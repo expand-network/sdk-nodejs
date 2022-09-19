@@ -28,7 +28,7 @@ Chains -
 
 | Blockchain types      | Blockchains           |
 | ------------- |-------------|
-| EVM compatible    |  Balancer |
+| EVM compatible    |  Optimism |
 
 Protocol -
 
