@@ -1,0 +1,167 @@
+{
+    
+    "chains": {
+
+        "1": {
+            "localName": "Ethereum",
+            "chainName": "Evm",
+            "chainSymbol": "ETH"
+        },
+
+        "3": {
+            "localName": "EthereumTestnetRopsten",
+            "chainName": "Evm",
+            "chainSymbol": "TETHRPT"
+        },
+
+        "4": {
+            "localName": "EthereumTestnetRinkeby",
+            "chainName": "Evm",
+            "chainSymbol": "TETHRNK"
+        },
+
+        "5": {
+            "localName": "EthereumTestnetGoerli",
+            "chainName": "Evm",
+            "chainSymbol": "TETHGRL"
+        },
+
+        "42": {
+            "localName": "EthereumTestnetKovan",
+            "chainName": "Evm",
+            "chainSymbol": "TETHKVN"
+        },
+
+        "56": {
+            "localName": "BinanceSmartChain",
+            "chainName": "Evm",
+            "chainSymbol": "BSC"
+        },
+
+        "97": {
+            "localName": "BinanceSmartChainTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TBSC"
+        },
+
+        "43114": {
+            "localName": "Avalanche",
+            "chainName": "Evm",
+            "chainSymbol": "AVAL"
+        },
+
+        "43113": {
+            "localName": "AvalancheTesnet",
+            "chainName": "Evm",
+            "chainSymbol": "TAVAL"
+        },
+        
+        "137": {
+            "localName": "Polygon",
+            "chainName": "Evm",
+            "chainSymbol": "MATIC"
+        },
+
+        "80001": {
+            "localName": "PolygonTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TMATIC"
+        },
+        
+        "25": {
+            "localName": "Cronos",
+            "chainName": "Evm",
+            "chainSymbol": "CRO"
+        },
+
+        "338": {
+            "localName": "CronosTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TCRO"
+        },
+        
+        "42161": {
+            "localName": "Arbitrum",
+            "chainName": "Evm",
+            "chainSymbol": "AETH"
+        },
+
+        "421611": {
+            "localName": "ArbitrumTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TAETH"
+        },
+        
+        "250": {
+            "localName": "Fantom",
+            "chainName": "Evm",
+            "chainSymbol": "FTM"
+        },
+
+        "4002": {
+            "localName": "FantomTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TFTM"
+        },
+
+        "900": {
+            "localName": "Solana",
+            "chainName": "Solana",
+            "chainSymbol": "SOL"
+        },
+
+        "901": {
+            "localName": "SolanaDevnet",
+            "chainName": "Solana",
+            "chainSymbol": "DSOL"
+        },
+
+        "1000": {
+            "localName": "Tron",
+            "chainName": "Tron",
+            "chainSymbol": "TRON"
+        },
+        
+        "1001": {
+            "localName": "TronTestnet",
+            "chainName": "Tron",
+            "chainSymbol": "TTRON"
+        },
+
+
+        "1200": {
+            "localName": "Near",
+            "chainName": "Near",
+            "chainSymbol": "NEAR"
+        },
+
+        "1201": {
+            "localName": "NearTestnet",
+            "chainName": "Near",
+            "chainSymbol": "TNEAR"
+        },
+        
+
+        "1300": {
+            "localName": "Algorand",
+            "chainName": "Algorand",
+            "chainSymbol": "ALGO"
+        },
+
+        "1301": {
+            "localName": "AlgorandTestnet",
+            "chainName": "Algorand",
+            "chainSymbol": "TALGO"
+        }
+
+    },
+
+    "url": {
+
+        "apiurl" : "https://uat.expand.network",
+        "x-api-key":"XStlBLRetO9a9sW6qD6O537DNeTsUjYn5DMNh9VP"
+
+    }
+
+
+}
