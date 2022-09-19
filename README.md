@@ -1,4 +1,4 @@
-# expand.network
+# expand.network - node.js SDK
 
 This is the free and open-source node.js SDK to connect to expand.network, an adapter API service that offers one common gateway for the various queries (read) and transactions (write) functions for all  major blockchains and smart contract based protocols. We offer a single integration point for access to all of DeFi.
 
