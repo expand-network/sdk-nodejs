@@ -3,6 +3,7 @@ const config = require('../configuration/config.json');
 const common = require('../configuration/common');
 const axios = require('axios').default;
 const {initialiseWeb3} = require('../configuration/intialiseWeb3');
+const BN = require('bn.js');
 
 axios.defaults.headers['X-API-KEY'] = config.url['x-api-key'];
 
@@ -45,6 +46,7 @@ exports.signTransaction = async(transactionObject, options) => {
     options.rpc = rpc.data.rpc;
     web3 = await initialiseWeb3({rpc:options.rpc,chainId:chainId,key:options.key});
     transactionObject.value = Number(transactionObject.value);
+    transactionObject.value = new BN(transactionObject.value, 16);
 
     try {
         var chainName = config.chains[chainId].chainName;
