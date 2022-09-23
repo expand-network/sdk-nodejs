@@ -23,7 +23,7 @@ signTransactionSolana: async(web3,transactionObject,options) => {
       manualTransaction.add(solanasdk.SystemProgram.transfer({
           fromPubkey: from.publicKey,
           toPubkey: transactionObject.to,
-          lamports: transactionObject.value * solanasdk.LAMPORTS_PER_SOL
+          lamports: transactionObject.value
       }));
       
       let transactionBuffer = manualTransaction.serializeMessage();
