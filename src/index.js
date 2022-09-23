@@ -5,8 +5,6 @@ const axios = require('axios').default;
 const {initialiseWeb3} = require('../configuration/intialiseWeb3');
 const BN = require('bn.js');
 
-axios.defaults.headers['X-API-KEY'] = config.url['x-api-key'];
-
 
 exports.prepareTransaction = async(apiURL, options) => {
 
@@ -15,7 +13,10 @@ exports.prepareTransaction = async(apiURL, options) => {
         const config = {
             method: "post",
             url: apiURL,
-            data: options
+            data: options,
+            headers: {
+                "x-api-key" : options.xapikey
+              }
             
         }
 
@@ -31,6 +32,8 @@ exports.prepareTransaction = async(apiURL, options) => {
 }
 
 exports.signTransaction = async(transactionObject, options) => {
+
+    axios.defaults.headers['X-API-KEY'] = options.xapikey;
 
     const apiURL = config.url.apiurl + '/chain/getpublicrpc/';
 
@@ -73,12 +76,12 @@ exports.sendTransaction = async(options) => {
             url: apiURL,
             data: options,
             headers: {
-                "x-api-key" : config.url['x-api-key']
+                "x-api-key" : options.xapikey
               }
         };
     
         const transactionHash = await axios(params);
-        return transactionHash;    
+        return transactionHash.data;    
 
     }
 
