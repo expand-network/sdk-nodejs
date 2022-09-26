@@ -37,6 +37,8 @@ exports.signTransaction = async(transactionObject, options) => {
 
     const apiURL = config.url.apiurl + '/chain/getpublicrpc/';
 
+    console.log(apiURL)
+
     var configuration = {};
 
     var chainId = await common.getChainId({chainId:options.chainId,chainSymbol:options.chainSymbol});
@@ -48,7 +50,8 @@ exports.signTransaction = async(transactionObject, options) => {
     var rpc = await axios.get(apiURL, configuration);
     options.rpc = rpc.data.rpc;
     web3 = await initialiseWeb3({rpc:options.rpc,chainId:chainId,key:options.key});
-    transactionObject.value = new BN(transactionObject.value, 16);
+    transactionObject.value = new BN(transactionObject.value);
+    console.log(transactionObject.value)
 
     try {
         var chainName = config.chains[chainId].chainName;
@@ -69,6 +72,8 @@ exports.sendTransaction = async(options) => {
     try {
 
         const apiURL = config.url.apiurl + '/chain/sendtransaction/';
+
+        console.log(apiURL)
         
         const params = {
             method: "post",
