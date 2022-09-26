@@ -26,8 +26,6 @@ module.exports = {
 
             const actions = [nearAPI.transactions.transfer(transactionObject.value)];
 
-            console.log(actions)
-
             const accessKey = await near.query(
                 `access_key/${transactionObject.sender}/${publicKey.toString()}`,
                 ""
