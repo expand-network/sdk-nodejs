@@ -25,7 +25,7 @@ exports.prepareTransaction = async(apiURL, options) => {
             url: apiURL,
             data: options,
             headers: {
-                "x-api-key" : options.xapikey
+                "x-api-key" : options.xApiKey
               }
             
         }
@@ -57,7 +57,7 @@ exports.signTransaction = async(transactionObject, options) => {
         return (validObject);
     }
 
-    axios.defaults.headers['X-API-KEY'] = options.xapikey;
+    axios.defaults.headers['X-API-KEY'] = options.xApiKey;
 
     const apiURL = config.url.apiurl + '/chain/getpublicrpc/';
 
@@ -106,7 +106,7 @@ exports.sendTransaction = async(options) => {
             url: apiURL,
             data: options,
             headers: {
-                "x-api-key" : options.xapikey
+                "x-api-key" : options.xApiKey
               }
         };
     
