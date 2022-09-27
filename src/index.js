@@ -2,11 +2,21 @@ const rawTransaction = require('./signTransaction/index');
 const config = require('../configuration/config.json');
 const common = require('../configuration/common');
 const axios = require('axios').default;
+
+const schemaValidator = require('../configuration/schemaValidator');
+const errorMessage = require('../configuration/errorMessage.json');
 const {initialiseWeb3} = require('../configuration/intialiseWeb3');
 const BN = require('bn.js');
 
 
 exports.prepareTransaction = async(apiURL, options) => {
+
+    options.function = "prepareTransaction()";
+    var validJson = await schemaValidator.validateInput(options);
+
+    if ( !validJson.valid ) {
+        return (validJson);
+    }
 
     try {
 
@@ -32,6 +42,20 @@ exports.prepareTransaction = async(apiURL, options) => {
 }
 
 exports.signTransaction = async(transactionObject, options) => {
+
+    options.function = "signTransaction()";
+    var validJson = await schemaValidator.validateInput(options);
+
+    transactionObject.function = "transactionObject()"
+    var validObject = await schemaValidator.validateInput(transactionObject);
+
+    if ( !validJson.valid  ) {
+        return (validJson);
+    }
+
+    if ( !validObject.valid  ) {
+        return (validObject);
+    }
 
     axios.defaults.headers['X-API-KEY'] = options.xapikey;
 
@@ -65,6 +89,13 @@ exports.signTransaction = async(transactionObject, options) => {
 }
 
 exports.sendTransaction = async(options) => {
+
+    options.function = "sendTransaction()";
+    var validJson = await schemaValidator.validateInput(options);
+
+    if ( !validJson.valid ) {
+        return (validJson);
+    }
 
     try {
 
