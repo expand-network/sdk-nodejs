@@ -23,11 +23,11 @@ exports.jsonSchema = {
                 properties: {
                     chainId: {type : "string"},
                     chainSymbol: {type: "string"},
-                    xapikey : {type : "string"},
+                    xApiKey : {type : "string"},
                     rpc: {type: "string"}
 
                 },
-                required: ["xapikey"] 
+                required: ["xApiKey"] 
             },
         },
 
@@ -45,9 +45,9 @@ exports.jsonSchema = {
                     chainId:{type: "string"},
                     chainSymbol: {type: "string"},
                     key: {type: "string"},
-                    xapikey: {type:"string"}
+                    xApiKey: {type:"string"}
                 },
-                required: ["privateKey","xapikey"] 
+                required: ["privateKey","xApiKey"] 
             },
         },
 
@@ -85,10 +85,10 @@ exports.jsonSchema = {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
                     rawTransaction : {type: "string"},
-                    xapikey : {type : "string"},
+                    xApiKey : {type : "string"},
                     rpc: {type: "string"}
                 },
-                required: ["rawTransaction","xapikey"] 
+                required: ["rawTransaction","xApiKey"] 
             },
         },
 
