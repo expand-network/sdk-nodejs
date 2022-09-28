@@ -64,11 +64,12 @@ exports.jsonSchema = {
                     from: {type: "string"},
                     to: {type: "string"},
                     value:{type : "string"},
-                    gas:{type : "string"},
-                    data : {type: "string"}
+                    gas: {type : "string"},
+                    data : {type: "string"},
+                    networkId : {type : "string"}
                 },
 
-                required: ["from","to","value","gas"]
+                required: ["from","to","value"]
             }
             
         },

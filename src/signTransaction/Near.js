@@ -17,7 +17,7 @@ module.exports = {
             const keyPair = KeyPair.fromString(options.privateKey);
 
             // adds the key you just created to your keyStore which can hold multiple keys
-            await keyStore.setKey(transactionObject.networkId, transactionObject.sender, keyPair);
+            await keyStore.setKey(transactionObject.networkId, transactionObject.from, keyPair);
 
             // connect to NEAR
             const near = new nearAPI.providers.JsonRpcProvider(options.rpc);
@@ -27,7 +27,7 @@ module.exports = {
             const actions = [nearAPI.transactions.transfer(transactionObject.value)];
 
             const accessKey = await near.query(
-                `access_key/${transactionObject.sender}/${publicKey.toString()}`,
+                `access_key/${transactionObject.from}/${publicKey.toString()}`,
                 ""
             );
             
@@ -38,9 +38,9 @@ module.exports = {
             );
 
             const transaction = nearAPI.transactions.createTransaction(
-                transactionObject.sender,
+                transactionObject.from,
                 publicKey,
-                transactionObject.receiver,
+                transactionObject.to,
                 nonce,
                 actions,
                 recentBlockHash
