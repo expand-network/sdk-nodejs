@@ -23,7 +23,7 @@ exports.jsonSchema = {
                 properties: {
                     chainId: {type : "string"},
                     chainSymbol: {type: "string"},
-                    xApiKey : {type : "string"},
+                    xApiKey: {type : "string"},
                     rpc: {type: "string"}
 
                 },
@@ -41,8 +41,8 @@ exports.jsonSchema = {
             then: {
                 properties: {
                     rpc: {type: "string"},
-                    privateKey:{type: "string"},
-                    chainId:{type: "string"},
+                    privateKey: {type: "string"},
+                    chainId: {type: "string"},
                     chainSymbol: {type: "string"},
                     key: {type: "string"},
                     xApiKey: {type:"string"}
@@ -63,10 +63,10 @@ exports.jsonSchema = {
                 properties:{
                     from: {type: "string"},
                     to: {type: "string"},
-                    value:{type : "string"},
+                    value: {type : "string"},
                     gas: {type : "string"},
-                    data : {type: "string"},
-                    networkId : {type : "string"}
+                    data: {type: "string"},
+                    networkId: {type : "string"}
                 },
 
                 required: ["from","to","value"]
@@ -85,8 +85,8 @@ exports.jsonSchema = {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
-                    rawTransaction : {type: "string"},
-                    xApiKey : {type : "string"},
+                    rawTransaction: {type: "string"},
+                    xApiKey: {type : "string"},
                     rpc: {type: "string"}
                 },
                 required: ["rawTransaction","xApiKey"] 
