@@ -17,7 +17,7 @@ module.exports ={
             transaction = {
                 "from": transactionObject.from,
                 "to": transactionObject.to,
-                "fee": transactionObject.gas,
+                "fee": Number(transactionObject.gas),
                 "amount": Number(transactionObject.value),
                 "firstRound": params.firstRound,
                 "lastRound": params.lastRound,
