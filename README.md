@@ -59,9 +59,11 @@ const rawTransaction = await signTransaction({
     value: '1',
     gas: 50000,
 },{
-    privateKey: YOUR_PRIVATE_KEY'
+    privateKey: YOUR_PRIVATE_KEY',
+    xApiKey : 'YOUR_API_KEY'
 }).then(rawTransaction => sendTransaction({
     rawTransaction: rawTransaction.rawTransaction,
+    xApiKey : 'YOUR_API_KEY'
 })).then(res => console.log(res));
 
 ```
@@ -78,15 +80,18 @@ var transaction = await prepareTransaction('https://uat.expand.network/dex/swap'
      to: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
      deadline: '1663143453',
      from: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
-     gas: '229880'
+     gas: '229880',
+     xApiKey : 'YOUR_API_KEY'
 });
 
 const rawTransaction = await signTransaction(transaction, {
       chainId: '1',
-      privateKey: 'YOUR_PRIVATE_KEY'
+      privateKey: 'YOUR_PRIVATE_KEY',
+      xApiKey : 'YOUR_API_KEY'
 }).then(rawTransaction => sendTransaction({
       rawTransaction: rawTransaction.rawTransaction,
-      chainId:'1'
+      chainId:'1',
+      xApiKey : 'YOUR_API_KEY'
 })).then(res => console.log(res))
 
 ```
@@ -157,15 +162,18 @@ const swap = async(dexId) => {
         to: publicAddress,
         deadline: Date.now() + 60*60*20,
         from: publicAddress,
-        gas: '229880'
+        gas: '229880',
+        xApiKey : 'YOUR_API_KEY'
     });
 
     const rawTransaction = await signTransaction(transaction, {
         chainId: '3',
-        privateKey: privateKey
+        privateKey: privateKey,
+        xApiKey : 'YOUR_API_KEY'
     }).then(rawTransaction => sendTransaction({
         rawTransaction: rawTransaction.rawTransaction,
-        chainId:'3'
+        chainId:'3',
+        xApiKey : 'YOUR_API_KEY'
     })).then(res => console.log(res))
 
 }
