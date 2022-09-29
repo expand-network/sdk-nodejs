@@ -31,7 +31,6 @@ exports.prepareTransaction = async(apiURL, options) => {
         }
 
         const response = await axios(config).then(response => response.data);
-        response.value = Number(response.value);
         return response;
 
     }
