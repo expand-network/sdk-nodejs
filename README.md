@@ -59,7 +59,7 @@ const rawTransaction = await signTransaction({
     value: '1',
     gas: '50000',
 },{
-    privateKey: YOUR_PRIVATE_KEY',
+    privateKey: 'YOUR_PRIVATE_KEY',
     xApiKey : 'YOUR_API_KEY'
 }).then(rawTransaction => sendTransaction({
     rawTransaction: rawTransaction.rawTransaction,
