@@ -94,4 +94,4 @@ exports.jsonSchema = {
         },
 
     ]
-}
+};

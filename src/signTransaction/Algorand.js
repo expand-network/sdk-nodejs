@@ -9,12 +9,12 @@ module.exports ={
 
         try {
 
-            let params = await algorandWeb3.getTransactionParams().do();
+            const params = await algorandWeb3.getTransactionParams().do();
             
             // Here private key is the menmonic key
-            var account = algosdk.mnemonicToSecretKey(options.privateKey);
+            const account = algosdk.mnemonicToSecretKey(options.privateKey);
 
-            transaction = {
+            const transaction = {
                 "from": transactionObject.from,
                 "to": transactionObject.to,
                 "fee": Number(transactionObject.gas),
@@ -26,8 +26,8 @@ module.exports ={
                 "note": new Uint8Array(0)
             };
 
-            var signedTransaction = algosdk.signTransaction(transaction, account.sk);
-            rawTransaction = Buffer.from(signedTransaction.blob).toString("base64");
+            const signedTransaction = algosdk.signTransaction(transaction, account.sk);
+            const rawTransaction = Buffer.from(signedTransaction.blob).toString("base64");
 
             return rawTransaction;
         }
@@ -38,5 +38,5 @@ module.exports ={
 
 }
 
-}
+};
 

@@ -1,6 +1,8 @@
 const nearAPI  = require('near-api-js');
+
 const sha256 = require("js-sha256");
-const { connect, KeyPair, keyStores, utils } = nearAPI;
+
+const {  KeyPair, keyStores } = nearAPI;
 
 
 module.exports = {
@@ -31,6 +33,7 @@ module.exports = {
                 ""
             );
             
+            // eslint-disable-next-line no-plusplus
             const nonce = ++accessKey.nonce;
 
             const recentBlockHash = nearAPI.utils.serialize.base_decode(
@@ -73,4 +76,4 @@ module.exports = {
 
     }
 
-}
+};
