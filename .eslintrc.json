@@ -1,0 +1,46 @@
+{
+  "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "es2021": true,
+      "node": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+      "ecmaVersion": 2018
+  },
+  "rules": {
+      "no-console": "off",
+      "no-else-return" : "off",
+      "no-redeclare": "error",
+      "semi": ["error", "always"],
+      "no-unused-vars": [
+          2,
+          {
+              "vars": "all",
+              "args": "after-used"
+          }
+      ],
+      "func-names": ["error", "as-needed"],
+      "global-require": "off",
+      "class-methods-use-this": "off",
+      "no-restricted-syntax": "off",
+      "radix": "off",
+      "max-len": [
+          2,
+          150,
+          4,
+          {
+              "ignoreComments": true
+          }
+      ],
+      "quote-props": "off",
+      "no-underscore-dangle": "off",
+      "no-nested-ternary": "off"
+  }
+}

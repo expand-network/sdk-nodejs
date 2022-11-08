@@ -1,4 +1,4 @@
-const TronWeb = require('tronweb')
+const TronWeb = require('tronweb');
 
 module.exports = {
 
@@ -28,4 +28,4 @@ module.exports = {
           }
     }
 
-}
+};
