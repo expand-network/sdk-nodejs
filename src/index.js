@@ -67,7 +67,7 @@ exports.signTransaction = async(transactionObject, options) => {
 
     const chainId = await common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
 
-    console.log(chainId);
+    // console.log(chainId);
     
     configuration.params = {
         chainId

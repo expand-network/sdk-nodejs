@@ -32,7 +32,7 @@ signTransactionSolana: async(web3,transactionObject,options) => {
       manualTransaction.addSignature(from.publicKey, signature);
       
       const isVerifiedSignature = manualTransaction.verifySignatures();
-      console.log(`The signatures were verifed: ${isVerifiedSignature}`);
+    //   console.log(`The signatures were verifed: ${isVerifiedSignature}`);
       
       const serializedTx = manualTransaction.serialize();
       const rawTransaction = Buffer.from(serializedTx).toString("base64");
