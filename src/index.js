@@ -1,18 +1,18 @@
+const axios = require('axios').default;
+const BN = require('bn.js');
 const rawTransaction = require('./signTransaction/index');
 const config = require('../configuration/config.json');
 const common = require('../configuration/common');
-const axios = require('axios').default;
 
 const schemaValidator = require('../configuration/schemaValidator');
-const errorMessage = require('../configuration/errorMessage.json');
 const {initialiseWeb3} = require('../configuration/intialiseWeb3');
-const BN = require('bn.js');
 
 
 exports.prepareTransaction = async(apiURL, options) => {
 
-    options.function = "prepareTransaction()";
-    var validJson = await schemaValidator.validateInput(options);
+    const filterOptions = options ;
+    filterOptions.function = "prepareTransaction()";
+    const validJson = await schemaValidator.validateInput(filterOptions);
 
     if ( !validJson.valid ) {
         return (validJson);
@@ -20,7 +20,7 @@ exports.prepareTransaction = async(apiURL, options) => {
 
     try {
 
-        const config = {
+        const paramConfig = {
             method: "post",
             url: apiURL,
             data: options,
@@ -28,9 +28,9 @@ exports.prepareTransaction = async(apiURL, options) => {
                 "x-api-key" : options.xApiKey
               }
             
-        }
+        };
 
-        const response = await axios(config).then(response => response.data);
+        const response = await axios(paramConfig).then(result => result.data);
         return response;
 
     }
@@ -38,15 +38,20 @@ exports.prepareTransaction = async(apiURL, options) => {
         return error;
     }
 
-}
+};
 
 exports.signTransaction = async(transactionObject, options) => {
 
-    options.function = "signTransaction()";
-    var validJson = await schemaValidator.validateInput(options);
+    const configuration = {};
 
-    transactionObject.function = "transactionObject()"
-    var validObject = await schemaValidator.validateInput(transactionObject);
+    const filterOptions = options ;
+    filterOptions.function = "signTransaction()";
+    const validJson = await schemaValidator.validateInput(options);
+
+    const transactionOptions = transactionObject;
+    transactionOptions.function = "transactionObject()";
+    const validObject = await schemaValidator.validateInput(transactionObject);
+    
 
     if ( !validJson.valid  ) {
         return (validJson);
@@ -58,39 +63,34 @@ exports.signTransaction = async(transactionObject, options) => {
 
     axios.defaults.headers['X-API-KEY'] = options.xApiKey;
 
-    const apiURL = config.url.apiurl + '/chain/getpublicrpc/';
+    const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
 
-    var configuration = {};
+    const chainId = await common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
 
-    var chainId = await common.getChainId({chainId:options.chainId,chainSymbol:options.chainSymbol});
+    console.log(chainId);
     
     configuration.params = {
-        chainId: chainId
-    }
+        chainId
+    };
 
-    var rpc = await axios.get(apiURL, configuration);
-    options.rpc = rpc.data.rpc;
-    web3 = await initialiseWeb3({rpc:options.rpc,chainId:chainId,key:options.key});
-    transactionObject.value = new BN(transactionObject.value);
+    const rpc = await axios.get(apiURL, configuration);
+    filterOptions.rpc = rpc.data.rpc;
+    const web3 = await initialiseWeb3({rpc:filterOptions.rpc,chainId,key:filterOptions.key});
+    transactionOptions.value = new BN(transactionOptions.value);
 
-    try {
-        var chainName = config.chains[chainId].chainName;
-    }
-    catch(error) {
-        return error;
-    }
+    filterOptions.chainName = config.chains[chainId].chainName;
 
-
-    var rawData = await rawTransaction['signTransaction' + chainName](web3,transactionObject,options);
+    const rawData = await rawTransaction[`signTransaction${ filterOptions.chainName}`](web3,transactionObject,options);
 
     return rawData;
 
-}
+};
 
 exports.sendTransaction = async(options) => {
 
-    options.function = "sendTransaction()";
-    var validJson = await schemaValidator.validateInput(options);
+    const filterOptions = options ;
+    filterOptions.function = "sendTransaction()";
+    const validJson = await schemaValidator.validateInput(options);
 
     if ( !validJson.valid ) {
         return (validJson);
@@ -98,7 +98,7 @@ exports.sendTransaction = async(options) => {
 
     try {
 
-        const apiURL = config.url.apiurl + '/chain/sendtransaction/';
+        const apiURL = `${config.url.apiurl  }/chain/sendtransaction/`;
         
         const params = {
             method: "post",
@@ -118,7 +118,7 @@ exports.sendTransaction = async(options) => {
         return error;
     }
 
-}
+};
 
 
 

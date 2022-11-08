@@ -2,6 +2,7 @@
 // This file is part of the expand Library.
 
 const Ajv = require('ajv');
+
 const ajv = new Ajv( {allErrors: true, strict: true, useDefaults: true} );
 const errorMessage = require('./errorMessage.json');
 
@@ -11,7 +12,7 @@ require("ajv-errors")(ajv);
 
 // Standard JSON schema for the complete adaptor program
 // Including all the functions
-const jsonSchema = require('./schema').jsonSchema;
+const {jsonSchema} = require('./schema');
 
 exports.validateInput = async(options) => {
     /*
@@ -29,12 +30,10 @@ exports.validateInput = async(options) => {
      * }    
      */
 
-    // console.log(options)
-    var validate = ajv.compile(jsonSchema);
-    var valid = validate(options);
-    var error = valid ? null : validate.errors[0].params;
-
-    var response = {};
+    const validate = ajv.compile(jsonSchema);
+    const valid = validate(options);
+    const error = valid ? null : validate.errors[0].params;
+    const response = {};
 
     response.valid = valid;
 
@@ -44,4 +43,4 @@ exports.validateInput = async(options) => {
     } 
 
     return (response);
-}
+};

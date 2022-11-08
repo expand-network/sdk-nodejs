@@ -1,5 +1,4 @@
-var Web3 = require('web3');
-
+// const Web3 = require('web3');
 
 module.exports = {
     
@@ -12,7 +11,7 @@ signTransactionEvm:async(web3,transactionObject, options) => {
 
         try {
 
-            var signedTransaction = await web3.eth.accounts.signTransaction(transactionObject, options.privateKey);
+            const signedTransaction = await web3.eth.accounts.signTransaction(transactionObject, options.privateKey);
             return (signedTransaction);
 
         }
@@ -21,4 +20,5 @@ signTransactionEvm:async(web3,transactionObject, options) => {
         }
     
 }
-}
+
+};
