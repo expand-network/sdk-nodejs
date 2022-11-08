@@ -57,7 +57,7 @@ const rawTransaction = await signTransaction({
     from: '0x1BdC0A29f667E2cc74e55531431986838023E2c7',
     to: '0x94a5E554DC172A472421291Ae6e6c0e3C150286F',
     value: '1',
-    gas: 50000,
+    gas: '50000',
 },{
     privateKey: YOUR_PRIVATE_KEY',
     xApiKey : 'YOUR_API_KEY'
