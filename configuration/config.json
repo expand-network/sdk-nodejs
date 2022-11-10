@@ -152,6 +152,18 @@
             "localName": "AlgorandTestnet",
             "chainName": "Algorand",
             "chainSymbol": "TALGO"
+        },
+
+        "10": {
+            "localName": "Optimism",
+            "chainName": "Evm",
+            "chainSymbol": "OPT"
+        },
+
+        "420": {
+            "localName": "OptimismTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TOPT"
         }
 
     },
