@@ -23,9 +23,9 @@ exports.prepareTransaction = async(apiURL, options) => {
         const paramConfig = {
             method: "post",
             url: apiURL,
-            data: options,
+            data: filterOptions,
             headers: {
-                "x-api-key" : options.xApiKey
+                "x-api-key" : filterOptions.xApiKey
               }
             
         };
