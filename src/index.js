@@ -74,7 +74,7 @@ exports.signTransaction = async(transactionObject, options) => {
     };
 
     const rpc = await axios.get(apiURL, configuration);
-    filterOptions.rpc = rpc.data.rpc;
+    filterOptions.rpc = rpc.data.data.rpc;
     const web3 = await initialiseWeb3({rpc:filterOptions.rpc,chainId,key:filterOptions.key});
     transactionOptions.value = new BN(transactionOptions.value);
 
