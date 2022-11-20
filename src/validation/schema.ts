@@ -6,7 +6,7 @@
 *
 */ 
 
-exports.jsonSchema = {
+const jsonSchema = {
    
     type: "object", 
 
@@ -95,3 +95,5 @@ exports.jsonSchema = {
 
     ]
 };
+
+export default jsonSchema;

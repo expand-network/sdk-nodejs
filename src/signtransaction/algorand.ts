@@ -1,16 +1,13 @@
-const algosdk=require('algosdk');
+import algosdk from 'algosdk';
 
-module.exports ={
-    
-    signTransactionAlgorand: async(algorandWeb3, transactionObject, options) => {
-    /*
-     * Function will sign the transaction payload for Algorand chain
-     */
-
+export default class Algorand {
+    signTransactionAlgorand = async (algorandWeb3: any, transactionObject: any, options: any) => {
+        /*
+         * Function will sign the transaction payload for Algorand chain
+         */
         try {
-
             const params = await algorandWeb3.getTransactionParams().do();
-            
+
             // Here private key is the menmonic key
             const account = algosdk.mnemonicToSecretKey(options.privateKey);
 
@@ -31,12 +28,9 @@ module.exports ={
 
             return rawTransaction;
         }
-        catch(error)
-        {
+        catch (error) {
             return error;
         }
-
+    }
 }
-
-};
 
