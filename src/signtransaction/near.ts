@@ -1,19 +1,15 @@
-const nearAPI  = require('near-api-js');
+import nearAPI from 'near-api-js';
+import sha256 from 'js-sha256';
+const { KeyPair, keyStores } = nearAPI;
+export default class Near {
 
-const sha256 = require("js-sha256");
-
-const {  KeyPair, keyStores } = nearAPI;
-
-
-module.exports = {
-    
-    signTransactionNear: async(web3,transactionObject,options) => {
-    /*
-     * Function will sign the transaction payload for Near chain
-     */
+    signTransactionNear = async (web3: any, transactionObject: any, options: any) => {
+        /*
+         * Function will sign the transaction payload for Near chain
+         */
 
         try {
-        
+
             const keyStore = new keyStores.InMemoryKeyStore();
 
             const keyPair = KeyPair.fromString(options.privateKey);
@@ -28,13 +24,15 @@ module.exports = {
 
             const actions = [nearAPI.transactions.transfer(transactionObject.value)];
 
-            const accessKey = await near.query(
+            const accessKey: any = await near.query(
                 `access_key/${transactionObject.from}/${publicKey.toString()}`,
                 ""
             );
-            
+
+            console.log(accessKey)
+
             // eslint-disable-next-line no-plusplus
-            const nonce = ++accessKey.nonce;
+            const nonce = accessKey?.nonce;
 
             const recentBlockHash = nearAPI.utils.serialize.base_decode(
                 accessKey.block_hash
@@ -58,22 +56,22 @@ module.exports = {
 
             const signature = keyPair.sign(serializedTxHash);
 
-            const signedTransaction = new nearAPI.transactions.SignedTransaction({
+            const signedTransaction: any = new nearAPI.transactions.SignedTransaction({
                 transaction,
                 signature: new nearAPI.transactions.Signature({
-                keyType: transaction.publicKey.keyType,
-                data: signature.signature,
+                    keyType: transaction.publicKey.keyType,
+                    data: signature.signature,
                 }),
             });
 
             const rawTransaction = signedTransaction.encode().toString("base64");
+
             return rawTransaction;
 
         }
-        catch(error) {
+        catch (error) {
             return error;
         }
 
     }
-
-};
+}
