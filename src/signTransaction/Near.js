@@ -32,6 +32,8 @@ module.exports = {
                 `access_key/${transactionObject.from}/${publicKey.toString()}`,
                 ""
             );
+
+            console.log(accessKey)
             
             // eslint-disable-next-line no-plusplus
             const nonce = ++accessKey.nonce;
@@ -67,7 +69,7 @@ module.exports = {
             });
 
             const rawTransaction = signedTransaction.encode().toString("base64");
-            return rawTransaction;
+            return {"rawTransaction":rawTransaction};
 
         }
         catch(error) {
