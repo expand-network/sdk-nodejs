@@ -36,7 +36,7 @@ signTransactionSolana: async(web3,transactionObject,options) => {
       
       const serializedTx = manualTransaction.serialize();
       const rawTransaction = Buffer.from(serializedTx).toString("base64");
-      return rawTransaction;
+      return {"rawTransaction":rawTransaction};
     }
     catch(error)
     {

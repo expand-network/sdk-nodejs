@@ -31,7 +31,7 @@ exports.prepareTransaction = async(apiURL, options) => {
         };
 
         const response = await axios(paramConfig).then(result => result.data);
-        return response;
+        return response.data;
 
     }
     catch(error){
