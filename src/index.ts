@@ -6,12 +6,12 @@ import Common from "./common/common";
 import SchemaValidator from "./validation/schemaValidator";
 import IntializeWeb3 from "./common/initializeWeb3";
 
-export default class ExpandSDK {
+class ExpandSDK {
     prepareTransaction = async(apiURL, options) => {
 
         const filterOptions = options ;
         filterOptions.function = "prepareTransaction()";
-        const validJson = await SchemaValidator.prototype.validateInput(filterOptions);
+        const validJson = await SchemaValidator.validateInput(filterOptions);
     
         if ( !validJson.valid ) {
             return (validJson);
@@ -39,32 +39,32 @@ export default class ExpandSDK {
     
     };
     
-    signTransaction = async(transactionObject, options) => {
+    signTransaction = async(transactionObject : any, options :any) => {
     
         const configuration : any= {};
     
         const filterOptions = options ;
-        filterOptions.function = "signTransaction()";
-        const validJson = await SchemaValidator.prototype.validateInput(options);
+        // filterOptions.function = "signTransaction()";
+        // const validJson = await SchemaValidator.prototype.validateInput(options);
     
         const transactionOptions = transactionObject;
-        transactionOptions.function = "transactionObject()";
-        const validObject = await SchemaValidator.prototype.validateInput(transactionObject);
+        // transactionOptions.function = "transactionObject()";
+        // const validObject = await SchemaValidator.prototype.validateInput(transactionObject);
         
     
-        if ( !validJson.valid  ) {
-            return (validJson);
-        }
+        // if ( !validJson.valid  ) {
+        //     return (validJson);
+        // }
     
-        if ( !validObject.valid  ) {
-            return (validObject);
-        }
+        // if ( !validObject.valid  ) {
+        //     return (validObject);
+        // }
     
         axios.defaults.headers['X-API-KEY'] = options.xApiKey;
     
         const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
     
-        const chainId = await Common.prototype.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
+        const chainId = await Common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
     
         // console.log(chainId);
         
@@ -74,10 +74,12 @@ export default class ExpandSDK {
     
         const rpc = await axios.get(apiURL, configuration);
         filterOptions.rpc = rpc.data.data.rpc;
-        const web3 = await IntializeWeb3.prototype.initialiseWeb3({rpc:filterOptions.rpc,chainId,key:filterOptions.key});
+        const web3 = await IntializeWeb3.initialiseWeb3({rpc:filterOptions.rpc,chainId,key:filterOptions.key});
         transactionOptions.value = new BN(transactionOptions.value);
     
         filterOptions.chainName = config.chains[chainId].chainName;
+
+        console.log(`signTransaction${ filterOptions.chainName}`);
     
         const rawData = await rawTransaction[`signTransaction${ filterOptions.chainName}`](web3,transactionObject,options);
     
@@ -89,7 +91,7 @@ export default class ExpandSDK {
     
         const filterOptions = options ;
         filterOptions.function = "sendTransaction()";
-        const validJson = await SchemaValidator.prototype.validateInput(options);
+        const validJson = await SchemaValidator.validateInput(options);
     
         if ( !validJson.valid ) {
             return (validJson);
@@ -119,3 +121,5 @@ export default class ExpandSDK {
     
     };
 }
+
+export default new ExpandSDK();

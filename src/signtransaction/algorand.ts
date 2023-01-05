@@ -1,6 +1,6 @@
 import algosdk from 'algosdk';
 
-export default class Algorand {
+class Algorand {
     signTransactionAlgorand = async (algorandWeb3: any, transactionObject: any, options: any) => {
         /*
          * Function will sign the transaction payload for Algorand chain
@@ -34,3 +34,4 @@ export default class Algorand {
     }
 }
 
+export default new Algorand();

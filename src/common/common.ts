@@ -1,6 +1,6 @@
 import config from '../configuration/config';
 
-export default class Common {
+class Common {
     getChainIdFromChainSymbol = async (chainSymbol: any) => {
         /*
          * This functions returns the appropriate chainId 
@@ -45,4 +45,6 @@ export default class Common {
 
     };
 }
+
+export default new Common();
 

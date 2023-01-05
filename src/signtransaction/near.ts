@@ -1,7 +1,7 @@
 import nearAPI from 'near-api-js';
 import sha256 from 'js-sha256';
 const { KeyPair, keyStores } = nearAPI;
-export default class Near {
+class Near {
 
     signTransactionNear = async (web3: any, transactionObject: any, options: any) => {
         /*
@@ -75,3 +75,5 @@ export default class Near {
 
     }
 }
+
+export default new Near();

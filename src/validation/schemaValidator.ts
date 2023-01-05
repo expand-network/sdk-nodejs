@@ -8,8 +8,7 @@ import jsonSchema from './schema';
 
 // Import the AJV error messages
 require("ajv-errors")(ajv);
-
-export default class SchemaValidator {
+class SchemaValidator {
 
 // Standard JSON schema for the complete adaptor program
 // Including all the functions
@@ -51,3 +50,5 @@ validateInput = async(options) => {
     return (response);
 };
 }
+
+export default new SchemaValidator();

@@ -1,4 +1,4 @@
-export default class Ethereum {
+class Ethereum {
     signTransactionEvm = async (web3: any, transactionObject: any, options: any) => {
         /*
          * Function will sign the transaction payload for ethereum based chains
@@ -17,3 +17,5 @@ export default class Ethereum {
     }
 
 }
+
+export default new Ethereum();
