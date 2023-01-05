@@ -2,7 +2,7 @@ import solanaSdk from '@solana/web3.js';
 import nacl from 'tweetnacl';
 import bs58 from 'bs58';
 
-export default class Solana {
+class Solana {
     signTransactionSolana = async (web3: any, transactionObject: any, options: any) => {
         /*
          * Function will sign the transaction payload for Solana Chain
@@ -43,3 +43,5 @@ export default class Solana {
 
     }
 }
+
+export default new Solana();

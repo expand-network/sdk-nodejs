@@ -14,13 +14,13 @@ const invalidChainId = {
     'code': errorMessage.code.invalidInput
 };
 
-export default class IntializeWeb3 {
+class IntializeWeb3 {
     initialiseWeb3 = async (data: any) => {
         /*
          * Initialise a web3 depending on the chain Id or chain Symbol
          *    
          */
-        const chainId = await common.prototype.getChainId({
+        const chainId = await common.getChainId({
             chainId: data.chainId,
             chainSymbol: data.chainSymbol
         });
@@ -78,3 +78,5 @@ export default class IntializeWeb3 {
 
     };
 }
+
+export default new IntializeWeb3();

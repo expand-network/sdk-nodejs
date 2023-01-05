@@ -1,6 +1,6 @@
 import TronWeb from 'tronweb';
 
-export default class Tron {
+class Tron {
     signTransactionTron = async (web3: any, transactionObject: any, options: any) => {
 
         try {
@@ -27,3 +27,5 @@ export default class Tron {
         }
     }
 }
+
+export default new Tron();
