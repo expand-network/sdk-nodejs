@@ -26,7 +26,7 @@ class Algorand {
             const signedTransaction = algosdk.signTransaction(transaction, account.sk);
             const rawTransaction = Buffer.from(signedTransaction.blob).toString("base64");
 
-            return rawTransaction;
+            return {"rawTransaction":rawTransaction};
         }
         catch (error) {
             return error;
