@@ -1,6 +1,30 @@
-# expand.network - node.js SDK
+<h1 align="center">
+  <br>
+  <img src="logo/black logo.png" alt="expand.network" width="200">
+  <br>
+  expand.network
+  <br>
+</h1>
 
-This is the free and open-source node.js SDK to connect to expand.network, an adapter API service that offers one common gateway for the various queries (read) and transactions (write) functions for all  major blockchains and smart contract based protocols. We offer a single integration point for access to all of DeFi.
+<p align="center">
+  <a href="#about-us">About Us</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#examples">Examples</a>
+</p>
+
+------------------------------------------------------------------
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="logo/white logo.png">
+  <source media="(prefers-color-scheme: light)" srcset="logo/black logo.png">
+  <img alt="Shows a black logo in light color mode and a white one in dark color mode.">
+</picture>
+-------------------------------------------------------------------
+<h4 align="center">SDK for <a href="https://expand.network/" target="_blank">expand.network</a> built on top of Node.js</h4>
+
+## About us
+
+This is the free and open-source node.js SDK for expand.network, an adapter API service that offers one common gateway for various queries (read functions) and transactions (write functions) for all  major blockchains and smart contract based protocols. We offer a single integration point for access to all of DeFi.
 
 For details on the complete capabilities of the API, please refer to the categories section in [our technical documentation](https://docs.expand.network).
 
@@ -9,40 +33,31 @@ We currently support the following blockchains:
 
 | Blockchain types      | Blockchains           |
 | ------------- |-------------|
-| EVM compatible    |  Ethereum, Binance Smart Chain, Avalanche, Polygon, Cronos, Arbitrum |
+| EVM compatible    |  Ethereum, Binance Smart Chain, Avalanche, Polygon, Cronos, Arbitrum, Optimism, Fantom |
 | Non-EVM     | Solana, Tron, NEAR, Algorand      |
 
 In addition, we currently support the following DeFi protocols:
 
 | Protocol types      | Protocol           |
 | ------------- |-------------|
-| DEX    |  Uniswap v2, v3, Sushiswap, Pancakeswap, Curve, Balancer coming soon |
+| DEX    |  Uniswap v2, v3, Sushiswap, Pancakeswap, Curve, Balancer  |
 | Lend and Borrow     | Aave, Compound      |
 | Derivatives    |  Synthetix, DyDx v4 coming soon |
-| Yield aggregators     | Yearn, Harvest coming soon      |
-| Oracles     | Chainlink coming soon |
+| Yield aggregators     | Yearn Finance, Harvest Finance       |
+| Oracles     | Chainlink, Winklink |
 
-Coming soon:
-
-Chains -
-
-| Blockchain types      | Blockchains           |
-| ------------- |-------------|
-| EVM compatible    |  Optimism |
+Coming soon: 
 
 Protocol -
 
 | Protocol types      | Protocol           |
-| ------------- |-------------|
-| DEX    |  Balancer |
-| Derivatives    |  Synthetix, DyDx v4 |
-| Yield aggregators     | Yearn, Harvest      |
-| Oracles     | Chainlink |
+| Derivatives    | DyDx v4 |
 
+<br>
 All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto at any point: your keys, your crypto. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
 
 ## Installation
-To install, just clone the repository from git directly. (npm install coiming soon.)
+To install, just clone the repository from git directly. (npm install coming soon.)
 ```
 git clone https://github.com/4cmlab/expand.network
 ```
@@ -50,7 +65,7 @@ git clone https://github.com/4cmlab/expand.network
 ## Usage
 
 ### Chain functions
-Example code: Send one Wei from address ending in `2c7` to address ending in `86F`. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
+Sample code: Send one Wei from address ending in `2c7` to address ending in `86F`. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
 
 ```js
 const rawTransaction = await signTransaction({
@@ -69,7 +84,7 @@ const rawTransaction = await signTransaction({
 ```
 
 ### Dex functions swap
-Example code: Swap 5 DAI (token ending in `38D`) with WETH (token ending in `5Ab`). In this example, the "to" and "from" are the same (ending in `006`), so the swapped tokens will come back into the same address. Again, you need to use your private key to sign the transaction. 
+Sample code: Swap 5 DAI (token ending in `38D`) with WETH (token ending in `5Ab`). In this example, the "to" and "from" are the same (ending in `006`), so the swapped tokens will come back into the same address. Again, you need to use your private key to sign the transaction. 
 
 ```js
 
@@ -99,7 +114,7 @@ const rawTransaction = await signTransaction(transaction, {
 ## Examples
 
 ### Get balance 
-Example code: get balances from different chains: Ethereum, BSC and Solana.
+Sample code: get balances from different chains: Ethereum, BSC and Solana.
 
 ```js
 
