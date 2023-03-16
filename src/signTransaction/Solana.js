@@ -30,13 +30,13 @@ signTransactionSolana: async(web3,transactionObject,options) => {
       const signature = nacl.sign.detached(transactionBuffer, from.secretKey);
       
       manualTransaction.addSignature(from.publicKey, signature);
-      
+      const transactionHash = bs58.encode(manualTransaction.signatures[0].signature);
     // const isVerifiedSignature = manualTransaction.verifySignatures();
     //   console.log(`The signatures were verifed: ${isVerifiedSignature}`);
       
       const serializedTx = manualTransaction.serialize();
       const rawTransaction = Buffer.from(serializedTx).toString("base64");
-      return {"rawTransaction":rawTransaction};
+      return { "rawTransaction": rawTransaction, "transactionHash": transactionHash };
     }
     catch(error)
     {

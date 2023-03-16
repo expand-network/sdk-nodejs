@@ -29,7 +29,7 @@ module.exports ={
             const signedTransaction = algosdk.signTransaction(transaction, account.sk);
             const rawTransaction = Buffer.from(signedTransaction.blob).toString("base64");
 
-            return {"rawTransaction":rawTransaction};
+            return { "rawTransaction": rawTransaction, "transactionHash": signedTransaction.txID };
         }
         catch(error)
         {

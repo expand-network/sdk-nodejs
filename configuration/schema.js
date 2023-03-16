@@ -86,6 +86,7 @@ exports.jsonSchema = {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
                     rawTransaction: {type: "string"},
+                    transactionHash: {type: "string"},
                     xApiKey: {type : "string"},
                     rpc: {type: "string"}
                 },
