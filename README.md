@@ -3,8 +3,8 @@
   <br>
     <center>
         <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="https://github.com/expand-network/sdk-nodejs/blob/main/logo/whiteLogo.png">
-            <source media="(prefers-color-scheme: light)" srcset="https://github.com/expand-network/sdk-nodejs/blob/main/logo/blackLogo.png">
+            <source media="(prefers-color-scheme: dark)" srcset="https://github.com/expand-network/sdk-nodejs/blob/main/logo/whiteLogo.svg">
+            <source media="(prefers-color-scheme: light)" srcset="https://github.com/expand-network/sdk-nodejs/blob/main/logo/blackLogo.svg">
             <img alt="expand.network SDK">
         </picture>   
     </center>    
