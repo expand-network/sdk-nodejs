@@ -20,7 +20,7 @@ module.exports = {
             );
 
             const rawTransaction = Buffer.from(JSON.stringify(signedtxn)).toString("base64");
-            return rawTransaction;
+            return {"rawTransaction":rawTransaction};
     
           }
           catch(error){
