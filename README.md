@@ -69,7 +69,7 @@ In addition, we currently support the following DeFi protocols:
       <td>Aave, Compound</td>
     </tr>
     <tr>
-        <td>Derivatives </td>
+        <td>Synthetic </td>
         <td>Synthetix</td>
     </tr>
     <tr>
