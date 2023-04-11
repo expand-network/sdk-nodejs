@@ -107,7 +107,7 @@ Coming soon:
 ## Installation
 To install, just clone the repository from git directly. (npm install coming soon)
 ```
-git clone https://github.com/4cmlab/expand.network
+git clone https://github.com/expand-network/sdk-nodejs.git
 ```
 
 ## Usage
