@@ -14,13 +14,15 @@
 </h1>
 
 <p align="center">
-  <a href="#about-us">About Us</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#examples">Examples</a>
+  <a href="#about-us">:wave: About Us</a> •
+  <a href="#installation">:desktop_computer: Installation</a> •
+  <a href="#usage">:technologist: Usage</a> •
+  <a href="#client-side-security-essentials">:shield: Client-Side Security Essentials</a> •
+  <a href="#socials">:globe_with_meridians: Socials</a> •
+  <a href="#examples">:page_with_curl: Examples</a>
 </p>
 
-<h3 align="center">SDK for <a href="https://expand.network/" target="_blank">expand.network</a> built on top of Node.js</h3>
+<h3 align="center">:large_orange_diamond: SDK for <a href="https://expand.network/" target="_blank">expand.network</a> built on top of Node.js :large_orange_diamond:</h3>
 
 ## About us
 
@@ -102,7 +104,7 @@ Coming soon:
 
 <br> 
 
->All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto at any point: your keys, your crypto. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
+>All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto:closed_lock_with_key: at any point: **Your keys, Your crypto**. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
 
 ## Installation
 To install, just clone the repository from git directly. (npm install coming soon)
@@ -158,6 +160,19 @@ const rawTransaction = await signTransaction(transaction, {
 })).then(res => console.log(res))
 
 ```
+## Client-side Security Essentials
+
+### Certificate transparency
+CT makes it easier to detect and prevent digital certificate fraud, thereby improving the security of internet connections.
+>**In addition to implementing certificate transparency measures on our end, we _highly recommend_ users to also consider implementing these measures for added security benefits.**
+
+### Private Key
+A user's private key is stored securely in a digital wallet, and should never be shared with anyone as it provides full access and control over their digital assets.
+>**It is _highly recommended_ that users take necessary precautions to ensure the safety and confidentiality of their private keys, as we do not possess any access or control over them.**
+
+### Additional Security Precautions
+* It is important for the user to safeguard both their data and workstation from potential risks such as spoofing, tampering, and other related threats.
+* It is important for the end user to connect to a secure network and ensure that they use only TLS 1.2 or a newer version for enhanced security to safeguard them from any kind of threats and attacks.
 
 ## Examples
 
@@ -272,9 +287,11 @@ bestBuy();
 
 ```
 
+## Socials:
+> [![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?logo=Twitter&logoColor=white)](https://twitter.com/expand_network)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <br> 
 <br>
-
-> Twitter [@expand_network](https://twitter.com/expand_network)
