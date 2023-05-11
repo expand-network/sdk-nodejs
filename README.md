@@ -127,7 +127,7 @@ git clone https://github.com/expand-network/sdk-nodejs.git
 ```
 ## Usage
 
->You can get your API key by vising our [website](https://expand.network/) or by clicking [here](https://auth.expand.network/)
+>You can get your API key by visiting our [website](https://expand.network/) or by clicking [here](https://auth.expand.network/)
 
 ### Chain functions
 Sample code: Send one Wei from one public address to another public address. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
