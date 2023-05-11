@@ -125,42 +125,46 @@ To install, just clone the repository from git directly. (npm install coming soo
 ```
 git clone https://github.com/expand-network/sdk-nodejs.git
 ```
-
 ## Usage
 
+>You can get your API key by visiting our [website](https://expand.network/) or by clicking [here](https://auth.expand.network/)
+
 ### Chain functions
-Sample code: Send one Wei from address ending in `2c7` to address ending in `86F`. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
+Sample code: Send one Wei from one public address to another public address. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
 
 ```js
 const rawTransaction = await signTransaction({
-    from: '0x1BdC0A29f667E2cc74e55531431986838023E2c7',
-    to: '0x94a5E554DC172A472421291Ae6e6c0e3C150286F',
-    value: '1',
-    gas: '50000',
-},{
-    privateKey: 'YOUR_PRIVATE_KEY',
-    xApiKey : 'YOUR_API_KEY'
-}).then(rawTransaction => sendTransaction({
-    rawTransaction: rawTransaction.rawTransaction,
-    xApiKey : 'YOUR_API_KEY'
-})).then(res => console.log(res));
+        from: 'PUBLIC_ADDRESS',
+        to: 'PUBLIC_ADDRESS',
+        value: '1',
+        gas: '50000',
+    },{
+        privateKey: 'YOUR_PRIVATE_KEY',
+        xApiKey : 'YOUR_API_KEY',
+        chainId : "1"
+    }).then(rawTransaction => sendTransaction({
+        rawTransaction: rawTransaction.rawTransaction,
+        xApiKey : 'YOUR_API_KEY',
+        chainId:"1"
+    })).then(res => console.log(res));
 
 ```
 
 ### Dex functions swap
-Sample code: Swap 5 DAI (token ending in `38D`) with WETH (token ending in `5Ab`). In this example, the "to" and "from" are the same (ending in `006`), so the swapped tokens will come back into the same address. Again, you need to use your private key to sign the transaction. 
+Sample code: Swap 5 DAI (token ending in `d0F`) with WETH (token ending in `Cc2`). In this example, the "to" and "from" are the same (ending in `006`), so the swapped tokens will come back into the same address. Again, you need to use your private key to sign the transaction. 
 
 ```js
 
 var transaction = await prepareTransaction('https://uat.expand.network/dex/swap', {
      amountIn: '5000000000000000000',
      amountOutMin: '0',
-     path: ['0xaD6D458402F60fD3Bd25163575031ACDce07538D','0xc778417E063141139Fce010982780140Aa0cD5Ab'],
+     path: ['0x6B175474E89094C44Da98b954EedeAC495271d0F','0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'],
      to: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
-     deadline: '1663143453',
+     deadline: '1693143453',
      from: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
      gas: '229880',
-     xApiKey : 'YOUR_API_KEY'
+     xApiKey : 'YOUR_API_KEY',
+     chainId:"1"
 });
 
 const rawTransaction = await signTransaction(transaction, {
@@ -171,8 +175,7 @@ const rawTransaction = await signTransaction(transaction, {
       rawTransaction: rawTransaction.rawTransaction,
       chainId:'1',
       xApiKey : 'YOUR_API_KEY'
-})).then(res => console.log(res))
-
+})).then(async res => console.log(res))
 ```
 ## Examples
 
@@ -181,23 +184,27 @@ Sample code: get balances from different chains: Ethereum, BSC and Solana.
 
 ```js
 
+//Setting API-KEY for axios header 
+
+axios.defaults.headers['X-API-KEY'] = "YOUR_API_KEY";
+
  // Fetching balance from Ethereum
 config.params = {
     address: publicAddressEvm
 }
 response = await axios.get(baseUrl + '/chain/getbalance/', config);
-balance = response.data.balance / 10**18;
+balance = response.data.data.balance / 10**18;
 console.log (`${publicAddressEvm} balance on ethereum chain is ${balance}`);
 
 
 // Fetching balance from Binance Smart Chain 
 config.params = {
     chainId: '56',
-    address: publicAddressEvm
+    address: publicAddressBsc
 }
 response = await axios.get(baseUrl + '/chain/getbalance/', config);
-balance = response.data.balance / 10**18;
-console.log (`${publicAddressEvm} balance on binance smart chain is ${balance}`);
+balance = response.data.data.balance / 10**18;
+console.log (`${publicAddressBsc} balance on binance smart chain is ${balance}`);
 
 
 // Fetching balance from Solana 
@@ -206,7 +213,7 @@ config.params = {
     address: publicAddressSolana
 }
 response = await axios.get(baseUrl + '/chain/getbalance/', config);
-balance = response.data.balance / 10**9;
+balance = response.data.data.balance / 10**9;
 console.log (`${publicAddressSolana} balance on solana chain is ${balance}`);
 
 ```
@@ -219,12 +226,11 @@ Sample Code: For the swap pair DAI <> WETH, find the best price on three differe
 
     config.params = {
         dexId: dexId,
-        path: DAI + ',' + WETH,
+        path: '0x6B175474E89094C44Da98b954EedeAC495271d0F' + ',' + '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
         amountIn: amount
     }
 
     const response = await axios.get(baseUrl + '/dex/getprice/', config);
-    // console.log(response)
     prices[dexId] = response.data.amountsOut[1];
 
 }
@@ -236,21 +242,21 @@ const swap = async(dexId) => {
         dexId: dexId,
         amountIn: amount,
         amountOutMin: '0',
-        path: [ DAI, WETH ],
-        to: publicAddress,
+        path: [ '0x6B175474E89094C44Da98b954EedeAC495271d0F', '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2' ],
+        to: 'PUBLIC_ADDRESS',
         deadline: Date.now() + 60*60*20,
-        from: publicAddress,
+        from: 'PUBLIC_ADDRESS',
         gas: '229880',
         xApiKey : 'YOUR_API_KEY'
     });
 
     const rawTransaction = await signTransaction(transaction, {
-        chainId: '3',
-        privateKey: privateKey,
+        chainId: '1',
+        privateKey: YOUR_PRIVATE_KEY,
         xApiKey : 'YOUR_API_KEY'
     }).then(rawTransaction => sendTransaction({
         rawTransaction: rawTransaction.rawTransaction,
-        chainId:'3',
+        chainId:'1',
         xApiKey : 'YOUR_API_KEY'
     })).then(res => console.log(res))
 
@@ -260,11 +266,11 @@ const swap = async(dexId) => {
 const bestBuy = async() => {
 
     // Fetching price from Uniswap V2
-    await getPrice('1001');
+    await getPrice('1000');
     // Fetching price from Sushiswap
-    await getPrice('1101');
+    await getPrice('1100');
     // Fetching price from Uniswap V3
-    await getPrice('1301');
+    await getPrice('1300');
 
     var max = 0;
     var maxDexId = 0;
@@ -292,6 +298,3 @@ bestBuy();
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<br> 
-<br>
