@@ -4,6 +4,12 @@ const solanaWeb = require('@solana/web3.js');
 const TronWeb = require('tronweb');
 const nearApi = require('near-api-js');
 const algosdk=require('algosdk');
+const {
+    JsonRpcProvider,
+    devnetConnection,
+    testnetConnection,
+    Connection
+  } = require("@mysten/sui.js");
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
@@ -71,6 +77,12 @@ exports.initialiseWeb3 = async( data ) => {
             web3 = new algosdk.Algodv2(token, rpc , "");
         }
 
+    }  else if ( chainName === 'Sui' ){
+
+        const connection = new Connection({
+            fullnode: config.chains[chainId].rpc,            
+          });
+        web3 = new JsonRpcProvider(connection);
     }
 
     return (web3);

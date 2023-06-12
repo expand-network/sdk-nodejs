@@ -165,23 +165,30 @@
             "chainName": "Evm",
             "chainSymbol": "TOPT"
         },
-
+        
         "101": {
             "localName": "Sui",
             "chainName": "Sui",
-            "chainSymbol": "Sui"
+            "chainSymbol": "Sui",
+            "rpc": "https://sui-mainnet-rpc.nodereal.io",
+            "publicRpc": "https://fullnode.mainnet.sui.io:443"
+
         },
 
         "102": {
-            "localName": "SuiDevnet",
+            "localName": "SuiDevtnet",
             "chainName": "Sui",
-            "chainSymbol": "DSui"
+            "chainSymbol": "DSui",
+            "rpc": "https://fullnode.devnet.sui.io:443",
+            "publicRpc": "https://fullnode.devnet.sui.io:443"
         },
 
         "103": {
-            "localName": "Sui",
-            "chainName": "SuiTestnet",
-            "chainSymbol": "TSui"
+            "localName": "SuiTestnet",
+            "chainName": "Sui",
+            "chainSymbol": "TSui",
+            "rpc": "https://fullnode.testnet.sui.io:443",
+            "publicRpc": "https://fullnode.testnet.sui.io:443"
         }
 
 
