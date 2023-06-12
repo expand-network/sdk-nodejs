@@ -6,8 +6,6 @@ const nearApi = require('near-api-js');
 const algosdk=require('algosdk');
 const {
     JsonRpcProvider,
-    devnetConnection,
-    testnetConnection,
     Connection
   } = require("@mysten/sui.js");
 const common = require('./common');
