@@ -164,7 +164,27 @@
             "localName": "OptimismTestnet",
             "chainName": "Evm",
             "chainSymbol": "TOPT"
+        },
+
+        "101": {
+            "localName": "Sui",
+            "chainName": "Sui",
+            "chainSymbol": "Sui"
+        },
+
+        "102": {
+            "localName": "SuiDevnet",
+            "chainName": "Sui",
+            "chainSymbol": "DSui"
+        },
+
+        "103": {
+            "localName": "Sui",
+            "chainName": "SuiTestnet",
+            "chainSymbol": "TSui"
         }
+
+
 
     },
 
