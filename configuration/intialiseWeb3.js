@@ -7,6 +7,7 @@ const algosdk=require('algosdk');
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
+const aptos = require('aptos');
 
 const invalidChainId = {
     'error': errorMessage.error.message.invalidChainId,
@@ -70,6 +71,11 @@ exports.initialiseWeb3 = async( data ) => {
         } else {
             web3 = new algosdk.Algodv2(token, rpc , "");
         }
+
+    }
+      else if (chainName === 'Aptos') {
+
+       web3 = new aptos.AptosClient(rpc);
 
     }
 
