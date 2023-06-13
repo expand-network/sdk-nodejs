@@ -4,10 +4,11 @@ const solanaWeb = require('@solana/web3.js');
 const TronWeb = require('tronweb');
 const nearApi = require('near-api-js');
 const algosdk=require('algosdk');
+const aptos = require('aptos');
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
-const aptos = require('aptos');
+
 
 const invalidChainId = {
     'error': errorMessage.error.message.invalidChainId,
