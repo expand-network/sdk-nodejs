@@ -3,7 +3,7 @@ const Ethereum = require('./Ethereum');
 const Near = require('./Near');
 const Solana = require('./Solana');
 const Tron = require('./Tron');
-const Sui = require('./Sui')
+const Sui = require('./Sui');
 
 exports.signTransactionAlgorand = async(web3, transactionObject, options) => {
 
