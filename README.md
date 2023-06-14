@@ -193,7 +193,7 @@ config.params = {
     address: publicAddressEvm
 }
 response = await axios.get(baseUrl + '/chain/getbalance/', config);
-balance = response.data.data.balance / 10**18;
+balance = response.data.data.balance / 10**18; // Divide by 10 to the power decimals of the asset (18 for ETH)
 console.log (`${publicAddressEvm} balance on ethereum chain is ${balance}`);
 
 
