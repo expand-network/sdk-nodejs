@@ -11,20 +11,17 @@ module.exports = {
             const keypair = Ed25519Keypair.fromSecretKey(fromB64(privateKeyBase64));
             const signer = new RawSigner(keypair, web3);
             const tx = new TransactionBlock();
-            console.log(tx);
             const [coin] = tx.splitCoins(tx.gas, [tx.pure(transactionObject.value)]);
-            console.log([coin]);
             tx.transferObjects(
                 [coin],
                 tx.pure(
                     transactionObject.to
                 )
             );
-            console.log(tx);
             const signedTransaction = await signer.signTransactionBlock({
                 transactionBlock: tx,
             });
-            return signedTransaction;
+            return {"rawTransaction":signedTransaction};
 
         } catch(error){
             return (error);

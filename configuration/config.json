@@ -169,16 +169,16 @@
         "101": {
             "localName": "Sui",
             "chainName": "Sui",
-            "chainSymbol": "Sui",
+            "chainSymbol": "SUI",
             "rpc": "https://sui-mainnet-rpc.nodereal.io",
             "publicRpc": "https://fullnode.mainnet.sui.io:443"
 
         },
 
         "102": {
-            "localName": "SuiDevtnet",
+            "localName": "SuiDevnet",
             "chainName": "Sui",
-            "chainSymbol": "DSui",
+            "chainSymbol": "DSUI",
             "rpc": "https://fullnode.devnet.sui.io:443",
             "publicRpc": "https://fullnode.devnet.sui.io:443"
         },
@@ -186,7 +186,7 @@
         "103": {
             "localName": "SuiTestnet",
             "chainName": "Sui",
-            "chainSymbol": "TSui",
+            "chainSymbol": "TSUI",
             "rpc": "https://fullnode.testnet.sui.io:443",
             "publicRpc": "https://fullnode.testnet.sui.io:443"
         }
