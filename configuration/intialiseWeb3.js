@@ -8,9 +8,11 @@ const {
     JsonRpcProvider,
     Connection
   } = require("@mysten/sui.js");
+const aptos = require('aptos');
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
+
 
 const invalidChainId = {
     'error': errorMessage.error.message.invalidChainId,
@@ -81,6 +83,11 @@ exports.initialiseWeb3 = async( data ) => {
             fullnode: config.chains[chainId].rpc,            
           });
         web3 = new JsonRpcProvider(connection);
+    }
+      else if (chainName === 'Aptos') {
+
+       web3 = new aptos.AptosClient(rpc);
+
     }
 
     return (web3);
