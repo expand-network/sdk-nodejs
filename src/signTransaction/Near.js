@@ -32,8 +32,6 @@ module.exports = {
                 `access_key/${transactionObject.from}/${publicKey.toString()}`,
                 ""
             );
-
-            console.log(accessKey)
             
             // eslint-disable-next-line no-plusplus
             const nonce = ++accessKey.nonce;
