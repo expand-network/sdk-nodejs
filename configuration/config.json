@@ -189,6 +189,23 @@
             "chainSymbol": "TSUI",
             "rpc": "https://fullnode.testnet.sui.io:443",
             "publicRpc": "https://fullnode.testnet.sui.io:443"
+        },
+        
+        "1400":{
+            "localName": "Aptos",
+            "chainName": "Aptos",
+            "chainSymbol": "APT",
+            "aptosCoin":"0x1::aptos_coin::AptosCoin",
+            "rpc": "https://fullnode.mainnet.aptoslabs.com",
+            "publicRpc": "https://fullnode.mainnet.aptoslabs.com"
+        },
+        "1401":{
+            "localName": "AptosTestnet",
+            "chainName": "Aptos",
+            "chainSymbol": "TAPT",
+            "aptosCoin":"0x1::aptos_coin::AptosCoin",
+            "rpc": "https://fullnode.testnet.aptoslabs.com",
+            "publicRpc": "https://fullnode.testnet.aptoslabs.com"
         }
 
 
