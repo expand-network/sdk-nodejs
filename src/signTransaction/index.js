@@ -3,6 +3,7 @@ const Ethereum = require('./Ethereum');
 const Near = require('./Near');
 const Solana = require('./Solana');
 const Tron = require('./Tron');
+const Aptos = require('./Aptos');
 
 exports.signTransactionAlgorand = async(web3, transactionObject, options) => {
 
@@ -33,6 +34,12 @@ exports.signTransactionTron = async(web3, transactionObject, options) => {
 exports.signTransactionSolana = async(web3, transactionObject, options) => {
 
     const rawData = await Solana.signTransactionSolana(web3, transactionObject, options);
+    return rawData;
+};
+
+exports.signTransactionAptos = async(web3, transactionObject, options) => {
+
+    const rawData = await Aptos.signTransactionAptos(web3, transactionObject, options);
     return rawData;
 };
 
