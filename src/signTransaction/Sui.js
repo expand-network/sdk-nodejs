@@ -9,7 +9,7 @@ module.exports = {
             // get the secretkey from options
             const secretKey = options.privateKey;
             const privateKeyBase64 = Buffer.from(secretKey,"hex").toString("base64"); // Convert hex to base64 string
-            // Create the keypair from converted privaye key
+            // Create the keypair from converted private key
             const keypair = Ed25519Keypair.fromSecretKey(fromB64(privateKeyBase64));
             // Create a signer with the provided keypair and network
             const signer = new RawSigner(keypair, web3);
