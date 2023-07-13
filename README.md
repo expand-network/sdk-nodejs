@@ -46,7 +46,7 @@ We currently support the following blockchains:
     </tr>
     <tr>
       <td>Non-EVM</td>
-      <td>Solana, Tron, NEAR, Algorand</td>
+      <td>Solana, Tron, NEAR, Algorand, Sui, Aptos</td>
       </tr>
   </tbody>
 </table>
