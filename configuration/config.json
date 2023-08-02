@@ -236,7 +236,7 @@
 
     "url": {
 
-        "apiurl" : "http://localhost:3000"
+        "apiurl" : "https://uat.expand.network"
 
     }
 
