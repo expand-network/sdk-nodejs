@@ -12,6 +12,7 @@ module.exports = {
          */
 
         const hexCallData = {};
+        let estimateFee = '';
 
         try {
             const starkKeyPair = starknet.ec.getKeyPair(options.privateKey);
@@ -31,7 +32,13 @@ module.exports = {
 
             contract.connect(account);
 
-            const estimateFee = await account.estimateInvokeFee({
+            if(options.gas !== undefined && Number(options.gas) !== 0) {
+                estimateFee = options.gas;
+            }
+            else
+            {
+
+            estimateFee = await account.estimateInvokeFee({
                 contractAddress: nativeEthAddress,  // ETH contract address
                 entrypoint: 'transfer',
                 calldata: starknet.stark.compileCalldata(
@@ -45,6 +52,7 @@ module.exports = {
                     }
                 ),
             }).then(res => res.suggestedMaxFee.toString());
+        }
 
             const signedTransaction = await account.signer.signTransaction([{
                 contractAddress: nativeEthAddress,  // ETH contract address
