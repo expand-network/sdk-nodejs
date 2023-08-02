@@ -206,6 +206,28 @@
             "aptosCoin":"0x1::aptos_coin::AptosCoin",
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
+        },
+
+        "300":{
+            "localName": "StarkNet",
+            "chainName": "StarkNet",
+            "chainSymbol": "STRK",
+            "nativeEthAddress":"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "rpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5/rpc/v0.2",
+            "publicRpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5/rpc/v0.2",
+            "domain" : "infura.io",
+            "sslMateId" : "4054117900"
+
+        },
+        "301":{
+            "localName": "StarkNetTestnet",
+            "chainName": "StarkNet",
+            "chainSymbol": "TSTRK",
+            "nativeEthAddress":"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "rpc": "https://starknet-testnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5/rpc/v0.2",
+            "publicRpc": "https://starknet-testnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5/rpc/v0.2",
+            "domain" : "infura.io",
+            "sslMateId" : "4054117900"
         }
 
 
@@ -214,7 +236,7 @@
 
     "url": {
 
-        "apiurl" : "https://uat.expand.network"
+        "apiurl" : "http://localhost:3000"
 
     }
 
