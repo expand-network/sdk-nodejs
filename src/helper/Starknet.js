@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const web3 = require('web3');
 const BN = require("bn.js");
-
+const config = require('../../configuration/config.json');
 
 module.exports = {
 
@@ -17,7 +17,7 @@ module.exports = {
 
             calls.forEach((call) => {
                 // eslint-disable-next-line max-len
-                const selectordata = new BN(`${(BigInt(BigInt((web3.utils.keccak256(call.entrypoint))).toString(10)).toString(16))}`, 16).iand(new BN("3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", 16));
+                const selectordata = new BN(`${(BigInt(BigInt((web3.utils.keccak256(call.entrypoint))).toString(10)).toString(16))}`, 16).iand(new BN(config.Mask250, 16));
                 const data = call.calldata || [];
                 callArray.push({
                     to: BigInt(call.contractAddress).toString(10),
