@@ -234,6 +234,8 @@
 
     },
 
+    "Mask250":"3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+
     "url": {
 
         "apiurl" : "https://uat.expand.network"
