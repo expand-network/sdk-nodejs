@@ -63,7 +63,7 @@ exports.signTransaction = async(transactionObject, options) => {
 
     axios.defaults.headers['X-API-KEY'] = options.xApiKey;
 
-    const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
+    const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
 
     const chainId = await common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
 
@@ -98,7 +98,7 @@ exports.sendTransaction = async(options) => {
 
     try {
 
-        const apiURL = `${config.url.apiurl  }/chain/sendtransaction/`;
+        const apiURL = `http://localhost:3000/chain/sendtransaction/`;
         
         const params = {
             method: "post",
