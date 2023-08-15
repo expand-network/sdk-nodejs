@@ -93,5 +93,24 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for orderUniswapX() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "signUniswapXDutchOrder()" },
+                }
+            },
+            then: {
+                properties: {
+                    domain: { type: "object" },
+                    types: { type: "object" },
+                    values: { type: "object" },
+                    privateKey: { type: "string" },
+                    xApiKey: { type: "string" },
+                },
+                required: ["domain", "types", "values", "privateKey", "xApiKey"]
+            },
+        },
+
     ]
 };
