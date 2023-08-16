@@ -15,7 +15,7 @@ module.exports = {
         let estimateFee = '';
 
         try {
-            const starkKeyPair = starknet.ec.getKeyPair(options.privateKey);
+            // const starkKeyPair = starknet.ec.getKeyPair(options.privateKey);
             const userAddress = transactionObject.from;
             // const signer = new starknet.Signer(starkKeyPair);
 
@@ -23,46 +23,45 @@ module.exports = {
                 nodeUrl: config.chains[options.chainId].rpc,
             });
 
+            // console.log(await rpcProvider.getChainId());
             const chainId = await rpcProvider.getChainId();
-            const account = new starknet.Account(rpcProvider, transactionObject.from, starkKeyPair);
+            const account = new starknet.Account(rpcProvider, transactionObject.from, options.privateKey);
 
             const currentNonce = BigInt(await account.getNonce());
             const { nativeEthAddress } = config.chains[options.chainId];
             const contract = new starknet.Contract(starkNetNativeEthAbi, nativeEthAddress, rpcProvider);
 
             contract.connect(account);
-
+            const value = BigInt(transactionObject.value).toString(16);
             if(options.gas !== undefined && Number(options.gas) !== 0) {
                 estimateFee = options.gas;
             }
             else
             {
-
             estimateFee = await account.estimateInvokeFee({
                 contractAddress: nativeEthAddress,  // ETH contract address
                 entrypoint: 'transfer',
-                calldata: starknet.stark.compileCalldata(
+                calldata: starknet.CallData.compile(
                     {
                         recipient: transactionObject.to,
                         amount: {
-                            type: 'struct',
-                            low: transactionObject.value,   // 1 wei
+                            low: value,  // 1 wei
                             high: '0',
                         }
                     }
                 ),
             }).then(res => res.suggestedMaxFee.toString());
+
         }
 
             const signedTransaction = await account.signer.signTransaction([{
                 contractAddress: nativeEthAddress,  // ETH contract address
                 entrypoint: 'transfer',
-                calldata: starknet.stark.compileCalldata(
+                calldata: starknet.CallData.compile(
                     {
                         recipient: transactionObject.to,
                         amount: {
-                            type: 'struct',
-                            low: transactionObject.value,   // 1 wei
+                            low: value,   // 1 wei
                             high: '0',
                         }
                     }
@@ -76,23 +75,24 @@ module.exports = {
                     chainId
                 },
                 undefined);
+            
+            const finalSignedData = [signedTransaction.r , signedTransaction.s];
 
             const callDataInitial = ({
                 contractAddress: userAddress,
                 calldata: await callsToArrayData([{
                     contractAddress: nativeEthAddress,
                     entrypoint: 'transfer',
-                    calldata: starknet.stark.compileCalldata(
+                    calldata: starknet.CallData.compile(
                         {
                             recipient: transactionObject.to,
                             amount: {
-                                type: 'struct',
-                                low: transactionObject.value,
+                                low: value,
                                 high: '0',
                             }
                         })
                 }]),
-                signature: signedTransaction
+                signature: finalSignedData
             });
 
             for (const key in callDataInitial) {
@@ -100,7 +100,7 @@ module.exports = {
                     hexCallData[key] = (callDataInitial[key]).toLowerCase();
                 }
                 else if (Array.isArray(callDataInitial[key])) {
-                    hexCallData[key] = callDataInitial[key].map(value => `0x${BigInt(value).toString(16)}`);
+                    hexCallData[key] = callDataInitial[key].map(val => `0x${BigInt(val).toString(16)}`);
                 } else {
                     hexCallData[key] = `0x${BigInt(callDataInitial[key]).toString(16)}`;
                 }
