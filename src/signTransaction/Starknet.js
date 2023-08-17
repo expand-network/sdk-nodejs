@@ -32,7 +32,7 @@ module.exports = {
             const contract = new starknet.Contract(starkNetNativeEthAbi, nativeEthAddress, rpcProvider);
 
             contract.connect(account);
-            const value = BigInt(transactionObject.value).toString(16);
+            const value = parseInt(transactionObject.value);
             if(options.gas !== undefined && Number(options.gas) !== 0) {
                 estimateFee = options.gas;
             }
