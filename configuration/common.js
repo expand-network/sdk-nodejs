@@ -45,3 +45,20 @@ exports.getChainId = async(options) => {
 
 };
 
+exports.encodeFunctionData = async(web3, options) => {
+    /*
+     * This functions execute a transaction for the given options, 
+     * Mainly to be used to interact with a smart contract
+     *    
+     */
+    const params = web3.eth.abi.encodeParameters(
+        options.parametersType,
+        options.parameters
+    );
+
+    const data = options.functionHash + params.slice(2);
+
+    return (data);
+
+};
+
