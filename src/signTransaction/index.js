@@ -7,7 +7,6 @@ const Sui = require('./Sui');
 const Aptos = require('./Aptos');
 
 exports.signTransactionAlgorand = async(web3, transactionObject, options) => {
-
     const rawData = await Algorand.signTransactionAlgorand(web3, transactionObject, options);
     return rawData;
 

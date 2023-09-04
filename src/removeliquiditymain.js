@@ -1,5 +1,5 @@
 const { sendTransaction, signTransaction, prepareTransaction} = require('./index');
-const baseurl = "http://localhost:3000";
+const baseurl = "https://uat.expand.network";
 const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
 async function main() {
     const txObject =   {
@@ -12,7 +12,7 @@ async function main() {
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };
 
-    const rawtx = await prepareTransaction('http://localhost:3000/bridge/removeliquidity', txObject);
+    const rawtx = await prepareTransaction('https://uat.expand.network/bridge/removeliquidity', txObject);
     console.log(rawtx,'******');
 
     const privateKey = '5fe1e6aa6620f849a1dcbdcc7e7ecd171c7d1793fd62620d92d4a7ce9ba69477';

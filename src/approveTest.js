@@ -1,6 +1,6 @@
 const { sendTransaction, signTransaction, prepareTransaction} = require('./index');
 
-const baseurl = "http://localhost:3000";
+const baseurl = "https://uat.expand.network";
 const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
 
 
@@ -14,7 +14,7 @@ async function main() {
         chainId: '80001',
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };
-    const rawtx = await prepareTransaction('http://localhost:3000/fungibletoken/approve', result);
+    const rawtx = await prepareTransaction('https://uat.expand.network/fungibletoken/approve', result);
     console.log(rawtx,'}}}}}}}}');
     const privateKey = 'a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86';
     const chainId = '80001';

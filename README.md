@@ -155,7 +155,7 @@ Sample code: Swap 5 DAI (token ending in `d0F`) with WETH (token ending in `Cc2`
 
 ```js
 
-var transaction = await prepareTransaction('http://localhost:3000/dex/swap', {
+var transaction = await prepareTransaction('https://uat.expand.network/dex/swap', {
      amountIn: '5000000000000000000',
      amountOutMin: '0',
      path: ['0x6B175474E89094C44Da98b954EedeAC495271d0F','0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'],

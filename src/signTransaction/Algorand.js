@@ -8,7 +8,6 @@ module.exports ={
      */
 
         try {
-
             const params = await algorandWeb3.getTransactionParams().do();
             
             // Here private key is the menmonic key
