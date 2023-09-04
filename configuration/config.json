@@ -32,6 +32,12 @@
             "chainSymbol": "TETHKVN"
         },
 
+        "11155111": {
+            "localName": "EthereumTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TETHSPL"
+        },
+
         "56": {
             "localName": "BinanceSmartChain",
             "chainName": "Evm",
