@@ -1,5 +1,5 @@
-const { sendTransaction, signTransaction, prepareTransaction} = require('./index');
-const baseurl = "https://uat.expand.network";
+const { sendTransaction, signTransaction, prepareTransaction} = require('../index');
+// const baseurl = "https://uat.expand.network";
 const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
 async function main() {
     const txObject =   {

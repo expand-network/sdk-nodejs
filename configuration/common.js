@@ -14,7 +14,7 @@ const getChainIdFromChainSymbol = async(chainSymbol) => {
             return (chain);
         }
     }
-
+    
     // Always returning null by default
     return (null);
 
