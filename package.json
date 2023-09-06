@@ -1,5 +1,5 @@
 {
-  "name": "expand.network",
+  "name": "expand-network",
   "version": "1.0.0",
   "description": "The external SDK for the adapter",
   "main": "index.js",
