@@ -40,6 +40,40 @@ exports.prepareTransaction = async(apiURL, options) => {
 
 };
 
+// exports.prepareTransaction = async(apiURL, options) => {
+
+//     const filterOptions = options ;
+//     filterOptions.function = "prepareTransaction()";
+//     const validJson = await schemaValidator.validateInput(filterOptions);
+
+//     if ( !validJson.valid ) {
+//         return (validJson);
+//     }
+
+//     try {
+
+//         const paramConfig = {
+//             method: "post",
+//             url: apiURL,
+//             data: filterOptions,
+//             headers: {
+//                 "x-api-key" : filterOptions.xApiKey,
+//                 "x-quicknode-id": filterOptions.id,
+//                 "x-instance-id": filterOptions.ids
+//               }
+            
+//         };
+
+//         const response = await axios(paramConfig).then(result => result.data);
+//         return response;
+
+//     }
+//     catch(error){
+//         return error;
+//     }
+
+// };
+
 exports.signTransaction = async(transactionObject, options) => {
 
     const configuration = {};
@@ -117,6 +151,39 @@ exports.sendTransaction = async(options) => {
     catch(error){
         return error;
     }
+
+};
+
+exports.decodeTransaction = async (options)=> {
+
+    const filterOptions = options;
+    filterOptions.function = "decodeTransaction()";
+    const validJson = await schemaValidator.validateInput(options);
+
+    if( !validJson.valid ) {
+        return (validJson);
+    }
+
+    try {
+
+        const apiURL = `${config.url.apiurl  }/chain/decodetransaction/`;
+
+        const paramConfig = {
+            method: "post",
+            url: apiURL,
+            data: filterOptions,
+            headers: {
+                "x-api-key" : filterOptions.xApiKey
+            }
+        };
+
+        const response = await axios(paramConfig).then(result => result.data);
+        return response.data;
+
+    } catch(error){
+        return error;
+    }
+
 
 };
 
