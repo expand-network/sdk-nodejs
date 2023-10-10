@@ -93,5 +93,22 @@ exports.jsonSchema = {
             },
         },
 
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "FordefiTransaction()" },
+                } 
+            },
+            then: {
+                properties: {
+                    data: { type: "string" },
+                    timestamp: { type: "number" },
+                    signature: {type: "string"},
+                    accessToken: {type : "string"},
+                },
+                required: ["data","signature","accessToken", "timestamp"] 
+            },
+        },
+
     ]
 };

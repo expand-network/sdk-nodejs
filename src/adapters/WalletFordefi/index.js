@@ -17,11 +17,11 @@ class WalletFordefi {
         try{
             const transactionOptions = transactionObject;
             transactionOptions.function = "transactionObject()";
-            // const validObject = await schemaValidator.validateInput(transactionObject);
+            const validObject = await schemaValidator.validateInput(transactionObject);
 
-            // if ( !validObject.valid  ) {
-            //         return (validObject);
-            // }
+            if ( !validObject.valid  ) {
+                    return (validObject);
+            }
 
             const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
             let chainName = config.chains[chainId].chainName;
@@ -42,6 +42,14 @@ class WalletFordefi {
 
     sendTransaction = async(response) => {
         try{
+            const filterOptions = response ;
+            filterOptions.function = "FordefiTransaction()";
+            const validJson = await schemaValidator.validateInput(filterOptions);
+
+            if ( !validJson.valid ) {
+                return (validJson);
+            }
+
             const path = "/api/v1/transactions";
             const config = {
                 method: "POST",

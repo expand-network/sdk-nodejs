@@ -1,10 +1,6 @@
 const axios = require('axios').default;
-// const BN = require('bn.js');
-// const rawTransaction = require('./signTransaction/index');
 const config = require('../configuration/config.json');
-// const common = require('../configuration/common');
 const schemaValidator = require('../configuration/schemaValidator');
-// const {initialiseWeb3} = require('../configuration/intialiseWeb3');
 const { Wallet, WalletFordefi } = require('./interfaces/index');
 
 exports.prepareTransaction = async(apiURL, options) => {
@@ -39,51 +35,6 @@ exports.prepareTransaction = async(apiURL, options) => {
 
 };
 
-// exports.signTransaction = async(transactionObject, options) => {
-
-//     const configuration = {};
-
-//     const filterOptions = options ;
-//     filterOptions.function = "signTransaction()";
-//     const validJson = await schemaValidator.validateInput(options);
-
-//     const transactionOptions = transactionObject;
-//     transactionOptions.function = "transactionObject()";
-//     const validObject = await schemaValidator.validateInput(transactionObject);
-    
-
-//     if ( !validJson.valid  ) {
-//         return (validJson);
-//     }
-
-//     if ( !validObject.valid  ) {
-//         return (validObject);
-//     }
-
-//     axios.defaults.headers['X-API-KEY'] = options.xApiKey;
-
-//     const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
-
-//     const chainId = await common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
-
-//     // console.log(chainId);
-    
-//     configuration.params = {
-//         chainId
-//     };
-
-//     const rpc = await axios.get(apiURL, configuration);
-//     filterOptions.rpc = rpc.data.data.rpc;
-//     const web3 = await initialiseWeb3({rpc:filterOptions.rpc,chainId,key:filterOptions.key});
-//     transactionOptions.value = new BN(transactionOptions.value);
-
-//     filterOptions.chainName = config.chains[chainId].chainName;
-
-//     const rawData = await rawTransaction[`signTransaction${ filterOptions.chainName}`](web3,transactionObject,options);
-
-//     return rawData;
-
-// };
 
 exports.sendTransaction = async(options) => {
 
