@@ -25,7 +25,7 @@ class WalletFordefi {
 
             const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
             let chainName = config.chains[chainId].chainName;
-            console.log(chainName);
+            // console.log(chainName);
             if(chainName !== "Evm" && chainName !== "Solana")
                 return new Error("chain not Supported");
             const options = {};
