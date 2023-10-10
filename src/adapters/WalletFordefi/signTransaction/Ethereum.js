@@ -21,7 +21,7 @@ module.exports = {
                 const gas = {
                     type: "priority",
                     priority_level: "medium",
-                    gas_limit: "1000000"
+                    gas_limit: transactionObject.gas
                 }
                 details.gas = gas;
                 details.to = transactionObject.to;
