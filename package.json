@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "The external SDK for the adapter",
   "main": "src/index.js",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
   "scripts": {
     "test": "jest"
   },
@@ -29,6 +32,7 @@
     "axios": "0.27.2",
     "bn.js": "5.2.1",
     "bs58": "5.0.0",
+    "dotenv": "^16.3.1",
     "ethereumjs-tx": "2.1.2",
     "ethers": "5.7.0",
     "expand-network": "^1.0.0",
@@ -40,6 +44,7 @@
     "web3": "1.7.5"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
     "eslint": "8.27.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",

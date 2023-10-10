@@ -47,7 +47,7 @@ exports.jsonSchema = {
                     key: {type: "string"},
                     xApiKey: {type:"string"}
                 },
-                required: ["privateKey","xApiKey"] 
+                required: ["xApiKey"] 
             },
         },
 
@@ -89,7 +89,7 @@ exports.jsonSchema = {
                     xApiKey: {type : "string"},
                     rpc: {type: "string"}
                 },
-                required: ["rawTransaction","xApiKey"] 
+                required: ["rawTransaction"] 
             },
         },
 
