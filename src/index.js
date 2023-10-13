@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 const config = require('../configuration/config.json');
 const schemaValidator = require('../configuration/schemaValidator');
-const { Wallet, WalletFordefi } = require('./interfaces/index');
+const { Wallet, WalletFordefi, WalletDFNS } = require('./interfaces/index');
 
 exports.prepareTransaction = async(apiURL, options) => {
 
@@ -73,6 +73,8 @@ exports.sendTransaction = async(options) => {
 exports.Wallet = Wallet;
 
 exports.WalletFordefi = WalletFordefi;
+
+exports.WalletDFNS = WalletDFNS;
 
 
 
