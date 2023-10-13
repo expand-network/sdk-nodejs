@@ -16,30 +16,19 @@ class Wallet {
     signTransaction = async( transactionObject ) => {
             
             const configuration = { "params": {}  };
-            // const filterOptions = options ;
-            // filterOptions.function = "signTransaction()";
-            // const validJson = await schemaValidator.validateInput(options);
             const transactionOptions = transactionObject;
             transactionOptions.function = "transactionObject()";
             const validObject = await schemaValidator.validateInput(transactionObject);
             
-
-            // if ( !validJson.valid  ) {
-            //     return (validJson);
-            // }
-
             if ( !validObject.valid  ) {
                 return (validObject);
             }
 
-            // axios.defaults.headers['X-API-KEY'] = options.xApiKey;
             axios.defaults.headers['X-API-KEY'] = this.xApiKey;
             const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
 
-            // const chainId = await common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
             const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
 
-            // console.log(chainId);
             
             configuration.params = {
                 chainId
@@ -81,9 +70,8 @@ class Wallet {
                   }
             };
         
-            const transactionHash =  axios(params);
-            // console.log("sent to blockchain");
-            return options.transactionHash && options.transactionHash;    
+            const transactionHash = await axios(params);
+            return transactionHash.data;    
         }
     
         catch(error){
@@ -95,3 +83,4 @@ class Wallet {
 }
 
 module.exports = { Wallet };
+
