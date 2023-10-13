@@ -1,5 +1,4 @@
 const Ethereum = require('./Ethereum');
-const Solana = require('./Solana');
 
 exports.signTransactionEvm = async(transactionObject, options) =>{
 
