@@ -36,45 +36,48 @@ exports.prepareTransaction = async(apiURL, options) => {
 };
 
 
-exports.sendTransaction = async(options) => {
+exports.decodeTransaction = async (options)=> {
 
-    const filterOptions = options ;
-    filterOptions.function = "sendTransaction()";
+    const filterOptions = options;
+    filterOptions.function = "decodeTransaction()";
     const validJson = await schemaValidator.validateInput(options);
 
-    if ( !validJson.valid ) {
+    if( !validJson.valid ) {
         return (validJson);
     }
 
     try {
 
-        const apiURL = `${config.url.apiurl  }/chain/sendtransaction/`;
-        
-        const params = {
+        const apiURL = `${config.url.apiurl  }/chain/decodetransaction/`;
+
+        const paramConfig = {
             method: "post",
             url: apiURL,
-            data: options,
+            data: filterOptions,
             headers: {
-                "x-api-key" : options.xApiKey
-              }
+                "x-api-key" : filterOptions.xApiKey
+            }
         };
-    
-        const transactionHash = await axios(params);
-        return transactionHash.data;    
 
-    }
+        const response = await axios(paramConfig).then(result => result.data);
+        return response.data;
 
-    catch(error){
+    } catch(error){
         return error;
     }
 
+
 };
+
+
 
 exports.Wallet = Wallet;
 
 exports.WalletFordefi = WalletFordefi;
 
 exports.WalletDFNS = WalletDFNS;
+
+
 
 
 
