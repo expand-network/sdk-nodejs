@@ -6,8 +6,7 @@ async function main() {
     const result =  {
         lendborrowId:'1200',
         from:'0x356dB816602c85e2075774bB77D13995c8Bab023',
-        assets:["0x6B175474E89094C44Da98b954EedeAC495271d0F"], 
-        // amountIn:"100000",     
+        assets:["0x6B175474E89094C44Da98b954EedeAC495271d0F"],      
         gas: '990000',
         xApiKey: "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };

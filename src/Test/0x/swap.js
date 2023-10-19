@@ -5,20 +5,21 @@ const xApiKey = 'TytSO3SsIw98gr6x8ezpI9QFw2LGWVEr8CwUF9Kd';
 async function main() {
     const txObject =  {
         "dexId":"1600",
-        "amountIn": "100000",
-        "path": ["0x742DfA5Aa70a8212857966D491D67B09Ce7D6ec7","0xfcBd6A360879728a31acEf20F3d8C41F0717C677"],
-        "to": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
+        "amountIn": "1000000000000000000",
+        "path": ["0x6B175474E89094C44Da98b954EedeAC495271d0F","0xdAC17F958D2ee523a2206206994597C13D831ec7"],
+        "to": "0x6AFb0df2F5ab5012568991549544dbC44Dfb6483",
         "deadline": "1999036703",
-        "from": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
-        "gas": "990089"
+        "from": "0x6AFb0df2F5ab5012568991549544dbC44Dfb6483",
+        "gas": "990089",
+        "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
             
         };
 
-    const preparedTx = await prepareTransaction('http://localhost:3000/dex/swap', txObject);
-    console.log(preparedTx);
-    const privateKey = '0xc985fccc2399debaf3fc53ac28301074803537cdc7ead3431fbe7f6c4fb1cec0';
+    const result = await prepareTransaction('http://localhost:3000/dex/swap', txObject);
+    console.log(result);
+    const privateKey = 'c2615f872d3a77ab320d1ad7304a83cea334b54a136ae9a2b8d6e798e7984c19';
     const chainId = '1';
-    const signedTx = await signTransaction(preparedTx.result.result,{
+    const signedTx = await signTransaction(result,{
         chainId,
         xApiKey,
         privateKey

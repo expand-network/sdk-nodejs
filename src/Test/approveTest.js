@@ -1,23 +1,23 @@
 const { sendTransaction, signTransaction, prepareTransaction} = require('../index');
 
-const baseurl = "http://localhost:3000";
+// const baseurl = "http://localhost:3000";
 const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
 
 
 async function main() {
     const result =  {
-        from: '0xa67e9b68c41b0f26184d64c26e0b2b81466e5994',
-        tokenAddress:'0x742DfA5Aa70a8212857966D491D67B09Ce7D6ec7',
-        amount: '1000000', // erc20 token
-        to: '0xf471d32cb40837bf24529fcf17418fc1a4807626',
+        from: '0x356dB816602c85e2075774bB77D13995c8Bab023',
+        tokenAddress:'0x6B175474E89094C44Da98b954EedeAC495271d0F',
+        amount: '10000000000000000000', // erc20 token
+        to: '0xb748952c7bc638f31775245964707bcc5ddfabfc',
         gas: '900000',
-        chainId: '80001',
+        chainId: '1',
         xApiKey: "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };
     const rawtx = await prepareTransaction('http://localhost:3000/fungibletoken/approve', result);
     console.log(rawtx,'}}}}}}}}');
-    const privateKey = 'a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86';
-    const chainId = '80001';
+    const privateKey = '96f965af1b75c901aea4a2f887a7b721b49834ca4f7daab1fa0047b2c57bc9a1';
+    const chainId = '1';
     const raw = await signTransaction(rawtx,{
         chainId,
         xApiKey,
@@ -25,7 +25,7 @@ async function main() {
     });
     console.log(raw,'------>');
     raw.xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
-    raw.chainId = '80001';
+    raw.chainId = '1';
     const x = await sendTransaction(raw);
     console.log(x);
 }

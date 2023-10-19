@@ -3,17 +3,16 @@ const { sendTransaction, signTransaction, prepareTransaction} = require('../../i
 // const baseurl = "https://localhost:3000";
 const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
 
-
 async function main() {
     const result =  {
-        lendborrowId: '1201',
-        from:'0xa67E9B68c41b0f26184D64C26e0b2B81466E5994',
+        lendborrowId:"1201",
+        from:'0xAEdf46101CD0D175bEE94082c094a9319A0634e4',
         asset:'0x6B175474E89094C44Da98b954EedeAC495271d0F',
         amount:'100000000000000', // erc20 token
-        onBehalfOf:'0xa67E9B68c41b0f26184D64C26e0b2B81466E5994',
+        onBehalfOf:'0xAEdf46101CD0D175bEE94082c094a9319A0634e4',
         gas: '329000',
         involveBaseToken:"1",
-        chainId:"11155111",
+        referralCode:"0",
         xApiKey:"vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
     };
     const rawtx = await prepareTransaction('https://api.expand.network/lendborrow/deposit', result);
