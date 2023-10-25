@@ -74,6 +74,8 @@ exports.prepareTransaction = async(apiURL, options) => {
 
 // };
 
+// Initial Commit
+
 exports.signTransaction = async(transactionObject, options) => {
 
     const configuration = {};
