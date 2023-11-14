@@ -4,8 +4,7 @@ async function main(){
 const d = await signTransaction( {
     from: 'hk1646455.testnet',
     to:'hk1646455.testnet',
-    value: "100000000",
-    gas:"670543",
+    value: "100000000000000000000000",
     xApiKey:"vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"}
 ,
 {

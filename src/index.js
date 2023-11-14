@@ -40,10 +40,44 @@ exports.prepareTransaction = async(apiURL, options) => {
 
 };
 
+// exports.prepareTransaction = async(apiURL, options) => {
+
+//     const filterOptions = options ;
+//     filterOptions.function = "prepareTransaction()";
+//     const validJson = await schemaValidator.validateInput(filterOptions);
+
+//     if ( !validJson.valid ) {
+//         return (validJson);
+//     }
+
+//     try {
+
+//         const paramConfig = {
+//             method: "post",
+//             url: apiURL,
+//             data: filterOptions,
+//             headers: {
+//                 "x-api-key" : filterOptions.xApiKey,
+//                 "x-quicknode-id": filterOptions.id,
+//                 "x-instance-id": filterOptions.ids
+//               }
+            
+//         };
+
+//         const response = await axios(paramConfig).then(result => result.data);
+//         return response;
+
+//     }
+//     catch(error){
+//         return error;
+//     }
+
+// };
+
 exports.signTransaction = async(transactionObject, options) => {
 
     const configuration = {};
-
+    // console.log(options);
     const filterOptions = options ;
     filterOptions.function = "signTransaction()";
     const validJson = await schemaValidator.validateInput(options);
@@ -63,7 +97,7 @@ exports.signTransaction = async(transactionObject, options) => {
 
     axios.defaults.headers['X-API-KEY'] = options.xApiKey;
 
-    const apiURL = `http://localhost:3000/chain/getpublicrpc/`;
+    const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
 
     const chainId = await common.getChainId({chainId:filterOptions.chainId,chainSymbol:filterOptions.chainSymbol});
 
@@ -98,16 +132,17 @@ exports.sendTransaction = async(options) => {
 
     try {
 
-        const apiURL = `http://localhost:3000/chain/sendtransaction/`;
+        const apiURL = `${config.url.apiurl}/chain/sendtransaction/`;
         
         const params = {
             method: "post",
             url: apiURL,
-            data: options,
+            data: filterOptions,
             headers: {
                 "x-api-key" : options.xApiKey
               }
         };
+        console.log(params, "__________>>>");
     
         const transactionHash = await axios(params);
         return transactionHash.data;    
@@ -120,5 +155,37 @@ exports.sendTransaction = async(options) => {
 
 };
 
+exports.decodeTransaction = async (options)=> {
+
+    const filterOptions = options;
+    filterOptions.function = "decodeTransaction()";
+    const validJson = await schemaValidator.validateInput(options);
+
+    if( !validJson.valid ) {
+        return (validJson);
+    }
+
+    try {
+
+        const apiURL = `${config.url.apiurl  }/chain/decodetransaction/`;
+
+        const paramConfig = {
+            method: "post",
+            url: apiURL,
+            data: filterOptions,
+            headers: {
+                "x-api-key" : filterOptions.xApiKey
+            }
+        };
+
+        const response = await axios(paramConfig).then(result => result.data);
+        return response.data;
+
+    } catch(error){
+        return error;
+    }
+
+
+};
 
 

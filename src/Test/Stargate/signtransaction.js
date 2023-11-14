@@ -1,4 +1,4 @@
-const { signTransaction } = require('../index');
+const { signTransaction } = require('../../index');
 
 async function main() {
     const d = await signTransaction({
@@ -11,7 +11,7 @@ async function main() {
     },
         {
             privateKey:"c03e8ee249d32de6a5e15cf526f05c89d574c275890be6ddbc61128facde79da",
-            chainId:"421614",
+            chainId:"8453",
             xApiKey: "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
         });
     // const data = JSON.parse(Buffer.from(d.rawTransaction,"base64").toString());
