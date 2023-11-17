@@ -5,6 +5,7 @@ const Solana = require('./Solana');
 const Tron = require('./Tron');
 const Sui = require('./Sui');
 const Aptos = require('./Aptos');
+const StarkNet = require('./Starknet');
 
 exports.signTransactionAlgorand = async(web3, transactionObject, options) => {
     const rawData = await Algorand.signTransactionAlgorand(web3, transactionObject, options);
@@ -47,6 +48,12 @@ exports.signTransactionSui = async(web3, transactionObject, options) => {
 exports.signTransactionAptos = async(web3, transactionObject, options) => {
 
     const rawData = await Aptos.signTransactionAptos(web3, transactionObject, options);
+    return rawData;
+};
+
+exports.signTransactionStarkNet = async(web3, transactionObject, options) => {
+
+    const rawData = await StarkNet.signTransactionStarkNet(web3, transactionObject, options);
     return rawData;
 };
 

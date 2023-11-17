@@ -1,5 +1,5 @@
-const {  signTransaction, prepareTransaction} = require('../../index');
 const {sendTransaction} = require("expand-network");
+const {  signTransaction, prepareTransaction} = require('../../index');
 // const { privateKey } = require('./privatekey');
 const xApiKey = 'TytSO3SsIw98gr6x8ezpI9QFw2LGWVEr8CwUF9Kd';
 async function main() {

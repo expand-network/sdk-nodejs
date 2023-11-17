@@ -3,15 +3,15 @@ const { signTransaction } = require('../../index');
 async function main() {
     const d = await signTransaction({
         
-        from: '0xa2e73C17F437688946993F683930E3Fd42Dd4F8C',
-        to: '0xa67E9B68c41b0f26184D64C26e0b2B81466E5994',
-        value: "10000000000000000000",
-        "gas":"874321",
+        from: '0x02735e60F0346A8827636290220e995117cc14280543d5CD5C8d544D7334bEF8',
+        to: '0x02735e60F0346A8827636290220e995117cc14280543d5CD5C8d544D7334bEF8',
+        value: "1000000000",
+        gas:"874321",
         xApiKey: "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
     },
         {
-            privateKey:"a0dc0a1da34821e9066c31fb2910ad73395105258309cacd7d8f26dc68d5f760",
-            chainId: "10",
+            privateKey:"423149548499943607318567778264048419352230277059557554818325647718469263324",
+            chainId: "301",
             xApiKey: "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
         });
     // const data = JSON.parse(Buffer.from(d.rawTransaction,"base64").toString());

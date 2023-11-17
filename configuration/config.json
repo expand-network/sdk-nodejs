@@ -212,11 +212,60 @@
             "aptosCoin":"0x1::aptos_coin::AptosCoin",
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
+        },
+
+        "300":{
+            "localName": "StarkNet",
+            "chainName": "StarkNet",
+            "chainSymbol": "STRK",
+            "nativeEthAddress":"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "rpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
+            "publicRpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
+            "domain" : "infura.io",
+            "sslMateId" : "4054117900"
+
+        },
+        "301":{
+            "localName": "StarkNetTestnet",
+            "chainName": "StarkNet",
+            "chainSymbol": "TSTRK",
+            "nativeEthAddress":"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "rpc": "https://starknet-testnet.blastapi.io/a0c768c4-cd06-4dfc-8a5c-a6a7a0716e2a",
+            "publicRpc": "https://starknet-testnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
+            "domain" : "infura.io",
+            "sslMateId" : "4054117900"
+        },
+        "8453": {
+            "localName": "Base",
+            "chainName": "Evm",
+            "chainSymbol": "BASE",
+            "rpc": "https://mainnet.base.org",
+            "publicRpc": "https://mainnet.base.org",
+            "domain" : "base.org",
+            "sslMateId" : "5673622167"
+        },
+
+        "84531": {
+            "localName": "BaseTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TBASE",
+            "rpc": "https://goerli.base.org",
+            "publicRpc": "https://goerli.base.org",
+            "domain" : "base.org",
+            "sslMateId" : "5673622167"
+        },
+        "84532": {
+            "localName": "BaseTestnet2",
+            "chainName": "Evm",
+            "chainSymbol": "TBASE2",
+            "rpc": "https://sepolia.base.org",
+            "publicRpc": "https://sepolia.base.org",
+            "domain" : "base.org",
+            "sslMateId" : "5673622167"
         }
-
-
-
     },
+
+    "Mask250":"3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
 
     "url": {
 

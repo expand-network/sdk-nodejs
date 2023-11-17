@@ -1,4 +1,4 @@
-const {signTransaction} = require('../src/index');
+const {signTransaction} = require('../index');
 async function main(){
 const d = await signTransaction( {
     from:"0x02735e60F0346A8827636290220e995117cc14280543d5CD5C8d544D7334bEF8",
