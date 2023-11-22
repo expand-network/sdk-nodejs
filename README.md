@@ -64,7 +64,7 @@ In addition, we currently support the following DeFi protocols:
   <tbody>
     <tr>
       <td>DEX & Aggregators </td>
-      <td>Uniswap v2, v3, Sushiswap, Pancakeswap, Curve, Balancer, 0x, 1inch </td>
+      <td>Uniswap v2, v3, Uniswap X, Sushiswap, Pancakeswap, Curve, Balancer, 0x, 1inch </td>
     </tr>
     <tr>
         <td>Bridge </td>
