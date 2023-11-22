@@ -42,7 +42,7 @@ We currently support the following blockchains:
   <tbody>
     <tr>
       <td>EVM compatible</td>
-      <td>Ethereum, Binance Smart Chain, Avalanche, Polygon, Cronos, Arbitrum, Fantom, Optimism</td>
+      <td>Ethereum, Binance Smart Chain, Avalanche, Polygon, Cronos, Arbitrum, Fantom, Optimism, Starknet, Base</td>
     </tr>
     <tr>
       <td>Non-EVM</td>
@@ -63,12 +63,16 @@ In addition, we currently support the following DeFi protocols:
   </thead>
   <tbody>
     <tr>
-      <td>DEX</td>
-      <td>Uniswap v2, v3, Sushiswap, Pancakeswap, Curve, Balancer</td>
+      <td>DEX & Aggregators </td>
+      <td>Uniswap v2, v3, Uniswap X, Sushiswap, Pancakeswap, Curve, Balancer, 0x, 1inch </td>
+    </tr>
+    <tr>
+        <td>Bridge </td>
+        <td>Stargate, Squid Router</td>
     </tr>
     <tr>
       <td>Lend and Borrow</td>
-      <td>Aave, Compound</td>
+      <td>Aave v2, v3, Compound</td>
     </tr>
     <tr>
         <td>Synthetic </td>
@@ -99,6 +103,10 @@ Coming soon:
       <td>Derivatives</td>
       <td>dYdX v4</td>
     </tr>
+    <tr>
+      <td>Liquid Staking</td>
+      <td>Lido</td>
+    </tr>
   </tbody>
 </table>
 
@@ -121,9 +129,13 @@ A user's private key is stored securely in a digital wallet, and should never be
 * It is important for the end user to connect to a secure network and ensure that they use only TLS 1.2 or a newer version for enhanced security to safeguard them from any kind of threats and attacks.
 
 ## Installation
-To install, just clone the repository from git directly. (npm install coming soon)
+To install, clone the repository from git directly.
 ```
 git clone https://github.com/expand-network/sdk-nodejs.git
+```
+Or, use the following npm package.
+```
+npm i expand-network
 ```
 ## Usage
 
@@ -155,7 +167,7 @@ Sample code: Swap 5 DAI (token ending in `d0F`) with WETH (token ending in `Cc2`
 
 ```js
 
-var transaction = await prepareTransaction('https://uat.expand.network/dex/swap', {
+var transaction = await prepareTransaction('https://api.expand.network/dex/swap', {
      amountIn: '5000000000000000000',
      amountOutMin: '0',
      path: ['0x6B175474E89094C44Da98b954EedeAC495271d0F','0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'],
