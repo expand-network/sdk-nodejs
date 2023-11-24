@@ -9,6 +9,7 @@ const {
     Connection
   } = require("@mysten/sui.js");
 const aptos = require('aptos');
+const { TonClient, WalletContractV4, internal } = require("ton");
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
@@ -88,6 +89,12 @@ exports.initialiseWeb3 = async( data ) => {
 
        web3 = new aptos.AptosClient(rpc);
 
+    } else if (chainName === 'TON'){
+        
+        web3 = new TonClient({
+            endpoint: rpc,
+            apiKey: config.chains[chainId].apiKey
+        });
     }
 
     return (web3);

@@ -96,6 +96,24 @@ exports.jsonSchema = {
         {
             if: { 
                 properties: {
+                    function: { type:"string", pattern: "TONTransaction()" },
+                } 
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
+                    rawTransaction: {type: "object"},
+                    xApiKey: {type : "string"},
+                    rpc: {type: "string"}
+                },
+                required: ["rawTransaction"] 
+            },
+        },
+
+        {
+            if: { 
+                properties: {
                     function: { type:"string", pattern: "FordefiTransaction()" },
                 } 
             },

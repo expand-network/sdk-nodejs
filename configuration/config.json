@@ -228,7 +228,28 @@
             "publicRpc": "https://starknet-testnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
             "domain" : "infura.io",
             "sslMateId" : "4054117900"
+        },
+
+        "ton": {
+            "localName": "TON",
+            "chainName": "TON",
+            "chainSymbol": "TON",
+            "rpc": "https://toncenter.com/api/v2/jsonRPC",
+            "publicRpc": "https://toncenter.com/api/v2/jsonRPC",
+            "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
+        },
+
+        "ton-testnet": {
+            "localName": "TONTestnet",
+            "chainName": "TON",
+            "chainSymbol": "TONTest",
+            "rpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
+            "publicRpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
+            "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
+
         }
+
+
 
 
 
