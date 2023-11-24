@@ -47,7 +47,7 @@ exports.jsonSchema = {
                     key: {type: "string"},
                     xApiKey: {type:"string"}
                 },
-                required: ["privateKey","xApiKey"] 
+                required: ["xApiKey"] 
             },
         },
 
@@ -89,7 +89,24 @@ exports.jsonSchema = {
                     xApiKey: {type : "string"},
                     rpc: {type: "string"}
                 },
-                required: ["rawTransaction","xApiKey"] 
+                required: ["rawTransaction"] 
+            },
+        },
+
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "FordefiTransaction()" },
+                } 
+            },
+            then: {
+                properties: {
+                    data: { type: "string" },
+                    timestamp: { type: "number" },
+                    signature: {type: "string"},
+                    accessToken: {type : "string"},
+                },
+                required: ["data","signature","accessToken", "timestamp"] 
             },
         },
 

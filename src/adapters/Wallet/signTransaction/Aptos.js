@@ -1,5 +1,5 @@
 const aptos = require('aptos');
-const config = require('../../configuration/config.json');
+const config = require('../../../../configuration/config.json');
 
 module.exports = {
 
