@@ -4,7 +4,6 @@ const UserOnboarding = require('./userOnboarding');
 const CancelOrder = require('./cancelOrder');
 const Transfer = require('./transfer');
 
-
 exports.userOnboarding = async (options) => {
     const filterOptions = options;
     filterOptions.function = "userOnboardingDYDX()";
