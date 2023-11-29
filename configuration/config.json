@@ -277,7 +277,39 @@
 
         "apiurl" : "https://uat.expand.network"
 
-    }
+    },
 
+    "dYdXV4": {
+        "MAX_CLIENT_ID": 4294967295,
+        "size": 0.01,
+        "signingMsg": {
+            "types": {
+                "EIP712Domain": [
+                    {
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "chainId",
+                        "type": "uint256"
+                    }
+                ],
+                "dYdX": [
+                    {
+                        "name": "action",
+                        "type": "string"
+                    }
+                ]
+            },
+            "primaryType": "dYdX",
+            "domain": {
+                "name": "dYdX V4",
+                "chainId": 5
+            },
+            "message": {
+                "action": "dYdX Chain Onboarding"
+            }
+        }
+    }
 
 }
