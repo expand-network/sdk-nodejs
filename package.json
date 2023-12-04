@@ -45,11 +45,13 @@
     "tronweb": "4.3.0",
     "tweetnacl": "1.0.3",
     "web3": "1.10.0",
-    "@dydxprotocol/v4-client-js": "^1.0.0",
+    "@dydxprotocol/v4-client-js": "1.0.5",
     "ethereum-cryptography": "^2.0.0",
+    "@cosmjs/tendermint-rpc": "^0.32.0",
     "@scure/bip32": "^1.1.5",
     "@scure/bip39": "^1.1.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "long": "^4.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",

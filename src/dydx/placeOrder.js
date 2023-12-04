@@ -1,5 +1,5 @@
 const { OrderExecution, OrderType, OrderSide, OrderTimeInForce } = require('@dydxprotocol/v4-client-js');
-const {getSubAccountClient} = require('../../configuration/dYdXCommon');
+const {getSubAccountCompositeClient} = require('../../configuration/dYdXCommon');
 const config = require("../../configuration/config.json");
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
             reduceOnly,
             triggerPrice
         } = options;
-        const { client, subaccount } = await getSubAccountClient(mnemonic, subAccountNumber);
+        const { client, subaccount } = await getSubAccountCompositeClient(mnemonic, subAccountNumber);
         try {
             const {size} = config.dYdXV4;
             const type = OrderType[orderType];
