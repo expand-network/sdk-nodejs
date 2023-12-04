@@ -1,26 +1,48 @@
-const { getSubAccountClient } = require('../../configuration/dYdXCommon');
+const Long = require('long');
+const { Method } = require('@cosmjs/tendermint-rpc');
+const { getSubAccountValidatorClient } = require('../../configuration/dYdXCommon');
+
 
 module.exports = {
-    cancelOrder: async (options) => {
+    transfer: async (options) => {
         const {
             subAccountNumber,
             mnemonic,
-            recipientAddress,
-            recipientSubAccountNumber,
-            amount
+            recipient,
+            assetId
         } = options;
-        const { client, subaccount } = await getSubAccountClient(mnemonic, subAccountNumber);
+        let {amount} = options;
 
-        try {
-            const tx = await client.transferToSubaccount(
-                subaccount,
-                 recipientAddress, 
-                 recipientSubAccountNumber, 
-                 amount
-            );
-            return tx;
-        } catch (error) {
-            return (error.message);
-        }
+        const { client, subaccount } = await getSubAccountValidatorClient(mnemonic, subAccountNumber);
+        amount = new Long(Number(amount));
+
+        const msgs = new Promise((resolve) => {
+          const msg = client.post.composer.composeMsgWithdrawFromSubaccount(
+            subaccount.address,
+            subaccount.subaccountNumber,
+            Number(assetId),
+            amount.toString(),
+            recipient,
+          );
+      
+          resolve([msg]);
+        });
+      
+        const totalFee = await client.post.simulate(
+          subaccount.wallet,
+          () => msgs,
+          undefined
+        );
+      
+        const amountAfterFee = amount.sub(Long.fromString(totalFee.amount[0].amount));
+      
+        const tx = await client.post.withdraw(
+          subaccount,
+          assetId,
+          amountAfterFee.toString(),
+          recipient,
+          Method.BroadcastTxCommit,
+        );
+        return tx;
     }
 };

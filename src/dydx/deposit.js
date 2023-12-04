@@ -1,31 +1,63 @@
-// const { default: axios } = require('axios');
+const { default: axios } = require('axios');
+const config = require("../../configuration/config.json");
+const { initialiseWeb3 } = require('../../configuration/intialiseWeb3');
 
-// module.exports = {
-//     deposit: async (options) => {
-//         const {srcChainId, from, to, srcToken} = options;
-//         const apiConfig = {
-//             method: 'post',
-//             url: `https://testnet.api.squidrouter.com/v1/route`,
-//             headers: {},
-//         data: {
-//             fromChain: srcChainId, // Avalanche
-//             toChain: 'dydx-testnet-4', // dydx
-//             fromToken: srcToken,
-//             toToken: "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
-//             fromAmount: "100000000000000000", // 0.1 AVAX
-//             fromAddress: from,
-//             toAddress: to,
-//             slippageConfig: {
-//               autoMode: 1
-//             }
-//           }
-//         };
+module.exports = {
+    deposit: async (options) => {
+        const { srcChainId: fromChain, from: fromAddress, to: toAddress, amountIn: fromAmount, tokenIn: fromToken, slippage, gas, privateKey } = options;
+        const web3 = await initialiseWeb3({ chainId: fromChain });
+        const routeURL = `${config.dYdXV4.squidRouterAPIBaseUrl}route`;
+        const apiConfig = {
+            method: 'get',
+            url: `${config.dYdXV4.squidRouterAPIBaseUrl}route`,
+            headers: {},
+            params: {
+                fromChain,
+                fromToken,
+                fromAddress,
+                fromAmount,
+                toChain: config.dYdXV4.chainId,
+                toToken: config.dYdXV4.USDC,
+                toAddress,
+                slippage,
+                quoteOnly: false
+            }
+        };
 
-//           try {
-//             const res = await axios.request(apiConfig);
-//             console.log(res);
-//         } catch (err) {
-//             return err;
-//         }        
-//     }
-// };
+        console.log(apiConfig);
+        try {
+            const result = await axios.get(routeURL, {
+                params: {
+                    fromChain,
+                    fromToken,
+                    fromAddress,
+                    fromAmount,
+                    toChain: config.dYdXV4.chainId,
+                    toToken: config.dYdXV4.USDC,
+                    toAddress,
+                    slippage,
+                    quoteOnly: false
+                },
+                headers: {
+                    "x-integrator-id": "your-integrator-id",
+                }
+            });
+
+            const {gasPrice, data, targetAddress: to, value} = result.data.route.transactionRequest;
+            const createTransaction = await web3.eth.accounts.signTransaction({
+                from: fromAddress,
+                gas,
+                gasPrice,
+                data,
+                value,
+                to,
+              }, privateKey);
+
+            const transactionReceipt = await web3.eth.sendSignedTransaction(createTransaction.rawTransaction);
+            return transactionReceipt;
+        } catch (err) {
+            console.log(err.response.data);
+            return '0';
+        }
+    }
+};

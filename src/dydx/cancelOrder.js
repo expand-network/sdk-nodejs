@@ -1,14 +1,16 @@
 const { default: axios } = require('axios');
-const { getSubAccountClient } = require('../../configuration/dYdXCommon');
+const { getSubAccountCompositeClient } = require('../../configuration/dYdXCommon');
+const { OrderFlags } = require('@dydxprotocol/v4-client-js');
 
 module.exports = {
     cancelOrder: async (options) => {
         const {
             subAccountNumber,
             mnemonic,
-            orderId
+            orderId,
+            goodTillTimeInSeconds
         } = options;
-        const { client, subaccount } = await getSubAccountClient(mnemonic, subAccountNumber);
+        const { client, subaccount } = await getSubAccountCompositeClient(mnemonic, subAccountNumber);
 
         const orderConfig = {
             method: 'get',
@@ -25,14 +27,16 @@ module.exports = {
             return err;
         }
 
+        console.log(order);
+        
         try {
             const tx = await client.cancelOrder(
                 subaccount,
                 order.clientId,
-                order.orderFlags,
-                order.clobPairId,
+                OrderFlags.LONG_TERM,
                 order.ticker,
-                order.goodTilBlockTime
+                0,
+                Number(goodTillTimeInSeconds)
               );
             return tx;
         } catch (error) {

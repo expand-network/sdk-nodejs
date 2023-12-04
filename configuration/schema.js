@@ -162,7 +162,8 @@ exports.jsonSchema = {
                 properties: {
                     subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
                     mnemonic: { type: "string" },
-                    orderId: { type: "string" }
+                    orderId: { type: "string" },
+                    goodTillTimeInSeconds: { type: "string", default: '500' }
                 },
                 required: ["subAccountNumber", "mnemonic", "orderId"]
             },
@@ -180,10 +181,32 @@ exports.jsonSchema = {
                         subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
                         mnemonic: { type: "string" },
                         recipient: { type: "string" },
-                        recipientSubAccountNumber: { type: "string" },
+                        assetId: { type: "string", default: "0" },
                         amount: { type: "string" },                        
                     },
-                    required: ["subAccountNumber", "mnemonic", "recipient", "recipientSubAccountNumber", "amount"]
+                    required: ["subAccountNumber", "mnemonic", "recipient", "amount"]
+                },
+            },
+
+             // Field Mapping for depositDYDX() function
+             {
+                if: {
+                    properties: {
+                        function: { type: "string", pattern: "depositDYDX()" },
+                    }
+                },
+                then: {
+                    properties: {
+                        amountIn: { type: "string" },
+                        from: { type: "string" },
+                        slippage: { type: "string", default: "1" },
+                        srcChainId: { type: "string", default: "5" },
+                        tokenIn: { type: "string" },
+                        to: { type: "string" },                        
+                        gas: { type: "string" },                        
+                        privateKey: { type: "string" },                        
+                    },
+                    required: ["amountIn", "to", "gas", "from", "tokenIn", "privateKey"]
                 },
             },
     ]

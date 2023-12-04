@@ -3,16 +3,14 @@ const PlaceOrder = require('./placeOrder');
 const UserOnboarding = require('./userOnboarding');
 const CancelOrder = require('./cancelOrder');
 const Transfer = require('./transfer');
+const Deposit = require('./deposit');
 
 exports.userOnboarding = async (options) => {
     const filterOptions = options;
     filterOptions.function = "userOnboardingDYDX()";
     const validJson = await schemaValidator.validateInput(filterOptions);
 
-    if (!validJson.valid) {
-        return (validJson);
-    }
-
+    if (!validJson.valid) return (validJson);
     return UserOnboarding.userOnboarding(options);
 };
 
@@ -21,10 +19,7 @@ exports.placeOrder = async (options) => {
     filterOptions.function = "placeOrderDYDX()";
     const validJson = await schemaValidator.validateInput(filterOptions);
 
-    if (!validJson.valid) {
-        return (validJson);
-    }
-
+    if (!validJson.valid) return (validJson);
     return PlaceOrder.placeOrder(options);
 };
 
@@ -33,10 +28,7 @@ exports.cancelOrder = async (options) => {
     filterOptions.function = "cancelOrderDYDX()";
     const validJson = await schemaValidator.validateInput(filterOptions);
 
-    if (!validJson.valid) {
-        return (validJson);
-    }
-
+    if (!validJson.valid) return (validJson);
     return CancelOrder.cancelOrder(options);
 };
 
@@ -45,9 +37,15 @@ exports.transfer = async (options) => {
     filterOptions.function = "transferDYDX()";
     const validJson = await schemaValidator.validateInput(filterOptions);
 
-    if (!validJson.valid) {
-        return (validJson);
-    }
-
+    if (!validJson.valid) return (validJson);
     return Transfer.transfer(options);
+};
+
+exports.deposit = async (options) => {
+    const filterOptions = options;
+    filterOptions.function = "depositDYDX()";
+    const validJson = await schemaValidator.validateInput(filterOptions);
+
+    if (!validJson.valid) return (validJson);
+    return Deposit.deposit(options);
 };
