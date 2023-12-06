@@ -128,5 +128,42 @@ exports.jsonSchema = {
             },
         },
 
+        // Fireblocks
+
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "FireblockSign()" },
+                } 
+            },
+            then: {
+                properties: {
+                    from: { type: "string" },
+                    assetId: { type: "string" },
+                    data: { type: "string" },
+                    note: {type: "string"},
+                    amount: {type: "string"}
+                },
+                required: ["from"] 
+            },
+        },
+
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "SendFireblocks()" },
+                } 
+            },
+            then: {
+                properties: {
+                    jwt: { type: "string" },
+                    path: { type: "string" },
+                    data: { type: "object" },
+                    method: { type: "string",  }
+                },
+                required: ["jwt", "data"] 
+            },
+        },
+
     ]
 };
