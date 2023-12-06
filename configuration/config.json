@@ -249,18 +249,17 @@
 
         }
 
+    },
 
-
-
-
+    "fireblocks": {
+        "baseUrl": "https://api.fireblocks.io",
+        "createTransaction": "/v1/transactions"
     },
 
     "Mask250":"3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
 
     "url": {
-
         "apiurl" : "https://api.expand.network"
-
     }
 
 
