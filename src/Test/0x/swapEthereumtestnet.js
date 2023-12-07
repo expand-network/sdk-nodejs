@@ -10,29 +10,27 @@ async function main() {
         "to": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
         "from": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
         "gas": "990089",
+        "gasPriority":"low",
         "chainId":"5",
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
             
         };
 
-    const result = await prepareTransaction('http://localhost:3000/dex/swap', txObject);
-    console.log(result);
-    const privateKey = 'a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86';
-    const chainId = '5';
-    const signedTx = await signTransaction(result,{
-        chainId,
-        xApiKey,
-        privateKey
-    });
-    console.log(signedTx);
-    // signedTx.xApiKey = xApiKey;
-    // signedTx.chainId = '5';
-    // const tx = await sendTransaction({
-    //     "chainId": "5",
-    //     "rawTransaction":signedTx.rawTransaction,
-    //     "xApiKey": xApiKey
-    
+    const rawtx = await prepareTransaction('https://api.expand.network/dex/swap', txObject);
+    console.log(rawtx,'******');
+
+    // const privateKey = 'a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86';
+    // const chainId = '5';
+    // const raw = await signTransaction(rawtx,{
+    //     chainId,
+    //     xApiKey,
+    //     privateKey,
     // });
-    // console.log("Transaction Pending....", tx);
+    // console.log(raw,'------>');
+    // raw.xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
+    // raw.chainId = '5';
+    // const x = await sendTransaction(raw);
+    // console.log(x);
 }
+    
 main();

@@ -1,4 +1,4 @@
-const {  signTransaction, prepareTransaction} = require('../../../../index');
+const { signTransaction, prepareTransaction} = require('../../../../index');
 const {sendTransaction} = require("expand-network");
 // const { privateKey } = require('./privatekey');
 const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
@@ -9,11 +9,11 @@ async function main() {
                             {
                                 "lendborrowId": "1000",
                                 "asset": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-                                "amount": "100000",
-                                "from": "0x356dB816602c85e2075774bB77D13995c8Bab023",
-                                "onBehalfOf": "0x356dB816602c85e2075774bB77D13995c8Bab023",
+                                "amount": "1000000",
+                                "from": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
+                                "onBehalfOf": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
                                 "gas": "408298",
-                                "interestRateMode" :'2'
+                                "interestRateMode" :'1'
                               
                             }
                         ],
@@ -26,7 +26,7 @@ async function main() {
 
     const preparedTx = await prepareTransaction('https://lend-borrow.quicknode.expand.network/lendborrow', txObject);
     console.log(preparedTx);
-    const privateKey = '96f965af1b75c901aea4a2f887a7b721b49834ca4f7daab1fa0047b2c57bc9a1';
+    const privateKey = '0x84d9b4595762f360fe58cc49dd5466d7d61e367322070899e5a213fd66e61c62';
     const chainId = '1';
     const signedTx = await signTransaction(preparedTx.result.result,{
         chainId,

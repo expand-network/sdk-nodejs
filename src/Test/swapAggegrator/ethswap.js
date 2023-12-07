@@ -6,21 +6,22 @@ const { sendTransaction, signTransaction, prepareTransaction} = require('../../i
 
 async function main() {
     const result =  {
-        "path":["0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee","0x6B175474E89094C44Da98b954EedeAC495271d0F"],
-        "amountIn": "1000000000000000",
+        "path":["0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee","0x6b175474e89094c44da98b954eedeac495271d0f"],
+        "amountIn": "100000000000000000",
         "gas":  "900000",
-        "gasPrice":"270000000000",
-        "excludedDexes":["1600","1100","1300","1700"],
-        "from": "0xb52340F15b7Cbd4e9178E44366c071D3849a1A0B",
-        "to": "0xb52340F15b7Cbd4e9178E44366c071D3849a1A0B", 
+        "gasPriority":"medium",
+        // "excludedDexes":["1000","1300","1100","1400"],
+        "bestSwap":true,
+        "from": "0x23Fc2AAc23E297605a2242fFeb19C869e4A1b520",
+        "to": "0x23Fc2AAc23E297605a2242fFeb19C869e4A1b520", 
         "chainId": "1",
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };
     const rawtx = await prepareTransaction('http://localhost:3000/dex/swapaggregator', result);
     console.log(rawtx,'}}}}}}}}');
-    const privateKey = '0x69393f0e6639298214c6d2bec1b7ed3b559d32514547a982fd402de8a4e2e4b9';
+    const privateKey = '8c471bc03e223f0d868f3ca9889608df55d711163cce1a61e5c1ba4024d303a3';
     const chainId = '1';
-    const raw = await signTransaction(rawtx.UniswapV2,{
+    const raw = await signTransaction(rawtx.transactionPayload,{
         chainId,
         xApiKey,
         privateKey,
@@ -28,14 +29,8 @@ async function main() {
     console.log(raw,'------>');
     raw.xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
     raw.chainId = '1';
-    // console.log(raw);
-    const tx = await sendTransaction({
-        "chainId": "1",
-        "rawTransaction":raw.rawTransaction,
-        "xApiKey": xApiKey
-    
-    });
-    console.log("Transaction Pending....", tx);
+    const x = await sendTransaction(raw);
+    console.log(x);
 }
 
 main();

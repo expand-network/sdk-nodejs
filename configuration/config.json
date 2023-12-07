@@ -97,6 +97,12 @@
             "chainName": "Evm",
             "chainSymbol": "TAETH"
         },
+
+        "421614": {
+            "localName": "ArbitrumSepoliaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TASPL"
+        },
         
         "250": {
             "localName": "Fantom",
@@ -170,6 +176,12 @@
             "localName": "OptimismTestnet",
             "chainName": "Evm",
             "chainSymbol": "TOPT"
+        },
+
+        "11155420": {
+            "localName": "OptimismSepoliaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TSPL"
         },
         
         "101": {
@@ -269,7 +281,7 @@
 
     "url": {
 
-        "apiurl" : "http://localhost:3000"
+        "apiurl" : "https://api.expand.network"
 
     }
 

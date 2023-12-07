@@ -7,13 +7,14 @@ async function main() {
         "bridgeId": "100",
         "srcTokenSymbol": "USDC",
         "amountIn": "10000",
-        "gas": "600000",
+        "gas": "900000",
+        "gasPriority":"low",
         "from": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
         "dstChainId": "80001",
         "amountOutMin": "100",
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };
-    const rawtx = await prepareTransaction('https://api.expand.network/bridge/swap', txObject);
+    const rawtx = await prepareTransaction('http://localhost:3000/bridge/swap', txObject);
     console.log(rawtx,'******');
 
     const privateKey = 'a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86';
@@ -26,7 +27,7 @@ async function main() {
     console.log(raw,'------>');
     raw.xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
     raw.chainId = '5';
-    const x = await sendTransaction(raw);
-    console.log(x);
+    // const x = await sendTransaction(raw);
+    // console.log(x);
 }
 main();

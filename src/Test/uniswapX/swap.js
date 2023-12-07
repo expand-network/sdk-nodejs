@@ -2,24 +2,19 @@ const axios = require('axios');
 const { ethers } = require('ethers');
  
  const generateSignature = async () => {
-     const provider = new ethers.providers.JsonRpcProvider("https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
-     const signer = new ethers.Wallet('a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86', provider);
+     const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
+     const signer = new ethers.Wallet('0x8c471bc03e223f0d868f3ca9889608df55d711163cce1a61e5c1ba4024d303a3', provider);
  
      const data = JSON.stringify({
-        "dexId": "1901",
-        "amountIn": "1000000000000000",
-        "amountOutMin": "0",
-        "path": [
-          "0xe0C9275E44Ea80eF17579d33c55136b7DA269aEb",
-          "0xdFCeA9088c8A88A76FF74892C1457C17dfeef9C1"
-        ],
-        "to": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
-        "from": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
-        "decayStartTime": "1700140876",
-        "decayEndTime": "1710140876",
-        "amountOut": "0",
-        "gas": "373376",
-        "deadline": "1795982024"
+    "dexId": "1900",
+    "amountIn": "10000000000000000",
+    "path": ["0x6b175474e89094c44da98b954eedeac495271d0f","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"],
+    "to": "0x23Fc2AAc23E297605a2242fFeb19C869e4A1b520",
+    "from": "0x23Fc2AAc23E297605a2242fFeb19C869e4A1b520",
+    "decayStartTime":"1701688477",
+    "decayEndTime": "1710140876",
+    "amountOut": "0",
+    "deadline": "1795982024"
      });
  
      const config = {
@@ -41,3 +36,4 @@ const { ethers } = require('ethers');
  };
  
  generateSignature();
+

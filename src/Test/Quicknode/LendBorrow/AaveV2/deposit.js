@@ -10,8 +10,8 @@ async function main() {
                 "lendborrowId": "1000",
                 "asset": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
                 "amount": "100000000000000",
-                "from": "0xAEdf46101CD0D175bEE94082c094a9319A0634e4",
-                "onBehalfOf": "0xAEdf46101CD0D175bEE94082c094a9319A0634e4",
+                "from": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
+                "onBehalfOf": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
                 "gas": "408298"
                               
                             }
@@ -25,7 +25,7 @@ async function main() {
 
     const preparedTx = await prepareTransaction('https://lend-borrow.quicknode.expand.network/lendborrow', txObject);
     console.log(preparedTx);
-    const privateKey = '96f965af1b75c901aea4a2f887a7b721b49834ca4f7daab1fa0047b2c57bc9a1';
+    const privateKey = '0x84d9b4595762f360fe58cc49dd5466d7d61e367322070899e5a213fd66e61c62';
     const chainId = '1';
     const signedTx = await signTransaction(preparedTx.result.result,{
         chainId,

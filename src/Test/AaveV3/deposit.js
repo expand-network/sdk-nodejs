@@ -7,17 +7,17 @@ const xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
 async function main() {
     const result =  {
         lendborrowId: '1200',
-        from:'0x122Eb6Cd95593b6401ce282453717f2f9A5c6bD5',
-        asset:'0x6B175474E89094C44Da98b954EedeAC495271d0F',
+        from:'0xFA2261A11eEd6a1209E3Ccf4b665C42692A4A88B',
+        asset:'0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
         amount:'100000000000000000', // erc20 token
-        onBehalfOf:'0x122Eb6Cd95593b6401ce282453717f2f9A5c6bD5',
+        onBehalfOf:'0xFA2261A11eEd6a1209E3Ccf4b665C42692A4A88B',
         gas: '329000',
-        involveBaseToken:"1",
+        // involveBaseToken:"1",
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T",
     };
-    const rawtx = await prepareTransaction('https://api.expand.network/lendborrow/deposit', result);
+    const rawtx = await prepareTransaction('http://localhost:3000/lendborrow/deposit', result);
     console.log(rawtx,'}}}}}}}}');
-    const privateKey = '0x2c5f35127c98904a733649d228a4c46580f9afd9680ae38418542f0ff083d3c1';
+    const privateKey = 'eeb5cdc6423ec97f6901466544e4295d65bec984217a3d8fa46fd86bc1431065';
     const chainId = '1';
     const raw = await signTransaction(rawtx,{
         chainId,

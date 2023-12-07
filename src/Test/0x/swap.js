@@ -5,34 +5,39 @@ const xApiKey = 'TytSO3SsIw98gr6x8ezpI9QFw2LGWVEr8CwUF9Kd';
 async function main() {
     const txObject =  {
         "dexId":"1600",
-        "amountIn": "1000000000000000000",
-        "path": ["0x6B175474E89094C44Da98b954EedeAC495271d0F","0xdAC17F958D2ee523a2206206994597C13D831ec7"],
-        "to": "0x6AFb0df2F5ab5012568991549544dbC44Dfb6483",
-        "deadline": "1999036703",
-        "from": "0x6AFb0df2F5ab5012568991549544dbC44Dfb6483",
+        "amountIn": "100000",
+        "path": ["0xdAC17F958D2ee523a2206206994597C13D831ec7","0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"],
+        "to": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
+        "from": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
         "gas": "990089",
+        "gasPriority":"low",
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
             
         };
 
-    const result = await prepareTransaction('http://localhost:3000/dex/swap', txObject);
-    console.log(result);
-    const privateKey = 'c2615f872d3a77ab320d1ad7304a83cea334b54a136ae9a2b8d6e798e7984c19';
-    const chainId = '1';
-    const signedTx = await signTransaction(result,{
-        chainId,
-        xApiKey,
-        privateKey
-    });
-    console.log(signedTx);
-    // signedTx.xApiKey = xApiKey;
-    // signedTx.chainId = '5';
-    const tx = await sendTransaction({
-        "chainId": "1",
-        "rawTransaction":signedTx.rawTransaction,
-        "xApiKey": xApiKey
-    
-    });
-    console.log("Transaction Pending....", tx);
+    const rawtx = await prepareTransaction('http://localhost:3000/dex/swap', txObject);
+    console.log(rawtx,'******');
+
+    // const privateKey ='0x84d9b4595762f360fe58cc49dd5466d7d61e367322070899e5a213fd66e61c62';
+    // const chainId = '1';
+    // const raw = await signTransaction(rawtx,{
+    //     chainId,
+    //     xApiKey,
+    //     privateKey,
+    // });
+    // console.log(raw,'------>');
+    // raw.xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
+    // raw.chainId = '1';
+    // const x = await sendTransaction(raw);
+    // console.log(x);
 }
+    
 main();
+    
+    
+    
+    
+    
+    
+    
+   
