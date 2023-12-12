@@ -57,11 +57,12 @@ class WalletFordefi {
                     'Content-Type': 'application/json',
                     "Authorization": response.accessToken,
                     'X-Timestamp': response.timestamp,
-                    'X-Signature': response.signature,
+                    // 'X-Signature': response.signature,
                 },
                 data: response.data
             };
-         return await axios.request(config);
+         const resp = await axios.request(config);
+         return resp.data;
             // .then((response) => {
             //     return (JSON.stringify(response.data));
             //  })
@@ -70,7 +71,7 @@ class WalletFordefi {
             // });
 
         } catch(error){
-            return error;
+            return error.response.data;
         }
 
     }
