@@ -5,7 +5,8 @@
         "1": {
             "localName": "Ethereum",
             "chainName": "Evm",
-            "chainSymbol": "ETH"
+            "chainSymbol": "ETH",
+            "rpc": "https://aged-bold-general.quiknode.pro/aca755115e18fb7c58c55a9e7c1af78e55e9cde2/"
         },
 
         "3": {
@@ -23,7 +24,8 @@
         "5": {
             "localName": "EthereumTestnetGoerli",
             "chainName": "Evm",
-            "chainSymbol": "TETHGRL"
+            "chainSymbol": "TETHGRL",
+            "rpc": "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
         },
 
         "42": {
