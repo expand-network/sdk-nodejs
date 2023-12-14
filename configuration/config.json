@@ -277,6 +277,10 @@
 
         "apiurl" : "https://api.expand.network"
 
+    },
+
+    "circleProgrammableWallet": {
+        "baseUrl" : "https://api.circle.com/v1/w3s/user/transactions/"
     }
 
 
