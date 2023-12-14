@@ -23,10 +23,12 @@ const preparedTx = await prepareTransaction('https://api.expand.network/fungible
         "tokenAddress": "0xe0C9275E44Ea80eF17579d33c55136b7DA269aEb",
         "to": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
         "amount": "100000",
-        "gas": "25000",
+        "gas": "96000",
+        "gasPriority":"low",
         "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"     
     });
    preparedTx.chainId = '5'; 
+   console.log(preparedTx);
 
 // // Sign the transaction locally using sdk client
 const SignedTx = await wallet.signTransaction(preparedTx);         

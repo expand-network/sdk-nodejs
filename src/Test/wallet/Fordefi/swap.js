@@ -15,25 +15,25 @@ async function initialiseFordefiWallet(){
 // ​
 async function main() {
     const wallet = await initialiseFordefiWallet();
-    const preparedTx = await prepareTransaction("http://localhost:3000/bridge/swap", {
+    const preparedTx = await prepareTransaction("https://api.expand.network/bridge/swap", {
         
         "bridgeId":"201",
         "srcChainId":"5",
         "dstChainId":"80001",
-        "srcTokenSymbol":"ETH",
-        "dstTokenSymbol":"MATIC",
+        "srcTokenSymbol":"WETH",
+        "dstTokenSymbol":"aUSDC",
         "amountIn":"1000000000000",
         "from":"0x9A120137a6C66fa0e70431666B7A049ab0b5E978",
         "to":"0x9A120137a6C66fa0e70431666B7A049ab0b5E978",
         "gas":"920000",
-        "gasPriority":"medium",
+        "gasPriority":"low",
         "xApiKey": xApiKey
     });
     preparedTx.chainId = '5';
     const signedTx = await wallet.signTransaction(preparedTx);
     console.log(signedTx);
-    const tx = await wallet.sendTransaction(signedTx);
-    console.log("Transaction Pending....", tx);
+    // const tx = await wallet.sendTransaction(signedTx);
+    // console.log("Transaction Pending....", tx);
     // console.log(`https://goerli.etherscan.io/tx/${tx}`);
 }
     

@@ -14,8 +14,8 @@ async function main() {
     const wallet  = new WalletFordefi({ accessToken:accessToken, xApiKey:xApiKey, privateKeyFile: './private.pem',vault_id: '297fac67-bf77-4391-a976-e417eb51ed2d'});
     const signedTx = await wallet.signTransaction(preparedTx);
     console.log(signedTx);
-    const tx = await wallet.sendTransaction(signedTx);
-    console.log("Transaction Pending....", tx);
+    // const tx = await wallet.sendTransaction(signedTx);
+    // console.log("Transaction Pending....", tx);
     // console.log(`https://goerli.etherscan.io/tx/${tx}`);
 }
     

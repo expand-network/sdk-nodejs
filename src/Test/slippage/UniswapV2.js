@@ -29,8 +29,8 @@ async function main() {
     console.log(raw,'------>');
     raw.xApiKey = 'vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T';
     raw.chainId = '1';
-    const x = await sendTransaction(raw);
-    console.log(x);
+    // const x = await sendTransaction(raw);
+    // console.log(x);
 }
 
 main();

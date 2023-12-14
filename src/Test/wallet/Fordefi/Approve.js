@@ -18,7 +18,7 @@ async function main() {
     const preparedTx = await prepareTransaction("https://api.expand.network/fungibletoken/approve", {
         "from": "0x9A120137a6C66fa0e70431666B7A049ab0b5E978", 
         "tokenAddress":"0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",  
-        "amount": "2000000",                  
+        "amount": "100000000000000",                  
         "to": "0x481A2AAE41cd34832dDCF5A79404538bb2c02bC8", 
         "gas": "100000",
         "gasPriority":"low",
@@ -28,8 +28,8 @@ async function main() {
     preparedTx.chainId = '5';
     const signedTx = await wallet.signTransaction(preparedTx);
     console.log(signedTx);
-    const tx = await wallet.sendTransaction(signedTx);
-    console.log("Transaction Pending....", tx);
+    // const tx = await wallet.sendTransaction(signedTx);
+    // console.log("Transaction Pending....", tx);
     // console.log(`https://goerli.etherscan.io/tx/${tx}`);
 }
     
