@@ -46,16 +46,28 @@ class WalletFireblocks {
             txData.source = {
                 "type": "VAULT_ACCOUNT",
                 "id": transactionObject.from
-            },
+            };
+
+            if(transactionObject.internal === true){
+                    txData.destination = {
+                        "type": "VAULT_ACCOUNT",
+                        "id": transactionObject.to
+                    }
+
+            }
+            else { 
             txData.destination = {
                 "type": "ONE_TIME_ADDRESS",
                 "oneTimeAddress": {
                     "address": transactionObject.to
                 }
+              }
             }
-            txData.assetId = (transactionObject.assetId)?(transactionObject.assetId):"BASE",
-            txData.amount = (transactionObject.amount)?(transactionObject.amount):'0.00000000001',
-            txData.note =  (transactionObject.note)?(transactionObject.note):"hey"
+            const assetDecimals = (transactionObject.assetDecimals)?(transactionObject.assetDecimals):18;
+            if(txData.operation === "TRANSFER")
+                 txData.assetId = (transactionObject.assetId)?(transactionObject.assetId):"ETH_TEST3",
+            txData.amount = (transactionObject.amount)?(transactionObject.amount)/10**assetDecimals:'0',
+            txData.note =  (transactionObject.note)?(transactionObject.note):"expand"
         
 
             if(transactionObject.data){
@@ -63,7 +75,6 @@ class WalletFireblocks {
                     "contractCallData": transactionObject.data
                 }
             }
-
             const signature = this.jwtSign("/v1/transactions", txData);
             const rawTx = {
                 "jwt": signature,
@@ -105,7 +116,7 @@ class WalletFireblocks {
             return resp.data;
         } catch(error){
             console.log(error);
-            return error;
+            return error.data;
         }
 
     }
