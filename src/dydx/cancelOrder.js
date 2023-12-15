@@ -26,8 +26,6 @@ module.exports = {
         } catch (err) {
             return err;
         }
-
-        console.log(order);
         
         try {
             const tx = await client.cancelOrder(
