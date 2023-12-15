@@ -63,7 +63,7 @@ const depositTest = async () => {
 };
 
 // onboardingTest();
-// placeOrderTest();
+placeOrderTest();
 // cancelOrderTest();
 // transferTest();
-depositTest();
+// depositTest();
