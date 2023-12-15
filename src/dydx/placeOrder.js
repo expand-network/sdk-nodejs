@@ -43,7 +43,6 @@ module.exports = {
             );
             return (tx);
         } catch (error) {
-            console.log(error);
             return (error.message);
         }
     }
