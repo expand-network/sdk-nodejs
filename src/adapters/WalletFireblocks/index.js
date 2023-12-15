@@ -64,8 +64,8 @@ class WalletFireblocks {
               }
             }
             const assetDecimals = (transactionObject.assetDecimals)?(transactionObject.assetDecimals):18;
-            txData.assetId = (transactionObject.assetId)?(transactionObject.assetId):"ETH_TEST3",
-            txData.amount = (transactionObject.amount)?(transactionObject.amount)/10**assetDecimals:'0',
+            txData.assetId = (transactionObject.assetId)?(transactionObject.assetId):"ETH_TEST3";
+            txData.amount = (transactionObject.value)?(transactionObject.value)/10**assetDecimals:'0',
             txData.note =  (transactionObject.note)?(transactionObject.note):"expand"
         
 
