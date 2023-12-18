@@ -6,7 +6,7 @@ const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
 const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
 
-class Wallet {
+class WalletCoinbase {
 
     constructor( options ){
         this.privateKey = options.privateKey;
@@ -29,7 +29,11 @@ class Wallet {
 
             const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
 
-            
+            let chainName = config.chains[chainId].chainName;
+
+            if(chainName !== "Evm")
+                return new Error("chain not Supported"); 
+
             configuration.params = {
                 chainId
             };
@@ -39,8 +43,7 @@ class Wallet {
             const web3 = await initialiseWeb3({rpc:rpc,chainId,key:this.xApiKey});
             transactionOptions.value = new BN(transactionOptions.value);
 
-            let chainName = config.chains[chainId].chainName;
-            
+                       
             const options = {};
             options.privateKey = this.privateKey;
             const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
@@ -83,5 +86,5 @@ class Wallet {
 
 }
 
-module.exports = { Wallet };
+module.exports = { WalletCoinbase };
 
