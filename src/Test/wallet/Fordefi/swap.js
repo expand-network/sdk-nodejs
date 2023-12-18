@@ -23,8 +23,8 @@ async function main() {
         "srcTokenSymbol":"WETH",
         "dstTokenSymbol":"aUSDC",
         "amountIn":"1000000000000",
-        "from":"0x9A120137a6C66fa0e70431666B7A049ab0b5E978",
-        "to":"0x9A120137a6C66fa0e70431666B7A049ab0b5E978",
+        "from":"0x4D62A8147c18B45D72BF02378329989533114aDf",
+        "to":"0x4D62A8147c18B45D72BF02378329989533114aDf",
         "gas":"920000",
         "gasPriority":"low",
         "xApiKey": xApiKey

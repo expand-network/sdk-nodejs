@@ -18,17 +18,12 @@ async function initialiseDFNSWallet(){
 async function main() {
 const wallet = await initialiseDFNSWallet();    // Initialise the wallet client
 // Preparing the approve transaction from expand.network
-const preparedTx = await prepareTransaction('https://api.expand.network/dex/swap', {       
-    "dexId":"1002",
-    "amountIn": "1000000000000000",
-    "amountOutMin": "0",
-    "path": ["0xdc31Ee1784292379Fbb2964b3B9C4124D8F89C60","0xD87Ba7A50B2E7E660f678A895E4B72E7CB4CCd9C"],
-    "to": "0x4D62A8147c18B45D72BF02378329989533114aDf",
-    "deadline": "1765990894",
+const preparedTx = await prepareTransaction('https://api.expand.network/fungibletoken/approve', {       
     "from": "0x4D62A8147c18B45D72BF02378329989533114aDf",
-    "gas": "173376",
-    "gasPriority":"low",
-    "slippage":"3",
+    "tokenAddress": "0xD87Ba7A50B2E7E660f678A895E4B72E7CB4CCd9C",
+    "to": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+    "amount": "10000000",
+    "gas": "96000",
     "xApiKey": "vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"     
     });
    preparedTx.chainId = '5'; 

@@ -11,9 +11,9 @@ async function main() {
             "path": ["0xdAC17F958D2ee523a2206206994597C13D831ec7","0x6B175474E89094C44Da98b954EedeAC495271d0F"],
             "to": "0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
             "from":"0x0a8062EeAA97b0CC055510eA125faA2cb37C1b3d",
-            "gas": "973376",
+            "gas": "27376",
             "gasPriority":"medium",
-            "slippage": "0.5",
+            // "slippage": "0.5",
             "xApiKey":"vF2rU96xCr9yJCgSVnSxR9yKOBd1U21z9jYcFb5T"
        
     };

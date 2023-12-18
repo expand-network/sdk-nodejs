@@ -15,6 +15,7 @@ async function initialiseFordefiWallet(){
 // ​
 async function main() {
     const wallet = await initialiseFordefiWallet();
+    console.log('++_+_+_+_')
     const preparedTx = await prepareTransaction("https://api.expand.network/fungibletoken/approve", {
         "from": "0x9A120137a6C66fa0e70431666B7A049ab0b5E978", 
         "tokenAddress":"0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",  
@@ -26,6 +27,7 @@ async function main() {
         "xApiKey": xApiKey
     });
     preparedTx.chainId = '5';
+    console.log('----==--=-=-=-==-')
     const signedTx = await wallet.signTransaction(preparedTx);
     console.log(signedTx);
     // const tx = await wallet.sendTransaction(signedTx);
