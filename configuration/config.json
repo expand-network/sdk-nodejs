@@ -26,6 +26,13 @@
             "chainSymbol": "TETHGRL"
         },
 
+        
+        "11155111": {
+            "localName": "EthereumTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TETHSPL"
+        },
+
         "42": {
             "localName": "EthereumTestnetKovan",
             "chainName": "Evm",
