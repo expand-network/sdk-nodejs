@@ -30,7 +30,7 @@
     "@solana/web3.js": "1.59.1",
     "ajv": "8.11.0",
     "ajv-errors": "3.0.0",
-    "algosdk": "1.20.0",
+    "algosdk": "2.7.0",
     "aptos": "1.10.0",
     "axios": "0.27.2",
     "bn.js": "5.2.1",
