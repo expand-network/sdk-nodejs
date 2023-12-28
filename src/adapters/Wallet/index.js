@@ -44,6 +44,7 @@ class Wallet {
             const options = {};
             options.privateKey = this.privateKey;
             const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
+            rawData.chainId = chainId;
 
             return rawData;
     };

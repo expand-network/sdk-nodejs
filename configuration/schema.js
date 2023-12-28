@@ -96,6 +96,24 @@ exports.jsonSchema = {
         {
             if: { 
                 properties: {
+                    function: { type:"string", pattern: "TONTransaction()" },
+                } 
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
+                    rawTransaction: {type: "object"},
+                    xApiKey: {type : "string"},
+                    rpc: {type: "string"}
+                },
+                required: ["rawTransaction"] 
+            },
+        },
+
+        {
+            if: { 
+                properties: {
                     function: { type:"string", pattern: "FordefiTransaction()" },
                 } 
             },
@@ -107,6 +125,43 @@ exports.jsonSchema = {
                     accessToken: {type : "string"},
                 },
                 required: ["data","signature","accessToken", "timestamp"] 
+            },
+        },
+
+        // Fireblocks
+
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "FireblockSign()" },
+                } 
+            },
+            then: {
+                properties: {
+                    from: { type: "string" },
+                    assetId: { type: "string" },
+                    data: { type: "string" },
+                    note: {type: "string"},
+                    amount: {type: "string"}
+                },
+                required: ["from"] 
+            },
+        },
+
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "SendFireblocks()" },
+                } 
+            },
+            then: {
+                properties: {
+                    jwt: { type: "string" },
+                    path: { type: "string" },
+                    data: { type: "object" },
+                    method: { type: "string",  }
+                },
+                required: ["jwt", "data"] 
             },
         },
 
