@@ -57,7 +57,7 @@ class WalletFordefi {
                     'Content-Type': 'application/json',
                     "Authorization": response.accessToken,
                     'X-Timestamp': response.timestamp,
-                    // 'X-Signature': response.signature,
+                    'X-Signature': response.signature,
                 },
                 data: response.data
             };
