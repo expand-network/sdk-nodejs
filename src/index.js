@@ -26,6 +26,7 @@ exports.prepareTransaction = async(apiURL, options) => {
         };
 
         const response = await axios(paramConfig).then(result => result.data);
+        response.data.chainId = options.chainId;
         return response.data;
 
     }
