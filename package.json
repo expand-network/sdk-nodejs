@@ -44,7 +44,7 @@
     "starknet": "5.14.1",
     "tronweb": "5.3.1",
     "tweetnacl": "1.0.3",
-    "web3": "1.7.5"
+    "web3": "4.3.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
