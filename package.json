@@ -22,7 +22,7 @@
   "homepage": "https://github.com/expand-network/sdk-nodejs#readme",
   "dependencies": {
     "@dfns/lib-ethersjs6": "^0.1.0-beta.5",
-    "@dfns/sdk": "^0.1.0-beta.5",
+    "@dfns/sdk": "^0.2.1",
     "@dfns/sdk-keysigner": "^0.1.0-beta.5",
     "@ethereumjs/common": "3.0.0",
     "@mysten/bcs": "0.7.1",
