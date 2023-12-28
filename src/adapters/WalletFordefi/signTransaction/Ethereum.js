@@ -27,9 +27,11 @@ module.exports = {
                 details.to = transactionObject.to;
                 details.value = transactionObject.value;
                 details.type = "evm_raw_transaction";
-                details.data = {
-                    type: "hex",
-                    hex_data: transactionObject.data
+                if(transactionObject.data){
+                    details.data = {
+                        type: "hex",
+                        hex_data: transactionObject.data
+                    }
                 }
                 reqBody.details = details;
                 reqBody.signer_type = "api_signer";
