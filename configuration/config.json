@@ -26,7 +26,6 @@
             "chainSymbol": "TETHGRL"
         },
 
-        
         "11155111": {
             "localName": "EthereumTestnetSepolia",
             "chainName": "Evm",
