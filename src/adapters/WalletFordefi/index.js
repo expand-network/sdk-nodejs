@@ -61,7 +61,8 @@ class WalletFordefi {
                 },
                 data: response.data
             };
-         return await axios.request(config);
+         const resp = await axios.request(config);
+         return resp.data;
             // .then((response) => {
             //     return (JSON.stringify(response.data));
             //  })
@@ -70,7 +71,7 @@ class WalletFordefi {
             // });
 
         } catch(error){
-            return error;
+            return error.response.data;
         }
 
     }
