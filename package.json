@@ -28,6 +28,7 @@
     "@mysten/bcs": "0.9.1",
     "@mysten/sui.js": "0.32.1",
     "@solana/web3.js": "1.59.1",
+    "@ton/ton": "^13.9.0",
     "ajv": "8.12.0",
     "ajv-errors": "3.0.0",
     "algosdk": "2.7.0",
@@ -44,7 +45,8 @@
     "starknet": "5.24.3",
     "tronweb": "5.3.1",
     "tweetnacl": "1.0.3",
-    "web3": "4.3.0"
+    "web3": "4.3.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
