@@ -24,7 +24,7 @@
     "@dfns/lib-ethersjs6": "^0.2.1",
     "@dfns/sdk": "^0.2.1",
     "@dfns/sdk-keysigner": "^0.2.1",
-    "@ethereumjs/common": "3.0.0",
+    "@ethereumjs/common": "4.1.0",
     "@mysten/bcs": "0.9.1",
     "@mysten/sui.js": "0.32.1",
     "@solana/web3.js": "1.59.1",
