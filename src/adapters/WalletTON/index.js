@@ -1,5 +1,5 @@
 const { mnemonicToPrivateKey, keyPairFromSecretKey} = require("ton-crypto");
-const { WalletContractV4, internal } = require("ton");
+const { WalletContractV4, internal } = require("@ton/ton");
 const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const { initialiseWeb3 } = require("../../../configuration/intialiseWeb3");
