@@ -9,7 +9,7 @@ const {
     Connection
   } = require("@mysten/sui.js");
 const aptos = require('aptos');
-const { TonClient, WalletContractV4, internal } = require("ton");
+const { TonClient, WalletContractV4, internal } = require("@ton/ton");
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
