@@ -15,15 +15,12 @@ module.exports = {
         let estimateFee = '';
 
         try {
-            // const starkKeyPair = starknet.ec.getKeyPair(options.privateKey);
             const userAddress = transactionObject.from;
-            // const signer = new starknet.Signer(starkKeyPair);
 
             const rpcProvider = new starknet.RpcProvider({
                 nodeUrl: config.chains[options.chainId].rpc,
             });
 
-            // console.log(await rpcProvider.getChainId());
             const chainId = await rpcProvider.getChainId();
             const account = new starknet.Account(rpcProvider, transactionObject.from, options.privateKey);
 

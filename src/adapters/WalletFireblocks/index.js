@@ -30,7 +30,6 @@ class WalletFireblocks {
     signTransaction = async (transactionObject) => {
         try{
 
-            const configuration = { "params": {} };
             transactionObject.function = "FireblockSign()";
             const validJson = await schemaValidator.validateInput(transactionObject);
 
@@ -42,7 +41,7 @@ class WalletFireblocks {
             let chainName = config.chains[chainId].chainName;
 
             const txData = {}
-            txData.operation = (transactionObject.data)?"CONTRACT_CALL":"TRANSFER",
+            txData.operation = (transactionObject.data)?"CONTRACT_CALL":"TRANSFER"
             txData.source = {
                 "type": "VAULT_ACCOUNT",
                 "id": transactionObject.from

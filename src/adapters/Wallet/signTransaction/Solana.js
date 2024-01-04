@@ -13,8 +13,6 @@ signTransactionSolana: async(web3,transactionObject,options) => {
     
     const from = solanasdk.Keypair.fromSecretKey(bs58.decode(options.privateKey));
 
-    // const toKey = solanasdk.Keypair.generate(transactionObject.to);
-    
       const recentBlockhash = await web3.getRecentBlockhash();
       const manualTransaction = new solanasdk.Transaction({
           recentBlockhash: recentBlockhash.blockhash,
@@ -30,10 +28,7 @@ signTransactionSolana: async(web3,transactionObject,options) => {
       const signature = nacl.sign.detached(transactionBuffer, from.secretKey);
       
       manualTransaction.addSignature(from.publicKey, signature);
-      
-    // const isVerifiedSignature = manualTransaction.verifySignatures();
-    //   console.log(`The signatures were verifed: ${isVerifiedSignature}`);
-      
+       
       const serializedTx = manualTransaction.serialize();
       const rawTransaction = Buffer.from(serializedTx).toString("base64");
       return {"rawTransaction":rawTransaction};

@@ -77,7 +77,7 @@ class WalletTON {
             const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
             let chainName = config.chains[chainId].chainName;
             const web3 = await initialiseWeb3({chainId,key:this.xApiKey});
-            // console.log(web3);
+
             if(chainName!=="TON"){
                 return {
                     "msg": "ton wallet can be used only with TON chain"
@@ -86,7 +86,7 @@ class WalletTON {
 
             const walletContract = web3.open(this.wallet);
             const currentseqno = await walletContract.getSeqno();
-            const txHash = await walletContract.send(transactionObject.rawTransaction);
+            await walletContract.send(transactionObject.rawTransaction);
             const timer = (ms) => new Promise(resolve => setTimeout(resolve, ms));
             await timer(5000);
             let seqno = await walletContract.getSeqno();
