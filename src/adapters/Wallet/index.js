@@ -5,6 +5,7 @@ const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
 const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
+const { ethers } = require('ethers');
 
 class Wallet {
 
@@ -79,6 +80,36 @@ class Wallet {
             return error;
         }
     
+    };
+
+    signOrderRFQ = async (options) => {
+        const filterOptions = options;
+        filterOptions.function = "signOrderRFQ()";
+        const validJson = await schemaValidator.validateInput(options);
+        if (!validJson.valid) {
+            return (validJson);
+        }
+
+        const { dexId, domain, types, values } = options;
+        const { chainId } = config.dexes[dexId]
+
+        let apiConfig = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${config.url.apiurl}/chain/getpublicrpc?chainId=${chainId}`,
+            headers: {
+                'x-api-key': this.xApiKey
+            }
+        };
+
+        let rpc = await axios.request(apiConfig);
+
+        rpc = rpc.data.data.rpc;
+
+        const provider = new ethers.providers.JsonRpcProvider(rpc);
+        const signer = new ethers.Wallet(this.privateKey, provider);
+        const signature = await signer._signTypedData(domain, types, values);
+        return { signature };
     };
 
 }

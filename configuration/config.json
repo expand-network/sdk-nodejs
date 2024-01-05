@@ -260,7 +260,20 @@
 
     "url": {
         "apiurl" : "https://api.expand.network"
+    },
+
+    "dexes": {
+        "1900": {
+            "localName": "UniswapX",
+            "dexName": "UniswapX",
+            "chainName": "Ethereum",
+            "chainId": "1"
+        },
+        "1901": {
+            "localName": "UniswapXTestnet",
+            "dexName": "UniswapX",
+            "chainName": "Ethereum",
+            "chainId": "5"
+        }
     }
-
-
 }
