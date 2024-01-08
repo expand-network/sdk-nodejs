@@ -82,6 +82,8 @@ exports.WalletTON = WalletTON;
 
 exports.WalletFireblocks = WalletFireblocks;
 
+exports.WalletCircle = WalletCircle;
+
 
 
 
