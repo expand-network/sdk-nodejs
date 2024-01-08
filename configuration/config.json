@@ -255,6 +255,10 @@
         "createTransaction": "/v1/transactions"
     },
 
+    "circleProgrammableWallet": {
+        "baseUrl": "https://api.circle.com/v1/w3s/user/transactions/"
+    },
+
     "Mask250":"3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
 
     "url": {
