@@ -1,18 +1,19 @@
-const dydx = require('./src/dydx');
+const dydx = require('../../dydx');
 // eslint-disable-next-line max-len
 // const mnemonic = "wisdom visa angry pattern memory install save skin ankle tumble double runway small feature text large act garage ceiling puppy lucky refuse food oak";
-const mnemonic = "wisdom visa angry pattern memory install save skin ankle tumble double runway small feature text large act garage ceiling puppy lucky refuse food oak"
+const mnemonic = "giraffe jazz panic usage auto expose salmon few chicken guilt hood weather barely demand juice rice luggage lazy farm camp poet violin urban apart"
 
 const onboardingTest = async () => {
-    const res = await dydx.userOnboarding({});
+    const res = await dydx.userOnboarding({privateKey: "0xa10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86"});
     console.log(res);
 };
+
 
 const placeOrderTest = async () => {
     const type = "LIMIT";
     const timeInForce = "GTT";
     const side = "BUY";
-    const price = '2000';
+    const price = '2600';
     const market = "ETH-USD";
 
     const tx = await dydx.placeOrder({
@@ -22,7 +23,7 @@ const placeOrderTest = async () => {
         type,
         side,
         timeInForce,
-        time: "300",
+        time: "500",
         price
     });
     console.log(tx);
