@@ -28,7 +28,7 @@ class Wallet {
             const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
 
             const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
-
+            console.log(chainId , "1");
             
             configuration.params = {
                 chainId
@@ -60,7 +60,7 @@ class Wallet {
         try {
     
             const apiURL = `${config.url.apiurl  }/chain/sendtransaction/`;
-            
+            console.log(options, "2");
             const params = {
                 method: "post",
                 url: apiURL,
