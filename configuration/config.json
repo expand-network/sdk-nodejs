@@ -246,7 +246,6 @@
             "rpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
             "publicRpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
             "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
-
         }
 
     },
@@ -254,6 +253,10 @@
     "fireblocks": {
         "baseUrl": "https://api.fireblocks.io",
         "createTransaction": "/v1/transactions"
+    },
+
+    "circleProgrammableWallet": {
+        "baseUrl": "https://api.circle.com/v1/w3s/user/transactions/"
     },
 
     "Mask250":"3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
