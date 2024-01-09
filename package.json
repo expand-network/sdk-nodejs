@@ -25,7 +25,7 @@
     "@dfns/sdk": "^0.2.1",
     "@dfns/sdk-keysigner": "^0.2.1",
     "@ethereumjs/common": "4.1.0",
-    "@mysten/bcs": "0.9.1",
+    "@mysten/bcs": "0.10.1",
     "@mysten/sui.js": "0.32.1",
     "@solana/web3.js": "1.88.0",
     "@ton/ton": "^13.9.0",
