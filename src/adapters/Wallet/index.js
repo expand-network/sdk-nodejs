@@ -5,7 +5,7 @@ const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
 const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
-const { ethers } = require('ethers');
+const { ethers } = require('ethers-5');
 
 class Wallet {
 
