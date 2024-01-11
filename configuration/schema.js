@@ -194,7 +194,7 @@ exports.jsonSchema = {
             market: { type: "string" },
             type: { type: "string", enum: ['LIMIT', 'MARKET'] },
             side: { type: "string", enum: ['SELL', 'BUY']},
-            timeInForce: { type: "string", default: "FOK", enum: ["GTT", "IOC", "FOK"] },
+            timeInForce: { type: "string", default: "IOC", enum: ["GTT", "IOC", "FOK"] },
             time: { type: "string", default: "60" },
             price: { type: "string" },
             size: { type: "string" },
