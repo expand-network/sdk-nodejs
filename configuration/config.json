@@ -20,6 +20,12 @@
             "chainSymbol": "TETHRNK"
         },
 
+        "11155111": {
+            "localName": "EthereumTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TETHSEP"
+        },
+
         "5": {
             "localName": "EthereumTestnetGoerli",
             "chainName": "Evm",
@@ -268,35 +274,19 @@
         "chainId": "dydx-testnet-4",
         "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5", 
         "MAX_CLIENT_ID": 4294967295,
-        "size": 0.01,
         "squidRouterAPIBaseUrl": "https://testnet.api.squidrouter.com/v1/",
         "signingMsg": {
-            "types": {
-                "EIP712Domain": [
-                    {
-                        "name": "name",
-                        "type": "string"
-                    },
-                    {
-                        "name": "chainId",
-                        "type": "uint256"
-                    }
-                ],
-                "dYdX": [
-                    {
-                        "name": "action",
-                        "type": "string"
-                    }
-                ]
-            },
             "primaryType": "dYdX",
             "domain": {
-                "name": "dYdX V4",
-                "chainId": 5
+              "name": "dYdX V4",
+              "chainId": "11155111"
+            },
+            "types": {
+              "dYdX": [{ "name": "action", "type": "string" }]
             },
             "message": {
-                "action": "dYdX Chain Onboarding"
+              "action": "dYdX Chain Onboarding"
             }
-        }
     }
+}
 }

@@ -196,12 +196,13 @@ exports.jsonSchema = {
             side: { type: "string", enum: ['SELL', 'BUY']},
             timeInForce: { type: "string", default: "FOK", enum: ["GTT", "IOC", "FOK"] },
             time: { type: "string", default: "60" },
-            price: { type: "string", pattern: '^[1-9][0-9]*$', "errorMessage": "Value should be greater than 0" },
+            price: { type: "string" },
+            size: { type: "string" },
             postOnly: { type: "string", default: "false", enum: ["true", "false"] },
             reduceOnly: { type: "string", default: "false", enum: ["true", "false"] },
             triggerPrice: { type: "string", default: "null" },
         },
-        required: ["subAccountNumber", "mnemonic", "market", "type", "side", "price"]
+        required: ["subAccountNumber", "size", "mnemonic", "market", "type", "side", "price"], 
     },
 },
 
@@ -235,7 +236,7 @@ exports.jsonSchema = {
                 subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
                 mnemonic: { type: "string" },
                 recipient: { type: "string" },
-                assetId: { type: "string", default: "0" },
+                assetId: { type: "string", default: "0", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
                 amount: { type: "string" },                        
             },
             required: ["subAccountNumber", "mnemonic", "recipient", "amount"]
@@ -254,7 +255,7 @@ exports.jsonSchema = {
                 amountIn: { type: "string" },
                 from: { type: "string" },
                 slippage: { type: "string", default: "1" },
-                srcChainId: { type: "string", default: "5" },
+                srcChainId: { type: "string", default: "5", enum: ["5", "97", "80001", "420", "43113", "421613", "4002", "84531"] },
                 tokenIn: { type: "string" },
                 to: { type: "string" },                        
                 gas: { type: "string" },                        

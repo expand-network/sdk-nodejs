@@ -15,11 +15,11 @@ module.exports = {
             price,
             postOnly,
             reduceOnly,
-            triggerPrice
+            triggerPrice,
+            size
         } = options;
         const { client, subaccount } = await getSubAccountCompositeClient(mnemonic, subAccountNumber);
         try {
-            const {size} = config.dYdXV4;
             const type = OrderType[orderType];
             const side = OrderSide[orderSide];
             const timeInForceString = ordertimeInForce;

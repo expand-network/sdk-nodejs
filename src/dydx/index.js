@@ -16,15 +16,15 @@ exports.userOnboarding = async (options) => {
 
 exports.placeOrder = async (options) => {
     let filterOptions = options;
-    const {side, type, timeInForce} = filterOptions;
-    filterOptions = {...filterOptions, side: side.toUpperCase(), type: type.toUpperCase(), timeInForce: timeInForce.toUpperCase()}
+
+    const {side, type, timeInForce, market} = filterOptions;
+    filterOptions = {...filterOptions, side: side && side.toUpperCase(), type: type && type.toUpperCase(), timeInForce: timeInForce && timeInForce.toUpperCase(), market: market && market.toUpperCase()}
     
-    console.log(filterOptions)
     filterOptions.function = "placeOrderDYDX()";
     const validJson = await schemaValidator.validateInput(filterOptions);
 
     if (!validJson.valid) return (validJson);
-    return PlaceOrder.placeOrder(options);
+    return PlaceOrder.placeOrder(filterOptions);
 };
 
 exports.cancelOrder = async (options) => {
@@ -33,7 +33,7 @@ exports.cancelOrder = async (options) => {
     const validJson = await schemaValidator.validateInput(filterOptions);
 
     if (!validJson.valid) return (validJson);
-    return CancelOrder.cancelOrder(options);
+    return CancelOrder.cancelOrder(filterOptions);
 };
 
 exports.transfer = async (options) => {
@@ -42,7 +42,7 @@ exports.transfer = async (options) => {
     const validJson = await schemaValidator.validateInput(filterOptions);
 
     if (!validJson.valid) return (validJson);
-    return Transfer.transfer(options);
+    return Transfer.transfer(filterOptions);
 };
 
 exports.deposit = async (options) => {
@@ -51,5 +51,5 @@ exports.deposit = async (options) => {
     const validJson = await schemaValidator.validateInput(filterOptions);
 
     if (!validJson.valid) return (validJson);
-    return Deposit.deposit(options);
+    return Deposit.deposit(filterOptions);
 };

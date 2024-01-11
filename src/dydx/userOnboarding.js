@@ -28,7 +28,7 @@ const exportMnemonicAndPrivateKey = (entropy, path = "m/44'/118'/0'/0/0") => {
 
 module.exports = {
     userOnboarding: async (options) => {
-        const web3 = await initialiseWeb3({chainId: '5'});
+        const web3 = await initialiseWeb3({chainId: '11155111'});
         const {signature} = await web3.eth.accounts.sign(config.dYdXV4.signingMsg, options.privateKey);
         const buffer = Buffer.from(stripHexPrefix(signature), 'hex');
 
