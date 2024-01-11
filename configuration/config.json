@@ -281,7 +281,7 @@
 
     "url": {
 
-        "apiurl" : "https://uat.expand.network"
+        "apiurl" : "http://localhost:3000"
 
     }
 
