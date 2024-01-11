@@ -26,7 +26,8 @@ module.exports = {
             const timeInForce = OrderTimeInForce[timeInForceString];
             const timeInForceSeconds = (timeInForce === OrderTimeInForce.GTT) ? time : 0;
 
-            const tx = await client.placeOrder(
+            let tx;
+            tx = await client.placeOrder(
                 subaccount,
                 market,
                 type,
@@ -41,6 +42,10 @@ module.exports = {
                 reduceOnly,
                 triggerPrice
             );
+
+            if (typeof tx.hash === 'object') {
+                tx = {...tx, 'hex': `0x${Buffer.from(tx.hash).toString('hex')}`}
+            }
             return (tx);
         } catch (error) {
             return (error.message);
