@@ -1,6 +1,7 @@
 const { default: axios } = require('axios');
 const { getSubAccountCompositeClient } = require('../../configuration/dYdXCommon');
 const { OrderFlags } = require('@dydxprotocol/v4-client-js');
+const errorMessage = require('../../configuration/errorMessage.json');
 
 module.exports = {
     cancelOrder: async (options) => {
@@ -24,7 +25,10 @@ module.exports = {
             const res = await axios.request(orderConfig);
             order = res.data;
         } catch (err) {
-            return err;
+            return {
+                message: errorMessage.error.message.invalidOrderId,
+                code: errorMessage.error.code.invalidInput
+            }
         }
         
         try {
