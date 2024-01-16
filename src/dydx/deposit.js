@@ -52,7 +52,7 @@ module.exports = {
 
             return transactionReceipt;
         } catch (err) {
-            return (err.response);
+            return (err.response.data);
         }
     }
 };
