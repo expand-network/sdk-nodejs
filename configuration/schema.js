@@ -255,7 +255,7 @@ exports.jsonSchema = {
                 amountIn: { type: "string" },
                 from: { type: "string" },
                 slippage: { type: "string", default: "1" },
-                srcChainId: { type: "string", default: "5", enum: ["5", "97", "80001", "420", "43113", "421613", "4002", "84531"] },
+                srcChainId: { type: "string", default: "5", enum: ["5", "97", "80001", "420", "43113", "4002"] },
                 tokenIn: { type: "string" },
                 to: { type: "string" },                        
                 gas: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },                        
