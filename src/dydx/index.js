@@ -51,5 +51,9 @@ exports.deposit = async (options) => {
     const validJson = await schemaValidator.validateInput(filterOptions);
 
     if (!validJson.valid) return (validJson);
-    return Deposit.deposit(filterOptions);
+    try {
+        return Deposit.deposit(filterOptions);
+    } catch (err) {
+        return err;
+    }
 };

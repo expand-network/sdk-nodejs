@@ -17,8 +17,9 @@ module.exports = {
 
         const routeURL = `${config.dYdXV4.squidRouterAPIBaseUrl}route`;
         
+        let result;
         try {
-            const result = await axios.get(routeURL, {
+            result = await axios.get(routeURL, {
                 params: {
                     fromChain,
                     fromToken,
@@ -32,6 +33,9 @@ module.exports = {
                 }
             });
 
+            } catch (err) {
+                return (err.response.data);
+            }
             const { gasPrice, data, targetAddress: to, value } = result.data.route.transactionRequest;
             const wallet = new Wallet({
                 privateKey,
@@ -48,11 +52,10 @@ module.exports = {
                 to,
             });
 
+            if (!createTransaction?.name?.valid) {
+                return new Error("Invalid", {cause: createTransaction?.message})
+            }
             const transactionReceipt = await wallet.sendTransaction(createTransaction);
-
-            return transactionReceipt;
-        } catch (err) {
-            return (err.response.data);
-        }
+            return transactionReceipt;    
     }
 };
