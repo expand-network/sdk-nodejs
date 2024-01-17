@@ -1,180 +1,147 @@
 {
-    
     "chains": {
-
         "1": {
             "localName": "Ethereum",
             "chainName": "Evm",
             "chainSymbol": "ETH"
         },
-
         "3": {
             "localName": "EthereumTestnetRopsten",
             "chainName": "Evm",
             "chainSymbol": "TETHRPT"
         },
-
         "4": {
             "localName": "EthereumTestnetRinkeby",
             "chainName": "Evm",
             "chainSymbol": "TETHRNK"
         },
-
         "5": {
             "localName": "EthereumTestnetGoerli",
             "chainName": "Evm",
             "chainSymbol": "TETHGRL"
         },
-
         "42": {
             "localName": "EthereumTestnetKovan",
             "chainName": "Evm",
             "chainSymbol": "TETHKVN"
         },
-
         "56": {
             "localName": "BinanceSmartChain",
             "chainName": "Evm",
             "chainSymbol": "BSC"
         },
-
         "97": {
             "localName": "BinanceSmartChainTestnet",
             "chainName": "Evm",
             "chainSymbol": "TBSC"
         },
-
         "43114": {
             "localName": "Avalanche",
             "chainName": "Evm",
             "chainSymbol": "AVAL"
         },
-
         "43113": {
             "localName": "AvalancheTesnet",
             "chainName": "Evm",
             "chainSymbol": "TAVAL"
         },
-        
         "137": {
             "localName": "Polygon",
             "chainName": "Evm",
             "chainSymbol": "MATIC"
         },
-
         "80001": {
             "localName": "PolygonTestnet",
             "chainName": "Evm",
             "chainSymbol": "TMATIC"
         },
-        
         "25": {
             "localName": "Cronos",
             "chainName": "Evm",
             "chainSymbol": "CRO"
         },
-
         "338": {
             "localName": "CronosTestnet",
             "chainName": "Evm",
             "chainSymbol": "TCRO"
         },
-        
         "42161": {
             "localName": "Arbitrum",
             "chainName": "Evm",
             "chainSymbol": "AETH"
         },
-
         "421611": {
             "localName": "ArbitrumTestnet",
             "chainName": "Evm",
             "chainSymbol": "TAETH"
         },
-        
         "250": {
             "localName": "Fantom",
             "chainName": "Evm",
             "chainSymbol": "FTM"
         },
-
         "4002": {
             "localName": "FantomTestnet",
             "chainName": "Evm",
             "chainSymbol": "TFTM"
         },
-
         "900": {
             "localName": "Solana",
             "chainName": "Solana",
             "chainSymbol": "SOL"
         },
-
         "901": {
             "localName": "SolanaDevnet",
             "chainName": "Solana",
             "chainSymbol": "DSOL"
         },
-
         "1000": {
             "localName": "Tron",
             "chainName": "Tron",
             "chainSymbol": "TRON"
         },
-        
         "1001": {
             "localName": "TronTestnet",
             "chainName": "Tron",
             "chainSymbol": "TTRON"
         },
-
-
         "1200": {
             "localName": "Near",
             "chainName": "Near",
             "chainSymbol": "NEAR"
         },
-
         "1201": {
             "localName": "NearTestnet",
             "chainName": "Near",
             "chainSymbol": "TNEAR"
         },
-        
-
         "1300": {
             "localName": "Algorand",
             "chainName": "Algorand",
             "chainSymbol": "ALGO"
         },
-
         "1301": {
             "localName": "AlgorandTestnet",
             "chainName": "Algorand",
             "chainSymbol": "TALGO"
         },
-
         "10": {
             "localName": "Optimism",
             "chainName": "Evm",
             "chainSymbol": "OPT"
         },
-
         "420": {
             "localName": "OptimismTestnet",
             "chainName": "Evm",
             "chainSymbol": "TOPT"
         },
-        
         "101": {
             "localName": "Sui",
             "chainName": "Sui",
             "chainSymbol": "SUI",
             "rpc": "https://sui-mainnet-rpc.nodereal.io",
             "publicRpc": "https://fullnode.mainnet.sui.io:443"
-
         },
-
         "102": {
             "localName": "SuiDevnet",
             "chainName": "Sui",
@@ -182,7 +149,6 @@
             "rpc": "https://fullnode.devnet.sui.io:443",
             "publicRpc": "https://fullnode.devnet.sui.io:443"
         },
-
         "103": {
             "localName": "SuiTestnet",
             "chainName": "Sui",
@@ -190,47 +156,42 @@
             "rpc": "https://fullnode.testnet.sui.io:443",
             "publicRpc": "https://fullnode.testnet.sui.io:443"
         },
-
-        "1400":{
+        "1400": {
             "localName": "Aptos",
             "chainName": "Aptos",
             "chainSymbol": "APT",
-            "aptosCoin":"0x1::aptos_coin::AptosCoin",
+            "aptosCoin": "0x1::aptos_coin::AptosCoin",
             "rpc": "https://fullnode.mainnet.aptoslabs.com",
             "publicRpc": "https://fullnode.mainnet.aptoslabs.com"
         },
-
-        "1401":{
+        "1401": {
             "localName": "AptosTestnet",
             "chainName": "Aptos",
             "chainSymbol": "TAPT",
-            "aptosCoin":"0x1::aptos_coin::AptosCoin",
+            "aptosCoin": "0x1::aptos_coin::AptosCoin",
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
         },
-
-        "300":{
+        "300": {
             "localName": "StarkNet",
             "chainName": "StarkNet",
             "chainSymbol": "STRK",
-            "nativeEthAddress":"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "nativeEthAddress": "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
             "rpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
             "publicRpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
-            "domain" : "infura.io",
-            "sslMateId" : "4054117900"
+            "domain": "infura.io",
+            "sslMateId": "4054117900"
         },
-
-        "301":{
+        "301": {
             "localName": "StarkNetTestnet",
             "chainName": "StarkNet",
             "chainSymbol": "TSTRK",
-            "nativeEthAddress":"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "nativeEthAddress": "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
             "rpc": "https://starknet-testnet.blastapi.io/a0c768c4-cd06-4dfc-8a5c-a6a7a0716e2a",
             "publicRpc": "https://starknet-testnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
-            "domain" : "infura.io",
-            "sslMateId" : "4054117900"
+            "domain": "infura.io",
+            "sslMateId": "4054117900"
         },
-
         "1100": {
             "localName": "TON",
             "chainName": "TON",
@@ -239,7 +200,6 @@
             "publicRpc": "https://toncenter.com/api/v2/jsonRPC",
             "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
         },
-
         "1101": {
             "localName": "TONTestnet",
             "chainName": "TON",
@@ -248,7 +208,6 @@
             "publicRpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
             "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
         },
-
         "8453": {
             "localName": "Base",
             "chainName": "Evm",
@@ -257,7 +216,6 @@
             "publicRpc": "https://mainnet.base.org",
             "domain": "base.org"
         },
-
         "84531": {
             "localName": "BaseTestnet",
             "chainName": "Evm",
@@ -266,7 +224,6 @@
             "publicRpc": "https://goerli.base.org",
             "domain": "base.org"
         },
-
         "84532": {
             "localName": "BaseTestnet2",
             "chainName": "Evm",
@@ -275,7 +232,6 @@
             "publicRpc": "https://sepolia.base.org",
             "domain": "base.org"
         },
-
         "11155111": {
             "localName": "EthereumTestnetSepolia",
             "chainName": "Evm",
@@ -284,7 +240,6 @@
             "publicRpc": "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
             "domain": "infura.io"
         },
-
         "421614": {
             "localName": "ArbitrumSepoliaTestnet",
             "chainName": "Evm",
@@ -293,7 +248,6 @@
             "publicRpc": "https://sepolia-rollup.arbitrum.io/rpc",
             "domain": "arbitrum.io"
         },
-        
         "11155420": {
             "localName": "OptimismSepoliaTestnet",
             "chainName": "Evm",
@@ -302,24 +256,51 @@
             "publicRpc": "https://sepolia.optimism.io",
             "domain": "optimism.io"
         }
-
-
     },
-
     "fireblocks": {
         "baseUrl": "https://api.fireblocks.io",
         "createTransaction": "/v1/transactions"
     },
-
     "circleProgrammableWallet": {
         "baseUrl": "https://api.circle.com/v1/w3s/user/transactions/"
     },
-
-    "Mask250":"3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-
+    "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl" : "https://api.expand.network"
+        "apiurl": "https://api.expand.network"
+    },
+    "dYdXV4": {
+        "chainId": "dydx-testnet-4",
+        "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
+        "MAX_CLIENT_ID": 4294967295,
+        "squidRouterAPIBaseUrl": "https://testnet.api.squidrouter.com/v1/",
+        "rpc": "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5",
+        "signingMsg": {
+            "domain": {
+                "name": "dYdX V4",
+                "chainId": 11155111
+            },
+            "primaryType": "dYdX",
+            "types": {
+                "EIP712Domain": [
+                    {
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "chainId",
+                        "type": "uint256"
+                    }
+                ],
+                "dYdX": [
+                    {
+                        "name": "action",
+                        "type": "string"
+                    }
+                ]
+            },
+            "message": {
+                "action": "dYdX Chain Onboarding"
+            }
+        }
     }
-
-
 }
