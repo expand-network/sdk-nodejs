@@ -15,11 +15,6 @@
             "chainName": "Evm",
             "chainSymbol": "TETHRNK"
         },
-        "11155111": {
-            "localName": "EthereumTestnetSepolia",
-            "chainName": "Evm",
-            "chainSymbol": "TETHSEP"
-        },
         "5": {
             "localName": "EthereumTestnetGoerli",
             "chainName": "Evm",
@@ -197,7 +192,7 @@
             "domain": "infura.io",
             "sslMateId": "4054117900"
         },
-        "ton": {
+        "1100": {
             "localName": "TON",
             "chainName": "TON",
             "chainSymbol": "TON",
@@ -205,13 +200,61 @@
             "publicRpc": "https://toncenter.com/api/v2/jsonRPC",
             "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
         },
-        "ton-testnet": {
+        "1101": {
             "localName": "TONTestnet",
             "chainName": "TON",
             "chainSymbol": "TONTest",
             "rpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
             "publicRpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
             "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
+        },
+        "8453": {
+            "localName": "Base",
+            "chainName": "Evm",
+            "chainSymbol": "BASE",
+            "rpc": "https://mainnet.base.org",
+            "publicRpc": "https://mainnet.base.org",
+            "domain": "base.org"
+        },
+        "84531": {
+            "localName": "BaseTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TBASE",
+            "rpc": "https://goerli.base.org",
+            "publicRpc": "https://goerli.base.org",
+            "domain": "base.org"
+        },
+        "84532": {
+            "localName": "BaseTestnet2",
+            "chainName": "Evm",
+            "chainSymbol": "TBASE2",
+            "rpc": "https://sepolia.base.org",
+            "publicRpc": "https://sepolia.base.org",
+            "domain": "base.org"
+        },
+        "11155111": {
+            "localName": "EthereumTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TETHSPL",
+            "rpc": "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+            "publicRpc": "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+            "domain": "infura.io"
+        },
+        "421614": {
+            "localName": "ArbitrumSepoliaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TASPL",
+            "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
+            "publicRpc": "https://sepolia-rollup.arbitrum.io/rpc",
+            "domain": "arbitrum.io"
+        },
+        "11155420": {
+            "localName": "OptimismSepoliaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TSPL",
+            "rpc": "https://sepolia.optimism.io",
+            "publicRpc": "https://sepolia.optimism.io",
+            "domain": "optimism.io"
         }
     },
     "fireblocks": {
