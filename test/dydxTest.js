@@ -1,17 +1,17 @@
 const dydx = require('../src/dydx');
-// eslint-disable-next-line max-len
-// const mnemonic = "wisdom visa angry pattern memory install save skin ankle tumble double runway small feature text large act garage ceiling puppy lucky refuse food oak";
-const mnemonic = "phrase occur vague artwork crumble surround try color abstract salad shine version virtual junior predict able sense mixture drip bridge melt usual purchase time";
+const dotenv = require('dotenv').config();
+
+const mnemonic = process.env.dydxMnemonic;
 
 const onboardingTest = async () => {
-    const res = await dydx.userOnboarding({privateKey: "0xa10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a86"});
+    const res = await dydx.userOnboarding({privateKey: process.env.privateKey});
     console.log(res);
 };
 
 
 const placeOrderTest = async () => {
     const type = "limit";
-    // const timeInForce = "GTT";
+    const timeInForce = "GTT";
     const side = "sell";
     const price = '2600';
     const market = "ETH-USD";
@@ -23,7 +23,7 @@ const placeOrderTest = async () => {
         market,
         type,
         side,
-        // timeInForce,
+        timeInForce,
         time: "500",
         price,
         size
@@ -32,7 +32,7 @@ const placeOrderTest = async () => {
 };
 
 const cancelOrderTest = async () => {
-    const orderId = "9c9e3d7e-1007-5b17-ade5-940808e76961";
+    const orderId = "<order id>";
     const res = await dydx.cancelOrder({ subAccountNumber: '0', mnemonic, orderId });
     console.log(res);
 };
@@ -42,7 +42,7 @@ const transferTest = async () => {
         {
             subAccountNumber: '0', 
             mnemonic,
-            recipient: "dydx150c8hssycjem2p9yfs9pa2xm4jjuvkn6t6w3v6",
+            recipient: "<recipient address>",
             assetId: "0",
             amount: "10000",
         }
@@ -55,10 +55,10 @@ const depositTest = async () => {
         {
             srcChainId: "5", 
             tokenIn: "ETH", 
-            from: "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994", 
+            from: "<user address>", 
             amountIn: "10000000000000000", // 0.01
-            to: "dydx13uxwm6gyyggdz92z47h0h2xdfqdfa0wrtykp2d", 
-            privateKey: "a10916eb80bd5af3b1cc3c12ae03a8e9f9aef8442b9b306640fa5cb98f641a",
+            to: "<recipient address>", 
+            privateKey: process.env.privateKey,
             gas: "800000"
         }
     );
@@ -69,4 +69,4 @@ const depositTest = async () => {
 // placeOrderTest();
 // cancelOrderTest();
 // transferTest();
-depositTest();
+// depositTest();
