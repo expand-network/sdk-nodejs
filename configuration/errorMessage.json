@@ -8,7 +8,9 @@
             "invalidChainId": "Invalid chain ID",
             "invalidDexId": "Invalid Dex Id",
             "invalidLendBorrowId": "Invalid Lend Borrow Id",
-            "invalidYieldAggregatorId": "Invalid Yield Aggregator Id"
+            "invalidYieldAggregatorId": "Invalid Yield Aggregator Id",
+            "invalidSrcToken": "Invalid/Unsupported Src Token",
+            "invalidOrderId": "Invalid Order Id"
         },
 
         "code": {
