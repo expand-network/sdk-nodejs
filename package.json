@@ -52,7 +52,7 @@
     "js-sha256": "0.9.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "long": "^4.0.0",
+    "long": "^5.2.3",
     "near-api-js": "3.0.1",
     "starknet": "5.24.3",
     "ton-crypto": "3.2.0",
