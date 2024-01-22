@@ -53,7 +53,7 @@ class Wallet {
 
         const filterOptions = options ;
         filterOptions.function = "sendTransaction()";
-        const validJson = await schemaValidator.validateInput(options);
+        const validJson = await schemaValidator.validateInput(filterOptions);
         if ( !validJson.valid ) {
             return (validJson);
         }
