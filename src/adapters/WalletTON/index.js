@@ -23,6 +23,10 @@ class WalletTON {
         return privateKey;
     }
 
+
+    _nanotons =  10**9;
+
+
     signTransaction = async (transactionObject) => {
 
         const configuration = { "params": {} };
@@ -52,7 +56,7 @@ class WalletTON {
             messages: [
                 internal({
                     to: transactionObject.to,
-                    value: transactionObject.value, 
+                    value: JSON.stringify(transactionObject.value/this._nanotons), 
                     body: transactionObject.message?transactionObject.message:"through expand", // optional comment
                     bounce: false,
                 })

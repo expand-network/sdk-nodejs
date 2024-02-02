@@ -4,7 +4,7 @@ const rawTransaction = require('./signTransaction/index');
 const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
-const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
+const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
 
 class WalletCoinbase {
 

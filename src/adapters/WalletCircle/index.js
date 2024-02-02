@@ -1,5 +1,5 @@
 const { initiateUserControlledWalletsClient } = require('@circle-fin/user-controlled-wallets');
-const {v4 } = require('uuid');
+const { v4 } = require('uuid');
 const axios = require('axios');
 const schemaValidator = require('../../../configuration/schemaValidator');
 const conf = require('../../../configuration/config.json');
