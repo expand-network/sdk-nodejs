@@ -1,13 +1,13 @@
 // const Web3 = require('web3');
 
 module.exports = {
-    
 
 
-signTransactionEvm:async(web3,transactionObject, options) => {
-    /*
-     * Function will sign the transaction payload for ethereum based chains
-     */
+
+    signTransactionEvm: async (web3, transactionObject, options) => {
+        /*
+         * Function will sign the transaction payload for ethereum based chains
+         */
 
         try {
 
@@ -15,10 +15,10 @@ signTransactionEvm:async(web3,transactionObject, options) => {
             return (signedTransaction);
 
         }
-        catch(error){
-            return(error);
+        catch (error) {
+            return (error);
         }
-    
-}
+
+    }
 
 };

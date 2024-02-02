@@ -1,4 +1,4 @@
-const { mnemonicToPrivateKey, keyPairFromSecretKey} = require("ton-crypto");
+const { mnemonicToPrivateKey, keyPairFromSecretKey } = require("ton-crypto");
 const { WalletContractV4, internal } = require("@ton/ton");
 const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
@@ -7,16 +7,16 @@ const config = require('../../../configuration/config.json');
 
 
 class WalletTON {
-    
-    constructor (options){
+
+    constructor(options) {
         this.privateKey = Buffer.from(options.privateKey, 'hex'),
-        this.keyPair = keyPairFromSecretKey(this.privateKey);
+            this.keyPair = keyPairFromSecretKey(this.privateKey);
         this.xApiKey = options.xApiKey
         const wallet = WalletContractV4.create({ publicKey: this.keyPair.publicKey, workchain: 0 });
         this.wallet = wallet;
     }
 
-    static getPrivateKey = async ( mnemonic ) => {
+    static getPrivateKey = async (mnemonic) => {
         const arr = mnemonic.split(" ");
         this.keyPair = await mnemonicToPrivateKey(arr);
         const privateKey = Buffer.from(this.keyPair.secretKey).toString('hex');
@@ -24,7 +24,7 @@ class WalletTON {
     }
 
 
-    _nanotons =  10**9;
+    _nanotons = 10 ** 9;
 
 
     signTransaction = async (transactionObject) => {
@@ -33,20 +33,20 @@ class WalletTON {
         transactionObject.function = "transactionObject()";
         const validJson = await schemaValidator.validateInput(transactionObject);
 
-        if(! validJson.valid){
+        if (!validJson.valid) {
             return validJson;
         }
 
-        const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
+        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
         let chainName = config.chains[chainId].chainName;
 
-        if(chainName!=="TON"){
+        if (chainName !== "TON") {
             return {
                 "msg": "ton wallet can be used only with TON chain"
             }
         };
 
-        const web3 = await initialiseWeb3({chainId,key:this.xApiKey});
+        const web3 = await initialiseWeb3({ chainId, key: this.xApiKey });
         const walletContract = web3.open(this.wallet);
 
         const seqno = await walletContract.getSeqno();
@@ -56,14 +56,14 @@ class WalletTON {
             messages: [
                 internal({
                     to: transactionObject.to,
-                    value: JSON.stringify(transactionObject.value/this._nanotons), 
-                    body: transactionObject.message?transactionObject.message:"through expand", // optional comment
+                    value: JSON.stringify(transactionObject.value / this._nanotons),
+                    body: transactionObject.message ? transactionObject.message : "through expand", // optional comment
                     bounce: false,
                 })
             ]
         });
 
-        return { rawTransaction: rawData, chainId: chainId};
+        return { rawTransaction: rawData, chainId: chainId };
 
 
     }
@@ -72,17 +72,17 @@ class WalletTON {
 
         transactionObject.function = "TONTransaction()";
         const validJson = await schemaValidator.validateInput(transactionObject);
-        if ( !validJson.valid ) {
+        if (!validJson.valid) {
             return (validJson);
         }
 
-        try{
+        try {
 
-            const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
+            const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
             let chainName = config.chains[chainId].chainName;
-            const web3 = await initialiseWeb3({chainId,key:this.xApiKey});
+            const web3 = await initialiseWeb3({ chainId, key: this.xApiKey });
             // console.log(web3);
-            if(chainName!=="TON"){
+            if (chainName !== "TON") {
                 return {
                     "msg": "ton wallet can be used only with TON chain"
                 }
@@ -94,7 +94,7 @@ class WalletTON {
             const timer = (ms) => new Promise(resolve => setTimeout(resolve, ms));
             await timer(5000);
             let seqno = await walletContract.getSeqno();
-            if(seqno>currentseqno){
+            if (seqno > currentseqno) {
                 return { seqno: seqno, message: "transaction has been sent to the blockchain" }
             }
 
@@ -102,7 +102,7 @@ class WalletTON {
                 "message": "transaction has been sent to the blockchain",
             };
 
-        }catch(error){
+        } catch (error) {
             return error;
         }
     }
