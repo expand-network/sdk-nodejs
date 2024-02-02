@@ -1,7 +1,5 @@
 {
-    
     "error": {
-
         "message": {
             "invalidInput": "Please provide proper input data",
             "notApplicable": "Given function is not applicable",
@@ -12,12 +10,9 @@
             "invalidSrcToken": "Invalid/Unsupported Src Token",
             "invalidOrderId": "Invalid Order Id"
         },
-
         "code": {
             "invalidInput": 400,
             "notApplicable": 406
         }
-
     }
-
 }
