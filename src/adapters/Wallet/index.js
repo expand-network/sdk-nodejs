@@ -42,10 +42,8 @@ class Wallet {
             let chainName = config.chains[chainId].chainName;
             
             const options = {};
-            console.log(chainName, transactionObject);
             options.privateKey = this.privateKey;
-            if(chainName === "Aptos") options.chainId = transactionObject.chainId;
-            if(chainName === "Starknet") options.chainId = transactionObject.chainId;
+            if(chainName === "Aptos" || chainName === "Starknet") options.chainId = transactionObject.chainId;
             const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
             rawData.chainId = chainId;
 
