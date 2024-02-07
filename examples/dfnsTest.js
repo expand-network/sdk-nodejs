@@ -1,13 +1,13 @@
-const { WalletDFNS , prepareTransaction } = require('../src/index');
+const { WalletDFNS, prepareTransaction } = require('../src/index');
 const dotenv = require('dotenv');
 
 async function main() {
 
     dotenv.config();
-    let preparedTx =  {
-        "from": "0x4D62A8147c18B45D72BF02378329989533114aDf", 
-        "value": "1000000",                  
-        "to": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994", 
+    let preparedTx = {
+        "from": "0x4D62A8147c18B45D72BF02378329989533114aDf",
+        "value": "1000000",
+        "to": "0xa67E9B68c41b0f26184D64C26e0b2B81466E5994",
         "gas": "100000",
         "chainId": "5",
         "xApiKey": xApiKey,
@@ -32,7 +32,7 @@ async function main() {
     //     gasLimit: '100000',
     //     chainId: '5',
     // }
-    const wallet  = new WalletDFNS(options);
+    const wallet = new WalletDFNS(options);
     // console.log(preparedTx);
     const signedTx = await wallet.signTransaction(preparedTx);
     // console.log(signedTx);
@@ -41,5 +41,5 @@ async function main() {
     // console.log(signedTx);
     console.log("Transaction Pending....", tx);
 }
-    
+
 main();

@@ -5,27 +5,27 @@ const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletFordefi {
-    constructor(options){
+    constructor(options) {
         this.accessToken = options.accessToken;
         this.xApiKey = options.xApiKey;
         this.privateKeyFile = options.privateKeyFile;
         this.vault_id = options.vault_id;
     };
 
-    signTransaction = async(transactionObject) => {
-        
-        try{
+    signTransaction = async (transactionObject) => {
+
+        try {
             const transactionOptions = transactionObject;
             transactionOptions.function = "transactionObject()";
             const validObject = await schemaValidator.validateInput(transactionObject);
 
-            if ( !validObject.valid  ) {
-                    return (validObject);
+            if (!validObject.valid) {
+                return (validObject);
             }
 
-            const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
+            const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
             let chainName = config.chains[chainId].chainName;
-            if(chainName !== "Evm" && chainName !== "Solana")
+            if (chainName !== "Evm" && chainName !== "Solana")
                 return new Error("chain not Supported");
             const options = {};
             options.vault_id = this.vault_id;
@@ -34,18 +34,18 @@ class WalletFordefi {
             options.xApiKey = this.xApiKey;
             const response = await rawTransaction[`signTransaction${chainName}`](transactionObject, options);
             return response;
-        } catch(error){
+        } catch (error) {
             return error;
         }
     };
 
-    sendTransaction = async(response) => {
-        try{
-            const filterOptions = response ;
+    sendTransaction = async (response) => {
+        try {
+            const filterOptions = response;
             filterOptions.function = "FordefiTransaction()";
             const validJson = await schemaValidator.validateInput(filterOptions);
 
-            if ( !validJson.valid ) {
+            if (!validJson.valid) {
                 return (validJson);
             }
 
@@ -61,8 +61,8 @@ class WalletFordefi {
                 },
                 data: response.data
             };
-         const resp = await axios.request(config);
-         return resp.data;
+            const resp = await axios.request(config);
+            return resp.data;
             // .then((response) => {
             //     return (JSON.stringify(response.data));
             //  })
@@ -70,7 +70,7 @@ class WalletFordefi {
             //  return (error.response.data.detail);
             // });
 
-        } catch(error){
+        } catch (error) {
             return error.response.data;
         }
 
