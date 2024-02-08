@@ -216,14 +216,6 @@
             "publicRpc": "https://mainnet.base.org",
             "domain": "base.org"
         },
-        "84531": {
-            "localName": "BaseTestnet",
-            "chainName": "Evm",
-            "chainSymbol": "TBASE",
-            "rpc": "https://goerli.base.org",
-            "publicRpc": "https://goerli.base.org",
-            "domain": "base.org"
-        },
         "84532": {
             "localName": "BaseTestnet2",
             "chainName": "Evm",
