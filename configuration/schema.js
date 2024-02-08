@@ -4,265 +4,265 @@
 * For example, for funciton getBlock() the request will be same, regardless of the chain ID and symbol 
 * Whereas for all the other category, validations are broken one level down, i.e. to the protocol level
 *
-*/ 
+*/
 
 exports.jsonSchema = {
-   
-    type: "object", 
+
+    type: "object",
 
     allOf: [
 
         // Field Mapping for prepareTransaction() function
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "prepareTransaction()" },
-                } 
+                    function: { type: "string", pattern: "prepareTransaction()" },
+                }
             },
             then: {
                 properties: {
-                    chainId: {type : "string"},
-                    chainSymbol: {type: "string"},
-                    xApiKey: {type : "string"},
-                    rpc: {type: "string"}
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    xApiKey: { type: "string" },
+                    rpc: { type: "string" }
 
                 },
-                required: ["xApiKey"] 
+                required: ["xApiKey"]
             },
         },
 
         // Field Mapping for signTransaction() function
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "signTransaction()" },
-                } 
+                    function: { type: "string", pattern: "signTransaction()" },
+                }
             },
             then: {
                 properties: {
-                    rpc: {type: "string"},
-                    privateKey: {type: "string"},
-                    chainId: {type: "string"},
-                    chainSymbol: {type: "string"},
-                    key: {type: "string"},
-                    xApiKey: {type:"string"}
+                    rpc: { type: "string" },
+                    privateKey: { type: "string" },
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    key: { type: "string" },
+                    xApiKey: { type: "string" }
                 },
-                required: ["xApiKey"] 
+                required: ["xApiKey"]
             },
         },
 
         // Field Mapping for transactionObject() function
 
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "transactionObject()" },
-                } 
+                    function: { type: "string", pattern: "transactionObject()" },
+                }
             },
             then: {
-                properties:{
-                    from: {type: "string"},
-                    to: {type: "string"},
-                    value: {type : "string"},
-                    gas: {type : "string"},
-                    data: {type: "string"},
-                    networkId: {type : "string"}
+                properties: {
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    gas: { type: "string" },
+                    data: { type: "string" },
+                    networkId: { type: "string" }
                 },
 
-                required: ["from","to","value"]
+                required: ["from", "to", "value"]
             }
-            
+
         },
 
         // Field Mapping for sendTransaction() function
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "sendTransaction()" },
-                } 
+                    function: { type: "string", pattern: "sendTransaction()" },
+                }
             },
             then: {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
-                    rawTransaction: {type: "string"},
+                    rawTransaction: { type: "string" },
                     signature: { type: "string" },
-                    xApiKey: {type : "string"},
-                    rpc: {type: "string"}
+                    xApiKey: { type: "string" },
+                    rpc: { type: "string" }
                 },
-                required: ["rawTransaction"] 
+                required: ["rawTransaction"]
             },
         },
 
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "TONTransaction()" },
-                } 
+                    function: { type: "string", pattern: "TONTransaction()" },
+                }
             },
             then: {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
-                    rawTransaction: {type: "object"},
-                    xApiKey: {type : "string"},
-                    rpc: {type: "string"}
+                    rawTransaction: { type: "object" },
+                    xApiKey: { type: "string" },
+                    rpc: { type: "string" }
                 },
-                required: ["rawTransaction"] 
+                required: ["rawTransaction"]
             },
         },
 
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "FordefiTransaction()" },
-                } 
+                    function: { type: "string", pattern: "FordefiTransaction()" },
+                }
             },
             then: {
                 properties: {
                     data: { type: "string" },
                     timestamp: { type: "number" },
-                    signature: {type: "string"},
-                    accessToken: {type : "string"},
+                    signature: { type: "string" },
+                    accessToken: { type: "string" },
                 },
-                required: ["data","signature","accessToken", "timestamp"] 
+                required: ["data", "signature", "accessToken", "timestamp"]
             },
         },
 
         // Fireblocks
 
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "FireblockSign()" },
-                } 
+                    function: { type: "string", pattern: "FireblockSign()" },
+                }
             },
             then: {
                 properties: {
                     from: { type: "string" },
                     assetId: { type: "string" },
                     data: { type: "string" },
-                    note: {type: "string"},
-                    amount: {type: "string"}
+                    note: { type: "string" },
+                    amount: { type: "string" }
                 },
-                required: ["from"] 
+                required: ["from"]
             },
         },
 
         {
-            if: { 
+            if: {
                 properties: {
-                    function: { type:"string", pattern: "SendFireblocks()" },
-                } 
+                    function: { type: "string", pattern: "SendFireblocks()" },
+                }
             },
             then: {
                 properties: {
                     jwt: { type: "string" },
                     path: { type: "string" },
                     data: { type: "object" },
-                    method: { type: "string",  }
+                    method: { type: "string", }
                 },
-                required: ["jwt", "data"] 
+                required: ["jwt", "data"]
             },
         },
-// Field Mapping for userOnboardingDYDX() function
-{
-    if: {
-        properties: {
-            function: { type: "string", pattern: "userOnboardingDYDX()" },
-        }
-    },
-    then: {
-        properties: {
-            privateKey: { type: "string" }
-        },
-        required: ["privateKey"]
-    },
-},
-
-// Field Mapping for placeOrderDYDX() function
-{
-    if: {
-        properties: {
-            function: { type: "string", pattern: "placeOrderDYDX()" },
-        }
-    },
-    then: {
-        properties: {
-            subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
-            mnemonic: { type: "string" },
-            market: { type: "string" },
-            type: { type: "string", enum: ['LIMIT', 'MARKET'] },
-            side: { type: "string", enum: ['SELL', 'BUY']},
-            timeInForce: { type: "string", default: "IOC", enum: ["GTT", "IOC", "FOK"] },
-            time: { type: "string", default: "60" },
-            price: { type: "string" },
-            size: { type: "string" },
-            postOnly: { type: "string", default: "false", enum: ["true", "false"] },
-            reduceOnly: { type: "string", default: "false", enum: ["true", "false"] },
-            triggerPrice: { type: "string", default: "null" },
-        },
-        required: ["subAccountNumber", "size", "mnemonic", "market", "type", "side", "price"], 
-    },
-},
-
-// Field Mapping for cancelOrderDYDX() function
-{
-    if: {
-        properties: {
-            function: { type: "string", pattern: "cancelOrderDYDX()" },
-        }
-    },
-    then: {
-        properties: {
-            subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
-            mnemonic: { type: "string" },
-            orderId: { type: "string" },
-            goodTillTimeInSeconds: { type: "string", default: '500' }
-        },
-        required: ["subAccountNumber", "mnemonic", "orderId"]
-    },
-},
-
-      // Field Mapping for transferDYDX() function
-      {
-        if: {
-            properties: {
-                function: { type: "string", pattern: "transferDYDX()" },
-            }
-        },
-        then: {
-            properties: {
-                subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
-                mnemonic: { type: "string" },
-                recipient: { type: "string" },
-                assetId: { type: "string", default: "0", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
-                amount: { type: "string" },                        
+        // Field Mapping for userOnboardingDYDX() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "userOnboardingDYDX()" },
+                }
             },
-            required: ["subAccountNumber", "mnemonic", "recipient", "amount"]
-        },
-    },
-
-     // Field Mapping for depositDYDX() function
-     {
-        if: {
-            properties: {
-                function: { type: "string", pattern: "depositDYDX()" },
-            }
-        },
-        then: {
-            properties: {
-                amountIn: { type: "string" },
-                from: { type: "string" },
-                slippage: { type: "string", default: "1" },
-                srcChainId: { type: "string", default: "5", enum: ["5", "97", "80001", "420", "43113", "4002"] },
-                tokenIn: { type: "string" },
-                to: { type: "string" },                        
-                gas: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },                        
-                privateKey: { type: "string" },                        
+            then: {
+                properties: {
+                    privateKey: { type: "string" }
+                },
+                required: ["privateKey"]
             },
-            required: ["amountIn", "to", "gas", "from", "tokenIn", "privateKey"]
         },
-    },
+
+        // Field Mapping for placeOrderDYDX() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "placeOrderDYDX()" },
+                }
+            },
+            then: {
+                properties: {
+                    subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    mnemonic: { type: "string" },
+                    market: { type: "string" },
+                    type: { type: "string", enum: ['LIMIT', 'MARKET'] },
+                    side: { type: "string", enum: ['SELL', 'BUY'] },
+                    timeInForce: { type: "string", default: "IOC", enum: ["GTT", "IOC", "FOK"] },
+                    time: { type: "string", default: "60" },
+                    price: { type: "string" },
+                    size: { type: "string" },
+                    postOnly: { type: "string", default: "false", enum: ["true", "false"] },
+                    reduceOnly: { type: "string", default: "false", enum: ["true", "false"] },
+                    triggerPrice: { type: "string", default: "null" },
+                },
+                required: ["subAccountNumber", "size", "mnemonic", "market", "type", "side", "price"],
+            },
+        },
+
+        // Field Mapping for cancelOrderDYDX() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "cancelOrderDYDX()" },
+                }
+            },
+            then: {
+                properties: {
+                    subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    mnemonic: { type: "string" },
+                    orderId: { type: "string" },
+                    goodTillTimeInSeconds: { type: "string", default: '500' }
+                },
+                required: ["subAccountNumber", "mnemonic", "orderId"]
+            },
+        },
+
+        // Field Mapping for transferDYDX() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "transferDYDX()" },
+                }
+            },
+            then: {
+                properties: {
+                    subAccountNumber: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    mnemonic: { type: "string" },
+                    recipient: { type: "string" },
+                    assetId: { type: "string", default: "0", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    amount: { type: "string" },
+                },
+                required: ["subAccountNumber", "mnemonic", "recipient", "amount"]
+            },
+        },
+
+        // Field Mapping for depositDYDX() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "depositDYDX()" },
+                }
+            },
+            then: {
+                properties: {
+                    amountIn: { type: "string" },
+                    from: { type: "string" },
+                    slippage: { type: "string", default: "1" },
+                    srcChainId: { type: "string", default: "5", enum: ["5", "97", "80001", "420", "43113", "4002"] },
+                    tokenIn: { type: "string" },
+                    to: { type: "string" },
+                    gas: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    privateKey: { type: "string" },
+                },
+                required: ["amountIn", "to", "gas", "from", "tokenIn", "privateKey"]
+            },
+        },
     ]
 };

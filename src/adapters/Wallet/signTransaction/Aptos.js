@@ -10,10 +10,10 @@ module.exports = {
 
         try {
 
-            const {TxnBuilderTypes} = aptos;
-            const {BCS} = aptos;
-            const {privateKey} = options;
-            const chainId = (options.chainId && options.chainId === "1400" ) ? "1" : "2";
+            const { TxnBuilderTypes } = aptos;
+            const { BCS } = aptos;
+            const { privateKey } = options;
+            const chainId = (options.chainId && options.chainId === "1400") ? "1" : "2";
 
             // Create an account instance with the wallet
 
@@ -45,7 +45,7 @@ module.exports = {
             // Generate BCS transaction for Sending to the Aptos Chain
 
             const bcsTxn = aptos.AptosClient.generateBCSTransaction(accountFrom, Txn);
-            
+
             // Generating a encoded Raw Transaction for Sending it to Aptos Chain 
 
             const rawTransaction = Buffer.from(bcsTxn).toString("base64");

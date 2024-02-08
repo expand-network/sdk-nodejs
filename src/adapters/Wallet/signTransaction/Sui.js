@@ -1,14 +1,14 @@
-const { TransactionBlock , Ed25519Keypair, RawSigner } = require('@mysten/sui.js');
+const { TransactionBlock, Ed25519Keypair, RawSigner } = require('@mysten/sui.js');
 const { fromB64 } = require("@mysten/bcs");
 
 module.exports = {
 
-    signTransactionSui: async (web3,transactionObject, options)=> {
+    signTransactionSui: async (web3, transactionObject, options) => {
 
-        try{
+        try {
             // get the secretkey from options
             const secretKey = options.privateKey;
-            const privateKeyBase64 = Buffer.from(secretKey,"hex").toString("base64"); // Convert hex to base64 string
+            const privateKeyBase64 = Buffer.from(secretKey, "hex").toString("base64"); // Convert hex to base64 string
             // Create the keypair from converted private key
             const keypair = Ed25519Keypair.fromSecretKey(fromB64(privateKeyBase64));
             // Create a signer with the provided keypair and network
@@ -29,9 +29,9 @@ module.exports = {
                 transactionBlock: tx,
             });
             // Return the raw Transaction
-            return {"rawTransaction":signedTransaction};
+            return { "rawTransaction": signedTransaction };
 
-        } catch(error){
+        } catch (error) {
             return (error);
 
         }
