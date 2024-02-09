@@ -39,12 +39,13 @@ class Wallet {
         const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
         transactionOptions.value = new BN(transactionOptions.value);
 
-        let chainName = config.chains[chainId].chainName;
-
-        const options = {};
-        options.privateKey = this.privateKey;
-        const rawData = await rawTransaction[`signTransaction${chainName}`](web3, transactionObject, options);
-        rawData.chainId = chainId;
+            let chainName = config.chains[chainId].chainName;
+            
+            const options = {};
+            options.privateKey = this.privateKey;
+            if(chainName === "Aptos" || chainName === "Starknet") options.chainId = transactionObject.chainId;
+            const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
+            rawData.chainId = chainId;
 
         return rawData;
     };
