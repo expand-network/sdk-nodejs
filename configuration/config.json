@@ -130,11 +130,6 @@
             "chainName": "Evm",
             "chainSymbol": "OPT"
         },
-        "420": {
-            "localName": "OptimismTestnet",
-            "chainName": "Evm",
-            "chainSymbol": "TOPT"
-        },
         "101": {
             "localName": "Sui",
             "chainName": "Sui",
