@@ -43,6 +43,8 @@ class Wallet {
             
             const options = {};
             options.privateKey = this.privateKey;
+            if(chainName === "Aptos" || chainName === "Starknet") options.chainId = transactionObject.chainId;
+            if(chainName === "Near") options.rpc = rpc;
             const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
             rawData.chainId = chainId;
 
