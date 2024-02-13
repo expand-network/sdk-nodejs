@@ -13,7 +13,6 @@ module.exports = {
          */
 
         try {
-
             const keyStore = new keyStores.InMemoryKeyStore();
 
             const keyPair = KeyPair.fromString(options.privateKey);
@@ -32,7 +31,6 @@ module.exports = {
                 `access_key/${transactionObject.from}/${publicKey.toString()}`,
                 ""
             );
-
             // eslint-disable-next-line no-plusplus
             const nonce = ++accessKey.nonce;
 
@@ -50,7 +48,7 @@ module.exports = {
             );
 
             const serializedTx = nearAPI.utils.serialize.serialize(
-                nearAPI.transactions.SCHEMA,
+                nearAPI.transactions.SCHEMA.Transaction,
                 transaction
             );
 
@@ -61,13 +59,13 @@ module.exports = {
             const signedTransaction = new nearAPI.transactions.SignedTransaction({
                 transaction,
                 signature: new nearAPI.transactions.Signature({
-                    keyType: transaction.publicKey.keyType,
-                    data: signature.signature,
+                keyType: transaction.publicKey.keyType,
+                data: signature.signature,
                 }),
             });
 
-            const rawTransaction = signedTransaction.encode().toString("base64");
-            return { "rawTransaction": rawTransaction };
+            const rawTransaction = Buffer.from(signedTransaction.encode()).toString('base64');
+            return {"rawTransaction": rawTransaction };
 
         }
         catch (error) {
