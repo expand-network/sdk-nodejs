@@ -1,19 +1,18 @@
-const nearAPI  = require('near-api-js');
+const nearAPI = require('near-api-js');
 
 const sha256 = require("js-sha256");
 
-const {  KeyPair, keyStores } = nearAPI;
+const { KeyPair, keyStores } = nearAPI;
 
 
 module.exports = {
-    
-    signTransactionNear: async(web3,transactionObject,options) => {
-    /*
-     * Function will sign the transaction payload for Near chain
-     */
+
+    signTransactionNear: async (web3, transactionObject, options) => {
+        /*
+         * Function will sign the transaction payload for Near chain
+         */
 
         try {
-        
             const keyStore = new keyStores.InMemoryKeyStore();
 
             const keyPair = KeyPair.fromString(options.privateKey);
@@ -32,7 +31,6 @@ module.exports = {
                 `access_key/${transactionObject.from}/${publicKey.toString()}`,
                 ""
             );
-            
             // eslint-disable-next-line no-plusplus
             const nonce = ++accessKey.nonce;
 
@@ -50,7 +48,7 @@ module.exports = {
             );
 
             const serializedTx = nearAPI.utils.serialize.serialize(
-                nearAPI.transactions.SCHEMA,
+                nearAPI.transactions.SCHEMA.Transaction,
                 transaction
             );
 
@@ -66,11 +64,11 @@ module.exports = {
                 }),
             });
 
-            const rawTransaction = signedTransaction.encode().toString("base64");
-            return {"rawTransaction":rawTransaction};
+            const rawTransaction = Buffer.from(signedTransaction.encode()).toString('base64');
+            return {"rawTransaction": rawTransaction };
 
         }
-        catch(error) {
+        catch (error) {
             return error;
         }
 

@@ -11,7 +11,7 @@ const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletDFNS {
 
-    constructor(options){
+    constructor(options) {
         this.xApiKey = options.xApiKey;
         this.privateKey = options.privateKey;
         this.credId = options.credId;
@@ -36,26 +36,26 @@ class WalletDFNS {
             dfnsClient: this.dfnsClient,
             maxRetries: 10,
         });
-        
+
     }
 
 
-    signTransaction = async(transactionObject) => {
-        
-        try{
+    signTransaction = async (transactionObject) => {
+
+        try {
             const transactionOptions = transactionObject;
             transactionOptions.function = "transactionObject()";
             const validObject = await schemaValidator.validateInput(transactionObject);
 
-            if ( !validObject.valid  ) {
-                    return (validObject);
+            if (!validObject.valid) {
+                return (validObject);
             }
-            
-            
-            const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
+
+
+            const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
             let chainName = config.chains[chainId].chainName;
             axios.defaults.headers['X-API-KEY'] = this.xApiKey;
-            const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
+            const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
             const configuration = {};
             configuration.params = {
                 chainId
@@ -63,55 +63,55 @@ class WalletDFNS {
             let rpc = await axios.get(apiURL, configuration);
             rpc = rpc.data.data.rpc;
 
-            const rpcProvider = new JsonRpcProvider(rpc,Number(transactionObject.chainId));
+            const rpcProvider = new JsonRpcProvider(rpc, Number(transactionObject.chainId));
 
 
-            if(chainName !== "Evm")
+            if (chainName !== "Evm")
                 return new Error("chain not Supported");
 
             const options = {};
-            options.wallet =  this.wallet  //.connect(rpcProvider);
+            options.wallet = this.wallet  //.connect(rpcProvider);
             options.xApiKey = this.xApiKey;
             options.rpcProvider = rpcProvider;
             const response = await rawTransaction[`signTransaction${chainName}`](transactionObject, options);
             return response;
-        } catch(error){
+        } catch (error) {
             return error;
         }
     };
 
-    sendTransaction = async(transactionObject) => {
-        try{
+    sendTransaction = async (transactionObject) => {
+        try {
 
-            const filterOptions = transactionObject ;
+            const filterOptions = transactionObject;
             filterOptions.function = "DFNSTransaction()";
             const validJson = await schemaValidator.validateInput(filterOptions);
 
-            if ( !validJson.valid ) {
+            if (!validJson.valid) {
                 return (validJson);
             }
             axios.defaults.headers['X-API-KEY'] = this.xApiKey;
-            const chainId = await common.getChainId({chainId:transactionObject.chainId,chainSymbol:transactionObject.chainSymbol});
+            const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
             let chainName = config.chains[chainId].chainName;
-            const apiURL = `${config.url.apiurl  }/chain/getpublicrpc/`;
+            const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
             const configuration = {};
             configuration.params = {
                 chainId
             };
             let rpc = await axios.get(apiURL, configuration);
             rpc = rpc.data.data.rpc;
-            if(chainName !== "Evm")
+            if (chainName !== "Evm")
                 return new Error("chain not Supported");
 
-            const rpcProvider = new JsonRpcProvider(rpc,Number(transactionObject.chainId));
-            
+            const rpcProvider = new JsonRpcProvider(rpc, Number(transactionObject.chainId));
+
             let wallet = this.wallet.connect(rpcProvider);
 
             let transaction = Transaction.from(transactionObject.rawTransaction);
             let TxHash = await wallet.sendTransaction(transaction);
-            return {"TxHash": TxHash.hash}
+            return { "TxHash": TxHash.hash }
 
-        } catch(error){
+        } catch (error) {
             return error;
         }
 

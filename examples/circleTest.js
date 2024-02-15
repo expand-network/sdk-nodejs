@@ -1,7 +1,7 @@
 const { WalletCircle, prepareTransaction } = require('../src/index');
 const dotenv = require('dotenv');
 
-async function initcircleWallet(options){
+async function initcircleWallet(options) {
     const userToken = await WalletCircle.getUserToken(options);
     options.userToken = userToken.userToken;
     options.encryptionKey = userToken.encryptionKey;
@@ -9,7 +9,7 @@ async function initcircleWallet(options){
     return wallet;
 }
 
-async function main(){
+async function main() {
 
     // configure the env
     dotenv.config();
@@ -22,7 +22,7 @@ async function main(){
         walletId: process.env.walletId,
         encryptionKey: process.env.encryptionKey
     });
-    
+
     // Prepare the transaction from expand api
     // We are making an approve call here
     const prepareApproveTx = await prepareTransaction('https://api.expand.network/fungibletoken/approve', {
@@ -38,7 +38,7 @@ async function main(){
     // Securely sign the transaction on user's end
     const signedTx = await wallet.signTransaction(prepareApproveTx);
     // Signed Transaction
-    console.log("signedTx: " ,signedTx);
+    console.log("signedTx: ", signedTx);
     // Send the transaction
     const tx = await wallet.sendTransaction(signedTx);
     // This challenge id and details can be used to send this transaction through circle on supported networks

@@ -5,7 +5,7 @@ exports.getSubAccountCompositeClient = async (mnemonic, subAccountNumber) => {
     const client = await CompositeClient.connect(Network.testnet());
 
     const subaccount = new SubaccountClient(wallet, subAccountNumber);
-    return {client, subaccount};
+    return { client, subaccount };
 };
 
 exports.getSubAccountValidatorClient = async (mnemonic, subAccountNumber) => {
@@ -13,5 +13,5 @@ exports.getSubAccountValidatorClient = async (mnemonic, subAccountNumber) => {
     const client = await ValidatorClient.connect(Network.testnet().validatorConfig);
 
     const subaccount = new SubaccountClient(wallet, subAccountNumber);
-    return {client, subaccount};
+    return { client, subaccount };
 };

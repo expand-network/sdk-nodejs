@@ -1,6 +1,6 @@
 {
   "name": "expand-network",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "The external SDK for the adapter",
   "main": "src/index.js",
   "parserOptions": {
@@ -25,8 +25,8 @@
     "@cosmjs/proto-signing": "^0.32.2",
     "@cosmjs/tendermint-rpc": "^0.32.0",
     "@dfns/lib-ethersjs6": "^0.2.1",
-    "@dfns/sdk": "^0.2.1",
-    "@dfns/sdk-keysigner": "^0.2.1",
+    "@dfns/sdk": "^0.3.1",
+    "@dfns/sdk-keysigner": "^0.3.1",
     "@dydxprotocol/v4-client-js": "1.0.17",
     "@ethereumjs/common": "4.1.0",
     "@mysten/bcs": "0.9.1",
