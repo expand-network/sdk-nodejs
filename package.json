@@ -35,7 +35,7 @@
     "@noble/secp256k1": "^2.0.0",
     "@scure/bip32": "^1.1.5",
     "@scure/bip39": "^1.1.1",
-    "@solana/web3.js": "1.89.0",
+    "@solana/web3.js": "1.90.0",
     "@ton/ton": "^13.9.0",
     "ajv": "8.12.0",
     "ajv-errors": "3.0.0",
