@@ -88,8 +88,7 @@ exports.jsonSchema = {
                     to: { type: "string" },
                     value: { type: "string" },
                     gas: { type: "string" },
-                    data: { type: "string" },
-                    networkId: { type: "string" }
+                    data: { type: "string" }
                 },
 
                 required: [ "to", "value"]
