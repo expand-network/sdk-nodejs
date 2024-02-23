@@ -79,7 +79,7 @@ exports.jsonSchema = {
         {
             if: {
                 properties: {
-                    function: { type: "string", pattern: "tontransactionObject()" },
+                    function: { type: "string", pattern: "tonTxObject()" },
                 }
             },
             then: {
