@@ -30,7 +30,7 @@ class WalletTON {
     signTransaction = async (transactionObject) => {
 
         const configuration = { "params": {} };
-        transactionObject.function = "transactionObject()";
+        transactionObject.function = "tontransactionObject()";
         const validJson = await schemaValidator.validateInput(transactionObject);
 
         if (!validJson.valid) {

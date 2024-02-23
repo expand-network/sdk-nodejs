@@ -74,6 +74,29 @@ exports.jsonSchema = {
 
         },
 
+        // Field Mapping for tontransactionObject() function
+
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "tontransactionObject()" },
+                }
+            },
+            then: {
+                properties: {
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    gas: { type: "string" },
+                    data: { type: "string" },
+                    networkId: { type: "string" }
+                },
+
+                required: [ "to", "value"]
+            }
+
+        },
+
         // Field Mapping for sendTransaction() function
         {
             if: {
