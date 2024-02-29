@@ -167,7 +167,7 @@
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
         },
-        "300": {
+        "400": {
             "localName": "StarkNet",
             "chainName": "StarkNet",
             "chainSymbol": "STRK",
@@ -177,7 +177,7 @@
             "domain": "infura.io",
             "sslMateId": "4054117900"
         },
-        "301": {
+        "401": {
             "localName": "StarkNetTestnet",
             "chainName": "StarkNet",
             "chainSymbol": "TSTRK",
