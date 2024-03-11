@@ -11,9 +11,8 @@ module.exports = {
 
     try {
 
-      const from = solanasdk.Keypair.fromSecretKey(bs58.decode(options.privateKey));
 
-      // const toKey = solanasdk.Keypair.generate(transactionObject.to);
+      const from = solanasdk.Keypair.fromSecretKey(bs58.decode(options.privateKey));
 
       const recentBlockhash = await web3.getRecentBlockhash();
       const manualTransaction = new solanasdk.Transaction({

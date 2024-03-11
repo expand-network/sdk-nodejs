@@ -33,26 +33,25 @@ module.exports = {
 
             contract.connect(account);
             const value = parseInt(transactionObject.value);
-            if(options.gas !== undefined && Number(options.gas) !== 0) {
+            if (options.gas !== undefined && Number(options.gas) !== 0) {
                 estimateFee = options.gas;
             }
-            else
-            {
-            estimateFee = await account.estimateInvokeFee({
-                contractAddress: nativeEthAddress,  // ETH contract address
-                entrypoint: 'transfer',
-                calldata: starknet.CallData.compile(
-                    {
-                        recipient: transactionObject.to,
-                        amount: {
-                            low: value,  // 1 wei
-                            high: '0',
+            else {
+                estimateFee = await account.estimateInvokeFee({
+                    contractAddress: nativeEthAddress,  // ETH contract address
+                    entrypoint: 'transfer',
+                    calldata: starknet.CallData.compile(
+                        {
+                            recipient: transactionObject.to,
+                            amount: {
+                                low: value,  // 1 wei
+                                high: '0',
+                            }
                         }
-                    }
-                ),
-            }).then(res => res.suggestedMaxFee.toString());
+                    ),
+                }).then(res => res.suggestedMaxFee.toString());
 
-        }
+            }
 
             const signedTransaction = await account.signer.signTransaction([{
                 contractAddress: nativeEthAddress,  // ETH contract address
@@ -68,15 +67,15 @@ module.exports = {
                 ),
             }],
                 {
-                    walletAddress:userAddress,
+                    walletAddress: userAddress,
                     nonce: new BN(currentNonce),
                     maxFee: estimateFee,
                     version: new BN(1),
                     chainId
                 },
                 undefined);
-            
-            const finalSignedData = [signedTransaction.r , signedTransaction.s];
+
+            const finalSignedData = [signedTransaction.r, signedTransaction.s];
 
             const callDataInitial = ({
                 contractAddress: userAddress,

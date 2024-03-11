@@ -1,15 +1,15 @@
 const axios = require('axios').default;
 const config = require('../configuration/config.json');
 const schemaValidator = require('../configuration/schemaValidator');
-const { Wallet, WalletFordefi, WalletDFNS, WalletTON, WalletFireblocks } = require('./interfaces/index');
+const { Wallet, WalletFordefi, WalletDFNS, WalletTON, WalletFireblocks, WalletPhantom, WalletCoinbase, WalletCircle } = require('./interfaces/index');
 
-exports.prepareTransaction = async(apiURL, options) => {
+exports.prepareTransaction = async (apiURL, options) => {
 
-    const filterOptions = options ;
+    const filterOptions = options;
     filterOptions.function = "prepareTransaction()";
     const validJson = await schemaValidator.validateInput(filterOptions);
 
-    if ( !validJson.valid ) {
+    if (!validJson.valid) {
         return (validJson);
     }
 
@@ -20,9 +20,9 @@ exports.prepareTransaction = async(apiURL, options) => {
             url: apiURL,
             data: filterOptions,
             headers: {
-                "x-api-key" : filterOptions.xApiKey
-              }
-            
+                "x-api-key": filterOptions.xApiKey
+            }
+
         };
 
         const response = await axios(paramConfig).then(result => result.data);
@@ -30,40 +30,40 @@ exports.prepareTransaction = async(apiURL, options) => {
         return response.data;
 
     }
-    catch(error){
+    catch (error) {
         return error;
     }
 
 };
 
 
-exports.decodeTransaction = async (options)=> {
+exports.decodeTransaction = async (options) => {
 
     const filterOptions = options;
     filterOptions.function = "decodeTransaction()";
     const validJson = await schemaValidator.validateInput(options);
 
-    if( !validJson.valid ) {
+    if (!validJson.valid) {
         return (validJson);
     }
 
     try {
 
-        const apiURL = `${config.url.apiurl  }/chain/decodetransaction/`;
+        const apiURL = `${config.url.apiurl}/chain/decodetransaction/`;
 
         const paramConfig = {
             method: "post",
             url: apiURL,
             data: filterOptions,
             headers: {
-                "x-api-key" : filterOptions.xApiKey
+                "x-api-key": filterOptions.xApiKey
             }
         };
 
         const response = await axios(paramConfig).then(result => result.data);
         return response.data;
 
-    } catch(error){
+    } catch (error) {
         return error;
     }
 
@@ -78,9 +78,15 @@ exports.WalletFordefi = WalletFordefi;
 
 exports.WalletDFNS = WalletDFNS;
 
+exports.WalletPhantom = WalletPhantom;
+
+exports.WalletCoinbase = WalletCoinbase;
+
 exports.WalletTON = WalletTON;
 
 exports.WalletFireblocks = WalletFireblocks;
+
+exports.WalletCircle = WalletCircle;
 
 
 

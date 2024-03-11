@@ -4,10 +4,9 @@ const rawTransaction = require('./signTransaction/index');
 const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
-const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
-const { ethers } = require('ethers-5');
+const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
 
-class Wallet {
+class WalletPhantom {
 
     constructor(options) {
         this.privateKey = options.privateKey;
@@ -30,6 +29,10 @@ class Wallet {
 
         const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
 
+        let chainName = config.chains[chainId].chainName;
+
+        if (chainName !== "Evm" && chainName !== "Solana")
+            return new Error("chain not Supported");
 
         configuration.params = {
             chainId
@@ -40,14 +43,11 @@ class Wallet {
         const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
         transactionOptions.value = new BN(transactionOptions.value);
 
-            let chainName = config.chains[chainId].chainName;
-            
-            const options = {};
-            options.privateKey = this.privateKey;
-            if(chainName === "Aptos" || chainName === "Starknet") options.chainId = transactionObject.chainId;
-            if(chainName === "Near") options.rpc = rpc;
-            const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
-            rawData.chainId = chainId;
+
+        const options = {};
+        options.privateKey = this.privateKey;
+        const rawData = await rawTransaction[`signTransaction${chainName}`](web3, transactionObject, options);
+        rawData.chainId = chainId;
 
         return rawData;
     };
@@ -56,7 +56,7 @@ class Wallet {
 
         const filterOptions = options;
         filterOptions.function = "sendTransaction()";
-        const validJson = await schemaValidator.validateInput(filterOptions);
+        const validJson = await schemaValidator.validateInput(options);
         if (!validJson.valid) {
             return (validJson);
         }
@@ -84,37 +84,7 @@ class Wallet {
 
     };
 
-    signOrderRFQ = async (options) => {
-        const filterOptions = options;
-        filterOptions.function = "signOrderRFQ()";
-        const validJson = await schemaValidator.validateInput(options);
-        if (!validJson.valid) {
-            return (validJson);
-        }
-
-        const { dexId, domain, types, values } = options;
-        const { chainId } = config.dexes[dexId]
-
-        let apiConfig = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: `${config.url.apiurl}/chain/getpublicrpc?chainId=${chainId}`,
-            headers: {
-                'x-api-key': this.xApiKey
-            }
-        };
-
-        let rpc = await axios.request(apiConfig);
-
-        rpc = rpc.data.data.rpc;
-
-        const provider = new ethers.providers.JsonRpcProvider(rpc);
-        const signer = new ethers.Wallet(this.privateKey, provider);
-        const signature = await signer._signTypedData(domain, types, values);
-        return { signature };
-    };
-
 }
 
-module.exports = { Wallet };
+module.exports = { WalletPhantom };
 
