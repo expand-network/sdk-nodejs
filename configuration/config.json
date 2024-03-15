@@ -85,6 +85,16 @@
             "chainName": "Evm",
             "chainSymbol": "TFTM"
         },
+        "324": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "ZKS"
+        },
+        "300": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "TZKS"
+        },
         "900": {
             "localName": "Solana",
             "chainName": "Solana",
@@ -167,7 +177,7 @@
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
         },
-        "300": {
+        "400": {
             "localName": "StarkNet",
             "chainName": "StarkNet",
             "chainSymbol": "STRK",
@@ -177,7 +187,7 @@
             "domain": "infura.io",
             "sslMateId": "4054117900"
         },
-        "301": {
+        "401": {
             "localName": "StarkNetTestnet",
             "chainName": "StarkNet",
             "chainSymbol": "TSTRK",
