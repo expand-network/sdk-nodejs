@@ -165,6 +165,24 @@ exports.jsonSchema = {
                 required: ["jwt", "data"]
             },
         },
+
+        // Field Mapping for stellarSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stellarSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    data: { type: "string" },
+                },
+                required: ["data"]
+            },
+        },
+
         // Field Mapping for userOnboardingDYDX() function
         {
             if: {

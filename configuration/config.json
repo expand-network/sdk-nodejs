@@ -242,6 +242,20 @@
             "rpc": "https://sepolia.optimism.io",
             "publicRpc": "https://sepolia.optimism.io",
             "domain": "optimism.io"
+        },
+        "1500": {
+            "localName": "Stellar",
+            "chainName": "Stellar",
+            "chainSymbol": "XLM",
+            "rpc": "https://horizon.stellar.org",
+            "networkPassphrase": "Public Global Stellar Network ; September 2015"
+        },
+        "1501": {
+            "localName": "StellarTestnet",
+            "chainName": "Stellar",
+            "chainSymbol": "TXLM",
+            "networkPassphrase": "Test SDF Network ; September 2015",
+            "rpc": "https://horizon-testnet.stellar.org"
         }
     },
     "fireblocks": {

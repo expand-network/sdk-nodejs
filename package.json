@@ -55,6 +55,7 @@
     "long": "^5.2.3",
     "near-api-js": "3.0.4",
     "starknet": "5.24.3",
+    "stellar-sdk": "^11.2.2",
     "ton-crypto": "3.2.0",
     "tronweb": "5.3.1",
     "tweetnacl": "1.0.3",
