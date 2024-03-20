@@ -1,8 +1,8 @@
-const starknet = require('starknet');
-const BN = require("bn.js");
-const config = require('../../../../configuration/config.json');
-const { callsToArrayData } = require('../../../helper/Starknet');
-const starkNetNativeEthAbi = require('../../../../assets/abis/starknetNativeEth.json');
+// const starknet = require('starknet');
+// const BN = require("bn.js");
+// const config = require('../../../../configuration/config.json');
+// const { callsToArrayData } = require('../../../helper/Starknet');
+// const starkNetNativeEthAbi = require('../../../../assets/abis/starknetNativeEth.json');
 const errorMessage = require('../../../../configuration/errorMessage.json');
 
 const throwErrorMessage = (msg) => ({
