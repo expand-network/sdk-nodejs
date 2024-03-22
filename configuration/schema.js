@@ -180,6 +180,24 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for signOrderRFQ() function
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "signOrderRFQ()" },
+                } 
+            },
+            then: {
+                properties: {
+                    dexId: { type: "string", enum: ["1900", "1901"], default: "1900" },
+                    domain: { type: "object" },
+                    types: { type: "object" },
+                    values: { type: "object" }
+                },
+                required: ["domain", "types", "values"] 
+            },
+        },
+        
         // Field Mapping for placeOrderDYDX() function
         {
             if: {

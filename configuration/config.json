@@ -253,8 +253,24 @@
     },
     "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl": "https://api.expand.network"
+        "apiurl" : "https://api.expand.network"
     },
+
+    "dexes": {
+        "1900": {
+            "localName": "UniswapX",
+            "dexName": "UniswapX",
+            "chainName": "Ethereum",
+            "chainId": "1"
+        },
+        "1901": {
+            "localName": "UniswapXTestnet",
+            "dexName": "UniswapX",
+            "chainName": "Ethereum",
+            "chainId": "5"
+        }
+    },
+    
     "dYdXV4": {
         "chainId": "dydx-testnet-4",
         "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
