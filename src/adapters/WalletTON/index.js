@@ -1,5 +1,5 @@
 const { mnemonicToPrivateKey, keyPairFromSecretKey } = require("ton-crypto");
-const { WalletContractV4, internal } = require("@ton/ton");
+const { WalletContractV4, internal, Cell } = require("@ton/ton");
 const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const { initialiseWeb3 } = require("../../../configuration/intialiseWeb3");
@@ -30,7 +30,7 @@ class WalletTON {
     signTransaction = async (transactionObject) => {
 
         const configuration = { "params": {} };
-        transactionObject.function = "transactionObject()";
+        transactionObject.function = "tonTxObject()";
         const validJson = await schemaValidator.validateInput(transactionObject);
 
         if (!validJson.valid) {
@@ -48,6 +48,13 @@ class WalletTON {
 
         const web3 = await initialiseWeb3({ chainId, key: this.xApiKey });
         const walletContract = web3.open(this.wallet);
+        
+        let body;
+        try {
+             body = Cell.fromBase64(transactionObject.message);
+        } catch(error) {
+            body =  transactionObject.message || "through expand"; // optional comment
+        };
 
         const seqno = await walletContract.getSeqno();
         const rawData = await walletContract.createTransfer({
@@ -57,7 +64,7 @@ class WalletTON {
                 internal({
                     to: transactionObject.to,
                     value: JSON.stringify(transactionObject.value / this._nanotons),
-                    body: transactionObject.message ? transactionObject.message : "through expand", // optional comment
+                    body,
                     bounce: false,
                 })
             ]

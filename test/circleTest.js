@@ -19,8 +19,7 @@ async function main(){
         appId: process.env.appId,
         apiKey: process.env.apiKey,
         userId: process.env.userId,
-        walletId: process.env.walletId,
-        encryptionKey: process.env.encryptionKey
+        walletId: process.env.walletId
     });
     
     // Prepare the transaction from expand api
