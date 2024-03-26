@@ -20,7 +20,9 @@ const main = async () => {
 
   // Securely sign the transaction on user's end
   const signedTx = await wallet.signTransaction(preparedTx);
-  console.log("signedTx: ", signedTx);
+  const tx = await wallet.sendTransaction(signedTx);
+
+  console.log("Tx: ", tx);
 }
 
 main();
