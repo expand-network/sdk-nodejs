@@ -178,6 +178,7 @@ exports.jsonSchema = {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string" },
                     data: { type: "string" },
+                    rpc: { type: "string" },
                 },
                 required: ["data"]
             },
