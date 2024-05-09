@@ -14,15 +14,6 @@ async function initializeAxios(xAPIKey) {
   return axiosInstance
 }
 
-// async function getNonce(account, web3) {
-//   const pendingNonce = await web3.eth.getTransactionCount(account, 'pending');
-//   const latestNonce = await web3.eth.getTransactionCount(account);
-//   console.log("pendingNonce --", pendingNonce);
-//   console.log("latestNonce --", latestNonce);
-
-//   return Math.max(pendingNonce, latestNonce);
-// }
-
 module.exports = {
   approveAndSwap: async (options) => {
     const { privateKey, xApiKey, chainId, from, path, gas, amountIn, dexId } = options;
@@ -36,25 +27,21 @@ module.exports = {
 
     const axiosInstance = await initializeAxios(xApiKey);
 
-    // let publicRpcResponse; 
-    let rpc = "https://aged-bold-general.quiknode.pro/aca755115e18fb7c58c55a9e7c1af78e55e9cde2/";
+    let publicRpcResponse = null;
+    let rpc = null;
 
-    // try {
-    //   publicRpcResponse = await axiosInstance.get(`chain/getpublicrpc?chainId=${chainId}`);
-    //   if (publicRpcResponse && publicRpcResponse?.data?.status === 200)
-    //     rpc = publicRpcResponse?.data?.data?.rpc
-    //   console.log("RPC --", rpc)
-    // } catch (error) {
-    //   console.log("Error getting RPC url - ", error)
-    //   return;
-    // }
+    try {
+      publicRpcResponse = await axiosInstance.get(`chain/getpublicrpc?chainId=${chainId}`);
+      if (publicRpcResponse && publicRpcResponse?.data?.status === 200)
+        rpc = publicRpcResponse?.data?.data?.rpc
+      console.log("RPC --", rpc)
+    } catch (error) {
+      console.log("Error getting RPC url - ", error)
+      return;
+    }
 
     console.log("Rpc --", rpc)
     const web3 = new Web3(rpc);
-    // console.log("Web3 connection", web3);
-
-    // let nonce = await web3.eth.getTransactionCount(from, 'pending');
-    // console.log("Nonce --", nonce);
     const batch = new web3.BatchRequest();
 
     try {
@@ -115,17 +102,10 @@ module.exports = {
         }));
       }
 
-     // nonce++;
-
       nonce = await web3.eth.getTransactionCount(from, 'pending');
 
       console.log("Nonce after approval but before swap  -----> ", nonce);
 
-      // setTimeout(() => console.log("Waiting..."), 60000);
-
-      // nonce = await web3.eth.getTransactionCount(from, 'pending');
-
-      
       const swapResponse = await axiosInstance.post('dex/swap', swapParams);
 
       const swapTxData = swapResponse?.data?.data;
@@ -143,16 +123,13 @@ module.exports = {
       const swapSignedTx = await web3.eth.accounts.signTransaction(swapTxObject, privateKey);
       nonce = await web3.eth.getTransactionCount(from, 'pending');
 
-      // setTimeout(async () =>
-        await batch.add(web3.eth.sendSignedTransaction.request(swapSignedTx.rawTransaction, (err, data) => {
-          if (err) {
-            console.error('Error executing swap transaction:', err);
-          } else {
-            console.log('Swap transaction successful:', data);
-          }
-        }))
-      //   , 60000
-      // )
+      await batch.add(web3.eth.sendSignedTransaction.request(swapSignedTx.rawTransaction, (err, data) => {
+        if (err) {
+          console.error('Error executing swap transaction:', err);
+        } else {
+          console.log('Swap transaction successful:', data);
+        }
+      }))
 
       // setTimeout(() => console.log("Waiting..."), 20000);
 
@@ -193,11 +170,8 @@ module.exports = {
       //   }));
       // }
 
-      // setTimeout(async () =>
-        await batch.execute()
-        // , 20000)
+      await batch.execute()
 
-      // batchRequest([approveTxObject, swapTxObject], privateKey, from);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
     }
