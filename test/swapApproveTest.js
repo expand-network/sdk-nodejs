@@ -1,6 +1,6 @@
 const Web3 = require('web3');
-const erc20ABI = require('./WETHERC20.json');
-const uniswapRouterABI = require('./UniswapRouterV2.json');
+const erc20ABI = require('../assets/abis/WETHERC20.json');
+const uniswapRouterABI = require('../assets/abis/UniswapRouterV2.json');
 const { batchRequest } = require('../src/batchRequest')
 const SEPOLIA_RPC_URL = "https://aged-bold-general.quiknode.pro/aca755115e18fb7c58c55a9e7c1af78e55e9cde2/"
 const WETH_CONTRACT_ADDRESS = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"

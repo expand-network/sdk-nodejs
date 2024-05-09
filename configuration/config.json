@@ -406,7 +406,7 @@
             "chainName": "Ethereum",
             "chainId": "5",
             "chainSymbol": "EVM",
-            "routerAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
+            "routerAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
         },
         "1402": {
             "localName": "BalancerV2Testnet",
@@ -423,7 +423,7 @@
             "chainId": "1",
             "chainSymbol": "EVM",
             "routerAddress": "0xe64608E223433E8a03a1DaaeFD8Cb638C14B552C",
-            "ethAddress": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "ethAddress": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
         },
         "1900": {
             "localName": "UniswapX",
@@ -476,13 +476,5 @@
                 "action": "dYdX Chain Onboarding"
             }
         }
-    },
-    "contract_address": {
-        "UNISWAPV2": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
-        "WETH": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
-        "DAI": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
-    },
-    "rpc_url": {
-        "sepolia": "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5"
     }
 }
