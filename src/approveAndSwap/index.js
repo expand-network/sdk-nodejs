@@ -17,7 +17,13 @@ async function initializeAxios(xAPIKey) {
 module.exports = {
   approveAndSwap: async (options) => {
     const { privateKey, xApiKey, chainId, from, path, gas, amountIn, dexId } = options;
-    const spender = config['dexes'][dexId].routerAddress
+    const spender = config['dexes'][dexId]?.routerAddress
+    console.log("Spender ---", spender)
+
+    if (parseInt(dexId) === 1900 || parseInt(dexId) === 1901)
+      throw new Error('unsuppoerted dex');
+    else if (!spender)
+      throw new Error('Invalid dex');
 
     let swapParams = options
 
