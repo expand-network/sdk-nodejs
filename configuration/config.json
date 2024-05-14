@@ -361,6 +361,25 @@
             "routerAddress": "0xe64608E223433E8a03a1DaaeFD8Cb638C14B552C",
             "ethAddress": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
         },
+        "2100": {
+            "localName": "TraderJoe",
+            "dexName": "TraderJoe",
+            "chainName": "Avalanche",
+            "chainId": "43114",
+            "chainSymbol": "AVAX",
+            "quoterAddress": "0xd76019A16606FDa4651f636D9751f500Ed776250",
+            "routerAddress": "0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30",
+            "factoryAddress": "0x8e42f2F4101563bF679975178e880FD87d3eFd4e"
+        },
+        "2101": {
+            "localName": "TraderJoeTestNet",
+            "dexName": "TraderJoe",
+            "chainName": "Avalanche",
+            "chainId": "43113",
+            "chainSymbol": "TAVAX",
+            "routerAddress": "0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30",
+            "factoryAddress": "0x8e42f2F4101563bF679975178e880FD87d3eFd4e"
+        },
         "1900": {
             "localName": "UniswapX",
             "dexName": "UniswapX",
