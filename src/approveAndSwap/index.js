@@ -66,6 +66,7 @@ module.exports = {
       console.log("Allowance --", allowance)
       let approvalResponse = null
       let updateAllowance = 0
+      let approveFlag = false
       if (allowance < amountIn) {
         approvalResponse = await axiosInstance.post('fungibletoken/approve', {
           from,
@@ -75,6 +76,7 @@ module.exports = {
           gas,
           chainId,
         })
+        approveFlag = true
       } else {
         updateAllowance = parseInt(allowance) - parseInt(amountIn)
       }
@@ -122,7 +124,7 @@ module.exports = {
         value: swapTxData.value,
         gas: swapTxData.gas,
         data: swapTxData.data,
-        nonce: nonce + 1
+        nonce: approveFlag ? nonce + 1 : nonce
       }
 
       console.log("SwapTXobject --", swapTxObject)
@@ -136,7 +138,7 @@ module.exports = {
           console.log('Swap transaction successful:', data)
         }
       }))
-      
+
       await batch.execute()
 
     } catch (error) {
