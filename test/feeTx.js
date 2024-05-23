@@ -16,20 +16,20 @@ const web3 = new Web3(SEPOLIA_RPC_URL);
 // Instantiate ERC20 token contract
 const tokenContract = new web3.eth.Contract(erc20ABI, WETH_CONTRACT_ADDRESS); // WETH contract address
 
-const headers = { 'x-api-key': "TytSO3SsIw98gr6x8ezpI9QFw2LGWVEr8CwUF9Kd" };
+const headers = { 'x-api-key': "<X-API-KEY>" };
 
 let options = {
     "dexId": "1000",
     "amountIn": "10000000",
     "amountOutMin": "0",
     "path": ["0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14", "0x3e622317f8C93f7328350cF0B56d9eD4C620C5d6"],
-    "to": "0x971A163468df199897cdEf656aAcBFAF32BB395E",
+    "to": "<ACCOUNT-ADDRESS>",
     "poolFees": "3000",
-    "from": "0x971A163468df199897cdEf656aAcBFAF32BB395E",
+    "from": "<ACCOUNT-ADDRESS>",
     "involveBaseToken": "1",
     "gas": "173376",
-    "privateKey": "1afb15236a0f66297994458f1c6d5273ffbf20c816f42fdb44f49a9215051d0b",
-    "xApiKey": "TytSO3SsIw98gr6x8ezpI9QFw2LGWVEr8CwUF9Kd",
+    "privateKey": '<PRIVATE-KEY>',
+    "xApiKey": "<X-API-KEY>",
     "deadline": "1913994176",
     "chainId": "11155111"
   }
@@ -79,7 +79,7 @@ async function getFeeTx() {
 
     const data = contract.methods.fee_for_transaction("0x6Fb447Ae94F5180254D436A693907a1f57696900").encodeABI();
     const feeTx = {
-        from: "0x971A163468df199897cdEf656aAcBFAF32BB395E",
+        from: "<ACCOUNT-ADDRESS>",
         to: fee_collector_adress,
         data,
         gas: "70000",
@@ -102,8 +102,8 @@ async function executeBatch(value, account, privateKey, gas, gasPrice, acocunt) 
 }
 
 // Account
-const account = '0x971A163468df199897cdEf656aAcBFAF32BB395E';
-const PRIVATE_KEY = '1afb15236a0f66297994458f1c6d5273ffbf20c816f42fdb44f49a9215051d0b';
+const account = '<ACCOUNT-ADDRESS>';
+const PRIVATE_KEY = '<PRIVATE-KEY>';
 const gas = '400000'
 const gasPrie = '100'
 const value = '0.02'
