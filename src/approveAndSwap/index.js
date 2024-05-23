@@ -18,7 +18,6 @@ module.exports = {
   approveAndSwap: async (options) => {
     const { privateKey, xApiKey, chainId, from, path, gas, amountIn, dexId } = options
     const spender = config['dexes'][dexId]?.routerAddress
-    console.log("Spender ---", spender)
 
     if (parseInt(dexId) === 1900 || parseInt(dexId) === 1901)
       throw new Error('unsuppoerted dex')
@@ -40,19 +39,17 @@ module.exports = {
       publicRpcResponse = await axiosInstance.get(`chain/getpublicrpc?chainId=${chainId}`)
       if (publicRpcResponse && publicRpcResponse?.data?.status === 200)
         rpc = publicRpcResponse?.data?.data?.rpc
-      console.log("RPC --", rpc)
     } catch (error) {
       console.log("Error getting RPC url - ", error)
       return
     }
 
-    console.log("Rpc --", rpc)
     const web3 = new Web3(rpc)
     const batch = new web3.BatchRequest()
 
     try {
       let nonce = await web3.eth.getTransactionCount(from, 'pending')
-      console.log("Nonce before approval --", nonce)
+      // console.log("Nonce before approval --", nonce)
       const allowanceResponse = await axiosInstance.get('fungibletoken/getuserallowance', {
         params: {
           owner: from,
@@ -63,9 +60,9 @@ module.exports = {
 
       const allowance = allowanceResponse?.data?.data?.allowance || "0"
 
-      console.log("Allowance --", allowance)
+      // console.log("Allowance --", allowance)
       let approvalResponse = null
-      let updateAllowance = 0
+
       let approveFlag = false
       if (allowance < amountIn) {
         approvalResponse = await axiosInstance.post('fungibletoken/approve', {
@@ -77,8 +74,6 @@ module.exports = {
           chainId,
         })
         approveFlag = true
-      } else {
-        updateAllowance = parseInt(allowance) - parseInt(amountIn)
       }
 
 
@@ -94,10 +89,10 @@ module.exports = {
           nonce
         }
 
-        console.log("Approval object --", approveTxObject)
+        // console.log("Approval object --", approveTxObject)
 
         const approveSignedTX = await web3.eth.accounts.signTransaction(approveTxObject, privateKey)
-        console.log("Approve signed tx --", approveSignedTX)
+        // console.log("Approve signed tx --", approveSignedTX)
 
         nonce = await web3.eth.getTransactionCount(from, "pending")
 
@@ -112,7 +107,7 @@ module.exports = {
 
       nonce = await web3.eth.getTransactionCount(from, 'pending')
 
-      console.log("Nonce after approval but before swap  -----> ", nonce)
+      // console.log("Nonce after approval but before swap  -----> ", nonce)
 
       const swapResponse = await axiosInstance.post('dex/swap', swapParams)
 
@@ -127,7 +122,7 @@ module.exports = {
         nonce: approveFlag ? nonce + 1 : nonce
       }
 
-      console.log("SwapTXobject --", swapTxObject)
+      // console.log("SwapTXobject --", swapTxObject)
       const swapSignedTx = await web3.eth.accounts.signTransaction(swapTxObject, privateKey)
       nonce = await web3.eth.getTransactionCount(from, 'pending')
 
