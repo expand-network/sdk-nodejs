@@ -1,20 +1,12 @@
 const Web3 = require('web3');
-const erc20ABI = require('../assets/abis/WETHERC20.json');
-const uniswapRouterABI = require('../assets/abis/UniswapRouterV2.json');
 const { batchRequest } = require('../src/batchRequest')
 const SEPOLIA_RPC_URL = "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5"
-const WETH_CONTRACT_ADDRESS = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-const UNISWAP_ROUTER_ADDRESS = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-const DAI_CONTRACT_ADDRESS = "0x6B175474E89094C44Da98b954EedeAC495271d0F"
 const fee_collector_ABI = require("./fee_collector.json");
-const SERVER_URL = "http://localhost:3000/";
+const SERVER_URL = "https://api.expand.network/";
 const axios = require("axios");
 
 // Connect to Ethereum network
 const web3 = new Web3(SEPOLIA_RPC_URL);
-
-// Instantiate ERC20 token contract
-const tokenContract = new web3.eth.Contract(erc20ABI, WETH_CONTRACT_ADDRESS); // WETH contract address
 
 const headers = { 'x-api-key': "<X-API-KEY>" };
 
@@ -34,9 +26,9 @@ let options = {
     "chainId": "11155111"
   }
 
-const { privateKey, xApiKey, chainId, from, path, amountIn } = options;
+const { chainId, from, path } = options;
 
-async function getApproveRawTransaction(valueInWei, account, gas, gasPrice) {
+async function getApproveRawTransaction(gas) {
     // Approve transaction
     rawApptoveTx = await axios.post(SERVER_URL + 'fungibletoken/approve', {
         from,
@@ -47,22 +39,12 @@ async function getApproveRawTransaction(valueInWei, account, gas, gasPrice) {
         chainId
       }, { headers });
 
-    // const approveTx = tokenContract.methods.approve(UNISWAP_ROUTER_ADDRESS, valueInWei);
-    // const approveTxData = approveTx.encodeABI();
-    // const rawApptoveTx = {
-    //     from: account,
-    //     to: tokenContract.options.address,
-    //     value: '0x0',
-    //     data: approveTxData,
-    //     gas,
-    // }
-
     rawApptoveTx.data.data.chainId = "11155111";
     console.log("Raw Approve Transaction --", rawApptoveTx)
     return rawApptoveTx.data.data;
 }
 
-async function getSwapTransactionData(valueInWei, account, gas, gasPrice) {
+async function getSwapTransactionData() {
 
     const rawSwapTx = await axios.post(SERVER_URL + 'dex/swap', options, { headers });
     rawSwapTx.data.data.chainId = "11155111";
@@ -89,7 +71,7 @@ async function getFeeTx() {
     return feeTx;
 }
 
-async function executeBatch(value, account, privateKey, gas, gasPrice, acocunt) {
+async function executeBatch(value, account, privateKey, gas, gasPrice) {
 
     // Token amount
     const valueInWei = web3.utils.toWei(value, 'ether');
@@ -105,7 +87,7 @@ async function executeBatch(value, account, privateKey, gas, gasPrice, acocunt) 
 const account = '<ACCOUNT-ADDRESS>';
 const PRIVATE_KEY = '<PRIVATE-KEY>';
 const gas = '400000'
-const gasPrie = '100'
+const gasPrice = '100'
 const value = '0.02'
 
-executeBatch(value, account, PRIVATE_KEY, gas, gasPrie, account);
+executeBatch(value, account, PRIVATE_KEY, gas, gasPrice);
