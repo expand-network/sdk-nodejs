@@ -282,24 +282,150 @@
     },
     "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl" : "https://api.expand.network"
+        "apiurl": "https://api.expand.network"
     },
-
     "dexes": {
+        "1000": {
+            "localName": "UniswapV2",
+            "dexName": "UniswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "factoryAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+        },
+        "1100": {
+            "localName": "SushiswapV2",
+            "dexName": "SushiswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
+            "factoryAddress": "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"
+        },
+        "1200": {
+            "localName": "PancakeV2",
+            "dexName": "PancakeV2",
+            "chainName": "BSC",
+            "chainId": "56",
+            "chainSymbol": "EVM",
+            "routerAddress": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+            "factoryAddress": "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
+        },
+        "1201": {
+            "localName": "PancakeV2Testnet",
+            "dexName": "PancakeV2",
+            "chainName": "BSC",
+            "chainId": "97",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xD99D1c33F9fC3444f8101754aBC46c52416550D1",
+            "factoryAddress": "0x6725F303b657a9451d8BA641348b6761A6CC7a17"
+        },
+        "1300": {
+            "localName": "UniswapV3",
+            "dexName": "UniswapV3",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "swapAddress": "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45",
+            "routerAddress": "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6",
+            "positionManager": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+            "factoryAddress": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+        },
+        "1305": {
+            "localName": "UniswapV3",
+            "dexName": "UniswapV3",
+            "chainName": "Avalanche",
+            "chainId": "43114",
+            "chainSymbol": "AVAX",
+            "swapAddress": "0xbb00FF08d01D300023C629E8fFfFcb65A5a578cE",
+            "routerAddress": "0xbe0F5544EC67e9B3b2D979aaA43f18Fd87E6257F",
+            "positionManager": "0x655C406EBFa14EE2006250925e54ec43AD184f8B",
+            "factoryAddress": "0x740b1c1de25031C31FF4fC9A62f554A55cdC1baD"
+        },
+        "1306": {
+            "localName": "UniswapV3Binance",
+            "dexName": "UniswapV3",
+            "chainName": "Binance",
+            "chainId": "56",
+            "chainSymbol": "BSC",
+            "swapAddress": "0xB971eF87ede563556b2ED4b1C0b0019111Dd85d2",
+            "routerAddress": "0x78D78E420Da98ad378D7799bE8f4AF69033EB077",
+            "positionManager": "0x7b8A01B39D58278b5DE7e48c8449c9f4F5170613",
+            "factoryAddress": "0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7"
+        },
+        "1307": {
+            "localName": "UniswapV3",
+            "dexName": "UniswapV3",
+            "chainName": "Polygon",
+            "chainId": "137",
+            "chainSymbol": "MATIC",
+            "swapAddress": "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45",
+            "routerAddress": "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6",
+            "positionManager": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+            "factoryAddress": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+        },
+        "1400": {
+            "localName": "BalancerV2",
+            "dexName": "BalancerV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+        },
+        "1402": {
+            "localName": "BalancerV2Testnet",
+            "dexName": "BalancerV2",
+            "chainName": "Ethereum",
+            "chainId": "11155111",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+        },
+        "1500": {
+            "localName": "CurveV2",
+            "dexName": "CurveV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xe64608E223433E8a03a1DaaeFD8Cb638C14B552C",
+            "ethAddress": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "2100": {
+            "localName": "TraderJoe",
+            "dexName": "TraderJoe",
+            "chainName": "Avalanche",
+            "chainId": "43114",
+            "chainSymbol": "AVAX",
+            "quoterAddress": "0xd76019A16606FDa4651f636D9751f500Ed776250",
+            "routerAddress": "0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30",
+            "factoryAddress": "0x8e42f2F4101563bF679975178e880FD87d3eFd4e"
+        },
+        "2101": {
+            "localName": "TraderJoeTestNet",
+            "dexName": "TraderJoe",
+            "chainName": "Avalanche",
+            "chainId": "43113",
+            "chainSymbol": "TAVAX",
+            "routerAddress": "0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30",
+            "factoryAddress": "0x8e42f2F4101563bF679975178e880FD87d3eFd4e"
+        },
         "1900": {
             "localName": "UniswapX",
             "dexName": "UniswapX",
             "chainName": "Ethereum",
-            "chainId": "1"
+            "chainId": "1",
+            "routerAddress": "0x6000da47483062A0D734Ba3dc7576Ce6A0B645C4",
+            "permit2Address": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
         },
         "1901": {
             "localName": "UniswapXTestnet",
             "dexName": "UniswapX",
             "chainName": "Ethereum",
-            "chainId": "5"
+            "chainId": "5",
+            "routerAddress": "0x6000da47483062A0D734Ba3dc7576Ce6A0B645C4",
+            "permit2Address": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
         }
     },
-    
     "dYdXV4": {
         "chainId": "dydx-testnet-4",
         "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
