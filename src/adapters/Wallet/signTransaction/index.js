@@ -58,4 +58,10 @@ exports.signTransactionStarkNet = async (web3, transactionObject, options) => {
     return rawData;
 };
 
+exports.signVersionedTransactionSolana = async (web3, transactionObject, options) => {
+
+    const rawData = await Solana.signVersionedTransactionSolana(web3, transactionObject, options);
+    return rawData;
+};
+
 

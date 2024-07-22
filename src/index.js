@@ -1,6 +1,7 @@
 const axios = require('axios').default;
 const config = require('../configuration/config.json');
 const schemaValidator = require('../configuration/schemaValidator');
+const { WalletStellar } = require('./adapters/WalletStellar');
 const { Wallet, WalletFordefi, WalletDFNS, WalletTON, WalletFireblocks, WalletPhantom, WalletCoinbase, WalletCircle } = require('./interfaces/index');
 
 exports.prepareTransaction = async (apiURL, options) => {
@@ -13,6 +14,7 @@ exports.prepareTransaction = async (apiURL, options) => {
         return (validJson);
     }
 
+    const { chainId, xApiKey } = filterOptions;
     try {
 
         const paramConfig = {
@@ -20,13 +22,13 @@ exports.prepareTransaction = async (apiURL, options) => {
             url: apiURL,
             data: filterOptions,
             headers: {
-                "x-api-key": filterOptions.xApiKey
+                "x-api-key": xApiKey
             }
 
         };
 
         const response = await axios(paramConfig).then(result => result.data);
-        response.data.chainId = filterOptions.chainId;
+        if (chainId) response.data.chainId = chainId;
         return response.data;
 
     }
@@ -87,6 +89,8 @@ exports.WalletTON = WalletTON;
 exports.WalletFireblocks = WalletFireblocks;
 
 exports.WalletCircle = WalletCircle;
+
+exports.WalletStellar = WalletStellar;
 
 
 

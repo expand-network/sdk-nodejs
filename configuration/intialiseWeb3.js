@@ -95,7 +95,10 @@ exports.initialiseWeb3 = async (data) => {
             endpoint: rpc,
             apiKey: config.chains[chainId].apiKey
         });
+    } else if (chainName === 'Stellar') {
+        web3 = new Horizon.Server(rpc);
     }
+
 
     return (web3);
 

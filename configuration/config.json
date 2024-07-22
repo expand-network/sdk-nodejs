@@ -25,6 +25,11 @@
             "chainName": "Evm",
             "chainSymbol": "TETHKVN"
         },
+        "17000": {
+            "localName": "EthereumTestnetHolesky",
+            "chainName": "Evm",
+            "chainSymbol": "TETHHSKY"
+        },
         "56": {
             "localName": "BinanceSmartChain",
             "chainName": "Evm",
@@ -84,6 +89,16 @@
             "localName": "FantomTestnet",
             "chainName": "Evm",
             "chainSymbol": "TFTM"
+        },
+        "324": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "ZKS"
+        },
+        "300": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "TZKS"
         },
         "900": {
             "localName": "Solana",
@@ -167,7 +182,7 @@
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
         },
-        "300": {
+        "400": {
             "localName": "StarkNet",
             "chainName": "StarkNet",
             "chainSymbol": "STRK",
@@ -177,7 +192,7 @@
             "domain": "infura.io",
             "sslMateId": "4054117900"
         },
-        "301": {
+        "401": {
             "localName": "StarkNetTestnet",
             "chainName": "StarkNet",
             "chainSymbol": "TSTRK",
@@ -242,6 +257,20 @@
             "rpc": "https://sepolia.optimism.io",
             "publicRpc": "https://sepolia.optimism.io",
             "domain": "optimism.io"
+        },
+        "1500": {
+            "localName": "Stellar",
+            "chainName": "Stellar",
+            "chainSymbol": "XLM",
+            "rpc": "https://horizon.stellar.org",
+            "networkPassphrase": "Public Global Stellar Network ; September 2015"
+        },
+        "1501": {
+            "localName": "StellarTestnet",
+            "chainName": "Stellar",
+            "chainSymbol": "TXLM",
+            "networkPassphrase": "Test SDF Network ; September 2015",
+            "rpc": "https://horizon-testnet.stellar.org"
         }
     },
     "fireblocks": {

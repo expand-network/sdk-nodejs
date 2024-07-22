@@ -16,8 +16,7 @@ class WalletPhantom {
     signTransaction = async (transactionObject) => {
 
         const configuration = { "params": {} };
-        const transactionOptions = transactionObject;
-        transactionOptions.function = "transactionObject()";
+        transactionObject.function = "txObjectSol()";
         const validObject = await schemaValidator.validateInput(transactionObject);
 
         if (!validObject.valid) {
@@ -41,12 +40,46 @@ class WalletPhantom {
         let rpc = await axios.get(apiURL, configuration);
         rpc = rpc.data.data.rpc;
         const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
-        transactionOptions.value = new BN(transactionOptions.value);
-
 
         const options = {};
         options.privateKey = this.privateKey;
         const rawData = await rawTransaction[`signTransaction${chainName}`](web3, transactionObject, options);
+        rawData.chainId = chainId;
+
+        return rawData;
+    };
+
+    signVersionedTransaction = async (transactionObject) => {
+
+        const configuration = { "params": {} };
+        transactionObject.function = "txObjectSol()";
+        const validObject = await schemaValidator.validateInput(transactionObject);
+
+        if (!validObject.valid) {
+            return (validObject);
+        }
+
+        axios.defaults.headers['X-API-KEY'] = this.xApiKey;
+        const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
+
+        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+
+        let chainName = config.chains[chainId].chainName;
+
+        if (chainName !== "Solana")
+            return new Error("chain not Supported");
+
+        configuration.params = {
+            chainId
+        };
+
+        let rpc = await axios.get(apiURL, configuration);
+        rpc = rpc.data.data.rpc;
+        const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
+
+        const options = {};
+        options.privateKey = this.privateKey;
+        const rawData = await rawTransaction[`signVersionedTransaction${chainName}`](web3, transactionObject, options);
         rawData.chainId = chainId;
 
         return rawData;
