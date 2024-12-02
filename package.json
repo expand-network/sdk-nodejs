@@ -2,7 +2,8 @@
   "name": "expand-network",
   "version": "3.2.4",
   "description": "The external SDK for the adapter",
-  "main": "src/index.js",
+  "main": "src/index.ts",
+  "type": "module",
   "parserOptions": {
     "ecmaVersion": 2018
   },
@@ -58,7 +59,7 @@
     "near-api-js": "4.0.2",
     "rpc-websockets": "7.5.1",
     "starknet": "5.24.3",
-    "stellar-sdk": "^11.2.2",
+    "stellar-sdk": "^12.3.0",
     "ton-crypto": "3.2.0",
     "tronweb": "5.3.1",
     "tweetnacl": "1.0.3",
@@ -67,10 +68,13 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
+    "@types/node": "^22.10.1",
     "eslint": "8.56.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
-    "jest": "29.7.0"
+    "jest": "29.7.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.1.6"
   }
 }

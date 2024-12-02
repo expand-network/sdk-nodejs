@@ -1,5 +1,21 @@
+type ChainConfig = {
+    localName: string;
+    chainName: string;
+    chainSymbol: string;
+    rpc?: string;
+    publicRpc?: string;
+    aptosCoin?: string;
+    nativeEthAddress?: string;
+    domain?: string;
+    sslMateId?: string;
+    apiKey?: string;
+  };
+  
+  type Config = {
+    chains: Record<string, ChainConfig>;
+  };
 
-{
+const config: Config = {
     "chains": {
         "1": {
             "localName": "Ethereum",
@@ -418,5 +434,7 @@
             }
         }
     }
-}
+};
+
+export default config;
 
