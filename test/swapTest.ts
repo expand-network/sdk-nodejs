@@ -5,7 +5,7 @@ async function swap() {
   dotenv.config();
 
   const xApiKey = "tK503cR23o8YTvXhNoDNo7kQf5sQdbXP8qbqkBeQ";
-  const privateKey = "<privateKey>";
+  const privateKey = "<private-key>";
 
   const wallet = new Wallet({ privateKey , xApiKey });
   

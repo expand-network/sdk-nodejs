@@ -1,9 +1,9 @@
 import axios from 'axios';
 import BN from 'bn.js';
-import  rawTransaction from './signTransaction/index';
+import * as rawTransaction from './signTransaction/index';
 import  config from '../../../configuration/config.json';
-import  { getChainId } from '../../../configuration/common';
-import  {schemaValidator} from '../../../configuration/schemaValidator';
+import * as common  from '../../../configuration/common';
+import * as  schemaValidator  from '../../../configuration/schemaValidator';
 import  {initialiseWeb3} from '../../../configuration/intialiseWeb3';
 import { ethers } from 'ethers-5';
 
@@ -28,7 +28,7 @@ class Wallet {
         axios.defaults.headers['X-API-KEY'] = this.xApiKey;
         const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
 
-        const chainId = await getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
 
 
         configuration.params = {
@@ -66,7 +66,7 @@ class Wallet {
         axios.defaults.headers['X-API-KEY'] = this.xApiKey;
         const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
 
-        const chainId = await getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
 
         let chainName = config.chains[chainId].chainName;
 
@@ -189,5 +189,5 @@ class Wallet {
     };
 }
 
-export default { Wallet };
+export { Wallet };
 

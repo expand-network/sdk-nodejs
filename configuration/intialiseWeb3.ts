@@ -8,11 +8,11 @@ import { AptosClient } from "aptos";
 import { TonClient } from "@ton/ton";
 import { StargateClient } from "@cosmjs/stargate";
 import StellarSdk from "stellar-sdk";
-import { getChainId } from "./common";
+import * as common  from "./common";
 import config from "./config.json";
 import errorMessage from "./errorMessage.json";
 
-const server = new StellarSdk.Server("https://horizon.stellar.org");
+import { Server } from "stellar-sdk";
 
 const invalidChainId = {
   error: errorMessage.error.message.invalidChainId,
@@ -20,7 +20,7 @@ const invalidChainId = {
 };
 
 export const initialiseWeb3 = async (data: any) => {
-  const chainId = await getChainId({
+  const chainId = await common.getChainId({
     chainId: data.chainId,
     chainSymbol: data.chainSymbol
   });
