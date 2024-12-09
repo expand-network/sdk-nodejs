@@ -12,7 +12,7 @@ interface Options {
     privateKey: string;
 }
 
-export const signTransactionEvm = async (
+ const signTransactionEvm = async (
     web3: Web3,
     transactionObject: TransactionObject,
     options: Options
@@ -29,3 +29,6 @@ export const signTransactionEvm = async (
         throw new Error('Transaction signing failed');
     }
 };
+
+
+export default { signTransactionEvm }; 

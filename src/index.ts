@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as config from "../configuration/config";
+import * as config from "../configuration/config.json";
 import * as schemaValidator from "../configuration/schemaValidator";
 import {
   Wallet,
@@ -13,9 +13,9 @@ import {
   WalletCosmos,
   WalletStellar,
   WalletXRPL,
-} from "./interfaces/index.ts";
+} from "./interfaces/index";
 
-export const prepareTransaction = async (apiURL, options) => {
+export const prepareTransaction = async (apiURL:any, options:any) => {
   const filterOptions = options;
   filterOptions.function = "prepareTransaction()";
   const validJson = await schemaValidator.validateInput(filterOptions);
@@ -43,10 +43,10 @@ export const prepareTransaction = async (apiURL, options) => {
   }
 };
 
-export const decodeTransaction = async (options) => {
+export const decodeTransaction = async (options:any) => {
   const filterOptions = options;
   filterOptions.function = "decodeTransaction()";
-  const validJson = await validateInput(options);
+  const validJson = await schemaValidator.validateInput(options);
 
   if (!validJson.valid) {
     return validJson;

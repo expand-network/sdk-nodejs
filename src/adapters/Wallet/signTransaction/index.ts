@@ -1,5 +1,5 @@
 // import Algorand from './Algorand';
-import { signTransactionEvm } from './Ethereum';
+import  Ethereum   from './Ethereum';
 // import Near from './Near';
 // import Solana from './Solana';
 // import Tron from './Tron';
@@ -14,8 +14,8 @@ import { signTransactionEvm } from './Ethereum';
 
 // };
 
-export const signTransactionEvm = async (web3: any, transactionObject: any, options: any) => {
-    const signedTransaction = await web3.eth.accounts.signTransaction(transactionObject, options.privateKey);
+const signTransactionEvm = async (web3: any, transactionObject: any, options: any) => {
+    const signedTransaction = await Ethereum.signTransactionEvm(web3, transactionObject, options.privateKey);
     return signedTransaction;
 };
 

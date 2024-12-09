@@ -9,10 +9,20 @@ type ChainConfig = {
     domain?: string;
     sslMateId?: string;
     apiKey?: string;
+    url?: string;
+    networkPassphrase?: string;
+    gasPrice?: string;
+    network?: string;
   };
+
+  type FireblocksConfig = {
+    baseUrl?:string;
+    createTransaction?: string;
+  }
   
   type Config = {
     chains: Record<string, ChainConfig>;
+    fireblocks : Record<string, FireblocksConfig>;
   };
 
 const config: Config = {
