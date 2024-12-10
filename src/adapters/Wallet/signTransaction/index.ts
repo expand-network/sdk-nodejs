@@ -1,9 +1,9 @@
  import * as Algorand from './Algorand';
 import  Ethereum   from './Ethereum';
-// import Near from './Near';
+ import * as Near from './Near';
  import * as Solana from './Solana';
 // import Tron from './Tron';
-// import Sui from './Sui';
+ import * as Sui from './Sui';
 // import Aptos from './Aptos';
 // import StarkNet from './Starknet';
 
@@ -21,12 +21,12 @@ const signTransactionEvm:any = async (web3: any, transactionObject: any, options
 
 
 
-// exports.signTransactionNear = async (web3, transactionObject, options) => {
+const signTransactionNear = async (web3:any, transactionObject:any , options:any) => {
 
-//     const rawData = await Near.signTransactionNear(web3, transactionObject, options);
-//     return rawData;
+    const rawData = await Near.signTransactionNear(web3, transactionObject, options);
+    return rawData;
 
-// };
+};
 
 // exports.signTransactionTron = async (web3, transactionObject, options) => {
 
@@ -40,11 +40,11 @@ const signTransactionSolana:any = async (web3:any, transactionObject:any, option
     return rawData;
 };
 
-// exports.signTransactionSui = async (web3, transactionObject, options) => {
+const signTransactionSui = async (web3:any, transactionObject:any, options:any) => {
 
-//     const rawData = await Sui.signTransactionSui(web3, transactionObject, options);
-//     return rawData;
-// };
+    const rawData = await Sui.signTransactionSui(web3, transactionObject, options);
+    return rawData;
+};
 
 
 // exports.signTransactionAptos = async (web3, transactionObject, options) => {
@@ -66,4 +66,4 @@ const signVersionedTransactionSolana = async (web3:any, transactionObject:any, o
 };
 
 
-export  {signTransactionEvm, signTransactionSolana, signVersionedTransactionSolana, signTransactionAlgorand};
+export  {signTransactionEvm, signTransactionSolana, signVersionedTransactionSolana, signTransactionAlgorand, signTransactionNear, signTransactionSui};
