@@ -1,37 +1,67 @@
 import axios from 'axios';
-import * as  sign  from 'jsonwebtoken';
-import * as uuid  from 'uuid';
+import * as jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
-import * as config from '../../../configuration/config.json';
+import config from '../../../configuration/config.json';
 import * as common from '../../../configuration/common';
 import * as schemaValidator from '../../../configuration/schemaValidator';
 
-class WalletFireblocks {
+interface WalletFireblocksOptions {
+    baseUrl?: string;
+    apiSecret: string;
+    apiKey: string;
+}
 
-    constructor(options) {
-        this.baseUrl = options.baseUrl ? (options.baseUrl) : config.fireblocks.baseUrl;
+interface TransactionObject {
+    chainId: string;
+    chainSymbol: string;
+    from: string;
+    to: string;
+    value?: number;
+    assetId?: string;
+    assetDecimals?: number;
+    note?: string;
+    data?: string;
+    internal?: boolean;
+}
+
+interface RawTransaction {
+    jwt: string;
+    path: string;
+    data: any;
+    method: string;
+}
+
+class WalletFireblocks {
+    private baseUrl: string;
+    private apiSecret: string;
+    private apiKey: string;
+
+    constructor(options: WalletFireblocksOptions) {
+        this.baseUrl = options.baseUrl || config.fireblocks.baseUrl;
         this.apiSecret = options.apiSecret;
         this.apiKey = options.apiKey;
     }
 
-    jwtSign(path, data) {
-        const token = sign({
-            uri: path,
-            nonce: uuid(),
-            iat: Math.floor(Date.now() / 1000),
-            exp: Math.floor(Date.now() / 1000) + 55,
-            sub: this.apiKey,
-            bodyHash: crypto.createHash("sha256").update(JSON.stringify(data || "")).digest().toString("hex")
-        }, this.apiSecret, { algorithm: "RS256" });
+    private jwtSign(path: string, data: any): string {
+        const token = jwt.sign(
+            {
+                uri: path,
+                nonce: uuidv4(),
+                iat: Math.floor(Date.now() / 1000),
+                exp: Math.floor(Date.now() / 1000) + 55,
+                sub: this.apiKey,
+                bodyHash: crypto.createHash('sha256').update(JSON.stringify(data || '')).digest().toString('hex'),
+            },
+            this.apiSecret,
+            { algorithm: 'RS256' }
+        );
         return token;
     }
 
-
-    signTransaction = async (transactionObject) => {
+    public signTransaction = async (transactionObject: TransactionObject): Promise<RawTransaction | any> => {
         try {
-
-            const configuration = { "params": {} };
-            transactionObject.function = "FireblockSign()";
+            transactionObject.function = 'FireblockSign()';
             const validJson = await schemaValidator.validateInput(transactionObject);
 
             if (!validJson.valid) {
@@ -39,90 +69,80 @@ class WalletFireblocks {
             }
 
             const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
-            let chainName = config.chains[chainId].chainName;
+            const chainName = config.chains[chainId].chainName;
 
-            const txData = {}
-            txData.operation = (transactionObject.data) ? "CONTRACT_CALL" : "TRANSFER",
-                txData.source = {
-                    "type": "VAULT_ACCOUNT",
-                    "id": transactionObject.from
+            const txData: any = {
+                operation: transactionObject.data ? 'CONTRACT_CALL' : 'TRANSFER',
+                source: {
+                    type: 'VAULT_ACCOUNT',
+                    id: transactionObject.from,
+                },
+            };
+
+            if (transactionObject.internal) {
+                txData.destination = {
+                    type: 'VAULT_ACCOUNT',
+                    id: transactionObject.to,
                 };
-
-            if (transactionObject.internal === true) {
+            } else {
                 txData.destination = {
-                    "type": "VAULT_ACCOUNT",
-                    "id": transactionObject.to
-                }
-
+                    type: 'ONE_TIME_ADDRESS',
+                    oneTimeAddress: {
+                        address: transactionObject.to,
+                    },
+                };
             }
-            else {
-                txData.destination = {
-                    "type": "ONE_TIME_ADDRESS",
-                    "oneTimeAddress": {
-                        "address": transactionObject.to
-                    }
-                }
-            }
-            const assetDecimals = (transactionObject.assetDecimals) ? (transactionObject.assetDecimals) : 18;
-            txData.assetId = (transactionObject.assetId) ? (transactionObject.assetId) : "ETH_TEST3";
-            txData.amount = (transactionObject.value) ? (transactionObject.value) / 10 ** assetDecimals : '0',
-                txData.note = (transactionObject.note) ? (transactionObject.note) : "expand"
 
+            const assetDecimals = transactionObject.assetDecimals || 18;
+            txData.assetId = transactionObject.assetId || 'ETH_TEST3';
+            txData.amount = transactionObject.value ? transactionObject.value / 10 ** assetDecimals : '0';
+            txData.note = transactionObject.note || 'expand';
 
             if (transactionObject.data) {
                 txData.extraParameters = {
-                    "contractCallData": transactionObject.data
-                }
+                    contractCallData: transactionObject.data,
+                };
             }
-            const signature = this.jwtSign("/v1/transactions", txData);
-            const rawTx = {
-                "jwt": signature,
-                "path": config.fireblocks.createTransaction,
-                "data": txData,
-                "method": "POST"
-            }
-            return rawTx;
 
+            const signature = this.jwtSign('/v1/transactions', txData);
+            const rawTx: RawTransaction = {
+                jwt: signature,
+                path: config.fireblocks.createTransaction,
+                data: txData,
+                method: 'POST',
+            };
+
+            return rawTx;
         } catch (error) {
             return error;
         }
-    }
+    };
 
-    sendTransaction = async (rawTx) => {
-
-
+    public sendTransaction = async (rawTx: RawTransaction): Promise<any> => {
         try {
-
-            const options = rawTx;
-            options.function = "SendFireblocks()";
-            const validJson = await schemaValidator.validateInput(options);
+            rawTx.function = 'SendFireblocks()';
+            const validJson = await schemaValidator.validateInput(rawTx);
 
             if (!validJson.valid) {
-                return (validJson);
+                return validJson;
             }
 
-
-            const resp = await axios({
+            const response = await axios({
                 url: `${this.baseUrl}${rawTx.path}`,
                 method: rawTx.method,
                 data: rawTx.data,
                 headers: {
-                    "X-API-Key": this.apiKey,
-                    "Authorization": `Bearer ${rawTx.jwt}`
-                }
-            })
+                    'X-API-Key': this.apiKey,
+                    Authorization: `Bearer ${rawTx.jwt}`,
+                },
+            });
 
-            return resp.data;
+            return response.data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return error.data;
         }
-
-    }
-
+    };
 }
 
-export { WalletFireblocks }
-
-
-
+export { WalletFireblocks };
