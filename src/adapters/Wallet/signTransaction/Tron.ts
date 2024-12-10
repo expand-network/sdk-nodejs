@@ -5,7 +5,7 @@ import * as TronWeb from 'tronweb';
  const signTransactionTron =  async (web3:any, transactionObject:any, options:any) => {
 
     try {
-      const tronWeb = new TronWeb({
+      const tronWeb = new TronWeb.TronWeb({
         fullHost: options.rpc,
         privateKey: options.privateKey,
       });

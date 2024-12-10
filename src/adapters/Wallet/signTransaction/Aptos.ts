@@ -1,6 +1,6 @@
 import { TxnBuilderTypes, BCS, AptosAccount, 
     AptosClient, HexString } from 'aptos';
-import * as config from '../../../../configuration/config.json';
+import  config from '../../../../configuration/config';
 
 
 
@@ -28,7 +28,7 @@ const signTransactionAptos = async (web3:any, transactionObject:any, options:any
                     TxnBuilderTypes.EntryFunction.natural(
                         '0x1::coin',
                         "transfer",
-                        [new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(config.chains[options.chainId].aptosCoin))],
+                        [new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(config.chains[options.chainId]!.aptosCoin || "undefined"))],
                         [BCS.bcsToBytes(TxnBuilderTypes.AccountAddress.fromHex(transactionObject.to)), BCS.bcsSerializeUint64(transactionObject.value)]
                     ),
                 ),
@@ -39,7 +39,7 @@ const signTransactionAptos = async (web3:any, transactionObject:any, options:any
             );
         } else {
             const decodedBytes = Buffer.from(data, "base64");
-            const deserializer = new BCS.Deserializer(new Uint8Array(Buffer.from(decodedBytes, "base64")));
+            const deserializer = new BCS.Deserializer(new Uint8Array(decodedBytes));
             transactionBuffer = TxnBuilderTypes.RawTransaction.deserialize(deserializer);
         }
 

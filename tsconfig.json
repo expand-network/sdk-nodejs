@@ -8,6 +8,7 @@
       "moduleResolution": "node",
       "sourceMap": true, 
       "forceConsistentCasingInFileNames": true ,
+      "allowSyntheticDefaultImports": true,
       "jsx": "react",
       "outDir": "./dist",
       "baseUrl": "./",
