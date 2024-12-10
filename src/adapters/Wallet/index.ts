@@ -78,7 +78,7 @@ class Wallet {
             rpc
         };
         
-        const rawData = await rawTransaction[`signTransaction${chainName}`](web3, transactionObject, options);
+        const rawData:any  = await rawTransaction[`signTransaction${chainName}`as keyof typeof rawTransaction](web3, transactionObject, options);
         rawData.chainId = chainId;
 
         return rawData;
