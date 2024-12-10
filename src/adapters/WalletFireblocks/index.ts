@@ -69,7 +69,7 @@ class WalletFireblocks {
             }
 
             const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
-            const chainName = config.chains[chainId].chainName;
+            const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 
             const txData: any = {
                 operation: transactionObject.data ? 'CONTRACT_CALL' : 'TRANSFER',
