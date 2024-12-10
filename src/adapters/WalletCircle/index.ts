@@ -1,137 +1,148 @@
-import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled-wallets';
+import axios from 'axios';
+import * as jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import axios, { AxiosRequestConfig } from 'axios';
+import crypto from 'crypto';
+import config from '../../../configuration/config.json';
+import * as common from '../../../configuration/common';
 import * as schemaValidator from '../../../configuration/schemaValidator';
-import * as conf from '../../../configuration/config.json';
 
-interface WalletCircleOptions {
-  appId: string;
-  apiKey: string;
-  userId: string;
-  userToken: string;
-  walletId: string;
-  encryptionKey: string;
+interface WalletFireblocksOptions {
+    baseUrl?: string;
+    apiSecret: string;
+    apiKey: string;
 }
 
 interface TransactionObject {
-  value: number;
-  data?: string;
-  to: string;
-  tokenId?: string;
-  function?: string;
+    chainId: string;
+    chainSymbol: string;
+    from: string;
+    to: string;
+    value?: number;
+    assetId?: string;
+    assetDecimals?: number;
+    note?: string;
+    data?: string;
+    internal?: boolean;
 }
 
-interface ValidObject {
-  valid: boolean;
+interface RawTransaction {
+    jwt: string;
+    path: string;
+    data: any;
+    method: string;
 }
 
-class WalletCircle {
-  private appId: string;
-  private apiKey: string;
-  private client: ReturnType<typeof initiateUserControlledWalletsClient>;
-  private userId: string;
-  private userToken: string;
-  private walletId: string;
-  private encryptionKey: string;
+class WalletFireblocks {
+    private baseUrl: string;
+    private apiSecret: string;
+    private apiKey: string;
 
-  constructor(options: WalletCircleOptions) {
-    this.appId = options.appId;
-    this.apiKey = options.apiKey;
-    this.client = initiateUserControlledWalletsClient({
-      apiKey: options.apiKey,
-    });
-    this.userId = options.userId;
-    this.userToken = options.userToken;
-    this.walletId = options.walletId;
-    this.encryptionKey = options.encryptionKey;
-  }
-
-  static async getUserToken(options: { apiKey: string; userId: string }): Promise<string> {
-    const client = initiateUserControlledWalletsClient({
-      apiKey: options.apiKey,
-    });
-    const userToken = await client.createUserToken({ userId: options.userId }).then(res => res.data);
-    return userToken;
-  }
-
-  async signTransaction(transactionObject: TransactionObject): Promise<any> {
-    const transactionOptions = transactionObject;
-    transactionOptions.function = "transactionObject()";
-    const validObject: ValidObject = await schemaValidator.validateInput(transactionObject);
-
-    if (!validObject.valid) {
-      return validObject;
+    constructor(options: WalletFireblocksOptions) {
+        this.baseUrl = options.baseUrl || config.fireblocks.baseUrl;
+        this.apiSecret = options.apiSecret;
+        this.apiKey = options.apiKey;
     }
 
-    if (transactionObject.data) {
-      const data = JSON.stringify({
-        userId: this.userId,
-        idempotencyKey: uuidv4(),
-        amounts: [transactionObject.value],
-        callData: transactionObject.data,
-        contractAddress: transactionObject.to,
-        walletId: this.walletId,
-        feeLevel: "MEDIUM",
-      });
-
-      const config: AxiosRequestConfig = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `${conf.circleProgrammableWallet.baseUrl}contractExecution`,
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${this.apiKey}`,
-          'X-User-Token': this.userToken,
-        },
-        data,
-      };
-
-      try {
-        const challengeId = await axios.request(config).then(res => res.data);
-        return challengeId;
-      } catch (error: any) {
-        return error;
-      }
-    } else {
-      const data = JSON.stringify({
-        userId: this.userId,
-        idempotencyKey: uuidv4(),
-        amounts: [transactionObject.value],
-        destinationAddress: transactionObject.to,
-        tokenId: transactionObject.tokenId,
-        walletId: this.walletId,
-        feeLevel: "MEDIUM",
-      });
-
-      const config: AxiosRequestConfig = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `${conf.circleProgrammableWallet.baseUrl}/transfer`,
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${this.apiKey}`,
-          'X-User-Token': this.userToken,
-        },
-        data,
-      };
-
-      try {
-        const challengeId = await axios.request(config).then(res => res.data);
-        return challengeId;
-      } catch (error: any) {
-        return error.response?.data;
-      }
+    private jwtSign(path: string, data: any): string {
+        const token = jwt.sign(
+            {
+                uri: path,
+                nonce: uuidv4(),
+                iat: Math.floor(Date.now() / 1000),
+                exp: Math.floor(Date.now() / 1000) + 55,
+                sub: this.apiKey,
+                bodyHash: crypto.createHash('sha256').update(JSON.stringify(data || '')).digest().toString('hex'),
+            },
+            this.apiSecret,
+            { algorithm: 'RS256' }
+        );
+        return token;
     }
-  }
 
-  async sendTransaction(challengeId: { data: { challengeId: string } }): Promise<Record<string, string>> {
-    return {
-      appId: this.appId,
-      userToken: this.userToken,
-      encryptionKey: this.encryptionKey,
-      challengeId: challengeId.data.challengeId,
+    public signTransaction = async (transactionObject: TransactionObject): Promise<RawTransaction | any> => {
+        try {
+            transactionObject.function = 'FireblockSign()';
+            const validJson = await schemaValidator.validateInput(transactionObject);
+
+            if (!validJson.valid) {
+                return validJson;
+            }
+
+            const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+            const chainName = config.chains[chainId].chainName;
+
+            const txData: any = {
+                operation: transactionObject.data ? 'CONTRACT_CALL' : 'TRANSFER',
+                source: {
+                    type: 'VAULT_ACCOUNT',
+                    id: transactionObject.from,
+                },
+            };
+
+            if (transactionObject.internal) {
+                txData.destination = {
+                    type: 'VAULT_ACCOUNT',
+                    id: transactionObject.to,
+                };
+            } else {
+                txData.destination = {
+                    type: 'ONE_TIME_ADDRESS',
+                    oneTimeAddress: {
+                        address: transactionObject.to,
+                    },
+                };
+            }
+
+            const assetDecimals = transactionObject.assetDecimals || 18;
+            txData.assetId = transactionObject.assetId || 'ETH_TEST3';
+            txData.amount = transactionObject.value ? transactionObject.value / 10 ** assetDecimals : '0';
+            txData.note = transactionObject.note || 'expand';
+
+            if (transactionObject.data) {
+                txData.extraParameters = {
+                    contractCallData: transactionObject.data,
+                };
+            }
+
+            const signature = this.jwtSign('/v1/transactions', txData);
+            const rawTx: RawTransaction = {
+                jwt: signature,
+                path: config.fireblocks.createTransaction,
+                data: txData,
+                method: 'POST',
+            };
+
+            return rawTx;
+        } catch (error) {
+            return error;
+        }
     };
-  }
+
+    public sendTransaction = async (rawTx: RawTransaction): Promise<any> => {
+        try {
+            rawTx.function = 'SendFireblocks()';
+            const validJson = await schemaValidator.validateInput(rawTx);
+
+            if (!validJson.valid) {
+                return validJson;
+            }
+
+            const response = await axios({
+                url: `${this.baseUrl}${rawTx.path}`,
+                method: rawTx.method,
+                data: rawTx.data,
+                headers: {
+                    'X-API-Key': this.apiKey,
+                    Authorization: `Bearer ${rawTx.jwt}`,
+                },
+            });
+
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return error.data;
+        }
+    };
 }
 
-export { WalletCircle };
+export { WalletFireblocks };
