@@ -1,25 +1,25 @@
-// import Algorand from './Algorand';
+ import * as Algorand from './Algorand';
 import  Ethereum   from './Ethereum';
 // import Near from './Near';
-// import Solana from './Solana';
+ import * as Solana from './Solana';
 // import Tron from './Tron';
 // import Sui from './Sui';
 // import Aptos from './Aptos';
 // import StarkNet from './Starknet';
 
-// export const signTransactionAlgorand = async (web3: any, transactionObject: any, options: any) => {
+const signTransactionAlgorand:any = async (web3: any, transactionObject: any, options: any) => {
 
-//     const rawData = await Algorand.signTransactionAlgorand(web3, transactionObject, options);
-//     return rawData;
+    const rawData = await Algorand.AlgorandUtils.signTransactionAlgorand(web3, transactionObject, options);
+    return rawData;
 
-// };
-
-const signTransactionEvm = async (web3: any, transactionObject: any, options: any) => {
-    const signedTransaction = await Ethereum.signTransactionEvm(web3, transactionObject, options.privateKey);
-    return signedTransaction;
 };
 
-export default signTransactionEvm;
+const signTransactionEvm:any = async (web3: any, transactionObject: any, options: any) => {
+    const rawData = await Ethereum.signTransactionEvm(web3, transactionObject, options.privateKey);
+    return rawData;
+};
+
+
 
 // exports.signTransactionNear = async (web3, transactionObject, options) => {
 
@@ -34,11 +34,11 @@ export default signTransactionEvm;
 //     return rawData;
 // };
 
-// exports.signTransactionSolana = async (web3, transactionObject, options) => {
+const signTransactionSolana:any = async (web3:any, transactionObject:any, options:any) => {
 
-//     const rawData = await Solana.signTransactionSolana(web3, transactionObject, options);
-//     return rawData;
-// };
+    const rawData = await Solana.SolanaUtils.signVersionedTransactionSolana(web3, transactionObject, options);
+    return rawData;
+};
 
 // exports.signTransactionSui = async (web3, transactionObject, options) => {
 
@@ -59,10 +59,11 @@ export default signTransactionEvm;
 //     return rawData;
 // };
 
-// exports.signVersionedTransactionSolana = async (web3, transactionObject, options) => {
+const signVersionedTransactionSolana = async (web3:any, transactionObject:any, options:any) => {
 
-//     const rawData = await Solana.signVersionedTransactionSolana(web3, transactionObject, options);
-//     return rawData;
-// };
+    const rawData = await Solana.SolanaUtils.signVersionedTransactionSolana(web3, transactionObject, options);
+    return rawData;
+};
 
 
+export  {signTransactionEvm, signTransactionSolana, signVersionedTransactionSolana, signTransactionAlgorand};

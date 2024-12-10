@@ -163,7 +163,7 @@ class Wallet {
             headers: { 'x-api-key': this.xApiKey }
         };
 
-        let rpc = await axios.request(apiConfig);
+        let rpc:any = await axios.request(apiConfig);
         rpc = rpc.data.data.rpc;
 
         const provider = new ethers.providers.JsonRpcProvider(rpc);
@@ -191,7 +191,7 @@ class Wallet {
             headers: { 'x-api-key': this.xApiKey }
         };
 
-        let rpc = await axios.request(apiConfig);
+        let rpc:any = await axios.request(apiConfig);
         rpc = rpc.data.data.rpc;
 
         const provider = new ethers.providers.JsonRpcProvider(rpc);

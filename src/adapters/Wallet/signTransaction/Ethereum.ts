@@ -12,7 +12,7 @@ interface Options {
     privateKey: string;
 }
 
- const signTransactionEvm = async (
+ const signTransactionEvm:any = async (
     web3: Web3,
     transactionObject: TransactionObject,
     options: Options
