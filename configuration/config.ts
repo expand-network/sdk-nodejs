@@ -23,7 +23,12 @@ type ChainConfig = {
   type Config = {
     chains: Record<string, ChainConfig>;
     fireblocks : Record<string, FireblocksConfig>;
+    url: Record<string, UrlConfig>;
   };
+
+  type UrlConfig = {
+    apiurl?:string;
+  }
 
 const config: Config = {
     "chains": {

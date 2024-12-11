@@ -53,7 +53,7 @@ class WalletCosmos {
     });
     const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 
-    config.chains[chainId as keyof typeof config.chains].chainName;
+    
 
     axios.defaults.headers["X-API-KEY"] = this.xApiKey;
     const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
