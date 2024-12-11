@@ -1,26 +1,27 @@
-import Web3 from "web3";
+import Web3 from 'web3';
 
 interface TransactionObject {
   to: string;
-  value: string | number;
-  gas: number | string;
-  gasPrice?: number | string;
+  value: string;
+  gas?: string;
+  gasPrice?: string;
   data?: string;
-  nonce?: number;
+  nonce?: number; // Update nonce to be a number instead of string
 }
 
-interface Options {
+interface SignTransactionOptions {
   privateKey: string;
 }
 
 export const signTransactionEvm = async (
   web3: Web3,
   transactionObject: TransactionObject,
-  options: Options
-): Promise<Web3.eth.SignedTransaction | Error> => {
+  options: SignTransactionOptions
+): Promise<any> => {
   /*
    * Function will sign the transaction payload for Ethereum-based chains
    */
+
   try {
     const signedTransaction = await web3.eth.accounts.signTransaction(
       transactionObject,
@@ -28,6 +29,6 @@ export const signTransactionEvm = async (
     );
     return signedTransaction;
   } catch (error) {
-    return error as Error;
+    return error;
   }
 };
