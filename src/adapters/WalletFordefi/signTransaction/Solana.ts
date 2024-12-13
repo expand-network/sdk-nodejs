@@ -28,7 +28,7 @@ interface Response {
   accessToken: string;
 }
 
-export const signTransactionSolana = async (
+const signTransactionSolana = async (
   transactionObject: TransactionObject,
   options: Options
 ): Promise<Response | Error> => {
@@ -91,3 +91,5 @@ export const signTransactionSolana = async (
     return error as Error;
   }
 };
+
+export default { signTransactionSolana } ;

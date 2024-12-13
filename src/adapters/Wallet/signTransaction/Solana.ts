@@ -9,14 +9,14 @@ import {
   Connection,
 } from '@solana/web3.js';
 import * as sign from 'tweetnacl';
-import * as decode from 'bs58';
+import bs58 from 'bs58';
 import BN from 'bn.js';
 
 interface TransactionObject {
   data?: string;
   from?: string;
-  to: string;
-  value?: number | BN;
+  to?: string;
+  value?: string | BN;
   additionalSigners?: string;
 }
 
@@ -34,7 +34,7 @@ export const SolanaUtils:any = {
      * Function will sign the transaction payload for Solana Chain
      */
     try {
-      const from = Keypair.fromSecretKey(decode(options.privateKey));
+      const from = Keypair.fromSecretKey(bs58.decode(options.privateKey));
       const blockHeight = await web3.getLatestBlockhash();
       let preparedTx: Transaction;
       let transactionBuffer: Buffer;
@@ -67,7 +67,7 @@ export const SolanaUtils:any = {
       preparedTx.addSignature(from.publicKey, signature);
 
       if (transactionObject.additionalSigners) {
-        const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
+        const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
         const additionalSignature = sign.detached(transactionBuffer, additionalKey.secretKey);
         preparedTx.addSignature(additionalKey.publicKey, additionalSignature);
       }
@@ -87,7 +87,7 @@ export const SolanaUtils:any = {
   ): Promise<{ rawTransaction: string } | Error | { msg: string }> {
     
     try {
-      const from = Keypair.fromSecretKey(decode(options.privateKey));
+      const from:any = Keypair.fromSecretKey(bs58.decode(options.privateKey));
       const wallet = new Wallet(from);
       const recentBlockhash = await web3.getRecentBlockhash();
       let preparedTx: VersionedTransaction;
@@ -117,7 +117,7 @@ export const SolanaUtils:any = {
       preparedTx.sign([wallet.payer]);
 
       if (transactionObject.additionalSigners) {
-        const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
+        const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
         preparedTx.sign([additionalKey]);
       }
 

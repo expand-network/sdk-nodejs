@@ -1,21 +1,9 @@
-import * as Ethereum from './Ethereum';
+import Ethereum from './Ethereum';
 
-interface TransactionObject {
-  to: string;
-  value: string | number;
-  gas: number | string;
-  gasPrice?: number | string;
-  data?: string;
-  nonce?: number;
-}
-
-interface Options {
-  privateKey: string;
-}
 
 export const signTransactionEvm = async (
-  transactionObject: TransactionObject,
-  options: Options
+  transactionObject: any,
+  options: any
 ): Promise<any> => {
   const rawData = await Ethereum.signTransactionEvm(transactionObject, options);
   return rawData;

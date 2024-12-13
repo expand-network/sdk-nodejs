@@ -1,80 +1,100 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import * as rawTransaction from './signTransaction/index';
-import config from '../../../configuration/config.json';
+import config from '../../../configuration/config';
 import { getChainId } from '../../../configuration/common';
 import * as schemaValidator from '../../../configuration/schemaValidator';
 
+interface WalletOptions {
+    accessToken: string;
+    xApiKey: string;
+    privateKeyFile: string;
+    vault_id: string;
+}
+
+interface TransactionObject {
+    chainId: number;
+    chainSymbol: string;
+    [key: string]: any;
+}
+
+interface SendTransactionResponse {
+    accessToken: string;
+    timestamp: string;
+    signature: string;
+    data: any;
+}
+
 class WalletFordefi {
-    constructor(options) {
+    private accessToken: string;
+    private xApiKey: string;
+    private privateKeyFile: string;
+    private vault_id: string;
+
+    constructor(options: WalletOptions) {
         this.accessToken = options.accessToken;
         this.xApiKey = options.xApiKey;
         this.privateKeyFile = options.privateKeyFile;
         this.vault_id = options.vault_id;
-    };
+    }
 
-    signTransaction = async (transactionObject) => {
-
+    signTransaction = async (transactionObject: TransactionObject): Promise<any> => {
         try {
-            const transactionOptions = transactionObject;
-            transactionOptions.function = "transactionObject()";
+            const transactionOptions = { ...transactionObject, function: "transactionObject()" };
             const validObject = await schemaValidator.validateInput(transactionObject);
 
             if (!validObject.valid) {
-                return (validObject);
+                return validObject;
             }
 
             const chainId = await getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
-            let chainName = config.chains[chainId].chainName;
-            if (chainName !== "Evm" && chainName !== "Solana")
-                return new Error("chain not Supported");
-            const options = {};
-            options.vault_id = this.vault_id;
-            options.privateKeyFile = this.privateKeyFile;
-            options.accessToken = this.accessToken;
-            options.xApiKey = this.xApiKey;
+            const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
+
+            if (chainName !== "Evm" && chainName !== "Solana") {
+                throw new Error("Chain not supported");
+            }
+
+            const options = {
+                vault_id: this.vault_id,
+                privateKeyFile: this.privateKeyFile,
+                accessToken: this.accessToken,
+                xApiKey: this.xApiKey,
+            };
+
             const response = await rawTransaction[`signTransaction${chainName}`](transactionObject, options);
             return response;
-        } catch (error) {
+        } catch (error: any) {
             return error;
         }
     };
 
-    sendTransaction = async (response) => {
+    sendTransaction = async (response: SendTransactionResponse): Promise<any> => {
         try {
-            const filterOptions = response;
-            filterOptions.function = "FordefiTransaction()";
+            const filterOptions = { ...response, function: "FordefiTransaction()" };
             const validJson = await schemaValidator.validateInput(filterOptions);
 
             if (!validJson.valid) {
-                return (validJson);
+                return validJson;
             }
 
             const path = "/api/v1/transactions";
-            const config = {
+            const axiosConfig: AxiosRequestConfig = {
                 method: "POST",
                 url: `https://api.fordefi.com${path}`,
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": response.accessToken,
+                    Authorization: response.accessToken,
                     'X-Timestamp': response.timestamp,
                     'X-Signature': response.signature,
                 },
-                data: response.data
+                data: response.data,
             };
-            const resp = await axios.request(config);
+
+            const resp = await axios.request(axiosConfig);
             return resp.data;
-            // .then((response) => {
-            //     return (JSON.stringify(response.data));
-            //  })
-            // .catch((error) => {
-            //  return (error.response.data.detail);
-            // });
-
-        } catch (error) {
-            return error.response.data;
+        } catch (error: any) {
+            return error.response?.data || error;
         }
-
-    }
+    };
 }
 
 export { WalletFordefi };
