@@ -13,8 +13,8 @@ interface WalletOptions {
 }
 
 interface TransactionObject {
-    chainId: number;
-    chainSymbol: string;
+    chainId: string;
+    chainSymbol?: string;
     value: string | BN;
     to?: string;  
     gas?: string; 
@@ -22,7 +22,7 @@ interface TransactionObject {
 }
 
 interface SignOrderOptions {
-    dexId: number;
+    dexId: string;
     domain: any;
     types: any;
     values?: any;
@@ -44,7 +44,7 @@ class Wallet {
     signTransaction = async (transactionObject: TransactionObject) => {
         const configuration: AxiosRequestConfig = { params: {} };
         const transactionOptions = { ...transactionObject, function: "transactionObject()" };
-        const validObject = await schemaValidator.validateInput(transactionObject);
+        const validObject = await schemaValidator.validateInput(transactionOptions);
 
         if (!validObject.valid) {
             return validObject;

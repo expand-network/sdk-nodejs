@@ -8,8 +8,8 @@ import {
   PublicKey,
   Connection,
 } from '@solana/web3.js';
-import { sign } from 'tweetnacl';
-import { decode } from 'bs58';
+import * as sign from 'tweetnacl';
+import * as decode from 'bs58';
 import BN from 'bn.js';
 
 interface TransactionObject {

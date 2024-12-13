@@ -16,14 +16,14 @@ interface Options {
     web3: Web3,
     transactionObject: TransactionObject,
     options: Options
-): Promise<string> => {
+): Promise<object> => {
     /*
      * Function will sign the transaction payload for Ethereum-based chains
      */
 
     try {
         const signedTransaction = await web3.eth.accounts.signTransaction(transactionObject, options.privateKey);
-        return signedTransaction.rawTransaction as string;  // Assuming you need the raw transaction
+        return signedTransaction; 
     } catch (error) {
         console.error('Error signing transaction:', error);
         throw new Error('Transaction signing failed');
@@ -31,4 +31,4 @@ interface Options {
 };
 
 
-export default { signTransactionEvm }; f
+export default { signTransactionEvm }; 
