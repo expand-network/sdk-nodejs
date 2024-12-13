@@ -10,7 +10,7 @@ import {
   BlockhashWithExpiryBlockHeight
 } from '@solana/web3.js';
 import * as sign from 'tweetnacl';
-import * as decode from 'bs58';
+import bs58 from 'bs58';
 import BN from 'bn.js';
 
 interface TransactionObject {
@@ -32,7 +32,7 @@ export const signTransactionSolana = async (
   options: Options
 ): Promise<{ rawTransaction: string } | { msg: string } | Error> => {
   try {
-    const from = Keypair.fromSecretKey(decode(options.privateKey));
+    const from = Keypair.fromSecretKey(bs58.decode(options.privateKey));
     const blockHeight: BlockhashWithExpiryBlockHeight = await web3.getLatestBlockhash();
     let preparedTx: Transaction;
     let transactionBuffer: Buffer;
@@ -65,7 +65,7 @@ export const signTransactionSolana = async (
     preparedTx.addSignature(from.publicKey, signature);
 
     if (transactionObject.additionalSigners) {
-      const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
+      const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
       const additionalSignature = sign.detached(transactionBuffer, additionalKey.secretKey);
       preparedTx.addSignature(additionalKey.publicKey, additionalSignature);
     }
@@ -84,7 +84,7 @@ export const signVersionedTransactionSolana = async (
   options: Options
 ): Promise<{ rawTransaction: string } | { msg: string } | Error> => {
   try {
-    const from = Keypair.fromSecretKey(decode(options.privateKey));
+    const from = Keypair.fromSecretKey(bs58.decode(options.privateKey));
     const wallet = new Wallet(from);
     const recentBlockhash: BlockhashWithExpiryBlockHeight = await web3.getLatestBlockhash();
     let preparedTx: VersionedTransaction;
@@ -114,7 +114,7 @@ export const signVersionedTransactionSolana = async (
     preparedTx.sign([wallet.payer]);
 
     if (transactionObject.additionalSigners) {
-      preparedTx.sign([Keypair.fromSecretKey(decode(transactionObject.additionalSigners))]);
+      preparedTx.sign([Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners))]);
     }
 
     const serializedTx = preparedTx.serialize();

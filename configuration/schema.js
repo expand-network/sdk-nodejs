@@ -69,7 +69,7 @@ exports.jsonSchema = {
                     networkId: { type: "string" }
                 },
 
-                required: ["from", "to"]
+                required: ["from"]
             }
 
         },
