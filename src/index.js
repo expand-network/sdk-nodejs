@@ -3,7 +3,7 @@ const config = require('../configuration/config.json');
 const schemaValidator = require('../configuration/schemaValidator');
 const { Wallet, WalletFordefi, WalletDFNS, WalletTON, 
         WalletFireblocks, WalletPhantom, WalletCoinbase, 
-        WalletCircle, WalletCosmos, WalletStellar, WalletXRPL } = require('./interfaces/index');
+        WalletCircle, WalletCosmos, WalletStellar, WalletXRPL, WalletBitcoin, WalletStacks } = require('./interfaces/index');
 
 exports.prepareTransaction = async (apiURL, options) => {
 
@@ -91,8 +91,6 @@ exports.WalletXRPL = WalletXRPL;
 
 exports.WalletCosmos = WalletCosmos;
 
+exports.WalletStacks = WalletStacks;
 
-
-
-
-
+exports.WalletBitcoin = WalletBitcoin;

@@ -246,6 +246,45 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for BTCSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "BTCSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    utxo: { type: "object" },
+                },
+                required: ["to", "value", "utxo"]
+            },
+        },
+
+         // Field Mapping for stacksSignTransaction() function
+         {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stacksSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    message: { type: "string" }
+                },
+                required: []
+            },
+        },
+
         // Field Mapping for userOnboardingDYDX() function
         {
             if: {
