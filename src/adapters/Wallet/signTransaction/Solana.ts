@@ -8,15 +8,15 @@ import {
   PublicKey,
   Connection,
 } from '@solana/web3.js';
-import { sign } from 'tweetnacl';
-import { decode } from 'bs58';
+import * as sign from 'tweetnacl';
+import bs58 from 'bs58';
 import BN from 'bn.js';
 
 interface TransactionObject {
   data?: string;
   from?: string;
-  to: string;
-  value?: number | BN;
+  to?: string;
+  value?: string | BN;
   additionalSigners?: string;
 }
 
@@ -87,7 +87,7 @@ export const SolanaUtils:any = {
   ): Promise<{ rawTransaction: string } | Error | { msg: string }> {
     
     try {
-      const from = Keypair.fromSecretKey(decode(options.privateKey));
+      const from:any = Keypair.fromSecretKey(bs58.decode(options.privateKey));
       const wallet = new Wallet(from);
       const recentBlockhash = await web3.getRecentBlockhash();
       let preparedTx: VersionedTransaction;
@@ -117,7 +117,7 @@ export const SolanaUtils:any = {
       preparedTx.sign([wallet.payer]);
 
       if (transactionObject.additionalSigners) {
-        const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
+        const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
         preparedTx.sign([additionalKey]);
       }
 

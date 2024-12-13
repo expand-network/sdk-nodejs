@@ -17,7 +17,7 @@ interface SignedTransactionResponse {
   rawTransaction: string;
 }
 
-export const signTransactionEvm = async (
+ const signTransactionEvm = async (
   transactionObject: TransactionObject,
   options: Options
 ): Promise<SignedTransactionResponse | Error> => {
@@ -50,3 +50,5 @@ export const signTransactionEvm = async (
     return error as Error;
   }
 };
+
+export default { signTransactionEvm };
