@@ -13,7 +13,7 @@ interface WalletCosmosOptions {
 
 interface TransactionObject {
   chainId: string;
-  chainSymbol: string;
+  chainSymbol?: string;
   to: string;
   value: string;
   function?: string;
