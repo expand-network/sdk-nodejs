@@ -13,6 +13,7 @@ type ChainConfig = {
     networkPassphrase?: string;
     gasPrice?: string;
     network?: string;
+    fee?: number;
   };
 
   type FireblocksConfig = {
@@ -331,6 +332,32 @@ const config: Config = {
             "chainName": "XRPL",
             "chainSymbol": "TXRPL",
             "network": "testnet"
+        },
+        "1700": {
+            "localName": "Stacks",
+            "chainName": "Stacks",
+            "chainSymbol": "STX",
+            "network": "mainnet"
+        },
+        "1701": {
+            "localName": "StacksTestnet",
+            "chainName": "Stacks",
+            "chainSymbol": "TSTX",
+            "network": "testnet"
+        },
+        "1800": {
+            "localName": "Bitcoin",
+            "chainName": "Bitcoin",
+            "chainSymbol": "BTC",
+            "network": "mainnet",
+            "fee": 2000
+        },
+        "1801": {
+            "localName": "BitcoinTestnet",
+            "chainName": "Bitcoin",
+            "chainSymbol": "TBTC",
+            "network": "testnet",
+            "fee": 2000
         }
     },
     "fireblocks": {
