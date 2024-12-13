@@ -2,9 +2,9 @@
 import  Ethereum   from './Ethereum';
  import * as Near from './Near';
  import * as Solana from './Solana';
-// import Tron from './Tron';
+import * as Tron from './Tron';
  import * as Sui from './Sui';
-// import Aptos from './Aptos';
+import * as Aptos from './Aptos';
 // import StarkNet from './Starknet';
 
 const signTransactionAlgorand:any = async (web3: any, transactionObject: any, options: any) => {
@@ -28,11 +28,11 @@ const signTransactionNear = async (web3:any, transactionObject:any , options:any
 
 };
 
-// exports.signTransactionTron = async (web3, transactionObject, options) => {
+const signTransactionTron = async (web3:any, transactionObject:any, options:any) => {
 
-//     const rawData = await Tron.signTransactionTron(web3, transactionObject, options);
-//     return rawData;
-// };
+   const rawData = await Tron.signTransactionTron(web3, transactionObject, options);
+     return rawData;
+ };
 
 const signTransactionSolana:any = async (web3:any, transactionObject:any, options:any) => {
 
@@ -47,11 +47,11 @@ const signTransactionSui = async (web3:any, transactionObject:any, options:any) 
 };
 
 
-// exports.signTransactionAptos = async (web3, transactionObject, options) => {
+const signTransactionAptos = async (web3:any, transactionObject:any, options:any) => {
 
-//     const rawData = await Aptos.signTransactionAptos(web3, transactionObject, options);
-//     return rawData;
-// };
+    const rawData = await Aptos.signTransactionAptos(web3, transactionObject, options);
+    return rawData;
+};
 
 // exports.signTransactionStarkNet = async (web3, transactionObject, options) => {
 
@@ -66,4 +66,11 @@ const signVersionedTransactionSolana = async (web3:any, transactionObject:any, o
 };
 
 
-export  {signTransactionEvm, signTransactionSolana, signVersionedTransactionSolana, signTransactionAlgorand, signTransactionNear, signTransactionSui};
+export  {signTransactionEvm, 
+         signTransactionSolana, 
+         signVersionedTransactionSolana, 
+         signTransactionAlgorand, 
+         signTransactionNear, 
+         signTransactionSui,
+         signTransactionTron,
+         signTransactionAptos,};

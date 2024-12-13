@@ -20,17 +20,22 @@ type ChainConfig = {
     baseUrl?:string;
     createTransaction?: string;
   }
+
+  type CircleProgrammableWalletConfig = {
+    baseUrl?:string;
+  }
+  type UrlConfig = {
+    apiurl?:string;
+  }
   
   type Config = {
     chains: Record<string, ChainConfig>;
     fireblocks : Record<string, FireblocksConfig>;
     url: Record<string, UrlConfig>;
+    circleProgrammableWallet : Record<string, CircleProgrammableWalletConfig>;
   };
 
-  type UrlConfig = {
-    apiurl?:string;
-  }
-
+ 
 const config: Config = {
     "chains": {
         "1": {
