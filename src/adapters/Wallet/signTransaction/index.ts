@@ -15,7 +15,7 @@ const signTransactionAlgorand:any = async (web3: any, transactionObject: any, op
 };
 
 const signTransactionEvm:any = async (web3: any, transactionObject: any, options: any) => {
-    const rawData = await Ethereum.signTransactionEvm(web3, transactionObject, options.privateKey);
+    const rawData = await Ethereum.signTransactionEvm(web3, transactionObject, options);
     return rawData;
 };
 

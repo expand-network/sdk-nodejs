@@ -34,7 +34,7 @@ export const SolanaUtils:any = {
      * Function will sign the transaction payload for Solana Chain
      */
     try {
-      const from = Keypair.fromSecretKey(decode(options.privateKey));
+      const from = Keypair.fromSecretKey(bs58.decode(options.privateKey));
       const blockHeight = await web3.getLatestBlockhash();
       let preparedTx: Transaction;
       let transactionBuffer: Buffer;
@@ -67,7 +67,7 @@ export const SolanaUtils:any = {
       preparedTx.addSignature(from.publicKey, signature);
 
       if (transactionObject.additionalSigners) {
-        const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
+        const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
         const additionalSignature = sign.detached(transactionBuffer, additionalKey.secretKey);
         preparedTx.addSignature(additionalKey.publicKey, additionalSignature);
       }
