@@ -13,6 +13,7 @@ import {
   WalletCosmos,
   WalletStellar,
   WalletXRPL,
+  WalletStacks,
 } from "./interfaces/index";
 
 export const prepareTransaction = async (apiURL:any, options:any) => {
@@ -84,4 +85,5 @@ export {
   WalletCosmos,
   WalletStellar,
   WalletXRPL,
+  WalletStacks,
 };
