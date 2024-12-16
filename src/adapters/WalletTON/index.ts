@@ -13,10 +13,10 @@ interface WalletTONOptions {
 interface TransactionObject {
     function?: string;
     chainId: string;
-    chainSymbol: string;
+    chainSymbol?: string;
     to: string;
-    value: number;
-    message: string;
+    value: string;
+    message?: string;
     rawTransaction?: any;
 }
 
@@ -71,7 +71,7 @@ class WalletTON {
 
         let body;
         try {
-            body = Cell.fromBase64(transactionObject.message);
+            body = Cell.fromBase64(transactionObject?.message || "through expand");
         } catch (error) {
             body = transactionObject.message || "through expand"; // Optional comment
         }
