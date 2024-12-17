@@ -23,9 +23,9 @@ type TransactionObject = {
     chainId: number;
     chainSymbol: string;
     rawTransaction: any;
-    to: string; // Address of the recipient
-    value: string; // Amount to be transferred
-    gas: string; // Gas limit for the transaction
+    to: string; 
+    value: string; 
+    gas: string; 
     [key: string]: any;
 };
 

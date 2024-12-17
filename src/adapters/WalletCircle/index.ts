@@ -2,7 +2,7 @@ import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled
 import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosRequestConfig } from 'axios';
 import * as schemaValidator from '../../../configuration/schemaValidator';
-import * as conf from '../../../configuration/config';
+import conf from '../../../configuration/config';
 
 interface WalletCircleOptions {
   appId: string;
@@ -50,7 +50,7 @@ class WalletCircle {
     const client = initiateUserControlledWalletsClient({
       apiKey: options.apiKey,
     });
-    const userToken = await client.createUserToken({ userId: options.userId }).then(res => res.data);
+    const userToken:any = await client.createUserToken({ userId: options.userId }).then(res => res.data);
     return userToken;
   }
 

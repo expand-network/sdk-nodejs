@@ -1,123 +1,137 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import BN from 'bn.js';
 import * as rawTransaction from './signTransaction/index';
-import config from '../../../configuration/config.json';
+import config from '../../../configuration/config';
 import * as common from '../../../configuration/common';
 import * as schemaValidator from '../../../configuration/schemaValidator';
 import { initialiseWeb3 } from '../../../configuration/intialiseWeb3';
 
-class WalletPhantom {
+interface WalletPhantomOptions {
+    privateKey: string;
+    xApiKey: string;
+}
 
-    constructor(options) {
+interface TransactionObject {
+    function?: string;
+    chainId: string | number;
+    chainSymbol: string;
+    [key: string]: any;
+}
+
+interface ValidObject {
+    valid: boolean;
+    [key: string]: any;
+}
+
+class WalletPhantom {
+    private privateKey: string;
+    private xApiKey: string;
+
+    constructor(options: WalletPhantomOptions) {
         this.privateKey = options.privateKey;
         this.xApiKey = options.xApiKey;
-    };
+    }
 
-    signTransaction = async (transactionObject) => {
-
-        const configuration = { "params": {} };
+    signTransaction = async (transactionObject: TransactionObject): Promise<any> => {
+        const configuration: AxiosRequestConfig = { params: {} };
         transactionObject.function = "txObjSol()";
-        const validObject = await schemaValidator.validateInput(transactionObject);
-
+        
+        const validObject: ValidObject = await schemaValidator.validateInput(transactionObject);
         if (!validObject.valid) {
-            return (validObject);
+            return validObject;
         }
 
         axios.defaults.headers['X-API-KEY'] = this.xApiKey;
         const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
 
-        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+        const chainId = await common.getChainId({
+            chainId: transactionObject.chainId,
+            chainSymbol: transactionObject.chainSymbol,
+        });
 
-        let chainName = config.chains[chainId].chainName;
+        const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 
-        if (chainName !== "Evm" && chainName !== "Solana")
-            return new Error("chain not Supported");
+        if (chainName !== "Evm" && chainName !== "Solana") {
+            return new Error("Chain not supported");
+        }
 
-        configuration.params = {
-            chainId
-        };
+        configuration.params = { chainId };
 
-        let rpc = await axios.get(apiURL, configuration);
-        rpc = rpc.data.data.rpc;
-        const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
+        let rpcResponse = await axios.get(apiURL, configuration);
+        const rpc = rpcResponse.data.data.rpc;
 
-        const options = {};
-        options.privateKey = this.privateKey;
+        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
+
+        const options = { privateKey: this.privateKey };
         const rawData = await rawTransaction[`signTransaction${chainName}`](web3, transactionObject, options);
         rawData.chainId = chainId;
 
         return rawData;
     };
 
-    signVersionedTransaction = async (transactionObject) => {
-
-        const configuration = { "params": {} };
+    signVersionedTransaction = async (transactionObject: TransactionObject): Promise<any> => {
+        const configuration: AxiosRequestConfig = { params: {} };
         transactionObject.function = "txObjectSol()";
-        const validObject = await schemaValidator.validateInput(transactionObject);
 
+        const validObject: ValidObject = await schemaValidator.validateInput(transactionObject);
         if (!validObject.valid) {
-            return (validObject);
+            return validObject;
         }
 
         axios.defaults.headers['X-API-KEY'] = this.xApiKey;
         const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
 
-        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+        const chainId = await common.getChainId({
+            chainId: transactionObject.chainId,
+            chainSymbol: transactionObject.chainSymbol,
+        });
 
-        let chainName = config.chains[chainId].chainName;
+        const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 
-        if (chainName !== "Solana")
-            return new Error("chain not Supported");
+        if (chainName !== "Solana") {
+            return new Error("Chain not supported");
+        }
 
-        configuration.params = {
-            chainId
-        };
+        configuration.params = { chainId };
 
-        let rpc = await axios.get(apiURL, configuration);
-        rpc = rpc.data.data.rpc;
-        const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
+        let rpcResponse = await axios.get(apiURL, configuration);
+        const rpc = rpcResponse.data.data.rpc;
 
-        const options = {};
-        options.privateKey = this.privateKey;
+        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
+
+        const options = { privateKey: this.privateKey };
         const rawData = await rawTransaction[`signVersionedTransaction${chainName}`](web3, transactionObject, options);
         rawData.chainId = chainId;
 
         return rawData;
     };
 
-    sendTransaction = async (options) => {
+    sendTransaction = async (options: TransactionObject): Promise<any> => {
+        options.function = "sendTransaction()";
 
-        const filterOptions = options;
-        filterOptions.function = "sendTransaction()";
-        const validJson = await schemaValidator.validateInput(options);
+        const validJson: ValidObject = await schemaValidator.validateInput(options);
         if (!validJson.valid) {
-            return (validJson);
+            return validJson;
         }
 
         try {
-
             const apiURL = `${config.url.apiurl}/chain/sendtransaction/`;
 
-            const params = {
+            const params: AxiosRequestConfig = {
                 method: "post",
                 url: apiURL,
                 data: options,
                 headers: {
-                    "x-api-key": this.xApiKey
-                }
+                    "x-api-key": this.xApiKey,
+                },
             };
 
             const transactionHash = await axios(params);
             return transactionHash.data;
-        }
-
-        catch (error) {
+        } catch (error) {
             return error;
         }
-
     };
-
 }
 
 export { WalletPhantom };
-

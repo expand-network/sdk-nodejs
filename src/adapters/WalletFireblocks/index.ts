@@ -23,6 +23,7 @@ interface TransactionObject {
     note?: string;
     data?: string;
     internal?: boolean;
+    function?: string;
 }
 
 interface RawTransaction {
@@ -30,6 +31,7 @@ interface RawTransaction {
     path: string;
     data: any;
     method: string;
+    function?: string;
 }
 
 class WalletFireblocks {

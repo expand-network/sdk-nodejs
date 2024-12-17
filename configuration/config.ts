@@ -17,22 +17,43 @@ type ChainConfig = {
   };
 
   type FireblocksConfig = {
-    baseUrl?:string;
-    createTransaction?: string;
+    baseUrl:string;
+    createTransaction: string;
   }
 
   type CircleProgrammableWalletConfig = {
-    baseUrl?:string;
+    baseUrl:string;
   }
   type UrlConfig = {
-    apiurl?:string;
+    apiurl:string;
   }
+
+  type DexesConfig = {
+    localName?: string;
+    chainName: string;
+    chainId: string;
+    dexName: string;
+    localDexName?: string;
+  };
+
+  type DYdXConfig = {
+    chainId: string;
+    USDC : string;
+    MAX_CLIENT_ID : any ;
+    squidRouterAPIBaseUrl : string ;
+    signingMsg: any;
+    rpc : string;
+  };
+
   
   type Config = {
     chains: Record<string, ChainConfig>;
-    fireblocks : Record<string, FireblocksConfig>;
-    url: Record<string, UrlConfig>;
-    circleProgrammableWallet : Record<string, CircleProgrammableWalletConfig>;
+    fireblocks: FireblocksConfig;
+    circleProgrammableWallet : CircleProgrammableWalletConfig;    
+    url:  UrlConfig;
+    Mask250: string;
+    dexes : Record<any, DexesConfig>;
+    dYdXV4: DYdXConfig;
   };
 
  
@@ -376,7 +397,6 @@ const config: Config = {
     "url": {
         "apiurl" : "https://api.expand.network"
     },
-
     "dexes": {
         "1900": {
             "localName": "UniswapX",

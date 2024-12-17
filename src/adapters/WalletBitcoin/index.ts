@@ -7,6 +7,8 @@ import * as schemaValidator from "../../../configuration/schemaValidator";
 import * as common from "../../../configuration/common";
 import config from "../../../configuration/config";
 
+import { networks } from "bitcoinjs-lib";
+
 interface WalletBitcoinOptions {
   privateKey: string;
   xApiKey: string;
@@ -58,7 +60,8 @@ export class WalletBitcoin {
     }
 
     const ECPair = ECPairFactory(tinysecp);
-    const network = chainId === "1800" ? bitcoin.networks.mainnet : bitcoin.networks.testnet;
+    const network = chainId === "1800" ? bitcoin.networks.bitcoin : bitcoin.networks.testnet;
+
 
     const privateKeyBuffer = Buffer.from(this.privateKey, "hex");
     const keyPair: ECPairInterface = ECPair.fromPrivateKey(privateKeyBuffer, { network });
@@ -132,7 +135,7 @@ export const getKeysFromMnemonic = async (
   }
 
   const seed = await bip39.mnemonicToSeed(mnemonic);
-  const network = chainId === "1800" ? bitcoin.networks.mainnet : bitcoin.networks.testnet;
+  const network = chainId === "1800" ? bitcoin.networks.bitcoin : bitcoin.networks.testnet;
 
   const root = bitcoin.bip32.fromSeed(seed, network);
   const child = root.derivePath(path);

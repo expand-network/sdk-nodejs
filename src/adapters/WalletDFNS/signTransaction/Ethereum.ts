@@ -1,4 +1,4 @@
-import { Wallet, providers } from "ethers";
+import { Wallet, JsonRpcProvider } from "ethers";
 
 interface TransactionObject {
   to: string;
@@ -10,7 +10,7 @@ interface TransactionObject {
 
 interface Options {
   wallet: Wallet;
-  rpcProvider: providers.JsonRpcProvider;
+  rpcProvider: JsonRpcProvider;
 }
 
 interface SignedTransactionResponse {

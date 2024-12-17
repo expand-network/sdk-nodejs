@@ -9,7 +9,7 @@ import {
   Connection,
   BlockhashWithExpiryBlockHeight
 } from '@solana/web3.js';
-import * as sign from 'tweetnacl';
+import nacl from 'tweetnacl';
 import bs58 from 'bs58';
 import BN from 'bn.js';
 
@@ -61,12 +61,12 @@ export const signTransactionSolana = async (
     }
 
     transactionBuffer = preparedTx.serializeMessage();
-    const signature = sign.detached(transactionBuffer, from.secretKey);
+    const signature:any = nacl.sign.detached(transactionBuffer, from.secretKey);
     preparedTx.addSignature(from.publicKey, signature);
 
     if (transactionObject.additionalSigners) {
       const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
-      const additionalSignature = sign.detached(transactionBuffer, additionalKey.secretKey);
+      const additionalSignature:any = nacl.sign.detached(transactionBuffer, additionalKey.secretKey);
       preparedTx.addSignature(additionalKey.publicKey, additionalSignature);
     }
 
