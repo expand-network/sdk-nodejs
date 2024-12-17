@@ -48,7 +48,7 @@ export const deposit = async (options: DepositOptions): Promise<any> => {
     return {
       message: errorMessage.error.message.invalidSrcToken,
       code: errorMessage.error.code.invalidInput,
-    } as ErrorResponse;
+    };
   }
 
   const routeURL = `${config.dYdXV4.squidRouterAPIBaseUrl}route`;
@@ -80,9 +80,9 @@ export const deposit = async (options: DepositOptions): Promise<any> => {
   });
 
   const createTransaction = await wallet.signTransaction({
-    chainId: fromChain,
+    chainId: String(fromChain),
     from: fromAddress,
-    gas,
+    gas: String(gas),
     gasPrice,
     data,
     value,
@@ -90,7 +90,7 @@ export const deposit = async (options: DepositOptions): Promise<any> => {
   });
 
   if (!createTransaction?.name?.valid) {
-    return new Error('Invalid', { cause: createTransaction?.message });
+    return new Error('Invalid transaction: ' + createTransaction?.message);
   }
 
   const transactionReceipt = await wallet.sendTransaction(createTransaction);
