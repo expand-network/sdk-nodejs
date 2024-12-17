@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getSubAccountCompositeClient } from '../../configuration/dYdXCommon';
 import { OrderFlags } from '@dydxprotocol/v4-client-js';
-import errorMessage from '../../configuration/errorMessage.json';
+import errorMessage from '../../configuration/errorMessage';
 
 interface CancelOrderOptions {
   subAccountNumber: number;
@@ -11,10 +11,8 @@ interface CancelOrderOptions {
 }
 
 interface OrderResponse {
-  data: {
-    clientId: string;
-    ticker: string;
-  };
+  clientId: string;
+  ticker: string;
 }
 
 interface ErrorResponse {
@@ -34,11 +32,11 @@ export const cancelOrder = async (options: CancelOrderOptions): Promise<any> => 
     headers: {},
   };
 
-  let order: OrderResponse['data'];
+  let order: OrderResponse;
 
   try {
     const res = await axios.request<OrderResponse>(orderConfig);
-    order = res.data;
+    order = res.data; // Assuming the response directly contains `clientId` and `ticker`
   } catch (err) {
     return {
       message: errorMessage.error.message.invalidOrderId,
@@ -49,7 +47,7 @@ export const cancelOrder = async (options: CancelOrderOptions): Promise<any> => 
   try {
     const tx = await client.cancelOrder(
       subaccount,
-      order.clientId,
+      Number(order.clientId),
       OrderFlags.LONG_TERM,
       order.ticker,
       0,
