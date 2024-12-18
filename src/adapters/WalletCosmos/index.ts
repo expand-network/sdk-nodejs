@@ -4,7 +4,7 @@ import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import axios from "axios";
 import * as schemaValidator from "../../../configuration/schemaValidator";
 import * as common from "../../../configuration/common";
-import * as config from "../../../configuration/config.json";
+import * as config from "../../../configuration/config";
 
 interface WalletCosmosOptions {
   privateKey: string;

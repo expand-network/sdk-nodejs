@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import Web3 from 'web3';
 import BN from "bn.js";
-import * as config from '../../configuration/config.json';
+import * as config from '../../configuration/config';
 
 interface Call {
   contractAddress: string;

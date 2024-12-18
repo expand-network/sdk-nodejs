@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as config from "../configuration/config.json";
+import config from "../configuration/config";
 import * as schemaValidator from "../configuration/schemaValidator";
 import {
   Wallet,

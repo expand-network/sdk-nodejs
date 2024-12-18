@@ -9,7 +9,7 @@ import { WalletCircle } from '../adapters/WalletCircle';
 import { WalletCosmos } from "../adapters/WalletCosmos";
 import { WalletStellar } from '../adapters/WalletStellar';
 import { WalletXRPL } from '../adapters/WalletXRPL';
-import { WalletStacks } from '@/adapters/WalletStacks';
+import { WalletStacks } from '../adapters/WalletStacks';
 
 export {
     Wallet,

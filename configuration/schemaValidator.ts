@@ -3,7 +3,7 @@
 
 import Ajv from "ajv";
 import addErrors from "ajv-errors";
-import errorMessage from "./errorMessage.json";
+import errorMessage from "./errorMessage";
 import { jsonSchema } from "./schema";
 
 const ajv = new Ajv({ allErrors: true, strict: true, useDefaults: true });

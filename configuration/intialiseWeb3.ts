@@ -9,10 +9,10 @@ import { TonClient } from "@ton/ton";
 import { StargateClient } from "@cosmjs/stargate";
 import StellarSdk from "stellar-sdk";
 import * as common  from "./common";
-import config from "./config.json";
-import errorMessage from "./errorMessage.json";
+import config from "./config";
+import errorMessage from "./errorMessage";
 
-import { Server } from "stellar-sdk";
+import Server from "stellar-sdk";
 
 const invalidChainId = {
   error: errorMessage.error.message.invalidChainId,

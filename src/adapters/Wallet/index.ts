@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import BN from 'bn.js';
 import * as rawTransaction from './signTransaction/index';
-import config from '../../../configuration/config.json';
+import config from '../../../configuration/config';
 import * as common from '../../../configuration/common';
 import * as schemaValidator from '../../../configuration/schemaValidator';
 import { initialiseWeb3 } from '../../../configuration/intialiseWeb3';

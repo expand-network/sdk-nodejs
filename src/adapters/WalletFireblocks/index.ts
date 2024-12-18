@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
-import config from '../../../configuration/config.json';
+import config from '../../../configuration/config';
 import * as common from '../../../configuration/common';
 import * as schemaValidator from '../../../configuration/schemaValidator';
 

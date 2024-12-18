@@ -2,8 +2,8 @@
   "name": "expand-network",
   "version": "3.2.4",
   "description": "The external SDK for the adapter",
-  "main": "src/index.ts",
-  "type": "module",
+  "main": "src/index.js",
+  "type": "commonjs",
   "parserOptions": {
     "ecmaVersion": 2018
   },
