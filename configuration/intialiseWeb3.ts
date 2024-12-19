@@ -25,8 +25,12 @@ export const initialiseWeb3 = async (data: any) => {
     chainSymbol: data.chainSymbol
   });
 
-  let rpc;
-  let chainName;
+  if (!chainId) {
+    return invalidChainId; // Return an error if chainId is null
+  }
+
+  let rpc:any;
+  let chainName:any;
 
   try {
     rpc = data.rpc || config.chains[chainId].rpc;
@@ -35,14 +39,14 @@ export const initialiseWeb3 = async (data: any) => {
     return invalidChainId;
   }
 
-  let web3;
+  let web3:any;
 
   if (chainName === "Evm") {
     web3 = new EvmWeb(rpc);
   } else if (chainName === "Solana") {
     web3 = new solanaWeb.Connection(rpc);
   } else if (chainName === "Tron") {
-    const { HttpProvider } = TronWeb.providers;
+    const HttpProvider = TronWeb.providers.HttpProvider;
     const fullNode = new HttpProvider(rpc);
     const solidityNode = new HttpProvider(rpc);
     const eventServer = new HttpProvider(rpc);
@@ -66,7 +70,7 @@ export const initialiseWeb3 = async (data: any) => {
   } else if (chainName === "TON") {
     web3 = new TonClient({ endpoint: rpc, apiKey: config.chains[chainId]?.apiKey });
   } else if (chainName === "Stellar") {
-    web3 = new HorizonServer(rpc);
+    web3 = new StellarSdk.Server(rpc);
   } else if (chainName === "Cosmos") {
     web3 = await StargateClient.connect(rpc);
   }
