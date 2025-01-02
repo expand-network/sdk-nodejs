@@ -14,6 +14,7 @@ import {
   WalletStellar,
   WalletXRPL,
   WalletStacks,
+  WalletBitcoin
 } from "./interfaces/index";
 
 export const prepareTransaction = async (apiURL:any, options:any) => {
@@ -86,4 +87,5 @@ export {
   WalletStellar,
   WalletXRPL,
   WalletStacks,
+  WalletBitcoin
 };

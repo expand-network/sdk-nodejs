@@ -10,6 +10,7 @@ import { WalletCosmos } from "../adapters/WalletCosmos";
 import { WalletStellar } from '../adapters/WalletStellar';
 import { WalletXRPL } from '../adapters/WalletXRPL';
 import { WalletStacks } from '../adapters/WalletStacks';
+import { WalletBitcoin } from '../adapters/WalletBitcoin';
 
 export {
     Wallet,
@@ -23,5 +24,6 @@ export {
     WalletStellar,
     WalletXRPL,
     WalletCosmos,
-    WalletStacks
+    WalletStacks,
+    WalletBitcoin
 };

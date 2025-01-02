@@ -12,8 +12,8 @@ interface WalletOptions {
 }
 
 interface TransactionObject {
-    chainId: number;
-    chainSymbol: string;
+    chainId: string;
+    chainSymbol?: string;
     [key: string]: any;
 }
 

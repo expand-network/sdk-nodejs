@@ -20,9 +20,9 @@ type WalletDFNSOptions = {
 };
 
 type TransactionObject = {
-    chainId: number;
-    chainSymbol: string;
-    rawTransaction: any;
+    chainId: string;
+    chainSymbol?: string;
+    rawTransaction?: any;
     to: string; 
     value: string; 
     gas: string; 

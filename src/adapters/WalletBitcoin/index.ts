@@ -7,24 +7,22 @@ import * as schemaValidator from "../../../configuration/schemaValidator";
 import * as common from "../../../configuration/common";
 import config from "../../../configuration/config";
 
-import { networks } from "bitcoinjs-lib";
-
 interface WalletBitcoinOptions {
   privateKey: string;
   xApiKey: string;
 }
 
 interface TransactionOptions {
-  chainSymbol: string;
+  chainSymbol?: string;
   to: string;
-  value: number;
+  value: string;
   utxo: { txId: string; vout: number; value: number };
   chainId?: string;
   [key: string]: any;
 }
 
 interface GetKeysOptions {
-  chainSymbol: string;
+  chainSymbol?: string;
   mnemonic: string;
   chainId?: string;
   [key: string]: any;
