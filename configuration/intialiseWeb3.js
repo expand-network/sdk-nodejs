@@ -1,5 +1,5 @@
 // Import the multiple different web3 libraries
-const EvmWeb = require('web3');
+const { ethers } =  require("ethers");
 const solanaWeb = require('@solana/web3.js');
 const TronWeb = require('tronweb');
 const nearApi = require('near-api-js');
@@ -44,7 +44,7 @@ exports.initialiseWeb3 = async (data) => {
 
     if (chainName === 'Evm') {
 
-        web3 = new EvmWeb(rpc);
+        web3 = new ethers.JsonRpcProvider(rpc);
 
     } else if (chainName === 'Solana') {
 
