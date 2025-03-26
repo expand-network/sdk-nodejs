@@ -1,11 +1,11 @@
 const { BECH32_PREFIX, LocalWallet } = require('@dydxprotocol/v4-client-js');
-const { ethers } = require('ethers-5');
+const { ethers } = require('ethers');
 const config = require("../../configuration/config.json");
 const { deriveHDKeyFromEthereumSignature } = require('@dydxprotocol/v4-client-js/build/src/lib/onboarding');
 
 module.exports = {
     userOnboarding: async (options) => {
-        const provider = new ethers.providers.JsonRpcProvider(config.dYdXV4.rpc);
+        const provider = new ethers.JsonRpcProvider(config.dYdXV4.rpc);
         const signer = new ethers.Wallet(options.privateKey, provider);
         const {signingMsg} = config.dYdXV4;
 

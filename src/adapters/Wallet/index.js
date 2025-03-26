@@ -5,7 +5,7 @@ const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
 const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
-const { ethers } = require('ethers-5');
+const { ethers } = require('ethers');
 
 class Wallet {
 
@@ -145,7 +145,7 @@ class Wallet {
 
         rpc = rpc.data.data.rpc;
 
-        const provider = new ethers.providers.JsonRpcProvider(rpc);
+        const provider = new ethers.JsonRpcProvider(rpc);
         const signer = new ethers.Wallet(this.privateKey, provider);
         const signature = await signer._signTypedData(domain, types, values);
         return { signature };
@@ -174,7 +174,7 @@ class Wallet {
         let rpc = await axios.request(apiConfig);
         rpc = rpc.data.data.rpc;
 
-        const provider = new ethers.providers.JsonRpcProvider(rpc);
+        const provider = new ethers.JsonRpcProvider(rpc);
         const signer = new ethers.Wallet(this.privateKey, provider);
         const signature = orderType === "create" ? await signer._signTypedData(
             domain,

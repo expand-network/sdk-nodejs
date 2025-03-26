@@ -10,7 +10,8 @@ module.exports = {
 
         try {
 
-            const signedTransaction = await web3.eth.accounts.signTransaction(transactionObject, options.privateKey);
+            const wallet = new ethers.Wallet(options.privateKey, web3);
+            const signedTransaction = await wallet.signTransaction(transactionObject);
             return (signedTransaction);
 
         }
