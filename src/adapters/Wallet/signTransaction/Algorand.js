@@ -11,7 +11,7 @@ module.exports = {
 
             const params = await algorandWeb3.getTransactionParams().do();
 
-            // Here private key is the menmonic key
+            // Here private key is the mnemonic key
             const account = algosdk.mnemonicToSecretKey(options.privateKey);
 
             const transaction = {
