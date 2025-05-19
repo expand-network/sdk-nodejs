@@ -62,5 +62,19 @@ module.exports = {
         catch (error) {
             return error;
         }
+    },
+
+    signSendBatchTransactionsAptos: async (web3, transactionObject, options) => {
+        /*
+         * Function will sign and send the batch the transactions for ethereum based chains
+         */
+
+        try {
+            const transaction = await batchRequestAptos(web3, transactionObject, options.privateKey);
+            return transaction;
+        }
+        catch (error) {
+            return (error);
+        }
     }
 };
