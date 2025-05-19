@@ -6,12 +6,13 @@ module.exports = {
     try {
       let { privateKey } = options;
       const chainId = (options.chainId && options.chainId === "1400") ? "1" : "2";
-      const aptos = new Aptos({ network:chainId==="1" ? Network.MAINNET : Network.TESTNET });
+      const config = new AptosConfig({network:chainId==="1" ? Network.MAINNET : Network.TESTNET});
+      const aptos = new Aptos(config);
       privateKey = new Ed25519PrivateKey(privateKey);
       const account = Account.fromPrivateKey({ privateKey });
 
       let { data } = transactionObject;
-      const transactions = base64Payloads.map((b64) => {
+      const transactions = data.map((b64) => {
       const jsonStr = Buffer.from(b64, "base64").toString("utf-8");
       return JSON.parse(jsonStr);
       });
