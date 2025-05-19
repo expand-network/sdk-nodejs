@@ -348,7 +348,7 @@
     },
     "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl" : "https://api.expand.network"
+        "apiurl" : "https://api.expand.network/"
     },
 
     "dexes": {

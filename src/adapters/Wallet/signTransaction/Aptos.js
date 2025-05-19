@@ -1,5 +1,6 @@
 const { Aptos, Ed25519PrivateKey, 
     AccountAddress, Network, Account } = require("@aptos-labs/ts-sdk");
+const { batchRequestAptos } = require("../../../helper/batchRequest");
 const config = require('../../../../configuration/config.json');
 
 module.exports = {

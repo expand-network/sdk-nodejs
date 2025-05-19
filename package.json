@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/expand-network/sdk-nodejs#readme",
   "dependencies": {
+    "@aptos-labs/ts-sdk": "^2.0.0",
     "@circle-fin/user-controlled-wallets": "^3.0.0",
     "@cosmjs/proto-signing": "^0.32.2",
     "@cosmjs/stargate": "0.32.4",
@@ -63,6 +64,7 @@
     "ethereumjs-tx": "2.1.2",
     "ethers": "6.13.1",
     "ethers-5": "npm:ethers@^5.7.2",
+    "got": "^14.4.7",
     "js-sha256": "0.9.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
