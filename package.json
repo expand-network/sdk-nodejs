@@ -49,7 +49,7 @@
     "ajv-errors": "3.0.0",
     "algosdk": "2.7.0",
     "aptos": "1.21.0",
-    "axios": "1.6.8",
+    "axios": "^1.9.0",
     "bip39": "^3.1.0",
     "bitcoinjs-lib": "5.2.0",
     "bitcore-lib": "10.1.0",
