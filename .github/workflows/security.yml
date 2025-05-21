@@ -1,0 +1,14 @@
+name: Security Pipeline
+
+on:
+  push:
+    branches: [ "develop" ]
+      
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  security_scan:
+    uses: expand-network/blueprint-template/.github/workflows/security.yaml@main
+    secrets: inherit
+    
