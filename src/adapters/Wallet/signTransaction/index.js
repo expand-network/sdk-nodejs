@@ -20,6 +20,12 @@ exports.signTransactionEvm = async (web3, transactionObject, options) => {
     return rawData;
 };
 
+exports.signSendBatchTransactionsEvm = async (web3, transactionObject, options) => {
+
+    const rawData = await Ethereum.signSendBatchTransactionsEvm(web3, transactionObject, options);
+    return rawData;
+};
+
 exports.signTransactionNear = async (web3, transactionObject, options) => {
 
     const rawData = await Near.signTransactionNear(web3, transactionObject, options);

@@ -30,7 +30,8 @@ class WalletXRPL {
       }
     };
 
-    const account = xrpl.Wallet.fromMnemonic(this.privateKey);
+    const account = (this.privateKey.split(" ").length > 1) ? xrpl.Wallet.fromMnemonic(this.privateKey)
+    : xrpl.Wallet.fromSecret(this.privateKey);
 
     const decodedData = JSON.parse(atob(data));
     const signedTx = account.sign(decodedData);

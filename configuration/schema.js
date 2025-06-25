@@ -65,7 +65,10 @@ exports.jsonSchema = {
                     to: { type: "string" },
                     value: { type: "string" },
                     gas: { type: "string" },
-                    data: { type: "string" },
+                    data: { "anyOf": [
+                                { "type": "string" },
+                                { "type": "array", "items": { "type": "string" } }
+                                ]},
                     networkId: { type: "string" }
                 },
 
@@ -129,12 +132,31 @@ exports.jsonSchema = {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
-                    rawTransaction: { type: "string" },
+                    rawTransaction:  { "anyOf": [
+                                { "type": "string" },
+                                { "type": "array", "items": { "type": "string" } }
+                                ]},
                     signature: { type: "string" },
                     xApiKey: { type: "string" },
                     rpc: { type: "string" }
                 },
                 required: ["rawTransaction"]
+            },
+        },
+
+        // Field Mapping for sendTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stellarDecodeTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    transactionHash: { type: "string" },
+                },
+                required: ["chainId","transactionHash"]
             },
         },
 
@@ -419,6 +441,28 @@ exports.jsonSchema = {
                     privateKey: { type: "string" },
                 },
                 required: ["amountIn", "to", "gas", "from", "tokenIn", "privateKey"]
+            },
+        },
+
+        // Field Mapping for batchTransactions() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "batchTransactions()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    transactions: {
+                        "anyOf": [
+                            { "type": "object" },
+                            { "type": "array", "items": { "type": "object" } }
+                        ]
+                    }
+                },
+                required: ["transactions"]
             },
         },
     ]

@@ -1,39 +1,31 @@
-const { TransactionBlock, Ed25519Keypair, RawSigner } = require('@mysten/sui.js');
-const { fromB64 } = require("@mysten/bcs");
+const { Ed25519Keypair } = require("@mysten/sui/keypairs/ed25519");
+const { Transaction } = require("@mysten/sui/transactions");
 
 module.exports = {
 
     signTransactionSui: async (web3, transactionObject, options) => {
+        const { to, value } = transactionObject;
+        let { data } = transactionObject;
 
+        let tx;
         try {
-            // get the secretkey from options
             const secretKey = options.privateKey;
-            const privateKeyBase64 = Buffer.from(secretKey, "hex").toString("base64"); // Convert hex to base64 string
-            // Create the keypair from converted private key
-            const keypair = Ed25519Keypair.fromSecretKey(fromB64(privateKeyBase64));
-            // Create a signer with the provided keypair and network
-            const signer = new RawSigner(keypair, web3);
-            // Create the transaction with given input
-            const tx = new TransactionBlock();
-            // Currently we support sui coin transfer
-            const [coin] = tx.splitCoins(tx.gas, [tx.pure(transactionObject.value)]);
-            // Add the instruction
-            tx.transferObjects(
-                [coin],
-                tx.pure(
-                    transactionObject.to
-                )
-            );
-            // Sign the transaction Block
-            const signedTransaction = await signer.signTransactionBlock({
-                transactionBlock: tx,
-            });
-            // Return the raw Transaction
-            return { "rawTransaction": signedTransaction };
+            const signer = Ed25519Keypair.fromSecretKey(secretKey);
 
+            if (data){
+                data = JSON.parse(atob(data));
+                tx = Transaction.from(JSON.stringify(data));
+            } else {
+                tx = new Transaction();
+
+                const [coin] = tx.splitCoins(tx.gas, [value.toString()]);
+                tx.transferObjects([coin], to);
+            }
+
+            const { bytes, signature } = await tx.sign({signer, client: web3, onlyTransactionKind: false});
+            return { rawTransaction: bytes, signature };
         } catch (error) {
             return (error);
-
         }
     }
 };

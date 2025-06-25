@@ -25,9 +25,9 @@ async function main(){
     // Prepare the transaction from expand api
     // We are making an approve call here
     const prepareApproveTx = await prepareTransaction('https://api.expand.network/fungibletoken/approve', {
-        "from": "0x6E5eAf34c73D1CD0be4e24f923b97CF38e10d1f3",
+        "from": "<Address>",
         "tokenAddress": "0xdc31Ee1784292379Fbb2964b3B9C4124D8F89C60",
-        "to": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "to": "<Spender Address>",
         "amount": "10000",
         "gas": "25000",
         "xApiKey": process.env.xApiKey

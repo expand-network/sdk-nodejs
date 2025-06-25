@@ -1,4 +1,4 @@
-const { TransactionBuilder, Keypair } = require("stellar-sdk");
+const { TransactionBuilder, Keypair } = require("@stellar/stellar-sdk");
 const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
