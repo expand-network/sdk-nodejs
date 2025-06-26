@@ -1,8 +1,7 @@
-const { Aptos, Hex, Ed25519PrivateKey, AccountAuthenticator, Deserializer, Serializer, 
+const { Aptos,  Ed25519PrivateKey, RawTransaction, Deserializer, SimpleTransaction,
      AptosConfig, Network, Account } = require("@aptos-labs/ts-sdk");
 const { batchRequestAptos } = require("../../../helper/batchRequest");
 const config = require('../../../../configuration/config.json');
-const { decodeTransactions } = require("../../../helper/aptosHelper");
 
 module.exports = {
 
@@ -13,54 +12,33 @@ module.exports = {
 
         try {
             let { privateKey } = options;
-            const chainId = (options.chainId && options.chainId === "1400") ? "1" : "2";
-            const config = new AptosConfig({network:chainId==="1" ? Network.MAINNET : Network.DEVNET});
+            const config = new AptosConfig({network:options.chainId==="1400" ? Network.MAINNET : Network.DEVNET});
             const aptos = new Aptos(config);
             privateKey = new Ed25519PrivateKey(privateKey);
             const account = Account.fromPrivateKey({ privateKey });
-
+            console.log(transactionObject);
             let transaction;
-            let payload;
-            // If `data` is provided, assume it's a base64-encoded JSON payload and decode it
             if (transactionObject.data) {
-                const decodedPayloadJson = await decodeTransactions(transactionObject.data);
-                payload = {
-                sender: account.accountAddress,
-                data: decodedPayloadJson,
-                }
-                transaction = await aptos.transaction.build.simple({
-                sender: account.accountAddress,
-                data: decodedPayloadJson,
-                });
+                transaction = new SimpleTransaction(RawTransaction.deserialize(Deserializer.fromHex(transactionObject.data)));
             } else {
-                // Manually build payload
                 const dataPayload = {
                 function: "0x1::coin::transfer",
                 typeArguments: ["0x1::aptos_coin::AptosCoin"],
-                functionArguments: [transactionObject.to, transactionObject.value],
+                functionArguments: [transactionObject.to, 100],
                 };
-                payload = {
-                sender: account.accountAddress,
-                data: dataPayload,
-                }
                 transaction = await aptos.transaction.build.simple({
                 sender: account.accountAddress,
                 data: dataPayload,
+                options : {
+                            expireTimestamp: Math.floor(Date.now() / 1000) + 600
+                        }
                 });
             }
-            
-            let signedTxn = await aptos.transaction.sign({ signer: account, transaction });
-            let signedTxn1 = signedTxn.bcsToBytes();
-            const deserialixe = new Deserializer(Deserializer.fromHex(Hex.fromHexString(signedTxn.toString())));
-            const de1 = AccountAuthenticator.deserialize(deserialixe);
-            console.log(de1);
-            const base64SignedTxn = Buffer.from(signedTxn).toString("base64");
-            console.log(base64SignedTxn);
-            return 0;
-            // const rawTransaction = [transactionObject.data
-            // ]
+            const signedTxn = await aptos.transaction.sign({ signer: account, transaction });
+            const signedTxn1 = signedTxn.bcsToHex().toString();
+            const rawTransaction = [transaction.bcsToHex().toString(), signedTxn1]
 
-            // return { "rawTransaction": rawTransaction };
+            return { "rawTransaction": rawTransaction };
 
         }
         catch (error) {
