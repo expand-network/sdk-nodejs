@@ -462,5 +462,27 @@ exports.jsonSchema = {
                 required: ["amountIn", "to", "gas", "from", "tokenIn", "privateKey"]
             },
         },
+
+        // Field Mapping for batchTransactions() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "batchTransactions()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    transactions: {
+                        "anyOf": [
+                            { "type": "object" },
+                            { "type": "array", "items": { "type": "object" } }
+                        ]
+                    }
+                },
+                required: ["transactions"]
+            },
+        },
     ]
 };

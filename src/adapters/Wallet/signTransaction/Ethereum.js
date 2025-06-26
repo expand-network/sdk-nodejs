@@ -1,5 +1,8 @@
 // const Web3 = require('web3');
 
+const { batchRequestEvm } = require("../../../helper/batchRequest");
+
+
 module.exports = {
 
 
@@ -19,6 +22,19 @@ module.exports = {
             return (error);
         }
 
-    }
+    },
 
+    signSendBatchTransactionsEvm: async (web3, transactionObject, options) => {
+        /*
+         * Function will sign and send the batch the transactions for ethereum based chains
+         */
+
+        try {
+            const transaction = await batchRequestEvm(web3, transactionObject, options.privateKey);
+            return transaction;
+        }
+        catch (error) {
+            return (error);
+        }
+    }
 };

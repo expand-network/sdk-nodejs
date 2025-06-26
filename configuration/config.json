@@ -348,9 +348,11 @@
     },
     "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl" : "http://localhost:3000"
+        "apiurl": "https://api.expand.network/"
     },
-
+    "localurl": {
+        "apiurl": "http://localhost:3000/"
+    },
     "dexes": {
         "1900": {
             "localName": "UniswapX",
@@ -363,6 +365,24 @@
             "dexName": "UniswapX",
             "chainName": "Ethereum",
             "chainId": "5"
+        },
+        "1000": {
+            "localName": "UniswapV2",
+            "dexName": "UniswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "factoryAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+        },
+        "1100": {
+            "localName": "SushiswapV2",
+            "dexName": "SushiswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
+            "factoryAddress": "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"
         },
         "2200": {
             "dexName": "Kyberswap",
@@ -419,7 +439,6 @@
             "chainId": "25"
         }
     },
-    
     "dYdXV4": {
         "chainId": "dydx-testnet-4",
         "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
@@ -454,5 +473,13 @@
                 "action": "dYdX Chain Onboarding"
             }
         }
+    },
+    "contract_address": {
+        "UNISWAPV2": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "WETH": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+        "DAI": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    },
+    "rpc_url": {
+        "sepolia": "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5"
     }
 }

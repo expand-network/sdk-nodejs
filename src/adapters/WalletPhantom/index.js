@@ -114,9 +114,32 @@ class WalletPhantom {
         catch (error) {
             return error;
         }
-
     };
 
+    signSendBatchTransactions = async (transactionObject) => {
+        const transactionOptions = { ...transactionObject, function: "batchTransactions()" };
+        const validObject = await schemaValidator.validateInput(transactionOptions);
+
+        if (!validObject.valid) return (validObject);
+
+        axios.defaults.headers['X-API-KEY'] = this.xApiKey;
+        const apiURL = `${config.url.apiurl}chain/getpublicrpc/`;
+
+        const chainId = await common.getChainId({
+            chainId: transactionObject.chainId,
+            chainSymbol: transactionObject.chainSymbol
+        });
+
+        let rpc = await axios.get(apiURL, { params: { chainId } }).then(res => res?.data?.data?.rpc || "");
+        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
+
+        let chainName = config.chains[chainId].chainName;
+        const transaction = await rawTransaction[`signSendBatchTransactions${chainName}`](web3, transactionObject, {
+            privateKey: this.privateKey
+        });
+        transaction.chainId = chainId;
+        return transaction;
+    }
 }
 
 module.exports = { WalletPhantom };

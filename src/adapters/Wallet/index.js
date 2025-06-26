@@ -4,7 +4,7 @@ const rawTransaction = require('./signTransaction/index');
 const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
-const {initialiseWeb3} = require('../../../configuration/intialiseWeb3');
+const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
 const { ethers } = require('ethers-5');
 
 class Wallet {
@@ -40,15 +40,14 @@ class Wallet {
         const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
         transactionOptions.value = new BN(transactionOptions.value);
 
-            let chainName = config.chains[chainId].chainName;
-            console.log(chainName);
-            
-            const options = {};
-            options.privateKey = this.privateKey;
-            options.chainId = transactionObject.chainId;
-            options.rpc = rpc;
-            const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
-            rawData.chainId = chainId;
+        let chainName = config.chains[chainId].chainName;
+
+        const options = {};
+        options.privateKey = this.privateKey;
+        options.chainId = transactionObject.chainId;
+        options.rpc = rpc;
+        const rawData = await rawTransaction[`signTransaction${chainName}`](web3, transactionObject, options);
+        rawData.chainId = chainId;
 
         return rawData;
     };
@@ -185,7 +184,7 @@ class Wallet {
             { CancelOrder: types.CancelOrder },
             message
         );
-        return { signature, ...(orderType === "create" && {salt: message.salt}) };
+        return { signature, ...(orderType === "create" && { salt: message.salt }) };
     };
 
     signSendBatchTransactions = async (transactionObject) => {
@@ -209,7 +208,7 @@ class Wallet {
         const transaction = await rawTransaction[`signSendBatchTransactions${chainName}`](web3, transactionObject, {
             privateKey: this.privateKey
         });
-        // transaction.chainId = chainId;
+        transaction.chainId = chainId;
         return transaction;
     }
 }

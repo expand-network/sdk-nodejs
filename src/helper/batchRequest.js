@@ -1,9 +1,46 @@
 const {Aptos, AptosConfig, Network, 
       Account, Ed25519PrivateKey } = require("@aptos-labs/ts-sdk");
 
-
-
 module.exports = {
+  batchRequestEvm: async (web3, transactionObject, privateKey) => {
+    try {
+      const { transactions } = transactionObject;
+      const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+      const initialNonce = await getNonce(web3, account.address);
+
+      const batch = new web3.BatchRequest();
+      const promises = [];
+      let batches = transactions;
+
+      if (typeof transactions === 'object' && transactions !== null && !Array.isArray(transactions)) {
+        batches = Object.values(transactions);
+      }
+      for (let i = 0; i < batches.length; i++) {
+        const txParams = { ...batches[i], nonce: web3.utils.toHex(initialNonce + i) };
+        const signedTx = await web3.eth.accounts.signTransaction(txParams, privateKey);
+
+        const promise = new Promise((resolve, reject) => {
+          batch.add(web3.eth.sendSignedTransaction.request(signedTx.rawTransaction, (err, data) => {
+            if (err) {
+              console.error('Error executing transaction:', err);
+              reject(err);
+            } else {
+              console.log('Transaction Sent:', data);
+              resolve(data);
+            }
+          }));
+        });
+        promises.push(promise);
+      }
+
+      await batch.execute();
+      const transactionHash = await Promise.all(promises);
+      return transactionHash;
+    } catch (error) {
+      console.error('Batch request failed:', error);
+      throw error;
+    }
+  },
   batchRequestAptos: async (web3, transactionObject, privateKey) => {
     try {
       const chainId = (transactionObject.chainId && transactionObject.chainId === "1400") ? "1" : "2";
@@ -13,21 +50,18 @@ module.exports = {
       const account = Account.fromPrivateKey({ privateKey });
       await aptos.account.getAccountInfo({ accountAddress: account.accountAddress });
       let transactions = transactionObject.transactions;
-      const decodedTransactions = await decodeTransactions(transactions, false);
+      const decodedPayloads = Object.values(transactions).map(tx =>
+        JSON.parse(Buffer.from(tx.data, 'base64').toString())
+      );
       try{
         await aptos.transaction.batch.forSingleAccount({
         sender: account,
-        data: decodedTransactions,
+        data: decodedPayloads,
         });
         return "Transaction Successful"
         }catch(error){
           return "Transaction Failed"
         }
-      // Extract transaction hashes
-      // const txHashes = responses.map((tx) => tx.hash);
-
-      // console.log("Batch submitted tx hashes:", txHashes);
-      return responses;
     }
     catch (error) {
       console.error('Batch request failed:', error);
