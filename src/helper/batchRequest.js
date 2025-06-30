@@ -43,13 +43,10 @@ module.exports = {
   },
   batchRequestAptos: async (web3, transactionObject, privateKey) => {
     try {
-      const chainId = (transactionObject.chainId && transactionObject.chainId === "1400") ? "1" : "2";
-      const config = new AptosConfig({network:chainId==="1" ? Network.MAINNET : Network.DEVNET});
-      const aptos = new Aptos(config);
-      privateKey = new Ed25519PrivateKey(privateKey);
-      const account = Account.fromPrivateKey({ privateKey });
-      await aptos.account.getAccountInfo({ accountAddress: account.accountAddress });
-      let transactions = transactionObject.transactions;
+      const config = new AptosConfig({network:options.chainId==="1400" ? Network.MAINNET : Network.TESTNET});
+      const aptos = new Aptos(config); 
+      const account = Account.fromPrivateKey({ privateKey: new Ed25519PrivateKey(privateKey) });
+      const { transactions } = transactionObject;
       const decodedPayloads = Object.values(transactions).map(tx =>
         JSON.parse(Buffer.from(tx.data, 'base64').toString())
       );
