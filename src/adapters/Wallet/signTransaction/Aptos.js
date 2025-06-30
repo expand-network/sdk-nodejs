@@ -14,7 +14,6 @@ module.exports = {
             const config = new AptosConfig({network:options.chainId==="1400" ? Network.MAINNET : Network.TESTNET});
             const aptos = new Aptos(config);
             const account = Account.fromPrivateKey({ privateKey : new Ed25519PrivateKey(privateKey)  });
-            console.log(transactionObject);
             let transaction;
             if (transactionObject.data) {
                 transaction = new SimpleTransaction(RawTransaction.deserialize(Deserializer.fromHex(transactionObject.data)));

@@ -73,7 +73,6 @@ exports.signVersionedTransactionSolana = async (web3, transactionObject, options
 exports.signSendBatchTransactionsAptos = async (web3, transactionObject, options) => {
 
     const rawData = await Aptos.signSendBatchTransactionsAptos(web3, transactionObject, options);
-    console.log(rawData);
     return rawData;
 };
 
