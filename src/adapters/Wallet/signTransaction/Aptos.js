@@ -64,7 +64,7 @@ module.exports = {
 
   signSendBatchTransactionsAptos: async (web3, transactionObject, options) => {
     /*
-     * Function will sign and send the batch the transactions for ethereum based chains
+     * Function will sign and send the batch the transactions for aptos chain
      */
 
     try {
