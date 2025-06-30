@@ -1,7 +1,6 @@
 const { Aptos,  Ed25519PrivateKey, RawTransaction, Deserializer, SimpleTransaction,
      AptosConfig, Network, Account } = require("@aptos-labs/ts-sdk");
 const { batchRequestAptos } = require("../../../helper/batchRequest");
-const config = require('../../../../configuration/config.json');
 
 module.exports = {
 
@@ -12,7 +11,7 @@ module.exports = {
 
         try {
             let { privateKey } = options;
-            const config = new AptosConfig({network:options.chainId==="1400" ? Network.MAINNET : Network.DEVNET});
+            const config = new AptosConfig({network:options.chainId==="1400" ? Network.MAINNET : Network.TESTNET});
             const aptos = new Aptos(config);
             privateKey = new Ed25519PrivateKey(privateKey);
             const account = Account.fromPrivateKey({ privateKey });
