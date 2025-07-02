@@ -106,5 +106,18 @@ module.exports = {
     catch (error) {
       return error;
     }
+  },
+  signBatchTransactionsSolana: async (web3, transactionObject, options) => {
+      /*
+        * Function will sign and send the batch the transactions for ethereum based chains
+        */
+
+      try {
+          const transaction = await batchRequestSolana(web3, transactionObject, options);
+          return transaction;
+      }
+      catch (error) {
+          return (error);
+      }
   }
 };
