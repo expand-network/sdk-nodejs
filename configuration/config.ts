@@ -14,6 +14,7 @@ type ChainConfig = {
     gasPrice?: string;
     network?: string;
     fee?: number;
+    sorobanRpc?:string;
   };
 
   type FireblocksConfig = {
@@ -27,6 +28,9 @@ type ChainConfig = {
   type UrlConfig = {
     apiurl:string;
   }
+  type localurlConfig = {
+    apiurl:string;
+  }
 
   type DexesConfig = {
     localName?: string;
@@ -34,6 +38,9 @@ type ChainConfig = {
     chainId: string;
     dexName: string;
     localDexName?: string;
+    chainSymbol?:string;
+    routerAddress?:string;
+    factoryAddress?:string;
   };
 
   type DYdXConfig = {
@@ -45,15 +52,27 @@ type ChainConfig = {
     rpc : string;
   };
 
+   type contract_addressConfig = {
+    UNISWAPV2: string;
+    WETH : string;
+    DAI : string;
+  };
+
+  type rpc_urlConfig = {
+    sepolia:string;
+  }
   
   type Config = {
     chains: Record<string, ChainConfig>;
     fireblocks: FireblocksConfig;
     circleProgrammableWallet : CircleProgrammableWalletConfig;    
     url:  UrlConfig;
+    localurl: localurlConfig;
     Mask250: string;
     dexes : Record<any, DexesConfig>;
     dYdXV4: DYdXConfig;
+    contract_address: contract_addressConfig;
+    rpc_url: rpc_urlConfig;
   };
 
  
@@ -222,8 +241,8 @@ const config: Config = {
             "localName": "SuiTestnet",
             "chainName": "Sui",
             "chainSymbol": "TSUI",
-            "rpc": "https://fullnode.testnet.sui.io:443",
-            "publicRpc": "https://fullnode.testnet.sui.io:443"
+            "rpc": "https://fullnode.testnet.sui.io",
+            "publicRpc": "https://rpc.ankr.com/sui_testnet"
         },
         "1400": {
             "localName": "Aptos",
@@ -322,14 +341,16 @@ const config: Config = {
             "chainName": "Stellar",
             "chainSymbol": "XLM",
             "rpc": "https://horizon.stellar.org",
-            "networkPassphrase": "Public Global Stellar Network ; September 2015"
+            "networkPassphrase": "Public Global Stellar Network ; September 2015",
+            "sorobanRpc": "https://mainnet.sorobanrpc.com"
         },
         "1501": {
             "localName": "StellarTestnet",
             "chainName": "Stellar",
             "chainSymbol": "TXLM",
             "networkPassphrase": "Test SDF Network ; September 2015",
-            "rpc": "https://horizon-testnet.stellar.org"
+            "rpc": "https://horizon-testnet.stellar.org",
+            "sorobanRpc": "https://soroban-rpc.testnet.stellar.gateway.fm"
         },
         "cosmoshub-4": {
             "localName": "cosmoshub_mainnet",
@@ -384,6 +405,16 @@ const config: Config = {
             "chainSymbol": "TBTC",
             "network": "testnet",
             "fee": 2000
+        },
+        "5000": {
+            "localName": "Mantle",
+            "chainName": "Evm",
+            "chainSymbol": "MNT"
+        },
+        "5003": {
+            "localName": "MantleTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TMNT"
         }
     },
     "fireblocks": {
@@ -395,7 +426,10 @@ const config: Config = {
     },
     "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl" : "https://api.expand.network"
+        "apiurl": "https://api.expand.network/"
+    },
+    "localurl": {
+        "apiurl": "http://localhost:3000/"
     },
     "dexes": {
         "1900": {
@@ -409,6 +443,24 @@ const config: Config = {
             "dexName": "UniswapX",
             "chainName": "Ethereum",
             "chainId": "5"
+        },
+        "1000": {
+            "localName": "UniswapV2",
+            "dexName": "UniswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "factoryAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+        },
+        "1100": {
+            "localName": "SushiswapV2",
+            "dexName": "SushiswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
+            "factoryAddress": "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"
         },
         "2200": {
             "dexName": "Kyberswap",
@@ -465,7 +517,6 @@ const config: Config = {
             "chainId": "25"
         }
     },
-    
     "dYdXV4": {
         "chainId": "dydx-testnet-4",
         "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
@@ -500,6 +551,14 @@ const config: Config = {
                 "action": "dYdX Chain Onboarding"
             }
         }
+    },
+    "contract_address": {
+        "UNISWAPV2": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "WETH": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+        "DAI": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    },
+    "rpc_url": {
+        "sepolia": "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5"
     }
 };
 

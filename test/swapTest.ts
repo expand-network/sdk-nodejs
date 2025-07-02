@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 async function swap() {
   dotenv.config();
 
-  const xApiKey = "tK503cR23o8YTvXhNoDNo7kQf5sQdbXP8qbqkBeQ";
-  const privateKey = "7b030343684de5d0d35dd68333dac40ffaed6f138da85464ca6227b89b17eae9";
+  const xApiKey = process.env.xApiKey || ''
+  const privateKey = process.env.privateKey || ''
 
   const wallet = new Wallet({ privateKey , xApiKey });
   
@@ -18,9 +18,9 @@ async function swap() {
     ],
     "amountIn": "50000000000000000000",
     "amountOutMin": "730655",
-    "to": "0xB409cB0b5DB9f148d0bc491E140D9E0FDd789C11",
+    "to": "<user address>",
     "gas": "80000",
-    "from": "0xB409cB0b5DB9f148d0bc491E140D9E0FDd789C11",
+    "from": "<user address>",
     "deadline": "1716461989",
     "slippage": "1",
     xApiKey,

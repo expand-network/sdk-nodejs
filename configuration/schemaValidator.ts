@@ -1,6 +1,3 @@
-// Copyright 2022 The CmLab Authors
-// This file is part of the expand Library.
-
 import Ajv from "ajv";
 import addErrors from "ajv-errors";
 import errorMessage from "./errorMessage";
