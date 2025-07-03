@@ -67,7 +67,7 @@ module.exports = {
 
       const from = Keypair.fromSecretKey(decode(options.privateKey));
       const wallet = new Wallet(from);
-      const recentBlockhash = await web3.getLatestBlockhash();
+      const { blockhash } = await web3.getLatestBlockhash('finalized');
       let preparedTx;
 
       if (!(transactionObject.data)) {
@@ -80,7 +80,7 @@ module.exports = {
         ];
         const versionedMessage = new TransactionMessage({
           payerKey: from.publicKey,
-          recentBlockhash: recentBlockhash.blockhash,
+          recentBlockhash: blockhash,
           instructions
         }).compileToV0Message();
         preparedTx = new VersionedTransaction(versionedMessage);
