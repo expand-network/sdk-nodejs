@@ -1,5 +1,4 @@
-const { Transaction, VersionedTransaction } = require('@solana/web3.js');
-const { signVersionedTransactionSolana, signTransactionSolana } = require('../adapters/Wallet/signTransaction/Solana');
+const { VersionedTransaction } = require('@solana/web3.js');
 
 async function getNonce(web3, account) {
   const [pendingNonce, latestNonce] = await Promise.all([
@@ -23,7 +22,7 @@ module.exports = {
       if (typeof transactions === 'object' && transactions !== null && !Array.isArray(transactions)) {
         batches = Object.values(transactions);
       }
-      for (let i = 0; i < batches.length; i+1) {
+      for (let i = 0; i < batches.length; i++) {
         const txParams = { ...batches[i], nonce: web3.utils.toHex(initialNonce + i) };
         const signedTx = await web3.eth.accounts.signTransaction(txParams, privateKey);
 
@@ -53,27 +52,20 @@ module.exports = {
     try {
       const { transactions } = transactionObject;
       let batches = transactions;
-
       if (typeof transactions === 'object' && transactions !== null && !Array.isArray(transactions)) {
         batches = Object.values(transactions);
       }
       const rawTransactions = [];
-      for (let i = 0; i < batches.length; i+1) {
+      for (let i = 0; i < batches.length; i++) {
         const buffer = Buffer.from(batches[i].data, "base64");
-        let isVersioned = false;
-        try {
-          VersionedTransaction.deserialize(buffer);
-          isVersioned = true;
-        } catch {
-          Transaction.from(buffer);
-        }
-        
-        if (isVersioned) {
-          const { rawTransaction } = signVersionedTransactionSolana(web3, batches[i], options);
+        const tx = VersionedTransaction.deserialize(buffer);
+        const { signVersionedTransactionSolana, signTransactionSolana } = require('../adapters/Wallet/signTransaction/Solana');
+        if (tx.version==="legacy") {
+          const { rawTransaction }= await signTransactionSolana(web3, batches[i], options);
           rawTransactions.push(rawTransaction);
         }
         else{
-          const { rawTransaction }= signTransactionSolana(web3, batches[i], options);
+          const { rawTransaction }= await signVersionedTransactionSolana(web3, batches[i], options);
           rawTransactions.push(rawTransaction);
         }
       }

@@ -16,13 +16,12 @@ module.exports = {
     try {
 
       const from = Keypair.fromSecretKey(decode(options.privateKey));
-      const blockHeight = await web3.getLatestBlockhash();
       let preparedTx;
-
+      const { blockhash } = await web3.getLatestBlockhash();
       if (!(transactionObject.data)) {
         preparedTx = new Transaction({
-          blockhash: blockHeight.blockhash,
-          lastValidBlockHeight: blockHeight + 1500,
+          recentBlockhash: blockhash,
+          lastValidBlockHeight: blockhash + 1500,
           feePayer: from.publicKey
         });
         preparedTx.add(SystemProgram.transfer({
@@ -38,7 +37,8 @@ module.exports = {
         };
         const buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = Transaction.from(buffer);
-        preparedTx.recentBlockhash = blockHeight.blockhash;
+        preparedTx.recentBlockhash = blockhash;
+        preparedTx.feePayer = from.publicKey;
       }
 
       const transactionBuffer = preparedTx.serializeMessage();
@@ -84,6 +84,9 @@ module.exports = {
           instructions
         }).compileToV0Message();
         preparedTx = new VersionedTransaction(versionedMessage);
+        await preparedTx.populate(web3, {
+              replaceRecentBlockhash: true
+            });
       } else {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
@@ -108,9 +111,8 @@ module.exports = {
   },
   signSendBatchTransactionsSolana: async (web3, transactionObject, options) => {
       /*
-        * Function will sign and send the batch the transactions for ethereum based chains
+        * Function will sign and send the batch the transactions for solana
         */
-
       try {
           const transaction = await batchRequestSolana(web3, transactionObject, options);
           return transaction;
