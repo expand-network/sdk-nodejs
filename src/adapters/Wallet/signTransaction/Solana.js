@@ -1,9 +1,10 @@
 const { Wallet } = require('@project-serum/anchor');
 const { Keypair, Transaction, SystemProgram, VersionedTransaction, 
-    TransactionMessage, PublicKey } = require('@solana/web3.js')
+    TransactionMessage, PublicKey } = require('@solana/web3.js');
 const { sign } = require('tweetnacl');
 const { decode } = require('bs58');
 const BN = require('bn.js');
+const { batchRequestSolana } = require("../../../helper/batchRequest");
 
 module.exports = {
 
@@ -17,10 +18,8 @@ module.exports = {
       const from = Keypair.fromSecretKey(decode(options.privateKey));
       const blockHeight = await web3.getLatestBlockhash();
       let preparedTx;
-      let transactionBuffer;
 
       if (!(transactionObject.data)) {
-        transactionObject.value = new BN(transactionObject.value);
         preparedTx = new Transaction({
           blockhash: blockHeight.blockhash,
           lastValidBlockHeight: blockHeight + 1500,
@@ -29,25 +28,25 @@ module.exports = {
         preparedTx.add(SystemProgram.transfer({
           fromPubkey: from.publicKey,
           toPubkey: transactionObject.to,
-          lamports: transactionObject.value
+          lamports: new BN(transactionObject.value)
         }));
       } else {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
             msg: "signer is not matching with the from address"
-          }
+          };
         };
-        let buffer = Buffer.from(transactionObject.data, "base64");
+        const buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = Transaction.from(buffer);
         preparedTx.recentBlockhash = blockHeight.blockhash;
       }
 
-      transactionBuffer = preparedTx.serializeMessage();
-      const signature = sign.detached(transactionBuffer, from.secretKey);
+      const transactionBuffer = preparedTx.serializeMessage();
+      let signature = sign.detached(transactionBuffer, from.secretKey);
       preparedTx.addSignature(from.publicKey, signature);
       if (transactionObject.additionalSigners) {
         const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
-        const signature = sign.detached(transactionBuffer, additionalKey.secretKey);
+        signature = sign.detached(transactionBuffer, additionalKey.secretKey);
         preparedTx.addSignature(additionalKey.publicKey, signature);
       }
       const serializedTx = preparedTx.serialize();
@@ -68,7 +67,7 @@ module.exports = {
 
       const from = Keypair.fromSecretKey(decode(options.privateKey));
       const wallet = new Wallet(from);
-      let recentBlockhash = await web3.getLatestBlockhash();
+      const recentBlockhash = await web3.getLatestBlockhash();
       let preparedTx;
 
       if (!(transactionObject.data)) {
@@ -89,9 +88,9 @@ module.exports = {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
             msg: "signer is not matching with the from address"
-          }
+          };
         };
-        let buffer = Buffer.from(transactionObject.data, "base64");
+        const buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = VersionedTransaction.deserialize(buffer);
       }
 
@@ -107,7 +106,7 @@ module.exports = {
       return error;
     }
   },
-  signBatchTransactionsSolana: async (web3, transactionObject, options) => {
+  signSendBatchTransactionsSolana: async (web3, transactionObject, options) => {
       /*
         * Function will sign and send the batch the transactions for ethereum based chains
         */
