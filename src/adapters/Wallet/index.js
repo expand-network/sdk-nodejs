@@ -208,7 +208,8 @@ class Wallet {
         const transaction = await rawTransaction[`signSendBatchTransactions${chainName}`](web3, transactionObject, {
             privateKey: this.privateKey
         });
-        transaction.chainId = chainId;
+        if (typeof transaction === "object")
+            transaction.chainId = chainId;
         return transaction;
     }
 }

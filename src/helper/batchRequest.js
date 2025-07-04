@@ -72,7 +72,7 @@ module.exports = {
   batchRequestAptos: async (web3, transactionObject, privateKey) => {
     try {
       const config = new AptosConfig({
-        network: options.chainId === "1400" ? Network.MAINNET : Network.TESTNET,
+        network: transactionObject.chainId === "1400" ? Network.MAINNET : Network.TESTNET,
       });
       const aptos = new Aptos(config);
       const account = Account.fromPrivateKey({
@@ -83,7 +83,7 @@ module.exports = {
         JSON.parse(Buffer.from(tx.data, "base64").toString())
       );
       try {
-        await aptos.transaction.batch.forSingleAccount({
+        aptos.transaction.batch.forSingleAccount({
           sender: account,
           data: decodedPayloads,
         });
