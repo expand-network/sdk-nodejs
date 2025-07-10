@@ -177,7 +177,26 @@ exports.jsonSchema = {
                 required: ["rawTransaction"]
             },
         },
-
+                // Field Mapping for batchTransactions() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "batchTransactions()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    transactions: {type: "object",
+                                    additionalProperties: {
+                                        type: "object",
+                                    }}
+                },
+                required: ["transactions"]
+            },
+        },
+        
         {
             if: {
                 properties: {
