@@ -76,7 +76,6 @@
     "ton-crypto": "3.2.0",
     "tronweb": "^5.3.4",
     "tweetnacl": "1.0.3",
-    "web3": "^4.16.0",
     "xrpl": "^3.0.0"
   },
   "devDependencies": {
