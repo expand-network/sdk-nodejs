@@ -69,16 +69,16 @@ module.exports = {
           rawTransactions.push(rawTransaction);
         }
       }
-      const receipts = [];
-      for (const tx of rawTransactions) {
       try {
-          const receipt = await web3.sendRawTransaction(Buffer.from(tx, "base64"));
-          receipts.push(receipt);
+        const receipts = await Promise.all(
+          rawTransactions.map(tx =>
+            web3.sendRawTransaction(Buffer.from(tx, "base64"))
+          )
+        );
+        return { transactionHash: receipts };
       } catch (err) {
           return err;
       }
-      }
-      return { transactionHash: receipts };
     } catch (error) {
       console.error('Batch request failed:', error);
       throw error;

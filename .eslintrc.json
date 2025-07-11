@@ -47,6 +47,7 @@
       "quote-props": "off",
       "no-underscore-dangle": "off",
       "no-nested-ternary": "off",
-      "no-await-in-loop": "off"
+      "no-await-in-loop": "off",
+      "no-plusplus": "off"
   }
 }
