@@ -4,6 +4,7 @@ const {
   Network,
   Account,
   Ed25519PrivateKey,
+  TransactionWorkerEventsEnum
 } = require("@aptos-labs/ts-sdk");
 
 async function getNonce(web3, account) {
@@ -87,7 +88,30 @@ module.exports = {
           sender: account,
           data: decodedPayloads,
         });
-        return "Transaction Successful";
+            // Now add event listeners
+        aptos.transaction.batch.on(TransactionWorkerEventsEnum.TransactionSent, (data) => {
+          console.log("✅ Transaction Sent:", data.message);
+          console.log("🔗 Transaction Hash:", data.transactionHash);
+        });
+
+        aptos.transaction.batch.on(TransactionWorkerEventsEnum.TransactionSendFailed, (data) => {
+          console.warn("❌ Transaction Send Failed:", data.message);
+        });
+
+        aptos.transaction.batch.on(TransactionWorkerEventsEnum.TransactionExecuted, (data) => {
+          console.log("🎉 Transaction Executed:", data.message);
+        });
+
+        aptos.transaction.batch.on(TransactionWorkerEventsEnum.TransactionExecutionFailed, (data) => {
+          console.warn("💥 Transaction Execution Failed:", data.message);
+        });
+
+        aptos.transaction.batch.on(TransactionWorkerEventsEnum.ExecutionFinish, async (data) => {
+          console.log("🛑 Execution Finished:", data.message);
+
+        aptos.transaction.batch.removeAllListeners();
+        });
+        return "Batch transaction submitted";
       } catch (error) {
         return "Transaction Failed";
       }

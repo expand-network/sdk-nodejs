@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: '../.env' });
 const axios = require("axios");
 const config = require('../configuration/config.json');
 const { Wallet } = require("../src");
