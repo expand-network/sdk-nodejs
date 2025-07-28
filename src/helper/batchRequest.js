@@ -84,10 +84,6 @@ module.exports = {
         JSON.parse(Buffer.from(tx.data, "base64").toString())
       );
       try {
-        aptos.transaction.batch.forSingleAccount({
-          sender: account,
-          data: decodedPayloads,
-        });
             // Now add event listeners
         aptos.transaction.batch.on(TransactionWorkerEventsEnum.TransactionSent, (data) => {
           console.log("✅ Transaction Sent:", data.message);
@@ -110,6 +106,11 @@ module.exports = {
           console.log("🛑 Execution Finished:", data.message);
 
         aptos.transaction.batch.removeAllListeners();
+        });
+
+        aptos.transaction.batch.forSingleAccount({
+          sender: account,
+          data: decodedPayloads,
         });
         return "Batch transaction submitted";
       } catch (error) {
