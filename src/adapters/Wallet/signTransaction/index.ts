@@ -1,10 +1,10 @@
  import * as Algorand from './Algorand';
+import * as Aptos from './Aptos';
 import  Ethereum   from './Ethereum';
  import * as Near from './Near';
  import * as Solana from './Solana';
-import * as Tron from './Tron';
  import * as Sui from './Sui';
-import * as Aptos from './Aptos';
+import * as Tron from './Tron';
 // import StarkNet from './Starknet';
 
 const signTransactionAlgorand:any = async (web3: any, transactionObject: any, options: any) => {

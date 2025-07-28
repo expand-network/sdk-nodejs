@@ -16,9 +16,9 @@ module.exports = {
             reqBody.vault_id = options.vault_id;
             reqBody.type = "solana_transaction";
             reqBody.signer_type = "api_signer";
-            let chain = 'solana_mainnet'
+            let chain = 'solana_mainnet';
             if (transactionObject.chainId === '901') {
-                chain = 'solana_devnet'
+                chain = 'solana_devnet';
             } else {
                 chain = 'solana_mainnet';
             }
@@ -37,7 +37,7 @@ module.exports = {
                         type: "native",
                         chain: chain
                     }
-                }
+                };
             reqBody.details = details;
             reqBody = JSON.stringify(reqBody);
             // return reqBody;

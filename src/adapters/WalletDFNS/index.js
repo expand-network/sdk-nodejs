@@ -1,11 +1,11 @@
+const { DfnsWallet } = require("@dfns/lib-ethersjs6");
 const { DfnsApiClient } = require("@dfns/sdk");
 const { AsymmetricKeySigner } = require("@dfns/sdk-keysigner");
-const { DfnsWallet } = require("@dfns/lib-ethersjs6");
-const { JsonRpcProvider, Network, Transaction } = require("ethers");
 const axios = require('axios');
+const { JsonRpcProvider, Network, Transaction } = require("ethers");
 const rawTransaction = require('./signTransaction/index');
-const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
+const config = require('../../../configuration/config.json');
 const schemaValidator = require('../../../configuration/schemaValidator');
 
 
@@ -18,8 +18,8 @@ class WalletDFNS {
         this.appId = options.appId;
         this.authToken = options.authToken;
         this.walletId = options.walletId;
-        this.baseUrl = options.baseUrl
-        this.appOrigin = options.appOrigin
+        this.baseUrl = options.baseUrl;
+        this.appOrigin = options.appOrigin;
         this.signer = new AsymmetricKeySigner({
             privateKey: options.privateKey,
             credId: options.credId,
@@ -70,7 +70,7 @@ class WalletDFNS {
                 return new Error("chain not Supported");
 
             const options = {};
-            options.wallet = this.wallet  //.connect(rpcProvider);
+            options.wallet = this.wallet;  //.connect(rpcProvider);
             options.xApiKey = this.xApiKey;
             options.rpcProvider = rpcProvider;
             const response = await rawTransaction[`signTransaction${chainName}`](transactionObject, options);
@@ -109,13 +109,13 @@ class WalletDFNS {
 
             let transaction = Transaction.from(transactionObject.rawTransaction);
             let TxHash = await wallet.sendTransaction(transaction);
-            return { "TxHash": TxHash.hash }
+            return { "TxHash": TxHash.hash };
 
         } catch (error) {
             return error;
         }
 
-    }
+    };
 }
 
 module.exports = { WalletDFNS };

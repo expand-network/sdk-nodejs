@@ -25,7 +25,7 @@ const getChainIdFromChainSymbol = async (chainSymbol: string): Promise<string | 
     }
 
     return null;
-}
+};
 
 export const getChainId = async (options: Options): Promise<string | null> => {
     /*

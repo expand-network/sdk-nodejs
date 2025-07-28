@@ -1,13 +1,13 @@
 // Import the multiple different web3 libraries
-const EvmWeb = require('web3');
-const solanaWeb = require('@solana/web3.js');
-const TronWeb = require('tronweb');
-const nearApi = require('near-api-js');
-const algosdk = require('algosdk');
-const { SuiClient } = require('@mysten/sui/client');
-const aptos = require('aptos');
-const { TonClient, WalletContractV4, internal } = require("@ton/ton");
 const { StargateClient } = require("@cosmjs/stargate");
+const { SuiClient } = require('@mysten/sui/client');
+const solanaWeb = require('@solana/web3.js');
+const { TonClient, WalletContractV4, internal } = require("@ton/ton");
+const algosdk = require('algosdk');
+const aptos = require('aptos');
+const nearApi = require('near-api-js');
+const TronWeb = require('tronweb');
+const EvmWeb = require('web3');
 
 const common = require('./common');
 const config = require('./config.json');

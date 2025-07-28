@@ -9,9 +9,9 @@ import {
   Connection,
   BlockhashWithExpiryBlockHeight
 } from '@solana/web3.js';
-import nacl from 'tweetnacl';
-import bs58 from 'bs58';
 import BN from 'bn.js';
+import bs58 from 'bs58';
+import nacl from 'tweetnacl';
 
 interface TransactionObject {
   to: string;

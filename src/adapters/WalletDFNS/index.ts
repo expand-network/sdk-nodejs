@@ -1,11 +1,11 @@
+import { DfnsWallet } from "@dfns/lib-ethersjs6";
 import { DfnsApiClient } from "@dfns/sdk";
 import { AsymmetricKeySigner } from "@dfns/sdk-keysigner";
-import { DfnsWallet } from "@dfns/lib-ethersjs6";
-import { JsonRpcProvider, Network, Transaction } from "ethers";
 import axios from "axios";
+import { JsonRpcProvider, Transaction } from "ethers";
 import * as rawTransaction from "./signTransaction/index";
-import config from "../../../configuration/config";
 import * as common from "../../../configuration/common";
+import config from "../../../configuration/config";
 import * as schemaValidator from "../../../configuration/schemaValidator";
 
 type WalletDFNSOptions = {

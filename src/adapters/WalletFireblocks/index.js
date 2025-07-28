@@ -1,9 +1,9 @@
+const crypto = require('crypto');
 const axios = require('axios');
 const { sign } = require('jsonwebtoken');
 const { v4: uuid } = require('uuid');
-const crypto = require('crypto');
-const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
+const config = require('../../../configuration/config.json');
 const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletFireblocks {
@@ -41,7 +41,7 @@ class WalletFireblocks {
             const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
             let chainName = config.chains[chainId].chainName;
 
-            const txData = {}
+            const txData = {};
             txData.operation = (transactionObject.data) ? "CONTRACT_CALL" : "TRANSFER",
                 txData.source = {
                     "type": "VAULT_ACCOUNT",
@@ -52,7 +52,7 @@ class WalletFireblocks {
                 txData.destination = {
                     "type": "VAULT_ACCOUNT",
                     "id": transactionObject.to
-                }
+                };
 
             }
             else {
@@ -61,18 +61,18 @@ class WalletFireblocks {
                     "oneTimeAddress": {
                         "address": transactionObject.to
                     }
-                }
+                };
             }
             const assetDecimals = (transactionObject.assetDecimals) ? (transactionObject.assetDecimals) : 18;
             txData.assetId = (transactionObject.assetId) ? (transactionObject.assetId) : "ETH_TEST3";
             txData.amount = (transactionObject.value) ? (transactionObject.value) / 10 ** assetDecimals : '0',
-                txData.note = (transactionObject.note) ? (transactionObject.note) : "expand"
+                txData.note = (transactionObject.note) ? (transactionObject.note) : "expand";
 
 
             if (transactionObject.data) {
                 txData.extraParameters = {
                     "contractCallData": transactionObject.data
-                }
+                };
             }
             const signature = this.jwtSign("/v1/transactions", txData);
             const rawTx = {
@@ -80,13 +80,13 @@ class WalletFireblocks {
                 "path": config.fireblocks.createTransaction,
                 "data": txData,
                 "method": "POST"
-            }
+            };
             return rawTx;
 
         } catch (error) {
             return error;
         }
-    }
+    };
 
     sendTransaction = async (rawTx) => {
 
@@ -110,7 +110,7 @@ class WalletFireblocks {
                     "X-API-Key": this.apiKey,
                     "Authorization": `Bearer ${rawTx.jwt}`
                 }
-            })
+            });
 
             return resp.data;
         } catch (error) {
@@ -118,11 +118,11 @@ class WalletFireblocks {
             return error.data;
         }
 
-    }
+    };
 
 }
 
-module.exports = { WalletFireblocks }
+module.exports = { WalletFireblocks };
 
 
 

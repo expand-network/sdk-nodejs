@@ -1,10 +1,10 @@
 import axios from 'axios';
 import BN from 'bn.js';
 import * as rawTransaction from './signTransaction/index';
-import config from '../../../configuration/config';
 import * as common from '../../../configuration/common';
-import * as schemaValidator from '../../../configuration/schemaValidator';
+import config from '../../../configuration/config';
 import { initialiseWeb3 } from '../../../configuration/intialiseWeb3';
+import * as schemaValidator from '../../../configuration/schemaValidator';
 
 type TransactionObject = {
     chainId: string;
@@ -54,7 +54,7 @@ class WalletCoinbase {
 
         configuration.params = { chainId };
 
-        let rpcResponse = await axios.get(apiURL, configuration);
+        const rpcResponse = await axios.get(apiURL, configuration);
         const rpc = rpcResponse.data.data.rpc;
         const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
 

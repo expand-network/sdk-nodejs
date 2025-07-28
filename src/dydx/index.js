@@ -1,9 +1,9 @@
-const schemaValidator = require('../../configuration/schemaValidator');
-const PlaceOrder = require('./placeOrder');
-const UserOnboarding = require('./userOnboarding');
 const CancelOrder = require('./cancelOrder');
-const Transfer = require('./transfer');
 const Deposit = require('./deposit');
+const PlaceOrder = require('./placeOrder');
+const Transfer = require('./transfer');
+const UserOnboarding = require('./userOnboarding');
+const schemaValidator = require('../../configuration/schemaValidator');
 
 exports.userOnboarding = async (options) => {
     const filterOptions = options;
@@ -18,7 +18,7 @@ exports.placeOrder = async (options) => {
     let filterOptions = options;
 
     const {side, type, timeInForce, market} = filterOptions;
-    filterOptions = {...filterOptions, side: side && side.toUpperCase(), type: type && type.toUpperCase(), timeInForce: timeInForce && timeInForce.toUpperCase(), market: market && market.toUpperCase()}
+    filterOptions = {...filterOptions, side: side && side.toUpperCase(), type: type && type.toUpperCase(), timeInForce: timeInForce && timeInForce.toUpperCase(), market: market && market.toUpperCase()};
     
     filterOptions.function = "placeOrderDYDX()";
     const validJson = await schemaValidator.validateInput(filterOptions);

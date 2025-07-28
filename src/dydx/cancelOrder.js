@@ -1,6 +1,6 @@
+const { OrderFlags } = require('@dydxprotocol/v4-client-js');
 const { default: axios } = require('axios');
 const { getSubAccountCompositeClient } = require('../../configuration/dYdXCommon');
-const { OrderFlags } = require('@dydxprotocol/v4-client-js');
 const errorMessage = require('../../configuration/errorMessage.json');
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
             return {
                 message: errorMessage.error.message.invalidOrderId,
                 code: errorMessage.error.code.invalidInput
-            }
+            };
         }
         
         try {

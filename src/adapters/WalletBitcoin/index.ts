@@ -1,11 +1,11 @@
 import axios from "axios";
+import * as bip39 from "bip39";
 import * as bitcoin from "bitcoinjs-lib";
 import { ECPairFactory, ECPairInterface } from "ecpair";
-import * as bip39 from "bip39";
 import * as tinysecp from "tiny-secp256k1";
-import * as schemaValidator from "../../../configuration/schemaValidator";
 import * as common from "../../../configuration/common";
 import config from "../../../configuration/config";
+import * as schemaValidator from "../../../configuration/schemaValidator";
 
 interface WalletBitcoinOptions {
   privateKey: string;

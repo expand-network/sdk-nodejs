@@ -1,5 +1,5 @@
-import { TransactionBlock, Ed25519Keypair, RawSigner } from '@mysten/sui.js';
 import { fromB64 } from "@mysten/bcs";
+import { TransactionBlock, Ed25519Keypair, RawSigner } from '@mysten/sui.js';
 
 
 
@@ -35,6 +35,6 @@ import { fromB64 } from "@mysten/bcs";
             return (error);
 
         }
-    }
+    };
 
-    export { signTransactionSui }
+    export { signTransactionSui };

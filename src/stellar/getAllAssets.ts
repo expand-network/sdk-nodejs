@@ -1,6 +1,6 @@
 import { xdr, StrKey } from "@stellar/stellar-sdk";
-import * as schemaValidator from "../../configuration/schemaValidator";
 import { bufferToString, getTransactionByHash } from './helpers';
+import * as schemaValidator from "../../configuration/schemaValidator";
 
 // Type definitions
 interface FilterOptions {

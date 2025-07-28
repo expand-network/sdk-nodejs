@@ -1,7 +1,7 @@
-import Long from 'long';
-import { Method } from '@cosmjs/tendermint-rpc';
-import { getSubAccountValidatorClient } from '../../configuration/dYdXCommon';
 import { EncodeObject } from '@cosmjs/proto-signing';
+import { Method } from '@cosmjs/tendermint-rpc';
+import Long from 'long';
+import { getSubAccountValidatorClient } from '../../configuration/dYdXCommon';
 
 interface TransferOptions {
   subAccountNumber: number;
@@ -13,7 +13,7 @@ interface TransferOptions {
 
 export const transfer = async (options: TransferOptions): Promise<any> => {
   const { subAccountNumber, mnemonic, recipient, assetId } = options;
-  let amount: Long = Long.fromValue(options.amount);
+  const amount: Long = Long.fromValue(options.amount);
 
   const { client, subaccount } = await getSubAccountValidatorClient(mnemonic, subAccountNumber);
   // amount = Long.fromValue(amount);

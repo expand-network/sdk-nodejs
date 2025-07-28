@@ -1,6 +1,6 @@
-const nearAPI = require('near-api-js');
 const BN = require('bn.js');
 const sha256 = require("js-sha256");
+const nearAPI = require('near-api-js');
 
 const { KeyPair, keyStores } = nearAPI;
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
 import config from '../../configuration/config';
+import errorMessage from '../../configuration/errorMessage';
 import tokenConfig from '../../configuration/squidRouterTokenConfig';
 import { Wallet } from '../adapters/Wallet';
-import dotenv from 'dotenv';
-import errorMessage from '../../configuration/errorMessage';
 
 dotenv.config();
 

@@ -1,6 +1,6 @@
 import { OrderExecution, OrderType, OrderSide, OrderTimeInForce } from '@dydxprotocol/v4-client-js';
-import { getSubAccountCompositeClient } from '../../configuration/dYdXCommon';
 import config from "../../configuration/config";
+import { getSubAccountCompositeClient } from '../../configuration/dYdXCommon';
 
 interface PlaceOrderOptions {
     subAccountNumber: number;

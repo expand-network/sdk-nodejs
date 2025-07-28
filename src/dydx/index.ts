@@ -1,9 +1,9 @@
-import * as schemaValidator from '../../configuration/schemaValidator';
-import * as PlaceOrder from './placeOrder';
-import * as UserOnboarding from './userOnboarding';
 import * as CancelOrder from './cancelOrder';
-import * as Transfer from './transfer';
 import * as Deposit from './deposit';
+import * as PlaceOrder from './placeOrder';
+import * as Transfer from './transfer';
+import * as UserOnboarding from './userOnboarding';
+import * as schemaValidator from '../../configuration/schemaValidator';
 
 interface Options {
     side?: string;

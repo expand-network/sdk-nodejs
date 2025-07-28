@@ -1,6 +1,6 @@
+const dotenv = require('dotenv');
 const { getStacksPrivateKey } = require('../src/adapters/WalletStacks');
 const { WalletStacks } = require('../src/index');
-const dotenv = require('dotenv');
 
 const main = async () => {
   dotenv.config();
@@ -16,20 +16,20 @@ const main = async () => {
     to: recipient,
     value: "3000",
     message: "Expand STACKS Test"
-  }
+  };
 
   // Securely sign the transaction on user's end
   const signedTx = await wallet.signTransaction(preparedTx);
-  console.log(signedTx)
+  console.log(signedTx);
   const tx = await wallet.sendTransaction(signedTx);
 
   console.log("Tx: ", tx);
-}
+};
 
 const getWallets = async() => {
   const keys = await getStacksPrivateKey("<secret key>", "<password>");
   console.log(keys);
-} 
+}; 
 
 
 // getWallets()

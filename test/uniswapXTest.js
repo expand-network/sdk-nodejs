@@ -1,6 +1,6 @@
 const { default: axios } = require("axios");
-const { Wallet } = require("../src");
 const dotenv = require('dotenv');
+const { Wallet } = require("../src");
 
 const amountIn = "10000000000000000";
 const amountOutMin = "10000000000000000";
@@ -8,7 +8,7 @@ const fromToken = "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"; //weth
 const toToken = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"; //uni
 const dexId = "1901";
 
-const user = "<user wallet address>"  // weth: 0.069, UNI: 0
+const user = "<user wallet address>";  // weth: 0.069, UNI: 0
 const now = Math.floor(Date.now() / 1000);
 const deadline = Math.floor(Date.now() / 1000) + 3600000;
 
@@ -51,5 +51,5 @@ const main = async () => {
 
   const sig = await wallet.signOrderRFQ({ domain, types, values });
   console.log(sig);
-}
+};
 main();

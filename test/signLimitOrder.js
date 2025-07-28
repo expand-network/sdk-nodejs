@@ -1,6 +1,6 @@
 const { default: axios } = require("axios");
-const { Wallet } = require("../src");
 const dotenv = require('dotenv');
+const { Wallet } = require("../src");
 
 dotenv.config();
 
@@ -39,7 +39,7 @@ const signCreateLimitOrder = async () => {
   const orderType = "create";
   const sig = await wallet.signLimitOrder({ domain, types, message, orderType });
   console.log(sig);
-}
+};
 
 const signCancelLimitOrder = async () => {
   const apiConfig = JSON.stringify({
@@ -65,7 +65,7 @@ const signCancelLimitOrder = async () => {
   const orderType = "cancel";
   const sig = await wallet.signLimitOrder({ domain, types, message, orderType });
   console.log(sig);
-}
+};
 
 // signCreateLimitOrder();
 // signCancelLimitOrder();

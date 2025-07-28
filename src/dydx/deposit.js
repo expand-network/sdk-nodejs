@@ -1,9 +1,9 @@
 const { default: axios } = require('axios');
+const dotenv = require('dotenv').config();
 const config = require("../../configuration/config.json");
+const errorMessage = require('../../configuration/errorMessage.json');
 const tokenConfig = require("../../configuration/squidRouterTokenConfig.json");
 const { Wallet } = require('../adapters/Wallet');
-const dotenv = require('dotenv').config();
-const errorMessage = require('../../configuration/errorMessage.json');
 
 module.exports = {
     deposit: async (options) => {
@@ -53,7 +53,7 @@ module.exports = {
             });
 
             if (!createTransaction?.name?.valid) {
-                return new Error("Invalid", {cause: createTransaction?.message})
+                return new Error("Invalid", {cause: createTransaction?.message});
             }
             const transactionReceipt = await wallet.sendTransaction(createTransaction);
             return transactionReceipt;    

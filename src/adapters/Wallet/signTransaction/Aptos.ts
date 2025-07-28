@@ -15,7 +15,7 @@ const signTransactionAptos = async (web3:any, transactionObject:any, options:any
 
         const accountFrom = new AptosAccount(HexString.ensure(privateKey).toUint8Array());
 
-        let { data } = transactionObject;
+        const { data } = transactionObject;
 
         let transactionBuffer: any;
 
@@ -53,6 +53,6 @@ const signTransactionAptos = async (web3:any, transactionObject:any, options:any
     catch (error) {
         return error;
     }
-}
+};
 
-export { signTransactionAptos }
+export { signTransactionAptos };

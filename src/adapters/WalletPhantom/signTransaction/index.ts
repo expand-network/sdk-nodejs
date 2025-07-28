@@ -1,5 +1,5 @@
-import * as Solana from './Solana';
 import * as Ethereum from './Ethereum';
+import * as Solana from './Solana';
 
 export const signTransactionEvm = async (
   web3: any,

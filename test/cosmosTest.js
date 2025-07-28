@@ -8,7 +8,7 @@ async function main() {
         "from": "cosmos1h7sp085zemehp5gunplymxhflrp8ls4qm3mxrq",
         "to": "cosmos1h6r7sgwxfxps4payfyc8rl56svzmx6t5kpumg3",
         "value": "1000",
-    }
+    };
     
     const wallet  = new WalletCosmos({ privateKey:'your Mnemonic in English', xApiKey:xApiKey});
     const signedTx = await wallet.signTransaction(preparedTx);

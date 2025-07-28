@@ -7,7 +7,7 @@ const { Wallet, WalletCoinbase, WalletPhantom } = require("../src");
 const expand_url = config.url.apiurl;
 const chainId = "1";
 const headers = { 'x-api-key': process.env.xApiKey };
-const wallet = new WalletPhantom({privateKey: process.env.WALLET_PRIVATE_KEY, xApiKey: process.env.xApiKey})
+const wallet = new WalletPhantom({privateKey: process.env.WALLET_PRIVATE_KEY, xApiKey: process.env.xApiKey});
 
 async function getApproveTx(options) {
     const rawApprovedTx = await axios.post(expand_url + 'fungibletoken/approve', options, { headers });

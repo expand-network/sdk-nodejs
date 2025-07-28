@@ -1,10 +1,10 @@
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { SigningStargateClient } from "@cosmjs/stargate";
-import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import axios from "axios";
-import * as schemaValidator from "../../../configuration/schemaValidator";
+import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import * as common from "../../../configuration/common";
 import * as config from "../../../configuration/config";
+import * as schemaValidator from "../../../configuration/schemaValidator";
 
 interface WalletCosmosOptions {
   privateKey: string;

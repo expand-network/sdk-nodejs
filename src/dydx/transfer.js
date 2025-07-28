@@ -1,5 +1,5 @@
-const Long = require('long');
 const { Method } = require('@cosmjs/tendermint-rpc');
+const Long = require('long');
 const { getSubAccountValidatorClient } = require('../../configuration/dYdXCommon');
 
 

@@ -1,6 +1,6 @@
 const { OrderExecution, OrderType, OrderSide, OrderTimeInForce } = require('@dydxprotocol/v4-client-js');
-const {getSubAccountCompositeClient} = require('../../configuration/dYdXCommon');
 const config = require("../../configuration/config.json");
+const {getSubAccountCompositeClient} = require('../../configuration/dYdXCommon');
 
 module.exports = {
     placeOrder: async (options) => {
@@ -44,7 +44,7 @@ module.exports = {
             );
 
             if (typeof tx.hash === 'object') {
-                tx = {...tx, 'hex': `0x${Buffer.from(tx.hash).toString('hex')}`}
+                tx = {...tx, 'hex': `0x${Buffer.from(tx.hash).toString('hex')}`};
             }
             return (tx);
         } catch (error) {

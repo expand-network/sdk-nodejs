@@ -1,6 +1,4 @@
 import axios from "axios";
-import config from "../configuration/config";
-import * as schemaValidator from "../configuration/schemaValidator";
 import {
   Wallet,
   WalletFordefi,
@@ -16,6 +14,8 @@ import {
   WalletStacks,
   WalletBitcoin
 } from "./interfaces/index";
+import config from "../configuration/config";
+import * as schemaValidator from "../configuration/schemaValidator";
 
 export const prepareTransaction = async (apiURL:any, options:any) => {
   const filterOptions = options;

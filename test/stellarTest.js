@@ -1,5 +1,5 @@
-const { WalletStellar, prepareTransaction } = require('../src/index');
 const dotenv = require('dotenv');
+const { WalletStellar, prepareTransaction } = require('../src/index');
 
 const main = async () => {
   // configure the env
@@ -23,7 +23,7 @@ const main = async () => {
   const tx = await wallet.sendTransaction(signedTx);
 
   console.log("Tx: ", tx);
-}
+};
 
 main();
 

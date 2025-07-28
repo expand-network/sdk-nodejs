@@ -1,9 +1,9 @@
 const { Wallet } = require('@project-serum/anchor');
 const { Keypair, Transaction, SystemProgram, VersionedTransaction, 
-    TransactionMessage, PublicKey } = require('@solana/web3.js')
-const { sign } = require('tweetnacl');
-const { decode } = require('bs58');
+    TransactionMessage, PublicKey } = require('@solana/web3.js');
 const BN = require('bn.js');
+const { decode } = require('bs58');
+const { sign } = require('tweetnacl');
 
 module.exports = {
 
@@ -35,7 +35,7 @@ module.exports = {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
             msg: "signer is not matching with the from address"
-          }
+          };
         };
         let buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = Transaction.from(buffer);
@@ -89,7 +89,7 @@ module.exports = {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
             msg: "signer is not matching with the from address"
-          }
+          };
         };
         let buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = VersionedTransaction.deserialize(buffer);

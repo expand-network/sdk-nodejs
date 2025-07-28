@@ -1,8 +1,8 @@
 import axios from "axios";
 import xrpl from 'xrpl';
-import * as schemaValidator from '../../../configuration/schemaValidator';
 import * as common from '../../../configuration/common';
 import config from '../../../configuration/config';
+import * as schemaValidator from '../../../configuration/schemaValidator';
 
 interface WalletXRPLConstructorOptions {
   privateKey: string;

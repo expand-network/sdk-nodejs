@@ -1,5 +1,5 @@
-import axios from "axios";
 import { bytesToHex } from "@stacks/common";
+import { StacksMainnet, StacksTestnet, StacksNetwork } from "@stacks/network";
 import {
   TransactionSigner,
   createStacksPrivateKey,
@@ -7,16 +7,15 @@ import {
   publicKeyToString,
   makeUnsignedSTXTokenTransfer,
   AnchorMode,
-  makeUnsignedContractCall,
   makeContractCall,
   StacksTransaction,
   TransactionVersion, 
 } from "@stacks/transactions";
-import * as schemaValidator from '../../../configuration/schemaValidator';
+import { getStxAddress, generateWallet } from "@stacks/wallet-sdk";
+import axios from "axios";
 import * as common from '../../../configuration/common';
 import config from '../../../configuration/config';
-import { StacksMainnet, StacksTestnet, StacksNetwork } from "@stacks/network";
-import { getStxAddress, generateWallet } from "@stacks/wallet-sdk";
+import * as schemaValidator from '../../../configuration/schemaValidator';
 
 interface WalletOptions {
   privateKey: string;

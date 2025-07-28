@@ -1,6 +1,6 @@
+import { OrderFlags } from '@dydxprotocol/v4-client-js';
 import axios from 'axios';
 import { getSubAccountCompositeClient } from '../../configuration/dYdXCommon';
-import { OrderFlags } from '@dydxprotocol/v4-client-js';
 import errorMessage from '../../configuration/errorMessage';
 
 interface CancelOrderOptions {

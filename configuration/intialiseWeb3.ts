@@ -1,13 +1,13 @@
-import EvmWeb from 'web3';
-import { Connection } from '@solana/web3.js';
-import TronWeb, { providers } from 'tronweb';
-import * as nearApi from 'near-api-js';
-import * as algosdk from 'algosdk';
-import { SuiClient } from '@mysten/sui/client';
-import { AptosClient } from 'aptos';
-import { TonClient } from "@ton/ton";
 import { StargateClient } from "@cosmjs/stargate";
+import { SuiClient } from '@mysten/sui/client';
+import { Connection } from '@solana/web3.js';
+import { TonClient } from "@ton/ton";
+import * as algosdk from 'algosdk';
+import { AptosClient } from 'aptos';
+import * as nearApi from 'near-api-js';
 import { Horizon } from 'stellar-sdk';
+import TronWeb, { providers } from 'tronweb';
+import EvmWeb from 'web3';
 
 import * as common from './common';
 import config from './config';

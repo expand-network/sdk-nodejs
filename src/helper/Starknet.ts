@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import Web3 from 'web3';
 import BN from "bn.js";
+import Web3 from 'web3';
 import config from '../../configuration/config';
 
 interface Call {

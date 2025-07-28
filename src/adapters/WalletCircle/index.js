@@ -1,8 +1,8 @@
 const { initiateUserControlledWalletsClient } = require('@circle-fin/user-controlled-wallets');
-const { v4 } = require('uuid');
 const axios = require('axios');
-const schemaValidator = require('../../../configuration/schemaValidator');
+const { v4 } = require('uuid');
 const conf = require('../../../configuration/config.json');
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 
 class WalletCircle {
@@ -123,7 +123,7 @@ class WalletCircle {
     response.challengeId = challengeId.data.challengeId;
     return response;
 
-  }
+  };
 
 }
 

@@ -8,9 +8,9 @@ import {
   PublicKey,
   Connection,
 } from '@solana/web3.js';
-import * as sign from 'tweetnacl';
-import bs58 from 'bs58';
 import BN from 'bn.js';
+import bs58 from 'bs58';
+import * as sign from 'tweetnacl';
 
 interface TransactionObject {
   data?: string;

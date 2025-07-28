@@ -1,13 +1,13 @@
 const { TransactionBuilder, Keypair } = require("@stellar/stellar-sdk");
-const schemaValidator = require('../../../configuration/schemaValidator');
+const { default: axios } = require("axios");
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
-const { default: axios } = require("axios");
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletStellar {
   constructor(options) {
     this.privateKey = options.privateKey,
-      this.xApiKey = options.xApiKey
+      this.xApiKey = options.xApiKey;
   }
 
   signTransaction = async (options) => {
@@ -27,14 +27,14 @@ class WalletStellar {
     if (chainName !== "Stellar") {
       return {
         "msg": "Stellar wallet can be used only with Stellar chain"
-      }
+      };
     };
 
     const userKeyPair = Keypair.fromSecret(this.privateKey);
     const { networkPassphrase } = config.chains[chainId];
 
     let rawTransaction = TransactionBuilder.fromXDR(data, networkPassphrase);
-    rawTransaction.sign(userKeyPair)
+    rawTransaction.sign(userKeyPair);
 
     rawTransaction = rawTransaction.toEnvelope().toXDR('base64');
     return { rawTransaction, chainId };

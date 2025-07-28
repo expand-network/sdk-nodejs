@@ -1,11 +1,11 @@
-const { Wallet, prepareTransaction } = require("../src");
 const dotenv = require('dotenv');
+const { Wallet, prepareTransaction } = require("../src");
 
 async function swap() {
   dotenv.config();
 
-  const xApiKey = process.env.xApiKey
-  const privateKey = process.env.privateKey
+  const xApiKey = process.env.xApiKey;
+  const privateKey = process.env.privateKey;
 
   const wallet = new Wallet({ privateKey, xApiKey });
   

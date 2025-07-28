@@ -3,8 +3,8 @@ const {
     StrKey
   } = require("@stellar/stellar-sdk");
 
-const schemaValidator = require('../../configuration/schemaValidator');
 const { bufferToString, getTransactionByHash } = require('./helpers');
+const schemaValidator = require('../../configuration/schemaValidator');
 
 module.exports = {
     getOwnerAssets: async (options) => {
@@ -53,4 +53,4 @@ module.exports = {
             return null;
         }
     }
-}
+};

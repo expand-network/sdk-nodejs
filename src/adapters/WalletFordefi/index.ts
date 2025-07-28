@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as rawTransaction from './signTransaction/index';
-import config from '../../../configuration/config';
 import { getChainId } from '../../../configuration/common';
+import config from '../../../configuration/config';
 import * as schemaValidator from '../../../configuration/schemaValidator';
 
 interface WalletOptions {

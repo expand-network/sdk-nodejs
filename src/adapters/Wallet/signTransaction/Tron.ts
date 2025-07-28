@@ -26,6 +26,6 @@ import * as TronWeb from 'tronweb';
     catch (error) {
       return error;
     }
-  }
+  };
 
-export { signTransactionTron }
+export { signTransactionTron };

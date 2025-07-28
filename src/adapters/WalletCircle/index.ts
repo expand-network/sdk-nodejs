@@ -1,8 +1,8 @@
 import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled-wallets';
-import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosRequestConfig } from 'axios';
-import * as schemaValidator from '../../../configuration/schemaValidator';
+import { v4 as uuidv4 } from 'uuid';
 import conf from '../../../configuration/config';
+import * as schemaValidator from '../../../configuration/schemaValidator';
 
 interface WalletCircleOptions {
   appId: string;

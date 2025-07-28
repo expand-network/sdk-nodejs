@@ -1,8 +1,8 @@
+import axios, { AxiosRequestConfig } from "axios";
 import { TransactionBuilder, Keypair } from "stellar-sdk";
-import * as schemaValidator from '../../../configuration/schemaValidator';
 import * as common from '../../../configuration/common';
 import config from '../../../configuration/config';
-import axios, { AxiosRequestConfig } from "axios";
+import * as schemaValidator from '../../../configuration/schemaValidator';
 
 interface WalletStellarOptions {
   privateKey: string;
@@ -59,7 +59,7 @@ class WalletStellar {
       return { msg: "Network passphrase is not defined" };
     }
 
-    let rawTransaction = TransactionBuilder.fromXDR(data, networkPassphrase);
+    const rawTransaction = TransactionBuilder.fromXDR(data, networkPassphrase);
     rawTransaction.sign(userKeyPair);
     const xdrString = rawTransaction.toEnvelope().toXDR("base64");
 

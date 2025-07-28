@@ -1,6 +1,6 @@
+import sha256 from "js-sha256";
 import nearAPI from 'near-api-js';
 
-import sha256 from "js-sha256";
 
 const { KeyPair, keyStores } = nearAPI;
 
@@ -76,6 +76,6 @@ interface AccessKey {
             return error;
         }
 
-    }
+    };
 
 export {signTransactionNear};

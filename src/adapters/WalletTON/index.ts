@@ -1,9 +1,9 @@
-import { mnemonicToPrivateKey, keyPairFromSecretKey } from "ton-crypto";
 import { WalletContractV4, internal, Cell } from "@ton/ton";
-import * as schemaValidator from '../../../configuration/schemaValidator';
+import { mnemonicToPrivateKey, keyPairFromSecretKey } from "ton-crypto";
 import * as common from '../../../configuration/common';
-import { initialiseWeb3 } from "../../../configuration/intialiseWeb3";
 import config from '../../../configuration/config';
+import { initialiseWeb3 } from "../../../configuration/intialiseWeb3";
+import * as schemaValidator from '../../../configuration/schemaValidator';
 
 interface WalletTONOptions {
     privateKey: string;

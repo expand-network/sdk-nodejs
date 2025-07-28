@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { TransactionConfig, SignedTransaction } from 'web3-core';
+import { TransactionConfig } from 'web3-core';
 
 async function getNonce(web3: Web3, account: string): Promise<number> {
   const [pendingNonce, latestNonce] = await Promise.all([
