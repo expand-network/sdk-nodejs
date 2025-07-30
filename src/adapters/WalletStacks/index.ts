@@ -86,7 +86,7 @@ class WalletStacks {
     }
 
     if (data) {
-      // Contract Call from Stacks SDK
+     
       const parsedData = JSON.parse(atob(data));
       transaction = await makeContractCall({
         ...parsedData,
@@ -96,7 +96,6 @@ class WalletStacks {
         anchorMode: AnchorMode.Any,
       });
     } else {
-      // Transfer token function from Stacks SDK
       const privateKeyBuffer = createStacksPrivateKey(this.privateKey);
       const publicKeyBuffer = getPublicKey(privateKeyBuffer);
       const publicKey = publicKeyToString(publicKeyBuffer);
@@ -114,7 +113,7 @@ class WalletStacks {
     const signer = new TransactionSigner(transaction);
     signer.signOrigin(createStacksPrivateKey(this.privateKey));
 
-    // Serialize the signed transaction
+  
     const serializedTx = transaction.serialize();
     const rawTransaction = bytesToHex(serializedTx);
 

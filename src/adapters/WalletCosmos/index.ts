@@ -3,7 +3,7 @@ import { SigningStargateClient } from "@cosmjs/stargate";
 import axios from "axios";
 import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import * as common from "../../../configuration/common";
-import * as config from "../../../configuration/config";
+import config from "../../../configuration/config";
 import * as schemaValidator from "../../../configuration/schemaValidator";
 
 interface WalletCosmosOptions {

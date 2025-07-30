@@ -2,7 +2,7 @@ import { xdr, StrKey } from "@stellar/stellar-sdk";
 import { bufferToString, getTransactionByHash } from './helpers';
 import * as schemaValidator from '../../configuration/schemaValidator';
 
-// Type definitions
+
 interface FilterOptions {
     function?: string;
     chainId: string;
@@ -48,7 +48,7 @@ interface ScMapEntry {
 
 type ScVal = xdr.ScVal | ScValObject;
 
-// Type guard for ScVal with attributes
+
 function isScValObject(value: any): value is ScValObject {
     return value && 
            typeof value === 'object' && 
@@ -58,7 +58,7 @@ function isScValObject(value: any): value is ScValObject {
            'val' in value._attributes;
 }
 
-// Type guard for array of ScVal objects
+
 function isScValArray(value: any): value is ScValObject[] {
     return Array.isArray(value) && value.every(isScValObject);
 }
@@ -137,7 +137,7 @@ export default {
                         throw new Error("Missing hi/lo values in response");
                     }
 
-                    // Safe BigInt conversion
+                    
                     const hi = BigInt(attributes.hi._value.toString());
                     const lo = BigInt(attributes.lo._value.toString());
                     const fullValue = (hi << BigInt(64)) + lo;

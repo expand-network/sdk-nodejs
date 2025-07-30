@@ -71,11 +71,11 @@ const signTransactionSolana = async (
     const timestamp = Date.now();
     const payload = `${path}|${timestamp}|${reqBody}`;
 
-    // Read private key
+    
     const secretPem = fs.readFileSync(options.privateKeyFile, 'utf8');
     const privateKey = crypto.createPrivateKey(secretPem);
 
-    // Create signature
+   
     const sign = crypto.createSign('SHA256').update(payload, 'utf8').end();
     const signature = sign.sign(privateKey, 'base64');
 

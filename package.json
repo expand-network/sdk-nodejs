@@ -8,7 +8,9 @@
     "ecmaVersion": 2018
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

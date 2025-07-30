@@ -58,6 +58,11 @@ class WalletTON {
             chainId: transactionObject.chainId,
             chainSymbol: transactionObject.chainSymbol
         });
+        
+        if (!chainId) {
+            return { msg: "Invalid chain ID" };
+        }
+        
         const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 
         if (chainName !== "TON") {
@@ -66,7 +71,7 @@ class WalletTON {
             };
         }
 
-        const web3 = await initialiseWeb3({ chainId, key: this.xApiKey });
+        const web3 = await initialiseWeb3({ chainId, key: this.xApiKey }) as any;
         const walletContract = web3.open(this.wallet);
 
         let body;
@@ -105,15 +110,20 @@ class WalletTON {
                 chainId: transactionObject.chainId,
                 chainSymbol: transactionObject.chainSymbol
             });
+            
+            if (!chainId) {
+                return { msg: "Invalid chain ID" };
+            }
+            
             const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
-            const web3 = await initialiseWeb3({ chainId, key: this.xApiKey });
-
+            
             if (chainName !== "TON") {
                 return {
                     msg: "ton wallet can be used only with TON chain"
                 };
             }
-
+            
+            const web3 = await initialiseWeb3({ chainId, key: this.xApiKey }) as any;
             const walletContract = web3.open(this.wallet);
             const currentSeqno = await walletContract.getSeqno();
             const txHash = await walletContract.send(transactionObject.rawTransaction);

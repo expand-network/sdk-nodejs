@@ -2,7 +2,7 @@ import { xdr, StrKey } from "@stellar/stellar-sdk";
 import { bufferToString, getTransactionByHash } from './helpers';
 import * as schemaValidator from "../../configuration/schemaValidator";
 
-// Type definitions
+
 interface FilterOptions {
     function?: string;
     chainId: string;
@@ -83,7 +83,7 @@ export default {
             const returnValue: xdr.ScVal = sorobanMeta.returnValue();  
             const response = returnValue.value();
 
-            // Type guard to check if response is an array-like structure
+            
             if (response && typeof response === 'object' && '_value' in response && Array.isArray(response._value)) {
                 return response._value.map((assetResponse: any) => {
                     const assetValues = assetResponse._value;
@@ -96,7 +96,7 @@ export default {
                         throw new Error("Invalid asset value structure");
                     }
 
-                    // Convert to BigInt safely
+                 
                     const hi = BigInt(attributes.hi._value.toString());
                     const lo = BigInt(attributes.lo._value.toString());
                     const fullValue = (hi << BigInt(64)) + lo;

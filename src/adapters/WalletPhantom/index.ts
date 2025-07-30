@@ -48,6 +48,10 @@ class WalletPhantom {
             chainSymbol: transactionObject.chainSymbol,
         });
 
+        if (!chainId) {
+            return new Error("Invalid chain ID");
+        }
+
         const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 
         if (chainName !== "Evm" && chainName !== "Solana") {
@@ -84,6 +88,10 @@ class WalletPhantom {
             chainId: transactionObject.chainId,
             chainSymbol: transactionObject.chainSymbol,
         });
+
+        if (!chainId) {
+            return new Error("Invalid chain ID");
+        }
 
         const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
 

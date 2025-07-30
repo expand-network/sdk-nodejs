@@ -5,12 +5,59 @@ import * as Transfer from './transfer';
 import * as UserOnboarding from './userOnboarding';
 import * as schemaValidator from '../../configuration/schemaValidator';
 
-interface Options {
-    side?: string;
-    type?: string;
-    timeInForce?: string;
-    market?: string;
+
+interface BaseOptions {
     [key: string]: any;
+}
+
+
+interface UserOnboardingOptions extends BaseOptions {
+    privateKey: string;
+}
+
+
+interface PlaceOrderOptions extends BaseOptions {
+    subAccountNumber: number;
+    mnemonic: string;
+    market: string;
+    type: string; 
+    side: string; 
+    timeInForce: string; 
+    time: number;
+    price: number;
+    postOnly: boolean;
+    reduceOnly: boolean;
+    triggerPrice?: number;
+    size: number;
+}
+
+
+interface CancelOrderOptions extends BaseOptions {
+    subAccountNumber: number;
+    mnemonic: string;
+    orderId: string;
+    goodTillTimeInSeconds: string;
+}
+
+
+interface TransferOptions extends BaseOptions {
+    subAccountNumber: number;
+    mnemonic: string;
+    recipient: string;
+    assetId: number;
+    amount: string | number;
+}
+
+
+interface DepositOptions extends BaseOptions {
+    srcChainId: number;
+    from: string;
+    to: string;
+    amountIn: string;
+    tokenIn: string;
+    slippage: number;
+    gas: number;
+    privateKey: string;
 }
 
 interface ValidationResult {
@@ -19,19 +66,7 @@ interface ValidationResult {
     [key: string]: any;
 }
 
-interface CancelOrderOptions {
-    subAccountNumber: string;
-    mnemonic: string;
-    orderId: string;
-    goodTillTimeInSeconds: number;
-    function: string;
-    side?: string;
-    type?: string;
-    timeInForce?: string;
-    market?: string;
-}
-
-export const userOnboarding = async (options: Options): Promise<any> => {
+export const userOnboarding = async (options: UserOnboardingOptions): Promise<any> => {
     const filterOptions = { ...options, function: "userOnboardingDYDX()" };
     const validJson: ValidationResult = await schemaValidator.validateInput(filterOptions);
 
@@ -39,7 +74,7 @@ export const userOnboarding = async (options: Options): Promise<any> => {
     return UserOnboarding.userOnboarding(options);
 };
 
-export const placeOrder = async (options: Options): Promise<any> => {
+export const placeOrder = async (options: PlaceOrderOptions): Promise<any> => {
     let filterOptions = options;
 
     const { side, type, timeInForce, market } = filterOptions;
@@ -55,10 +90,11 @@ export const placeOrder = async (options: Options): Promise<any> => {
     const validJson: ValidationResult = await schemaValidator.validateInput(filterOptions);
 
     if (!validJson.valid) return validJson;
-    return PlaceOrder.placeOrder(filterOptions);
+   
+    return PlaceOrder.placeOrder(filterOptions as any);
 };
 
-export const cancelOrder = async (options: Options): Promise<any> => {
+export const cancelOrder = async (options: CancelOrderOptions): Promise<any> => {
     const filterOptions = { ...options, function: "cancelOrderDYDX()" };
     const validJson: ValidationResult = await schemaValidator.validateInput(filterOptions);
 
@@ -66,7 +102,7 @@ export const cancelOrder = async (options: Options): Promise<any> => {
     return CancelOrder.cancelOrder(filterOptions);
 };
 
-export const transfer = async (options: Options): Promise<any> => {
+export const transfer = async (options: TransferOptions): Promise<any> => {
     const filterOptions = { ...options, function: "transferDYDX()" };
     const validJson: ValidationResult = await schemaValidator.validateInput(filterOptions);
 
@@ -74,7 +110,7 @@ export const transfer = async (options: Options): Promise<any> => {
     return Transfer.transfer(filterOptions);
 };
 
-export const deposit = async (options: Options): Promise<any> => {
+export const deposit = async (options: DepositOptions): Promise<any> => {
     const filterOptions = { ...options, function: "depositDYDX()" };
     const validJson: ValidationResult = await schemaValidator.validateInput(filterOptions);
 

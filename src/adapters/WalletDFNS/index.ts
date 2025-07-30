@@ -68,7 +68,7 @@ class WalletDFNS {
     this.signer = new AsymmetricKeySigner({
         privateKey: options.privateKey,
         credId: options.credId,
-        appOrigin: options.appOrigin, // Include this if needed
+        appOrigin: options.appOrigin, 
       } as ExtendedAsymmetricKeySignerOptions);
 
     this.dfnsClient = new DfnsApiClient({

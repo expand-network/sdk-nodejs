@@ -13,7 +13,6 @@ import * as common from './common';
 import config from './config';
 import errorMessage from './errorMessage.json';
 
-// Define interfaces for your data structures
 interface InitializeWeb3Data {
     chainId?: string | number;
     chainSymbol?: string;
@@ -48,11 +47,11 @@ interface Config {
     rpc_url: RpcUrls;
 }
 
-// Type for the web3 instance which can be any of the supported clients
+
 type Web3Instance = 
     | EvmWeb 
     | Connection 
-    | TronWeb 
+    | typeof TronWeb 
     | nearApi.Near 
     | algosdk.Algodv2 
     | algosdk.Indexer 
@@ -101,7 +100,7 @@ export const initialiseWeb3 = async (data: InitializeWeb3Data): Promise<Web3Inst
         const fullNode = new HttpProvider(rpc);
         const solidityNode = new HttpProvider(rpc);
         const eventServer = new HttpProvider(rpc);
-        web3 = new TronWeb(fullNode, solidityNode, eventServer);
+        web3 = TronWeb;
     } else if (chainName === 'Near') {
         web3 = await nearApi.connect({
             networkId: data.networkId || '',

@@ -11,8 +11,6 @@ interface RequestBody {
 }
 
 interface TransactionResponse {
-    // Define the structure of your transaction response here
-    // Adjust based on the actual response structure
     [key: string]: any;
 }
 

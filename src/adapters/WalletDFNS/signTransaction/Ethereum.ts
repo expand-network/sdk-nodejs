@@ -37,7 +37,7 @@ interface SignedTransactionResponse {
       value: transactionObject.value,
       gas: transactionObject.gas,
       chainId: transactionObject.chainId,
-      maxFeePerGas: "120000000000", // Set these values as required
+      maxFeePerGas: "120000000000", 
       maxPriorityFeePerGas: "120000000000",
       gasLimit: transactionObject.gas,
     };

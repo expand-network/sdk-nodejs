@@ -73,7 +73,7 @@ export const decodeTransaction = async (options:any) => {
   }
 };
 
-// Replace `exports.Wallet = Wallet;` with:
+
 export {
   Wallet,
   WalletFordefi,

@@ -73,5 +73,5 @@ const batchRequestEvm = async (
   }
 };
 
-// Export the function
+
 export { batchRequestEvm };

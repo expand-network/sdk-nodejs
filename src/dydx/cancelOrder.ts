@@ -36,7 +36,7 @@ export const cancelOrder = async (options: CancelOrderOptions): Promise<any> => 
 
   try {
     const res = await axios.request<OrderResponse>(orderConfig);
-    order = res.data; // Assuming the response directly contains `clientId` and `ticker`
+    order = res.data; 
   } catch (err) {
     return {
       message: errorMessage.error.message.invalidOrderId,

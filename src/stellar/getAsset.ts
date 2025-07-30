@@ -2,7 +2,7 @@ import { xdr, StrKey } from "@stellar/stellar-sdk";
 import { bufferToString, getTransactionByHash } from './helpers';
 import * as schemaValidator from '../../configuration/schemaValidator';
 
-// Type definitions
+
 interface FilterOptions {
     function?: string;
     chainId: string;
@@ -44,7 +44,7 @@ interface ScValObject {
 
 type ScVal = xdr.ScVal | ScValObject;
 
-// Type guard for ScVal with attributes
+
 function isScValObject(value: any): value is ScValObject {
     return value && 
            typeof value === 'object' && 
@@ -54,7 +54,7 @@ function isScValObject(value: any): value is ScValObject {
            'val' in value._attributes;
 }
 
-// Type guard for array of ScVal objects
+
 function isScValArray(value: any): value is ScValObject[] {
     return Array.isArray(value) && value.every(isScValObject);
 }
@@ -108,7 +108,7 @@ export default {
             const response = returnValue.value();
 
             if (isScValArray(response) && response.length >= 4) {
-                // Access attributes safely after type checking
+               
                 const attr0 = response[0]._attributes;
                 const attr1 = response[1]._attributes;
                 const attr2 = response[2]._attributes;
