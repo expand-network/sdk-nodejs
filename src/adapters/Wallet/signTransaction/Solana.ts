@@ -46,6 +46,9 @@ export const SolanaUtils:any = {
           lastValidBlockHeight: blockHeight.lastValidBlockHeight + 1500,
           feePayer: from.publicKey,
         });
+        if (!transactionObject.to) {
+          throw new Error('Recipient address is required');
+        }
         preparedTx.add(
           SystemProgram.transfer({
             fromPubkey: from.publicKey,
@@ -63,13 +66,13 @@ export const SolanaUtils:any = {
       }
 
       transactionBuffer = preparedTx.serializeMessage();
-      const signature = sign.detached(transactionBuffer, from.secretKey);
-      preparedTx.addSignature(from.publicKey, signature);
+      const signature = sign.sign.detached(transactionBuffer, from.secretKey);
+      preparedTx.addSignature(from.publicKey, Buffer.from(signature));
 
       if (transactionObject.additionalSigners) {
         const additionalKey = Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
-        const additionalSignature = sign.detached(transactionBuffer, additionalKey.secretKey);
-        preparedTx.addSignature(additionalKey.publicKey, additionalSignature);
+        const additionalSignature = sign.sign.detached(transactionBuffer, additionalKey.secretKey);
+        preparedTx.addSignature(additionalKey.publicKey, Buffer.from(additionalSignature));
       }
 
       const serializedTx = preparedTx.serialize();
@@ -93,11 +96,14 @@ export const SolanaUtils:any = {
       let preparedTx: VersionedTransaction;
 
       if (!transactionObject.data) {
+        if (!transactionObject.to) {
+          throw new Error('Recipient address is required');
+        }
         const instructions = [
           SystemProgram.transfer({
             fromPubkey: from.publicKey,
             toPubkey: new PublicKey(transactionObject.to),
-            lamports: transactionObject.value instanceof BN ? transactionObject.value.toNumber() : transactionObject.value || 0,
+            lamports: transactionObject.value instanceof BN ? transactionObject.value.toNumber() : Number(transactionObject.value) || 0,
           }),
         ];
         const versionedMessage = new TransactionMessage({

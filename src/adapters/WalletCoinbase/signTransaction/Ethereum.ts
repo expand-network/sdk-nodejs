@@ -6,7 +6,7 @@ interface TransactionObject {
   gas?: string;
   gasPrice?: string;
   data?: string;
-  nonce?: number; // Update nonce to be a number instead of string
+  nonce?: number; 
 }
 
 interface SignTransactionOptions {

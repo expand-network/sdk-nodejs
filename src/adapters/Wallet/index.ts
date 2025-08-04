@@ -63,10 +63,10 @@ class Wallet {
 
         configuration.params = { chainId };
 
-        let rpc = await axios.get(apiURL, configuration);
-        rpc = rpc.data.data.rpc;
+        const rpcResponse = await axios.get(apiURL, configuration);
+        const rpc = rpcResponse.data.data.rpc;
 
-        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
+        const web3 = await initialiseWeb3({ rpc: rpc || undefined, chainId: chainId || undefined, key: this.xApiKey });
         transactionOptions.value = new BN(transactionOptions.value);
 
         const chainName = config.chains[chainId as keyof typeof config.chains].chainName;
@@ -108,10 +108,10 @@ class Wallet {
 
         configuration.params = { chainId };
 
-        let rpc = await axios.get(apiURL, configuration);
-        rpc = rpc.data.data.rpc;
+        const rpcResponse = await axios.get(apiURL, configuration);
+        const rpc = rpcResponse.data.data.rpc;
 
-        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
+        const web3 = await initialiseWeb3({ rpc: rpc || undefined, chainId: chainId || undefined, key: this.xApiKey });
         const options = { privateKey: this.privateKey };
         const rawData = await rawTransaction[`signVersionedTransaction${chainName}`](web3, transactionObject, options);
         rawData.chainId = chainId;

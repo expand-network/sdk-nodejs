@@ -56,7 +56,7 @@ class WalletCoinbase {
 
         const rpcResponse = await axios.get(apiURL, configuration);
         const rpc = rpcResponse.data.data.rpc;
-        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
+        const web3 = await initialiseWeb3({ rpc: rpc || undefined, chainId: chainId || undefined, key: this.xApiKey });
 
         transactionOptions.value = new BN(transactionOptions.value);
 
