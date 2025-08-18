@@ -4,8 +4,17 @@ const {
   Network,
   Account,
   Ed25519PrivateKey,
-  TransactionWorkerEventsEnum
+  TransactionWorkerEventsEnum,
+  U64,
 } = require("@aptos-labs/ts-sdk");
+
+function convertTaggedU64(value) {
+  if (Array.isArray(value)) {
+    if (value.length === 2 && value[1] === "u64") return new U64(BigInt(value[0]));
+    return value.map((v) => convertTaggedU64(v));
+  }
+  return value;
+}
 
 async function getNonce(web3, account) {
   const [pendingNonce, latestNonce] = await Promise.all([
@@ -80,9 +89,13 @@ module.exports = {
         privateKey: new Ed25519PrivateKey(privateKey),
       });
       const { transactions } = transactionObject;
-      const decodedPayloads = Object.values(transactions).map((tx) =>
-        JSON.parse(Buffer.from(tx.data, "base64").toString())
-      );
+      const decodedPayloads = Object.values(transactions).map((tx) => {
+        const parsed = JSON.parse(Buffer.from(tx.data, "base64").toString());
+        parsed.functionArguments = parsed.functionArguments.map((arg) =>
+          convertTaggedU64(arg)
+        );
+        return parsed;
+      });
       try {
             // Now add event listeners
         aptos.transaction.batch.on(TransactionWorkerEventsEnum.TransactionSent, (data) => {
