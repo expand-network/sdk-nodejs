@@ -4,7 +4,6 @@ const { Wallet } = require("../src");
 
 // const expandUrl = config.url.apiurl;
 const chainId = "901";
-// const headers = { 'x-api-key': "tK503cR23o8YTvXhNoDNo7kQf5sQdbXP8qbqkBeQ" };
 const wallet = new Wallet({privateKey: process.env.WALLET_PRIVATE_KEY, xApiKey: process.env.xApiKey});
 
 
