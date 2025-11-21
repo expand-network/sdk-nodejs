@@ -15,7 +15,15 @@ exports.prepareTransaction = async (apiURL, options) => {
         return (validJson);
     }
 
-    const { chainId, xApiKey } = filterOptions;
+       let { chainId, chainSymbol, xApiKey } = filterOptions;
+    
+    // Convert chainSymbol to chainId if chainSymbol is provided
+    if (chainSymbol && !chainId) {
+        chainId = Object.keys(config.chains).find(id => 
+            config.chains[id].chainSymbol === chainSymbol
+        );
+    }
+    
     try {
         const paramConfig = {
             method: "post",
