@@ -2,6 +2,32 @@ const { prepareTransaction, Wallet } = require('../src');
 const axios = require('axios');
 const config = require('../configuration/config.json');
 
+// Source base URL from config
+const BASE_URL = config.url.apiurl;
+
+// Base options object for add liquidity tests
+const BASE_ADD_LIQUIDITY_OPTIONS = {
+  dexId: '1307',
+  tokenA: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+  tokenB: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+  poolFees: '3000',
+  amountADesired: '100000000000000',
+  amountBDesired: '0',
+  amountAMin: '0',
+  amountBMin: '0',
+  deadline: '1797485659',
+  to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+  from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+  gas: '544672',
+  chainSymbol: 'BSC',
+  xApiKey: 'test-api-key',
+  gasPriority: 'medium'
+};
+
+// Mock response template
+const createMockResponse = (data) => ({
+  data: { data }
+});
 
 jest.mock('axios');
 
@@ -15,159 +41,117 @@ describe('AddLiquidity - prepareTransaction', () => {
   describe('chainSymbol to chainId conversion', () => {
     
     it('should convert BSC chainSymbol to chainId 56', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-            to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-            gas: '544672',
-            data: '0x...'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+        to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+        gas: '544672',
+        data: '0x...'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
-      const options = {
-        dexId: '1307',
-        tokenA: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
-        tokenB: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-        poolFees: '3000',
-        amountADesired: '100000000000000',
-        amountBDesired: '0',
-        amountAMin: '0',
-        amountBMin: '0',
-        deadline: '1797485659',
-        to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-        from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-        gas: '544672',
-        chainSymbol: 'BSC',
-        xApiKey: 'test-api-key',
-        gasPriority: 'medium'
-      };
-
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, BASE_ADD_LIQUIDITY_OPTIONS);
       
       expect(result.chainId).toBe('56');
     });
 
     it('should convert ETH chainSymbol to chainId 1', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x123',
-            to: '0x456',
-            gas: '100000'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x123',
+        to: '0x456',
+        gas: '100000'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
       const options = {
+        ...BASE_ADD_LIQUIDITY_OPTIONS,
         dexId: '1000',
         chainSymbol: 'ETH',
-        xApiKey: 'test-api-key',
         from: '0x123',
         to: '0x456'
       };
 
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, options);
       
       expect(result.chainId).toBe('1');
     });
 
     it('should convert MATIC chainSymbol to chainId 137', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x123',
-            to: '0x456'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x123',
+        to: '0x456'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
       const options = {
+        ...BASE_ADD_LIQUIDITY_OPTIONS,
         chainSymbol: 'MATIC',
-        xApiKey: 'test-api-key',
         from: '0x123',
         to: '0x456'
       };
 
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, options);
       
       expect(result.chainId).toBe('137');
     });
 
     it('should convert SOL chainSymbol to chainId 900', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: 'solana-address',
-            to: 'solana-address'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: 'solana-address',
+        to: 'solana-address'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
       const options = {
+        ...BASE_ADD_LIQUIDITY_OPTIONS,
         chainSymbol: 'SOL',
-        xApiKey: 'test-api-key',
         from: 'solana-address'
       };
 
-      const result = await prepareTransaction('https://api.expand.network/dex/swap', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/swap`, options);
       
       expect(result.chainId).toBe('900');
     });
 
     it('should handle chainId when already provided (not convert from chainSymbol)', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x123',
-            to: '0x456'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x123',
+        to: '0x456'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
       const options = {
+        ...BASE_ADD_LIQUIDITY_OPTIONS,
         chainId: '42161', 
         chainSymbol: 'BSC', 
-        xApiKey: 'test-api-key',
         from: '0x123'
       };
 
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, options);
       
       // Should keep the provided chainId, not convert from chainSymbol
       expect(result.chainId).toBe('42161');
     });
 
     it('should not set chainId when chainSymbol is invalid', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x123',
-            to: '0x456'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x123',
+        to: '0x456'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
       const options = {
+        ...BASE_ADD_LIQUIDITY_OPTIONS,
         chainSymbol: 'INVALID_CHAIN',
-        xApiKey: 'test-api-key',
         from: '0x123'
       };
 
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, options);
       
       expect(result.chainId).toBeUndefined();
     });
@@ -176,33 +160,20 @@ describe('AddLiquidity - prepareTransaction', () => {
   describe('prepareTransaction API call', () => {
     
     it('should make API call with correct headers and data', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-            to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-            gas: '544672'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+        to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+        gas: '544672'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
-      const options = {
-        dexId: '1307',
-        tokenA: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
-        tokenB: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-        chainSymbol: 'BSC',
-        xApiKey: 'test-api-key',
-        from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45'
-      };
-
-      await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      await prepareTransaction(`${BASE_URL}dex/addliquidity`, BASE_ADD_LIQUIDITY_OPTIONS);
       
       expect(axios).toHaveBeenCalledWith(
         expect.objectContaining({
           method: 'post',
-          url: 'https://api.expand.network/dex/addliquidity',
+          url: `${BASE_URL}dex/addliquidity`,
           headers: {
             'x-api-key': 'test-api-key'
           }
@@ -211,27 +182,16 @@ describe('AddLiquidity - prepareTransaction', () => {
     });
 
     it('should return transaction data with chainId set', async () => {
-      const mockResponse = {
-        data: {
-          data: {
-            from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-            to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-            gas: '544672',
-            data: '0x123456'
-          }
-        }
-      };
+      const mockResponse = createMockResponse({
+        from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+        to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+        gas: '544672',
+        data: '0x123456'
+      });
       
       axios.mockResolvedValue(mockResponse);
 
-      const options = {
-        dexId: '1307',
-        chainSymbol: 'BSC',
-        xApiKey: 'test-api-key',
-        from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45'
-      };
-
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, BASE_ADD_LIQUIDITY_OPTIONS);
       
       expect(result).toHaveProperty('from');
       expect(result).toHaveProperty('to');
@@ -244,13 +204,11 @@ describe('AddLiquidity - prepareTransaction', () => {
       axios.mockRejectedValue(mockError);
 
       const options = {
-        dexId: '1307',
-        chainSymbol: 'BSC',
-        xApiKey: 'test-api-key',
+        ...BASE_ADD_LIQUIDITY_OPTIONS,
         from: '0x123'
       };
 
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, options);
       
       expect(result).toBeInstanceOf(Error);
       expect(result.message).toBe('API Error');
@@ -260,14 +218,9 @@ describe('AddLiquidity - prepareTransaction', () => {
   describe('validation tests', () => {
     
     it('should return validation error when xApiKey is missing', async () => {
-      const options = {
-        dexId: '1307',
-        chainSymbol: 'BSC',
-        from: '0x123'
-        // xApiKey is missing
-      };
+      const { xApiKey, ...optionsWithoutKey } = BASE_ADD_LIQUIDITY_OPTIONS;
 
-      const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+      const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, optionsWithoutKey);
       
       expect(result.valid).toBe(false);
       expect(result.code).toBe(400);
@@ -289,24 +242,20 @@ describe('AddLiquidity - prepareTransaction', () => {
 
     testCases.forEach(({ chainSymbol, expectedChainId, name }) => {
       it(`should convert ${name} (${chainSymbol}) to chainId ${expectedChainId}`, async () => {
-        const mockResponse = {
-          data: {
-            data: {
-              from: '0x123',
-              to: '0x456'
-            }
-          }
-        };
+        const mockResponse = createMockResponse({
+          from: '0x123',
+          to: '0x456'
+        });
         
         axios.mockResolvedValue(mockResponse);
 
         const options = {
+          ...BASE_ADD_LIQUIDITY_OPTIONS,
           chainSymbol,
-          xApiKey: 'test-api-key',
           from: '0x123'
         };
 
-        const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+        const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, options);
         
         expect(result.chainId).toBe(expectedChainId);
       });
@@ -334,41 +283,19 @@ describe('AddLiquidity - prepareTransaction', () => {
 describe('AddLiquidity - Full Integration', () => {
   
   it('should prepare add liquidity transaction with all parameters', async () => {
-    const mockResponse = {
-      data: {
-        data: {
-          from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-          to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-          value: '0',
-          gas: '544672',
-          gasPrice: '5000000000',
-          nonce: 10,
-          data: '0x1234567890abcdef'
-        }
-      }
-    };
+    const mockResponse = createMockResponse({
+      from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+      to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+      value: '0',
+      gas: '544672',
+      gasPrice: '5000000000',
+      nonce: 10,
+      data: '0x1234567890abcdef'
+    });
     
     axios.mockResolvedValue(mockResponse);
 
-    const options = {
-      dexId: '1307',
-      tokenA: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
-      tokenB: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-      poolFees: '3000',
-      amountADesired: '100000000000000',
-      amountBDesired: '0',
-      amountAMin: '0',
-      amountBMin: '0',
-      deadline: '1797485659',
-      to: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-      from: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-      gas: '544672',
-      chainSymbol: 'BSC',
-      xApiKey: 'test-api-key',
-      gasPriority: 'medium'
-    };
-
-    const result = await prepareTransaction('https://api.expand.network/dex/addliquidity', options);
+    const result = await prepareTransaction(`${BASE_URL}dex/addliquidity`, BASE_ADD_LIQUIDITY_OPTIONS);
     
     expect(result).toBeDefined();
     expect(result.chainId).toBe('56');
