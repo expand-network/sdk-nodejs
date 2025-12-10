@@ -26,6 +26,12 @@ exports.signSendBatchTransactionsEvm = async (web3, transactionObject, options) 
     return rawData;
 };
 
+exports.signSendBatchTransactionsAptos = async (web3, transactionObject, options) => {
+
+    const rawData = await Aptos.signSendBatchTransactionsAptos(web3, transactionObject, options);
+    return rawData;
+};
+
 exports.signTransactionNear = async (web3, transactionObject, options) => {
 
     const rawData = await Near.signTransactionNear(web3, transactionObject, options);
@@ -67,6 +73,12 @@ exports.signTransactionStarkNet = async (web3, transactionObject, options) => {
 exports.signVersionedTransactionSolana = async (web3, transactionObject, options) => {
 
     const rawData = await Solana.signVersionedTransactionSolana(web3, transactionObject, options);
+    return rawData;
+};
+
+exports.signSendBatchTransactionsAptos = async (web3, transactionObject, options) => {
+
+    const rawData = await Aptos.signSendBatchTransactionsAptos(web3, transactionObject, options);
     return rawData;
 };
 
