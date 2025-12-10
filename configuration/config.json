@@ -337,6 +337,16 @@
             "localName": "MantleTestnetSepolia",
             "chainName": "Evm",
             "chainSymbol": "TMNT"
+        },
+        "3637": {
+            "localName": "Botanix",
+            "chainName": "Evm",
+            "chainSymbol": "BOT"
+        },
+        "3636": {
+            "localName": "BotanixTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TBOT"
         }
     },
     "fireblocks": {
