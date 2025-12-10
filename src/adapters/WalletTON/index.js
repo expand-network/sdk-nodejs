@@ -1,9 +1,9 @@
-const { mnemonicToPrivateKey, keyPairFromSecretKey } = require("ton-crypto");
 const { WalletContractV4, internal, Cell } = require("@ton/ton");
-const schemaValidator = require('../../../configuration/schemaValidator');
+const { mnemonicToPrivateKey, keyPairFromSecretKey } = require("ton-crypto");
 const common = require('../../../configuration/common');
-const { initialiseWeb3 } = require("../../../configuration/intialiseWeb3");
 const config = require('../../../configuration/config.json');
+const { initialiseWeb3 } = require("../../../configuration/intialiseWeb3");
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 
 class WalletTON {
@@ -11,7 +11,7 @@ class WalletTON {
     constructor(options) {
         this.privateKey = Buffer.from(options.privateKey, 'hex'),
             this.keyPair = keyPairFromSecretKey(this.privateKey);
-        this.xApiKey = options.xApiKey
+        this.xApiKey = options.xApiKey;
         const wallet = WalletContractV4.create({ publicKey: this.keyPair.publicKey, workchain: 0 });
         this.wallet = wallet;
     }
@@ -21,7 +21,7 @@ class WalletTON {
         this.keyPair = await mnemonicToPrivateKey(arr);
         const privateKey = Buffer.from(this.keyPair.secretKey).toString('hex');
         return privateKey;
-    }
+    };
 
 
     _nanotons = 10 ** 9;
@@ -43,7 +43,7 @@ class WalletTON {
         if (chainName !== "TON") {
             return {
                 "msg": "ton wallet can be used only with TON chain"
-            }
+            };
         };
 
         const web3 = await initialiseWeb3({ chainId, key: this.xApiKey });
@@ -73,7 +73,7 @@ class WalletTON {
         return { rawTransaction: rawData, chainId: chainId };
 
 
-    }
+    };
 
     sendTransaction = async (transactionObject) => {
 
@@ -92,7 +92,7 @@ class WalletTON {
             if (chainName !== "TON") {
                 return {
                     "msg": "ton wallet can be used only with TON chain"
-                }
+                };
             };
 
             const walletContract = web3.open(this.wallet);
@@ -102,7 +102,7 @@ class WalletTON {
             await timer(5000);
             let seqno = await walletContract.getSeqno();
             if (seqno > currentseqno) {
-                return { seqno: seqno, message: "transaction has been sent to the blockchain" }
+                return { seqno: seqno, message: "transaction has been sent to the blockchain" };
             }
 
             return {
@@ -112,7 +112,7 @@ class WalletTON {
         } catch (error) {
             return error;
         }
-    }
+    };
 
 
 }

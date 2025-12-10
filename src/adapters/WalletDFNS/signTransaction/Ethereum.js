@@ -22,7 +22,7 @@ module.exports = {
                 gasLimit: transactionObject.gas
             };
             let signedTx = await (options.wallet).signTransaction(tx);
-            const response = { rawTransaction: signedTx }
+            const response = { rawTransaction: signedTx };
             return response;
 
 

@@ -1,17 +1,17 @@
 const { default: axios } = require("axios");
+const bip39 = require('bip39');
 const bitcoin = require('bitcoinjs-lib');
 const { ECPairFactory } = require('ecpair');
-const bip39 = require('bip39');
 
 const tinysecp = require('tiny-secp256k1');
-const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletBitcoin {
   constructor(options) {
     this.privateKey = options.privateKey,
-      this.xApiKey = options.xApiKey
+      this.xApiKey = options.xApiKey;
   }
 
   signTransaction = async (options) => {
@@ -31,7 +31,7 @@ class WalletBitcoin {
     if (chainName !== "Bitcoin") {
       return {
         "msg": "Bitcoin wallet can be used only with Bitcoin Wallet"
-      }
+      };
     };
 
     const ECPair = ECPairFactory(tinysecp);
@@ -106,7 +106,7 @@ const getKeysFromMnemonic = async (options, path = "m/44'/0'/0'/0/0") => {
   if (chainName !== "Bitcoin") {
     return {
       "msg": "Bitcoin wallet can be used only with Bitcoin Wallet"
-    }
+    };
   };
 
   const seed = await bip39.mnemonicToSeed(mnemonic);
@@ -135,6 +135,6 @@ const getKeysFromMnemonic = async (options, path = "m/44'/0'/0'/0/0") => {
   });
 
   return { privateKeyWIF, privateKeyHex, publickKey, address };
-}
+};
 
 module.exports = { WalletBitcoin, getKeysFromMnemonic }; 

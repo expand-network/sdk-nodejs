@@ -1,5 +1,5 @@
-const { WalletCircle, prepareTransaction } = require('../src/index');
 const dotenv = require('dotenv');
+const { WalletCircle, prepareTransaction } = require('../src/index');
 
 async function initcircleWallet(options) {
     const userToken = await WalletCircle.getUserToken(options);

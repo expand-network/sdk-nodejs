@@ -1,0 +1,566 @@
+type ChainConfig = {
+    localName: string;
+    chainName: string;
+    chainSymbol: string;
+    rpc?: string;
+    publicRpc?: string;
+    aptosCoin?: string;
+    nativeEthAddress?: string;
+    domain?: string;
+    sslMateId?: string;
+    apiKey?: string;
+    url?: string;
+    networkPassphrase?: string;
+    gasPrice?: string;
+    network?: string;
+    fee?: number;
+    sorobanRpc?:string;
+  };
+
+  type FireblocksConfig = {
+    baseUrl:string;
+    createTransaction: string;
+  }
+
+  type CircleProgrammableWalletConfig = {
+    baseUrl:string;
+  }
+  type UrlConfig = {
+    apiurl:string;
+  }
+  type localurlConfig = {
+    apiurl:string;
+  }
+
+  type DexesConfig = {
+    localName?: string;
+    chainName: string;
+    chainId: string;
+    dexName: string;
+    localDexName?: string;
+    chainSymbol?:string;
+    routerAddress?:string;
+    factoryAddress?:string;
+  };
+
+  type DYdXConfig = {
+    chainId: string;
+    USDC : string;
+    MAX_CLIENT_ID : any ;
+    squidRouterAPIBaseUrl : string ;
+    signingMsg: any;
+    rpc : string;
+  };
+
+   type contract_addressConfig = {
+    UNISWAPV2: string;
+    WETH : string;
+    DAI : string;
+  };
+
+  type rpc_urlConfig = {
+    sepolia:string;
+  }
+  
+  type Config = {
+    chains: Record<string, ChainConfig>;
+    fireblocks: FireblocksConfig;
+    circleProgrammableWallet : CircleProgrammableWalletConfig;    
+    url:  UrlConfig;
+    localurl: localurlConfig;
+    Mask250: string;
+    dexes : Record<any, DexesConfig>;
+    dYdXV4: DYdXConfig;
+    contract_address: contract_addressConfig;
+    rpc_url: rpc_urlConfig;
+  };
+
+ 
+const config: Config = {
+    "chains": {
+        "1": {
+            "localName": "Ethereum",
+            "chainName": "Evm",
+            "chainSymbol": "ETH"
+        },
+        "3": {
+            "localName": "EthereumTestnetRopsten",
+            "chainName": "Evm",
+            "chainSymbol": "TETHRPT"
+        },
+        "4": {
+            "localName": "EthereumTestnetRinkeby",
+            "chainName": "Evm",
+            "chainSymbol": "TETHRNK"
+        },
+        "5": {
+            "localName": "EthereumTestnetGoerli",
+            "chainName": "Evm",
+            "chainSymbol": "TETHGRL"
+        },
+        "42": {
+            "localName": "EthereumTestnetKovan",
+            "chainName": "Evm",
+            "chainSymbol": "TETHKVN"
+        },
+        "17000": {
+            "localName": "EthereumTestnetHolesky",
+            "chainName": "Evm",
+            "chainSymbol": "TETHHSKY"
+        },
+        "56": {
+            "localName": "BinanceSmartChain",
+            "chainName": "Evm",
+            "chainSymbol": "BSC"
+        },
+        "97": {
+            "localName": "BinanceSmartChainTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TBSC"
+        },
+        "43114": {
+            "localName": "Avalanche",
+            "chainName": "Evm",
+            "chainSymbol": "AVAL"
+        },
+        "43113": {
+            "localName": "AvalancheTesnet",
+            "chainName": "Evm",
+            "chainSymbol": "TAVAL"
+        },
+        "137": {
+            "localName": "Polygon",
+            "chainName": "Evm",
+            "chainSymbol": "MATIC"
+        },
+        "80001": {
+            "localName": "PolygonTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TMATIC"
+        },
+        "25": {
+            "localName": "Cronos",
+            "chainName": "Evm",
+            "chainSymbol": "CRO"
+        },
+        "338": {
+            "localName": "CronosTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TCRO"
+        },
+        "42161": {
+            "localName": "Arbitrum",
+            "chainName": "Evm",
+            "chainSymbol": "AETH"
+        },
+        "421611": {
+            "localName": "ArbitrumTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TAETH"
+        },
+        "250": {
+            "localName": "Fantom",
+            "chainName": "Evm",
+            "chainSymbol": "FTM"
+        },
+        "4002": {
+            "localName": "FantomTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TFTM"
+        },
+        "324": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "ZKS"
+        },
+        "300": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "TZKS"
+        },
+        "900": {
+            "localName": "Solana",
+            "chainName": "Solana",
+            "chainSymbol": "SOL"
+        },
+        "901": {
+            "localName": "SolanaDevnet",
+            "chainName": "Solana",
+            "chainSymbol": "DSOL"
+        },
+        "1000": {
+            "localName": "Tron",
+            "chainName": "Tron",
+            "chainSymbol": "TRON"
+        },
+        "1001": {
+            "localName": "TronTestnet",
+            "chainName": "Tron",
+            "chainSymbol": "TTRON"
+        },
+        "1200": {
+            "localName": "Near",
+            "chainName": "Near",
+            "chainSymbol": "NEAR"
+        },
+        "1201": {
+            "localName": "NearTestnet",
+            "chainName": "Near",
+            "chainSymbol": "TNEAR"
+        },
+        "1300": {
+            "localName": "Algorand",
+            "chainName": "Algorand",
+            "chainSymbol": "ALGO"
+        },
+        "1301": {
+            "localName": "AlgorandTestnet",
+            "chainName": "Algorand",
+            "chainSymbol": "TALGO"
+        },
+        "10": {
+            "localName": "Optimism",
+            "chainName": "Evm",
+            "chainSymbol": "OPT"
+        },
+        "101": {
+            "localName": "Sui",
+            "chainName": "Sui",
+            "chainSymbol": "SUI",
+            "rpc": "https://sui-mainnet-rpc.nodereal.io",
+            "publicRpc": "https://fullnode.mainnet.sui.io:443"
+        },
+        "102": {
+            "localName": "SuiDevnet",
+            "chainName": "Sui",
+            "chainSymbol": "DSUI",
+            "rpc": "https://fullnode.devnet.sui.io:443",
+            "publicRpc": "https://fullnode.devnet.sui.io:443"
+        },
+        "103": {
+            "localName": "SuiTestnet",
+            "chainName": "Sui",
+            "chainSymbol": "TSUI",
+            "rpc": "https://fullnode.testnet.sui.io",
+            "publicRpc": "https://rpc.ankr.com/sui_testnet"
+        },
+        "1400": {
+            "localName": "Aptos",
+            "chainName": "Aptos",
+            "chainSymbol": "APT",
+            "aptosCoin": "0x1::aptos_coin::AptosCoin",
+            "rpc": "https://fullnode.mainnet.aptoslabs.com",
+            "publicRpc": "https://fullnode.mainnet.aptoslabs.com"
+        },
+        "1401": {
+            "localName": "AptosTestnet",
+            "chainName": "Aptos",
+            "chainSymbol": "TAPT",
+            "aptosCoin": "0x1::aptos_coin::AptosCoin",
+            "rpc": "https://fullnode.testnet.aptoslabs.com",
+            "publicRpc": "https://fullnode.testnet.aptoslabs.com"
+        },
+        "400": {
+            "localName": "StarkNet",
+            "chainName": "StarkNet",
+            "chainSymbol": "STRK",
+            "nativeEthAddress": "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "rpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
+            "publicRpc": "https://starknet-mainnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
+            "domain": "infura.io",
+            "sslMateId": "4054117900"
+        },
+        "401": {
+            "localName": "StarkNetTestnet",
+            "chainName": "StarkNet",
+            "chainSymbol": "TSTRK",
+            "nativeEthAddress": "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "rpc": "https://starknet-testnet.blastapi.io/a0c768c4-cd06-4dfc-8a5c-a6a7a0716e2a",
+            "publicRpc": "https://starknet-testnet.blastapi.io/efc44012-502c-4b57-a7b2-f7e7a44535f5",
+            "domain": "infura.io",
+            "sslMateId": "4054117900"
+        },
+        "1100": {
+            "localName": "TON",
+            "chainName": "TON",
+            "chainSymbol": "TON",
+            "rpc": "https://toncenter.com/api/v2/jsonRPC",
+            "publicRpc": "https://toncenter.com/api/v2/jsonRPC",
+            "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
+        },
+        "1101": {
+            "localName": "TONTestnet",
+            "chainName": "TON",
+            "chainSymbol": "TONTest",
+            "rpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
+            "publicRpc": "https://testnet.toncenter.com/api/v2/jsonRPC",
+            "apiKey": "f5dcc14824318f08f20c7c10b29a3eaac29b9d0c73609f10c1d8f125dd3f6cd2"
+        },
+        "8453": {
+            "localName": "Base",
+            "chainName": "Evm",
+            "chainSymbol": "BASE",
+            "rpc": "https://mainnet.base.org",
+            "publicRpc": "https://mainnet.base.org",
+            "domain": "base.org"
+        },
+        "84532": {
+            "localName": "BaseTestnet2",
+            "chainName": "Evm",
+            "chainSymbol": "TBASE2",
+            "rpc": "https://sepolia.base.org",
+            "publicRpc": "https://sepolia.base.org",
+            "domain": "base.org"
+        },
+        "11155111": {
+            "localName": "EthereumTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TETHSPL",
+            "rpc": "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+            "publicRpc": "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+            "domain": "infura.io"
+        },
+        "421614": {
+            "localName": "ArbitrumSepoliaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TASPL",
+            "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
+            "publicRpc": "https://sepolia-rollup.arbitrum.io/rpc",
+            "domain": "arbitrum.io"
+        },
+        "11155420": {
+            "localName": "OptimismSepoliaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TSPL",
+            "rpc": "https://sepolia.optimism.io",
+            "publicRpc": "https://sepolia.optimism.io",
+            "domain": "optimism.io"
+        },
+        "1500": {
+            "localName": "Stellar",
+            "chainName": "Stellar",
+            "chainSymbol": "XLM",
+            "rpc": "https://horizon.stellar.org",
+            "networkPassphrase": "Public Global Stellar Network ; September 2015",
+            "sorobanRpc": "https://mainnet.sorobanrpc.com"
+        },
+        "1501": {
+            "localName": "StellarTestnet",
+            "chainName": "Stellar",
+            "chainSymbol": "TXLM",
+            "networkPassphrase": "Test SDF Network ; September 2015",
+            "rpc": "https://horizon-testnet.stellar.org",
+            "sorobanRpc": "https://soroban-rpc.testnet.stellar.gateway.fm"
+        },
+        "cosmoshub-4": {
+            "localName": "cosmoshub_mainnet",
+            "chainName": "Cosmos",
+            "chainSymbol": "cosmos",
+            "rpc": "https://cosmos-rpc.publicnode.com:443",
+            "publicRpc": "https://cosmos-rpc.publicnode.com:443",
+            "gasPrice": "3000"
+        },
+        "theta-testnet-001": {
+            "localName": "cosmoshub_testnet",
+            "chainName": "Cosmos",
+            "chainSymbol": "cosmos",
+            "rpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
+            "publicRpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
+            "gasPrice": "3000"
+        },
+        "1600": {
+            "localName": "XRPLedger",
+            "chainName": "XRPL",
+            "chainSymbol": "XRPL",
+            "network": "mainnet"
+        },
+        "1601": {
+            "localName": "XRPLedgerTestnet",
+            "chainName": "XRPL",
+            "chainSymbol": "TXRPL",
+            "network": "testnet"
+        },
+        "1700": {
+            "localName": "Stacks",
+            "chainName": "Stacks",
+            "chainSymbol": "STX",
+            "network": "mainnet"
+        },
+        "1701": {
+            "localName": "StacksTestnet",
+            "chainName": "Stacks",
+            "chainSymbol": "TSTX",
+            "network": "testnet"
+        },
+        "1800": {
+            "localName": "Bitcoin",
+            "chainName": "Bitcoin",
+            "chainSymbol": "BTC",
+            "network": "mainnet",
+            "fee": 2000
+        },
+        "1801": {
+            "localName": "BitcoinTestnet",
+            "chainName": "Bitcoin",
+            "chainSymbol": "TBTC",
+            "network": "testnet",
+            "fee": 2000
+        },
+        "5000": {
+            "localName": "Mantle",
+            "chainName": "Evm",
+            "chainSymbol": "MNT"
+        },
+        "5003": {
+            "localName": "MantleTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TMNT"
+        }
+    },
+    "fireblocks": {
+        "baseUrl": "https://api.fireblocks.io",
+        "createTransaction": "/v1/transactions"
+    },
+    "circleProgrammableWallet": {
+        "baseUrl": "https://api.circle.com/v1/w3s/user/transactions/"
+    },
+    "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "url": {
+        "apiurl": "https://api.expand.network/"
+    },
+    "localurl": {
+        "apiurl": "http://localhost:3000/"
+    },
+    "dexes": {
+        "1900": {
+            "localName": "UniswapX",
+            "dexName": "UniswapX",
+            "chainName": "Ethereum",
+            "chainId": "1"
+        },
+        "1901": {
+            "localName": "UniswapXTestnet",
+            "dexName": "UniswapX",
+            "chainName": "Ethereum",
+            "chainId": "5"
+        },
+        "1000": {
+            "localName": "UniswapV2",
+            "dexName": "UniswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "factoryAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+        },
+        "1100": {
+            "localName": "SushiswapV2",
+            "dexName": "SushiswapV2",
+            "chainName": "Ethereum",
+            "chainId": "1",
+            "chainSymbol": "EVM",
+            "routerAddress": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
+            "factoryAddress": "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"
+        },
+        "2200": {
+            "dexName": "Kyberswap",
+            "localDexName": "Kyberswap",
+            "chainName": "Ethereum",
+            "chainId": "1"
+        },
+        "2201": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapBsc",
+            "chainName": "Ethereum",
+            "chainId": "56"
+        },
+        "2202": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapPolygon",
+            "chainName": "Ethereum",
+            "chainId": "137"
+        },
+        "2203": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapArbitrum",
+            "chainName": "Ethereum",
+            "chainId": "42161"
+        },
+        "2204": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapAvalanche",
+            "chainName": "Ethereum",
+            "chainId": "43114"
+        },
+        "2205": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapOptimism",
+            "chainName": "Ethereum",
+            "chainId": "10"
+        },
+        "2206": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapBase",
+            "chainName": "Ethereum",
+            "chainId": "8453"
+        },
+        "2207": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapFantom",
+            "chainName": "Ethereum",
+            "chainId": "250"
+        },
+        "2208": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapCronos",
+            "chainName": "Ethereum",
+            "chainId": "25"
+        }
+    },
+    "dYdXV4": {
+        "chainId": "dydx-testnet-4",
+        "USDC": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
+        "MAX_CLIENT_ID": 4294967295,
+        "squidRouterAPIBaseUrl": "https://testnet.api.squidrouter.com/v1/",
+        "rpc": "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5",
+        "signingMsg": {
+            "domain": {
+                "name": "dYdX V4",
+                "chainId": 11155111
+            },
+            "primaryType": "dYdX",
+            "types": {
+                "EIP712Domain": [
+                    {
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "chainId",
+                        "type": "uint256"
+                    }
+                ],
+                "dYdX": [
+                    {
+                        "name": "action",
+                        "type": "string"
+                    }
+                ]
+            },
+            "message": {
+                "action": "dYdX Chain Onboarding"
+            }
+        }
+    },
+    "contract_address": {
+        "UNISWAPV2": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "WETH": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+        "DAI": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    },
+    "rpc_url": {
+        "sepolia": "https://sepolia.infura.io/v3/fc5d23096e754d64a5f261f5f07170d5"
+    }
+};
+
+export default config;
+

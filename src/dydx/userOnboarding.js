@@ -1,7 +1,7 @@
 const { BECH32_PREFIX, LocalWallet } = require('@dydxprotocol/v4-client-js');
+const { deriveHDKeyFromEthereumSignature } = require('@dydxprotocol/v4-client-js/build/src/lib/onboarding');
 const { ethers } = require('ethers-5');
 const config = require("../../configuration/config.json");
-const { deriveHDKeyFromEthereumSignature } = require('@dydxprotocol/v4-client-js/build/src/lib/onboarding');
 
 module.exports = {
     userOnboarding: async (options) => {
@@ -13,6 +13,6 @@ module.exports = {
         const keys = deriveHDKeyFromEthereumSignature(signature);
         const {mnemonic, publicKey, privateKey} = keys;
         const wallet = await LocalWallet.fromMnemonic(mnemonic, BECH32_PREFIX);
-        return {mnemonic, publicKey, privateKey, address: wallet.address}
+        return {mnemonic, publicKey, privateKey, address: wallet.address};
     }
 };

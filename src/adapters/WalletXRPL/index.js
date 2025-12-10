@@ -1,13 +1,13 @@
 const { default: axios } = require("axios");
 const xrpl = require('xrpl');
-const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletXRPL {
   constructor(options) {
     this.privateKey = options.privateKey,
-      this.xApiKey = options.xApiKey
+      this.xApiKey = options.xApiKey;
   }
 
   signTransaction = async (options) => {
@@ -27,7 +27,7 @@ class WalletXRPL {
     if (chainName !== "XRPL") {
       return {
         "msg": "XRPL wallet can be used only with XRP Ledger"
-      }
+      };
     };
 
     const account = (this.privateKey.split(" ").length > 1) ? xrpl.Wallet.fromMnemonic(this.privateKey)

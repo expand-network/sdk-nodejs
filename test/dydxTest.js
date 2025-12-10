@@ -1,5 +1,5 @@
-const dydx = require('../src/dydx');
 const dotenv = require('dotenv').config();
+const dydx = require('../src/dydx');
 
 const mnemonic = process.env.dydxMnemonic;
 

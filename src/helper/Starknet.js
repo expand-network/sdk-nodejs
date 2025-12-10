@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-const web3 = require('web3');
 const BN = require("bn.js");
+const web3 = require('web3');
 const config = require('../../configuration/config.json');
 
 module.exports = {

@@ -1,5 +1,5 @@
-const { WalletXRPL, prepareTransaction } = require('../src/index');
 const dotenv = require('dotenv');
+const { WalletXRPL, prepareTransaction } = require('../src/index');
 
 const main = async () => {
   dotenv.config();
@@ -27,7 +27,7 @@ const main = async () => {
   const tx = await wallet.sendTransaction(signedTx);
 
   console.log("Tx: ", tx);
-}
+};
 
 main();
 

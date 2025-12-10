@@ -3,8 +3,8 @@ const {
     StrKey
   } = require("@stellar/stellar-sdk");
 
-const schemaValidator = require('../../configuration/schemaValidator');
 const { bufferToString, getTransactionByHash } = require('./helpers');
+const schemaValidator = require('../../configuration/schemaValidator');
 // const errorMessage = require('../../configuration/errorMessage.json');
 
 module.exports = {
@@ -49,4 +49,4 @@ module.exports = {
             return null;
         }
     }
-}
+};

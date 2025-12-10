@@ -2,9 +2,9 @@ const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
 const { SigningStargateClient } = require("@cosmjs/stargate");
 const { TxRaw } = require("cosmjs-types/cosmos/tx/v1beta1/tx");
 const axios = require('axios').default;
-const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 
 class WalletCosmos {
@@ -40,7 +40,7 @@ class WalletCosmos {
         if (chainName !== "Cosmos") {
             return {
                 "msg": "Cosmos wallet can be used only with Cosmos chains"
-            }
+            };
         };
 
         const wallet = await DirectSecp256k1HdWallet.fromMnemonic(this.wallet, {
@@ -70,7 +70,7 @@ class WalletCosmos {
         const rawString = Buffer.from(encodedTx).toString("base64");
         return { chainId: chainId, rawTransaction: rawString };
 
-    }
+    };
 
     sendTransaction = async (options) => {
 

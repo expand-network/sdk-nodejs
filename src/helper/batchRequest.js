@@ -2,7 +2,7 @@ async function getNonce(web3, account) {
   const [pendingNonce, latestNonce] = await Promise.all([
     web3.eth.getTransactionCount(account, 'pending'), 
     web3.eth.getTransactionCount(account)
-  ])
+  ]);
   return Math.max(pendingNonce, latestNonce);
 }
 

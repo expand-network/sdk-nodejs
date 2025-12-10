@@ -1,10 +1,10 @@
 const axios = require('axios').default;
 const BN = require('bn.js');
 const rawTransaction = require('./signTransaction/index');
-const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
-const schemaValidator = require('../../../configuration/schemaValidator');
+const config = require('../../../configuration/config.json');
 const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletPhantom {
 
@@ -139,7 +139,7 @@ class WalletPhantom {
         });
         transaction.chainId = chainId;
         return transaction;
-    }
+    };
 }
 
 module.exports = { WalletPhantom };

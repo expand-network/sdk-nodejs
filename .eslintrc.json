@@ -1,48 +1,69 @@
 {
   "env": {
-      "browser": true,
-      "commonjs": true,
-      "es6": true,
-      "es2021": true,
-      "node": true
+    "es2021": true,
+    "node": true
   },
-  "extends": ["airbnb-base", "prettier"],
-  "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint", "unused-imports"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-      "ecmaVersion": 2018
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": "./tsconfig.json",
+        "tsconfigRootDir": "."
+      },
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          { "args": "after-used", "ignoreRestSiblings": true }
+        ],
+        "@typescript-eslint/no-require-imports": "warn" // or "off" if you want to allow it in TS too
+      }
+    },
+    {
+      "files": ["*.js"],
+      "rules": {
+        "import/no-commonjs": "off",
+        "import/no-unresolved": "off",
+        "@typescript-eslint/no-require-imports": "off", // <-- important fix
+        "no-unused-vars": [
+          "warn",
+          { "args": "after-used", "ignoreRestSiblings": true }
+        ]
+      }
+    }
+  ],
   "rules": {
-      "no-console": "off",
-      "no-else-return" : "off",
-      "no-redeclare": "error",
-      "semi": ["error", "always"],
-      "no-unused-vars": [
-          2,
-          {
-              "vars": "all",
-              "args": "after-used"
-          }
-      ],
-      "func-names": ["error", "as-needed"],
-      "global-require": "off",
-      "class-methods-use-this": "off",
-      "no-restricted-syntax": "off",
-      "radix": "off",
-      "max-len": [
-          2,
-          150,
-          4,
-          {
-              "ignoreComments": true
-          }
-      ],
-      "quote-props": "off",
-      "no-underscore-dangle": "off",
-      "no-nested-ternary": "off",
-      "parser": "@babel/eslint-parser"
-
+    "semi": ["error", "always"],
+    "no-console": "off",
+    "no-redeclare": "error",
+    "max-len": [
+      "error",
+      {
+        "code": 150,
+        "ignoreComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true
+      }
+    ],
+    "unused-imports/no-unused-imports": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ]
   }
 }

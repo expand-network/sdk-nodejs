@@ -1,11 +1,11 @@
 const axios = require('axios').default;
 const BN = require('bn.js');
-const rawTransaction = require('./signTransaction/index');
-const config = require('../../../configuration/config.json');
-const common = require('../../../configuration/common');
-const schemaValidator = require('../../../configuration/schemaValidator');
-const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
 const { ethers } = require('ethers-5');
+const rawTransaction = require('./signTransaction/index');
+const common = require('../../../configuration/common');
+const config = require('../../../configuration/config.json');
+const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 class Wallet {
 
@@ -129,7 +129,7 @@ class Wallet {
         }
 
         const { dexId, domain, types, values } = options;
-        const { chainId } = config.dexes[dexId]
+        const { chainId } = config.dexes[dexId];
 
         let apiConfig = {
             method: 'get',
@@ -159,7 +159,7 @@ class Wallet {
         }
 
         const { dexId, orderType, domain, types, message } = options;
-        const { chainId } = config.dexes[dexId]
+        const { chainId } = config.dexes[dexId];
 
         let apiConfig = {
             method: 'get',
@@ -210,7 +210,7 @@ class Wallet {
         });
         transaction.chainId = chainId;
         return transaction;
-    }
+    };
 }
 
 module.exports = { Wallet };

@@ -22,7 +22,7 @@ module.exports = {
                 type: "priority",
                 priority_level: "medium",
                 gas_limit: transactionObject.gas
-            }
+            };
             details.gas = gas;
             details.to = transactionObject.to;
             details.value = transactionObject.value;
@@ -31,7 +31,7 @@ module.exports = {
                 details.data = {
                     type: "hex",
                     hex_data: transactionObject.data
-                }
+                };
             }
             reqBody.details = details;
             reqBody.signer_type = "api_signer";

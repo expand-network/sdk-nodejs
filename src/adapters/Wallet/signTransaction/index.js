@@ -1,11 +1,11 @@
 const Algorand = require('./Algorand');
+const Aptos = require('./Aptos');
 const Ethereum = require('./Ethereum');
 const Near = require('./Near');
 const Solana = require('./Solana');
-const Tron = require('./Tron');
-const Sui = require('./Sui');
-const Aptos = require('./Aptos');
 const StarkNet = require('./Starknet');
+const Sui = require('./Sui');
+const Tron = require('./Tron');
 
 exports.signTransactionAlgorand = async (web3, transactionObject, options) => {
 

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const rawTransaction = require('./signTransaction/index');
-const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
+const config = require('../../../configuration/config.json');
 const schemaValidator = require('../../../configuration/schemaValidator');
 
 class WalletFordefi {
@@ -74,7 +74,7 @@ class WalletFordefi {
             return error.response.data;
         }
 
-    }
+    };
 }
 
 module.exports = { WalletFordefi };

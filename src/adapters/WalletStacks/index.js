@@ -1,5 +1,5 @@
-const { default: axios } = require("axios");
 const { bytesToHex } = require("@stacks/common");
+const { StacksMainnet, StacksNetwork, StacksTestnet } = require("@stacks/network");
 const {
   TransactionSigner,
   createStacksPrivateKey,
@@ -11,17 +11,17 @@ const {
   TransactionVersion,
   makeContractCall,
 } = require("@stacks/transactions");
-const schemaValidator = require('../../../configuration/schemaValidator');
+const { getStxAddress, generateWallet } = require("@stacks/wallet-sdk");
+const { default: axios } = require("axios");
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
-const { StacksMainnet, StacksNetwork, StacksTestnet } = require("@stacks/network");
-const { getStxAddress, generateWallet } = require("@stacks/wallet-sdk");
+const schemaValidator = require('../../../configuration/schemaValidator');
 
 
 class WalletStacks {
   constructor(options) {
     this.privateKey = options.privateKey,
-      this.xApiKey = options.xApiKey
+      this.xApiKey = options.xApiKey;
   }
 
   signTransaction = async (options) => {
@@ -41,7 +41,7 @@ class WalletStacks {
     if (chainName !== "Stacks") {
       return {
         "msg": "Stacks wallet can be used only with Stacks chain"
-      }
+      };
     };
 
     const network = chainId === "1700" ? new StacksMainnet : new StacksTestnet();
@@ -74,7 +74,7 @@ class WalletStacks {
         network,
         senderKey: this.privateKey,
         anchorMode: AnchorMode.Any,
-      })
+      });
 
     } else {
       // Transfer token function from Stacks SDK
@@ -145,6 +145,6 @@ const getStacksPrivateKey = async (mnemonic, password) => {
   }));
 
   return (wallets);
-}
+};
 
 module.exports = { WalletStacks, getStacksPrivateKey }; 
