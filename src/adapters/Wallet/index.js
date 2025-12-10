@@ -1,11 +1,11 @@
 const axios = require('axios').default;
 const BN = require('bn.js');
+const { ethers } = require('ethers-5');
 const rawTransaction = require('./signTransaction/index');
 const config = require('../../../configuration/config.json');
 const common = require('../../../configuration/common');
 const schemaValidator = require('../../../configuration/schemaValidator');
 const { initialiseWeb3 } = require('../../../configuration/intialiseWeb3');
-const { ethers } = require('ethers-5');
 
 class Wallet {
 
@@ -37,10 +37,10 @@ class Wallet {
 
         let rpc = await axios.get(apiURL, configuration);
         rpc = rpc.data.data.rpc;
-        const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
+        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
         transactionOptions.value = new BN(transactionOptions.value);
 
-        let chainName = config.chains[chainId].chainName;
+        const { chainName }= config.chains[chainId];
 
         const options = {};
         options.privateKey = this.privateKey;
@@ -67,7 +67,7 @@ class Wallet {
 
         const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
 
-        let chainName = config.chains[chainId].chainName;
+        const { chainName }= config.chains[chainId];
 
         if (chainName !== "Solana")
             return new Error("chain not Supported");
@@ -78,7 +78,7 @@ class Wallet {
 
         let rpc = await axios.get(apiURL, configuration);
         rpc = rpc.data.data.rpc;
-        const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
+        const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
 
         const options = {};
         options.privateKey = this.privateKey;
@@ -129,9 +129,9 @@ class Wallet {
         }
 
         const { dexId, domain, types, values } = options;
-        const { chainId } = config.dexes[dexId]
+        const { chainId } = config.dexes[dexId];
 
-        let apiConfig = {
+        const apiConfig = {
             method: 'get',
             maxBodyLength: Infinity,
             url: `${config.url.apiurl}/chain/getpublicrpc?chainId=${chainId}`,
@@ -159,9 +159,9 @@ class Wallet {
         }
 
         const { dexId, orderType, domain, types, message } = options;
-        const { chainId } = config.dexes[dexId]
+        const { chainId } = config.dexes[dexId];
 
-        let apiConfig = {
+        const apiConfig = {
             method: 'get',
             maxBodyLength: Infinity,
             url: `${config.url.apiurl}/chain/getpublicrpc?chainId=${chainId}`,
@@ -201,16 +201,16 @@ class Wallet {
             chainSymbol: transactionObject.chainSymbol
         });
 
-        let rpc = await axios.get(apiURL, { params: { chainId } }).then(res => res?.data?.data?.rpc || "");
+        const rpc = await axios.get(apiURL, { params: { chainId } }).then(res => res?.data?.data?.rpc || "");
         const web3 = await initialiseWeb3({ rpc, chainId, key: this.xApiKey });
 
-        let chainName = config.chains[chainId].chainName;
+        const { chainName }= config.chains[chainId];
         const transaction = await rawTransaction[`signSendBatchTransactions${chainName}`](web3, transactionObject, {
             privateKey: this.privateKey
         });
         transaction.chainId = chainId;
         return transaction;
-    }
+    };
 }
 
 module.exports = { Wallet };

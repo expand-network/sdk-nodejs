@@ -11,8 +11,13 @@
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
   },
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
-      "ecmaVersion": 2018
+    "ecmaVersion": 2018,
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-env"]
+    }
   },
   "rules": {
       "no-console": "off",
@@ -42,7 +47,7 @@
       "quote-props": "off",
       "no-underscore-dangle": "off",
       "no-nested-ternary": "off",
-      "parser": "@babel/eslint-parser"
-
+      "no-await-in-loop": "off",
+      "no-plusplus": "off"
   }
 }

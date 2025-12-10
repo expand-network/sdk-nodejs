@@ -11,6 +11,11 @@ exports.signSendBatchTransactionsEvm = async (web3, transactionObject, options) 
     return rawData;
 };
 
+exports.signSendBatchTransactionsSolana = async (web3, transactionObject, options) => {
+    const rawData = await Solana.signSendBatchTransactionsSolana(web3, transactionObject, options);
+    return rawData;
+};
+
 exports.signTransactionSolana = async (web3, transactionObject, options) => {
     const rawData = await Solana.signTransactionSolana(web3, transactionObject, options);
     return rawData;

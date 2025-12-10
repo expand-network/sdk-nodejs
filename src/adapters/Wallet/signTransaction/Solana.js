@@ -1,9 +1,10 @@
 const { Wallet } = require('@project-serum/anchor');
 const { Keypair, Transaction, SystemProgram, VersionedTransaction, 
-    TransactionMessage, PublicKey } = require('@solana/web3.js')
+    TransactionMessage, PublicKey } = require('@solana/web3.js');
 const { sign } = require('tweetnacl');
 const { decode } = require('bs58');
 const BN = require('bn.js');
+const { batchRequestSolana } = require("../../../helper/batchRequest");
 
 module.exports = {
 
@@ -15,39 +16,37 @@ module.exports = {
     try {
 
       const from = Keypair.fromSecretKey(decode(options.privateKey));
-      const blockHeight = await web3.getLatestBlockhash();
       let preparedTx;
-      let transactionBuffer;
-
+      const { blockhash } = await web3.getLatestBlockhash();
       if (!(transactionObject.data)) {
-        transactionObject.value = new BN(transactionObject.value);
         preparedTx = new Transaction({
-          blockhash: blockHeight.blockhash,
-          lastValidBlockHeight: blockHeight + 1500,
+          recentBlockhash: blockhash,
+          lastValidBlockHeight: blockhash + 1500,
           feePayer: from.publicKey
         });
         preparedTx.add(SystemProgram.transfer({
           fromPubkey: from.publicKey,
           toPubkey: transactionObject.to,
-          lamports: transactionObject.value
+          lamports: new BN(transactionObject.value)
         }));
       } else {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
             msg: "signer is not matching with the from address"
-          }
+          };
         };
-        let buffer = Buffer.from(transactionObject.data, "base64");
+        const buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = Transaction.from(buffer);
-        preparedTx.recentBlockhash = blockHeight.blockhash;
+        preparedTx.recentBlockhash = blockhash;
+        preparedTx.feePayer = from.publicKey;
       }
 
-      transactionBuffer = preparedTx.serializeMessage();
-      const signature = sign.detached(transactionBuffer, from.secretKey);
+      const transactionBuffer = preparedTx.serializeMessage();
+      let signature = sign.detached(transactionBuffer, from.secretKey);
       preparedTx.addSignature(from.publicKey, signature);
       if (transactionObject.additionalSigners) {
         const additionalKey = Keypair.fromSecretKey(decode(transactionObject.additionalSigners));
-        const signature = sign.detached(transactionBuffer, additionalKey.secretKey);
+        signature = sign.detached(transactionBuffer, additionalKey.secretKey);
         preparedTx.addSignature(additionalKey.publicKey, signature);
       }
       const serializedTx = preparedTx.serialize();
@@ -68,7 +67,7 @@ module.exports = {
 
       const from = Keypair.fromSecretKey(decode(options.privateKey));
       const wallet = new Wallet(from);
-      let recentBlockhash = await web3.getLatestBlockhash();
+      const { blockhash } = await web3.getLatestBlockhash('finalized');
       let preparedTx;
 
       if (!(transactionObject.data)) {
@@ -81,17 +80,20 @@ module.exports = {
         ];
         const versionedMessage = new TransactionMessage({
           payerKey: from.publicKey,
-          recentBlockhash: recentBlockhash.blockhash,
+          recentBlockhash: blockhash,
           instructions
         }).compileToV0Message();
         preparedTx = new VersionedTransaction(versionedMessage);
+        await preparedTx.populate(web3, {
+              replaceRecentBlockhash: true
+            });
       } else {
         if (transactionObject.from !== from.publicKey.toBase58()) {
           return {
             msg: "signer is not matching with the from address"
-          }
+          };
         };
-        let buffer = Buffer.from(transactionObject.data, "base64");
+        const buffer = Buffer.from(transactionObject.data, "base64");
         preparedTx = VersionedTransaction.deserialize(buffer);
       }
 
@@ -106,5 +108,17 @@ module.exports = {
     catch (error) {
       return error;
     }
+  },
+  signSendBatchTransactionsSolana: async (web3, transactionObject, options) => {
+      /*
+        * Function will sign and send the batch the transactions for solana
+        */
+      try {
+          const transaction = await batchRequestSolana(web3, transactionObject, options);
+          return transaction;
+      }
+      catch (error) {
+          return (error);
+      }
   }
 };

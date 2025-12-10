@@ -1,8 +1,10 @@
+const { VersionedTransaction } = require('@solana/web3.js');
+
 async function getNonce(web3, account) {
   const [pendingNonce, latestNonce] = await Promise.all([
     web3.eth.getTransactionCount(account, 'pending'), 
     web3.eth.getTransactionCount(account)
-  ])
+  ]);
   return Math.max(pendingNonce, latestNonce);
 }
 
@@ -41,6 +43,42 @@ module.exports = {
       await batch.execute();
       const transactionHash = await Promise.all(promises);
       return transactionHash;
+    } catch (error) {
+      console.error('Batch request failed:', error);
+      throw error;
+    }
+  },
+  batchRequestSolana: async (web3, transactionObject, options) => {
+    try {
+      const { transactions } = transactionObject;
+      let batches = transactions;
+      if (typeof transactions === 'object' && transactions !== null && !Array.isArray(transactions)) {
+        batches = Object.values(transactions);
+      }
+      const rawTransactions = [];
+      for (let i = 0; i < batches.length; i++) {
+        const buffer = Buffer.from(batches[i].data, "base64");
+        const tx = VersionedTransaction.deserialize(buffer);
+        const { signVersionedTransactionSolana, signTransactionSolana } = require('../adapters/Wallet/signTransaction/Solana');
+        if (tx.version==="legacy") {
+          const { rawTransaction }= await signTransactionSolana(web3, batches[i], options);
+          rawTransactions.push(rawTransaction);
+        }
+        else{
+          const { rawTransaction }= await signVersionedTransactionSolana(web3, batches[i], options);
+          rawTransactions.push(rawTransaction);
+        }
+      }
+      try {
+        const receipts = await Promise.all(
+          rawTransactions.map(tx =>
+            web3.sendRawTransaction(Buffer.from(tx, "base64"))
+          )
+        );
+        return { transactionHash: receipts };
+      } catch (err) {
+          return err;
+      }
     } catch (error) {
       console.error('Batch request failed:', error);
       throw error;
