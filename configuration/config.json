@@ -115,7 +115,7 @@
             "chainName": "Tron",
             "chainSymbol": "TRON"
         },
-        "1001": {
+        "1002": {
             "localName": "TronTestnet",
             "chainName": "Tron",
             "chainSymbol": "TTRON"
@@ -337,6 +337,16 @@
             "localName": "MantleTestnetSepolia",
             "chainName": "Evm",
             "chainSymbol": "TMNT"
+        },
+        "8217": {
+            "localName": "Kaia",
+            "chainName": "Evm",
+            "chainSymbol": "KAIA"
+        },
+        "1001": {
+            "localName": "KaiaTestnet",
+            "chainName": "Evm",
+            "chainSymbol": "TKAIA"
         }
     },
     "fireblocks": {
