@@ -1,6 +1,5 @@
 require("dotenv").config();
 const axios = require("axios");
-const web3 = require("web3");
 const { batchRequest } = require('../src/batchRequest');
 const config = require('../configuration/config.json');
 
